@@ -1,8 +1,6 @@
-# COMP 4350: Project
+### COMP 4350: Project
 
-Group: Faraday Ferrets
-
-### Meet the Team!
+## Meet the Faraday Ferrets Team!
 | Name             | GitHub Username  | Email                   |
 | ---------------- | ---------------- | ----------------------- |
 | Jillian Manguba  | jimanguba        | manguba3@myumanitoba.ca |
