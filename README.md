@@ -1,1 +1,3 @@
-# COMP-4350-Project
+# COMP 4350: Project
+
+Group: Faraday Ferrets
