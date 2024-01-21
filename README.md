@@ -7,3 +7,4 @@
 | Vedant Pulahru   | Vedant1206       | pulahruv@myumanitoba.ca |
 | Christopher Eu   | ChristopherE0    | euc@myumanitoba.ca      |
 | Kate Walley      | KatieCodess      | walleyk1@myumanitoba.ca |
+| Ty Brass         | TyBrass          | brasst@myumanitoba.ca   |
