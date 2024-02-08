@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 const pool = require("./database");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const getBooks =  (req, res) => {
     pool.query('SELECT * FROM books', (error, books) => {
