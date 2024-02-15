@@ -2,7 +2,7 @@
 import './App.css';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 function App() {
@@ -11,9 +11,10 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () =>{
+      console.log("Fetching data....")
       setLoading(true);
       try {
-        const {data: response} = await axios.get('/books');
+        const {data: response} = await axios.get('http://localhost:5000/books');
         setData(response);
       } catch (error) {
         console.error(error.message);

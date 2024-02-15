@@ -12,3 +12,5 @@ INSERT INTO books (book_id, title, author, pages, genre) VALUES (1,  'To Kill a 
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (2,  '1984', 'George Orwell', 336, 'Science Fiction');
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (3,  'Of Mice and Men', 'John Steinbeck', 112,'Tragedy');
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (4,  'Macbeth', 'William Shakespeare', 120,'Tragedy');
+
+ALTER TABLE books ADD COLUMN readingTime INTEGER DEFAULT 0;
