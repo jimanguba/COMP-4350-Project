@@ -2,53 +2,38 @@
 import './App.css';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CreateAccount from './Components/CreateAccount'
 
-
-
-function App() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+function App(){
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-    const fetchData = async () =>{
-      setLoading(true);
-      try {
-        const {data: response} = await axios.get('/books');
-        setData(response);
-      } catch (error) {
-        console.error(error.message);
-      }
-      setLoading(false);
+    const lsToken = localStorage.getItem("token");
+    if (lsToken) {
+        setToken(lsToken);
     }
-
-    fetchData();
   }, []);
 
+  if (token) {
+    return (
+        <Router>
+        <Routes>
+            <Route exact path="/" element={<CreateAccount/>} />
+            <Route path='/CreateAccount' element={<CreateAccount/>} />
+        </Routes>
+      </Router>
+    );
+  }
+
   return (
-    <div className='container my-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-      <table className='table table-striped'>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Pages</th>
-            <th>Genre</th>
-          </tr>
-          </thead>
-          <tbody>
-            { data.map(item => (
-              <tr key={item.book_id}>
-                <td>{item.book_id}</td>
-                <td>{item.title}</td>
-                <td>{item.author}</td>
-                <td>{item.pages}</td>
-                <td>{item.genre}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table> 
-      </div>
-  )};
+    <Router>
+    <Routes>
+            <Route exact path="/" element={<CreateAccount />} />
+            <Route path='/CreateAccount' element={<CreateAccount/>} />
+      </Routes>
+    </Router>
+  );
+}
 
 export default App;
-
