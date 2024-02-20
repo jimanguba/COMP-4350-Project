@@ -15,6 +15,13 @@ export default function BookDetailsCard({book, updateBookDetails}) {
         updateBookDetails(newBookDetails);
     }
 
+    const editButtonCallback = () => {
+        setEditing(!editing)
+        
+        // change editing state (done above), then submit the new details (do below)
+        // ____
+    }
+
     return (
         <div className={`bookDetailsCard ` + (editing ? `currentlyEditing` : ``)}>
             <label htmlFor="title">Title</label>
@@ -37,7 +44,7 @@ export default function BookDetailsCard({book, updateBookDetails}) {
             <input type="text" id="genre" value={book.genre}></input>
             <br></br>
             <br></br>
-            <button onClick={() => setEditing(!editing)}>Edit Details</button>
+            <button onClick={editButtonCallback}>{editing ? "Edit Book Details" : "Submit Edits"}</button>
         </div>
     )
 }
