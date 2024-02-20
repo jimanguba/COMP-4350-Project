@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 
-
+import ViewBookPage from './components/ViewBookPage';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -26,28 +26,8 @@ function App() {
 
   return (
     <div className='container my-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-      <table className='table table-striped'>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Pages</th>
-            <th>Genre</th>
-          </tr>
-          </thead>
-          <tbody>
-            { data.map(item => (
-              <tr key={item.book_id}>
-                <td>{item.book_id}</td>
-                <td>{item.title}</td>
-                <td>{item.author}</td>
-                <td>{item.pages}</td>
-                <td>{item.genre}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table> 
-      </div>
+        <ViewBookPage />
+    </div>
   )};
 
 export default App;
