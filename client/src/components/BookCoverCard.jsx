@@ -7,8 +7,8 @@ export default function BookCoverCard({book, size}) {
     // - large: when displayed on a ViewBookPage
     // Size is "large" or "small", defaulting to "small"
     return (
-        <div className={`bookCoverCard ` + size === "large" ? `large` : `small`}>
-            <p>{book.title}</p>
+        <div className={`bookCoverCard ` + (size === "large" ? `large` : `small`)}>
+            <p className="title">{book.title}</p>
         </div>
     )
 }

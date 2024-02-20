@@ -1,6 +1,20 @@
 import "../styles/BookDetailsCard.css"
+import { useState } from "react"
 
 export default function BookDetailsCard({book, updateBookDetails}) {
+    
+    // Are we editing currently?
+    // If we aren't, disable the inputs and style them properly
+    const [editing, setEditing] = useState()
+    
+    const submitBookDetails = () => {
+        let newBookDetails;
+
+        // collect new details from the input values
+
+        updateBookDetails(newBookDetails);
+    }
+
     return (
         <div>
             <label htmlFor="title">Title</label>
@@ -23,6 +37,7 @@ export default function BookDetailsCard({book, updateBookDetails}) {
             <input type="text" id="genre" value={book.genre}></input>
             <br></br>
             <br></br>
+            <button onClick={submitBookDetails}>Edit Details</button>
         </div>
     )
 }
