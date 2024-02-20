@@ -1,3 +1,12 @@
+/**
+ * Display a Book's cover
+ * @param {Book} book - The Book whose cover being displayed
+ * @param {string} size - Specifying the size of the Book cover
+ * 
+ * Should we put the link that links to the book's details page here?
+ * Or should we leave that to the containing component?
+ */
+
 import "../styles/BookCoverCard.css"
 
 export default function BookCoverCard({book, size}) {

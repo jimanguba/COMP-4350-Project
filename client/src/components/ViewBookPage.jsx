@@ -1,3 +1,8 @@
+/**
+ * View a Book's cover and details
+ * @param {Book} book - The Book being displayed
+ */
+
 import { useState } from "react";
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";

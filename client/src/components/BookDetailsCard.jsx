@@ -1,3 +1,9 @@
+/**
+ * See and edit a Book's details
+ * @param {Book} book - The Book being displayed
+ * @param {function} updateBookDetails - Callback to update the Book
+ */
+
 import "../styles/BookDetailsCard.css"
 import { useState } from "react"
 
@@ -7,6 +13,7 @@ export default function BookDetailsCard({book, updateBookDetails}) {
     // If we aren't, disable the inputs and style them properly
     const [editing, setEditing] = useState(false)
     
+    // This should probably be added to the editButtonCallback function
     const submitBookDetails = () => {
         let newBookDetails;
 
