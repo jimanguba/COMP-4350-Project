@@ -5,7 +5,7 @@ export default function BookDetailsCard({book, updateBookDetails}) {
     
     // Are we editing currently?
     // If we aren't, disable the inputs and style them properly
-    const [editing, setEditing] = useState()
+    const [editing, setEditing] = useState(false)
     
     const submitBookDetails = () => {
         let newBookDetails;
@@ -16,7 +16,7 @@ export default function BookDetailsCard({book, updateBookDetails}) {
     }
 
     return (
-        <div>
+        <div className={`bookDetailsCard ` + (editing ? `currentlyEditing` : ``)}>
             <label htmlFor="title">Title</label>
             <br></br>
             <input type="text" id="title" value={book.title}></input>
@@ -37,7 +37,7 @@ export default function BookDetailsCard({book, updateBookDetails}) {
             <input type="text" id="genre" value={book.genre}></input>
             <br></br>
             <br></br>
-            <button onClick={submitBookDetails}>Edit Details</button>
+            <button onClick={() => setEditing(!editing)}>Edit Details</button>
         </div>
     )
 }

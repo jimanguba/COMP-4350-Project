@@ -1,0 +1,8 @@
+.bookDetailsCard {
+
+}
+
+.currentlyEditing > input {
+    border: none;
+    pointer-events: none;
+}
