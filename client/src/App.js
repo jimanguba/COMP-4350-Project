@@ -6,7 +6,8 @@ import React, {useState, useEffect} from 'react';
 
 
 function App() {
-  const [setLoading] = useState(true);
+  // eslint-disable-next-line
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function App() {
     }
 
     fetchData();
-  });
+  }, []);
 
   return (
     <div className='container my-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
