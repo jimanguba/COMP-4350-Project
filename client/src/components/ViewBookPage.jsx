@@ -15,7 +15,10 @@ export default function ViewBookPage(book) {
     // are edited
     const [currentBook, setCurrentBook] = useState(book)
 
+    // Takes a new Book and updates the currentBook
+    // (intended for updating a Book's details, rather than actually changing books)
     const updateBookDetails = newBookDetails => {
+        // _ PUT new book details (a requests function)
         setCurrentBook(newBookDetails)
     }
 

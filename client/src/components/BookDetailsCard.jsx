@@ -9,46 +9,42 @@ import { useState } from "react"
 
 export default function BookDetailsCard({book, updateBookDetails}) {
     
-    // Are we editing currently?
-    // If we aren't, disable the inputs and style them properly
+    // Are we editing currently? If not, disable inputs and style them properly
     const [editing, setEditing] = useState(false)
-    
-    // This should probably be added to the editButtonCallback function
-    const submitBookDetails = () => {
-        let newBookDetails;
 
-        // collect new details from the input values
-
-        updateBookDetails(newBookDetails);
+    let newBook = {
+        title: "",
+        author: "",
+        genre: "",
+        pages: "",
     }
 
     const editButtonCallback = () => {
+        if (editing)
+            updateBookDetails(newBook)
         setEditing(!editing)
-        
-        // change editing state (done above), then submit the new details (do below)
-        // ____
     }
 
     return (
         <div className={`bookDetailsCard ` + (editing ? `currentlyEditing` : ``)}>
             <label htmlFor="title">Title</label>
             <br></br>
-            <input type="text" id="title" value={book.title}></input>
+            <input type="text" id="title" value={book.title} onChange={e => newBook.title = e.target.value}></input>
             <br></br>
             <br></br>
             <label htmlFor="author">Author</label>
             <br></br>
-            <input type="text" id="author" value={book.author}></input>
+            <input type="text" id="author" value={book.author} onChange={e => newBook.author = e.target.value}></input>
             <br></br>
             <br></br>
             <label htmlFor="pages">Pages</label>
             <br></br>
-            <input type="text" id="pages" value={book.pages}></input>
+            <input type="text" id="pages" value={book.pages} onChange={e => newBook.pages = e.target.value}></input>
             <br></br>
             <br></br>
             <label htmlFor="genre">Genre</label>
             <br></br>
-            <input type="text" id="genre" value={book.genre}></input>
+            <input type="text" id="genre" value={book.genre} onChange={e => newBook.genre = e.target.value}></input>
             <br></br>
             <br></br>
             <button onClick={editButtonCallback}>{editing ? "Edit Book Details" : "Submit Edits"}</button>
