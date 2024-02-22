@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
 function Statistics() {
+    // eslint-disable-next-line
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 
