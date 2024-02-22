@@ -23,7 +23,7 @@ function Home() {
 
     return (
         <div className='container my-5'>
-            <h1 className="text-center mb-4">Books Collection</h1>
+            <h1 className="text-center mb-4">Home</h1>
             <div className="table-responsive">
                 <table className='table table-striped'>
                     <thead>

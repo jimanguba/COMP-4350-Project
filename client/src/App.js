@@ -22,6 +22,7 @@ function App() {
                 <div className="main-content">
                     <Routes>
                         <Route exact path="/" element={<Home />} />
+                        
                         <Route path="/statistics" element={<Statistics />} />
                         {/* Add more routes for additional pages */}
                     </Routes>
