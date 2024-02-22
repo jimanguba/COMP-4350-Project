@@ -2,6 +2,7 @@
 import './App.css';
 import Home from './pages/Home'
 import Statistics from './pages/Statistics'
+// eslint-disable-next-line
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
