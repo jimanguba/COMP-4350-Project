@@ -1,5 +1,6 @@
 
 require("dotenv").config({ path: __dirname + "/.env" });
+require("dotenv").config({ path: __dirname + "/.env.local" });
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -18,9 +19,11 @@ app.post("/books/new", async (req, res) => {
     try {
         const newData = bookUtil.createNewBook(req.body)
         if(newData) {
-            await pool.insertBook(newData) ? 
-                res.status(200).json("Successfully added the book.") : 
-                res.status(400).json("Failed to insert.")
+            pool.insertBook(newData) ? 
+                res.status(200).json('Successfully added the book.') : 
+                res.status(400).json('Failed to insert.')
+        } else {
+            res.status(400).json('Failed to create a book with the given data')
         }
     } catch (error) {
         console.error(error)
@@ -138,6 +141,11 @@ app.put('/users/:book_id/reading_time', async (req, res) => {
 
 // DELETE
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server listening on the port ${PORT}`);
 })
+
+module.exports = {
+    server,
+    app
+}
