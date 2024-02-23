@@ -21,8 +21,8 @@ function getAllBooks(params) {
 
 async function getBook(identifier) {
     queryResult = await pool.query('SELECT * FROM books WHERE book_id = $1', [identifier])
-    bookData = queryResult?.rowCount > 0 ? queryResult.rows[0] : null
-    return bookUtil.validateBook(bookData) ? bookData : null
+    bookData = queryResult?.rowCount > 0 ? queryResult.rows[0] : undefined
+    return bookUtil.validateBook(bookData) ? bookData : undefined
 }
 
 function insertBook(newBook) {
