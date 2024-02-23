@@ -7,7 +7,7 @@ import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
 import "../assets/styles/ViewBookPage.css"
 
-export default function ViewBookPage(book) {
+export default function ViewBook(book) {
 
     // Takes a new Book and updates the currentBook
     // (intended for updating a Book's details, rather than actually changing books)
@@ -18,7 +18,7 @@ export default function ViewBookPage(book) {
     }
 
     return (
-        <div className="viewBookPage">
+        <div className="viewBook">
             <BookCoverCard book={book} size={"large"} />
             <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
         </div>

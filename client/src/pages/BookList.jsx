@@ -1,10 +1,13 @@
 /**
  * Display books in a list
+ * 
+ * We can make this list very specific (such as, only for a specific user's 
+ * lists), by adjusting which Books we GET from the database
  */
 
 import { useState } from "react"
 import { getBooks } from "../lib/requests"
-import BookCoverCard from "./BookCoverCard"
+import BookCoverCard from "../components/BookCoverCard"
 import "../assets/styles/BookList.css"
 
 
@@ -14,7 +17,7 @@ export default function BookList() {
     // On loading component, request all books,, displayed alphanumerically
     // const books = getBooks()
 
-    // PLACEHOLDER HERE::::___
+    // Placeholder data: __
     const books = [
         {
             title: "Harry P",
