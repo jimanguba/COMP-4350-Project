@@ -29,7 +29,6 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE want_to_read (
-    wtr_id SERIAL PRIMARY KEY,
     book_id INTEGER,
     user_id INTEGER,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
@@ -38,7 +37,6 @@ CREATE TABLE want_to_read (
 );
 
 CREATE TABLE curr_reading (
-    curr_reading_id SERIAL PRIMARY KEY,
     book_id INTEGER,
     user_id INTEGER,
     reading_time INTEGER,

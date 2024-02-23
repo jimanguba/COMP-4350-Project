@@ -54,7 +54,7 @@ app.get('/users/:user_id/average_rating', async (req, res) => {
     }
 });
 
-app.get('/users/:user_id/progress', async (req, res) => {
+app.get('/users/:user_id/curr_reading', async (req, res) => {
     const { user_id } = req.params;
     try {
         const progress = await pool.query('SELECT * FROM curr_reading WHERE user_id = $1', [user_id]);
@@ -65,16 +65,28 @@ app.get('/users/:user_id/progress', async (req, res) => {
     }
 });
 
-app.get('/users/:user_id/books/completed', async (req, res) => {
+app.get('/users/:user_id/books/num_completed', async (req, res) => {
     const { user_id } = req.params;
     try {
-        const completedBooks = await pool.query('SELECT * FROM completed_books WHERE user_id = $1', [user_id]);
+        const completedBooks = await pool.query('SELECT COUNT(*) FROM completed_books WHERE user_id = $1', [user_id]);
         res.status(200).json(completedBooks.rows);
     } catch (error) {
         console.error('Error fetching completed books for user:', error.message);
         res.status(500).json({ error: 'Error fetching completed books for user' });
     }
 });
+
+app.get('/users/:user_id', async (req, res) => {
+    const { user_id } = req.params;
+    try {
+        const user = await pool.query('SELECT * FROM users WHERE user_id = $1', [user_id]);
+        res.status(200).json(user.rows[0]);
+    } catch (error) {
+        console.error('Error fetching user data:', error.message);
+        res.status(500).json({ error: 'Error fetching user data' });
+    }
+});
+
 
 // UPDATE
 app.put('/users/:book_id/reading_time', async (req, res) => {
