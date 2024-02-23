@@ -5,7 +5,7 @@
 
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
-import "../styles/ViewBookPage.css"
+import "../assets/styles/ViewBookPage.css"
 
 export default function ViewBookPage(book) {
 

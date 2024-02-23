@@ -7,7 +7,7 @@
  * Or should we leave that to the containing component?
  */
 
-import "../styles/BookCoverCard.css"
+import "../assets/styles/BookCoverCard.css"
 
 export default function BookCoverCard({book, size}) {
 
