@@ -3,7 +3,6 @@
  * @param {Book} book - The Book being displayed
  */
 
-import { useState } from "react";
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
 import "../styles/ViewBookPage.css"
