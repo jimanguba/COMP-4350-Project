@@ -11,7 +11,7 @@ function Statistics() {
 
     useEffect(() => {
         // Fetch user data including reading goal
-        axios.get('http://localhost:5000/users/1')
+        axios.get('/users/1')
             .then(response => {
                 const { book_goal } = response.data;
                 setReadingGoal(book_goal);
@@ -21,7 +21,7 @@ function Statistics() {
             });
 
         // Fetch reading progress
-        axios.get('http://localhost:5000/users/1/books/num_completed')
+        axios.get('/users/1/books/num_completed')
             .then(response => {
                 const countData = response.data[0]; // Access the first element of the array
                 if (countData && countData.count !== undefined && !isNaN(countData.count)) {
@@ -38,7 +38,7 @@ function Statistics() {
 
 
         // Fetch average reading time
-        axios.get('http://localhost:5000/books/average_time')
+        axios.get('/books/average_time')
             .then(response => {
                 setAverageReadingTime(response.data.average_time);
             })
