@@ -4,7 +4,7 @@
   "description": "",
   "main": "bookshelf.js",
   "scripts": {
-    "test": "echo 'No current tests'"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",

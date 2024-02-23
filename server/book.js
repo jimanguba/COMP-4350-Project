@@ -16,10 +16,10 @@ function createNewBook(data) {
 }
 
 function validateBook(book) {
-    return book?.title && 
-            book?.author &&
-            Number.isInteger(book?.pages) &&
-            book?.genre
+    return  !!book?.title && 
+            !!book?.author &&
+            !!Number.isInteger(book?.pages) &&
+            !!book?.genre
 }
 
 module.exports = {
