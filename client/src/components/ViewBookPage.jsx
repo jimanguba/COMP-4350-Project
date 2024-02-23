@@ -18,7 +18,7 @@ export default function ViewBookPage(book) {
     }
 
     return (
-        <div>
+        <div className="viewBookPage">
             <BookCoverCard book={book} size={"large"} />
             <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
         </div>

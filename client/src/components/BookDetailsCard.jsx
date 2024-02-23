@@ -12,11 +12,13 @@ export default function BookDetailsCard({book, updateBookDetails}) {
     // Are we editing currently? If not, disable inputs and style them properly
     const [editing, setEditing] = useState(false)
 
+    // "new book" to be built from the input values below, and POSTed
+    // as a replacement for the old
     let newBook = {
         title: "",
         author: "",
         genre: "",
-        pages: "",
+        pages: 0,
     }
 
     const editButtonCallback = () => {
@@ -26,7 +28,7 @@ export default function BookDetailsCard({book, updateBookDetails}) {
     }
 
     return (
-        <div className={`bookDetailsCard ` + (editing ? `currentlyEditing` : ``)}>
+        <div className={`bookDetailsCard ` + (!editing ? `currentlyEditing` : ``)}>
             <label htmlFor="title">Title</label>
             <br></br>
             <input type="text" id="title" value={book.title} onChange={e => newBook.title = e.target.value}></input>
@@ -39,7 +41,7 @@ export default function BookDetailsCard({book, updateBookDetails}) {
             <br></br>
             <label htmlFor="pages">Pages</label>
             <br></br>
-            <input type="text" id="pages" value={book.pages} onChange={e => newBook.pages = e.target.value}></input>
+            <input type="number" id="pages" value={book.pages} onChange={e => newBook.pages = e.target.value}></input>
             <br></br>
             <br></br>
             <label htmlFor="genre">Genre</label>
@@ -47,7 +49,7 @@ export default function BookDetailsCard({book, updateBookDetails}) {
             <input type="text" id="genre" value={book.genre} onChange={e => newBook.genre = e.target.value}></input>
             <br></br>
             <br></br>
-            <button onClick={editButtonCallback}>{editing ? "Edit Book Details" : "Submit Edits"}</button>
+            <button className="submit-btn" onClick={editButtonCallback}>{!editing ? "Edit Book Details" : "Submit Changes"}</button>
         </div>
     )
 }
