@@ -1,53 +1,66 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import ProgressBar from '../components/ProgressBar';
 
 function Statistics() {
-    // eslint-disable-next-line
-    const [loading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
+    const [progress, setProgress] = useState(0);
+    const [averageReadingTime, setAverageReadingTime] = useState(null);
+    const [count, setBooksCompleted] = useState(0);
+    const [readingGoal, setReadingGoal] = useState(0); // New state for reading goal
+    const yearlyReadingGoal = readingGoal; // Use the fetched reading goal
 
     useEffect(() => {
-        const fetchData = async () => {
-            console.log("Fetching data....")
-            setLoading(true);
-            try {
-                const { data: response } = await axios.get('http://localhost:5000/books');
-                setData(response);
-            } catch (error) {
-                console.error(error.message);
-            }
-            setLoading(false);
-        }
+        // Fetch user data including reading goal
+        axios.get('/users/1')
+            .then(response => {
+                const { book_goal } = response.data;
+                setReadingGoal(book_goal);
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
 
-        fetchData();
-    }, []);
+        // Fetch reading progress
+        axios.get('/users/1/books/num_completed')
+            .then(response => {
+                const countData = response.data[0]; // Access the first element of the array
+                if (countData && countData.count !== undefined && !isNaN(countData.count)) {
+                    const completedBooksCount = parseInt(countData.count);
+                    setBooksCompleted(completedBooksCount);
+                    setProgress((completedBooksCount / yearlyReadingGoal) * 100);
+                } else {
+                    console.error('Invalid completedBooks value:', countData.count);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching reading progress:', error);
+            });
+
+
+        // Fetch average reading time
+        axios.get('/books/average_time')
+            .then(response => {
+                setAverageReadingTime(response.data.average_time);
+            })
+            .catch(error => {
+                console.error('Error fetching average reading time:', error);
+            });
+    }, [yearlyReadingGoal]);
 
     return (
-        <div className='container my-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <table className='table table-striped'>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Pages</th>
-                        <th>Genre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map(item => (
-                        <tr key={item.book_id}>
-                            <td>{item.book_id}</td>
-                            <td>{item.title}</td>
-                            <td>{item.author}</td>
-                            <td>{item.pages}</td>
-                            <td>{item.genre}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div>
+            <h2>Reading Statistics</h2>
+            <div>
+                <h3>Reading Progress</h3>
+                <ProgressBar progress={progress} />
+                <p>{count} out of {yearlyReadingGoal} books completed</p>
+            </div>
+            <div>
+                <h3>Average Reading Time</h3>
+                <p>{averageReadingTime} minutes</p>
+            </div>
         </div>
-    )
-};
+    );
+}
 
 export default Statistics;
-

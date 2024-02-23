@@ -10,7 +10,7 @@ function Home() {
             console.log("Fetching data....")
             setLoading(true);
             try {
-                const { data: response } = await axios.get('http://localhost:5000/books');
+                const { data: response } = await axios.get('/books');
                 setData(response);
             } catch (error) {
                 console.error(error.message);
