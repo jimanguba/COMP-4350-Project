@@ -3,9 +3,9 @@
  * @param {Book} book - The Book being displayed
  */
 
-import BookDetailsCard from "./BookDetailsCard";
-import BookCoverCard from "./BookCoverCard";
-import "../assets/styles/ViewBookPage.css"
+import BookDetailsCard from "../components/BookDetailsCard";
+import BookCoverCard from "../components/BookCoverCard";
+import "../assets/styles/ViewBook.css"
 
 export default function ViewBook(book) {
 

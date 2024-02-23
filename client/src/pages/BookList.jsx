@@ -8,6 +8,7 @@
 import { useState } from "react"
 import { getBooks } from "../lib/requests"
 import BookCoverCard from "../components/BookCoverCard"
+import { Link } from "react-router-dom"
 import "../assets/styles/BookList.css"
 
 
@@ -51,7 +52,7 @@ export default function BookList() {
             <input type="text" placeholder="search titles..." value={query} onChange={e => setQuery(e.target.value)}></input>
             <ul>
                 {books.filter(book => book.title.toLowerCase().includes(query.toLowerCase())).map(book => (
-                    <a href="......."><li><BookCoverCard book={book} size={"small"} /></li></a>
+                    <Link href="/view-book"><li><BookCoverCard book={book} size={"small"} /></li></Link>
                 ))}
             </ul>
         </div>
