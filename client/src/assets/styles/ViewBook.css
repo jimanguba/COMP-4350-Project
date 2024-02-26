@@ -1,0 +1,12 @@
+.viewBook {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 25%;
+    margin: auto;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #e1e1e1;
+}
