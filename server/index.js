@@ -10,7 +10,6 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 app.get('/signup', async (req, res) => {
-  console.log(req.url);
   let str = req.url;
   str = str.substring(2)
 
@@ -23,8 +22,7 @@ app.get('/signup', async (req, res) => {
   const salt = await bcrypt.genSalt(10) ;
 
   try{
-    const result1 = await pool.query('SELECT user_id FROM users WHERE user_name = $1',[username]);
-    
+    const result1 = await pool.query('SELECT count(*) FROM users WHERE user_name = $1 GROUP BY user_id',[username]);
     if(result1.rowCount!=0) 
     {
       const result2 = await pool.query('SELECT user_password FROM users WHERE user_name = $1',[username]);
@@ -35,11 +33,9 @@ app.get('/signup', async (req, res) => {
       if(password.length>=5)
       {
         const result3 = await pool.query('INSERT INTO users (user_name, user_password) VALUES ($1  ,$2 )', [ username, await bcrypt.hash(password, salt)]);
-        console.log("create account done");
       }
       else
       {
-        console.log("too short");
         return res.status(400).json({errors: [{msg: "Password is too short must be at least length 5"}] });
       }
     }
@@ -52,7 +48,6 @@ app.get('/signup', async (req, res) => {
 
 
 app.get('/login', async (req, res) => {
-  console.log(req.url);
   let str = req.url;
   str = str.substring(2)
   var partsArray = str.split('&');
@@ -63,7 +58,6 @@ app.get('/login', async (req, res) => {
 
   try{
     const result1 = await pool.query('SELECT user_id FROM users WHERE user_name = $1',[username]);
-    
     if(result1.rowCount!=0)
     {
       const result2 = await pool.query('SELECT user_password FROM users WHERE user_name = $1',[username]);
@@ -71,17 +65,15 @@ app.get('/login', async (req, res) => {
 
       if(await bcrypt.compare(password, pw))
       {
-        console.log("I get to this point 1")         
+        console.log("Login Success")         
       }
-        else
-        {
-          console.log("I get to this point 2")
-          return res.status(400).json({errors: [{msg: "Incorrect Password or Account Name"}] });
-        }
+      else
+      {
+        return res.status(400).json({errors: [{msg: "Incorrect Password or Account Name"}] });
+      }
     }
     else 
     {
-      console.log("account not exist");
       return res.status(400).json({errors: [{msg: "Account does not exist"}] });
     }
   }
@@ -91,6 +83,11 @@ app.get('/login', async (req, res) => {
   res.json({response: "ok"});
 })
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server listening on the port  ${PORT}`);
 })
+
+module.exports = {
+  server,
+  app
+}
