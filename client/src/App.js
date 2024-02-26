@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReviewsList from './components/ReviewList'; // Adjust the import path if necessary
 import './App.css';
 import Home from './pages/Home'
