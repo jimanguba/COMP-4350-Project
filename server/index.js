@@ -1,10 +1,12 @@
 
 require("dotenv").config({ path: __dirname + "/.env" });
+require("dotenv").config({ path: __dirname + "/.env.local" });
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./database");
 const bodyParser = require('body-parser');
+const bookUtil = require('./book');
 
 const PORT = process.env.PORT || 5000;
 
@@ -13,15 +15,36 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // CREATE
+app.post("/books/new", async (req, res) => {
+    try {
+        const newData = bookUtil.createNewBook(req.body)
+        if(newData) {
+            pool.insertBook(newData) ? 
+                res.status(200).json('Successfully added the book.') : 
+                res.status(400).json('Failed to insert.')
+        } else {
+            res.status(400).json('Failed to create a book with the given data')
+        }
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'An error occurred while inserting the requested book' });
+    }
+
+})
 
 // READ
 const getBooks = (req, res) => {
-    pool.query('SELECT * FROM books', (error, books) => {
-        if (error) {
-            throw error
-        }
-        res.status(200).json(books.rows)
-    })
+    try {
+        pool.getAllBooks((error, books) => {
+            if (error) {
+                throw error
+            }
+            res.status(200).json(books.rows)
+        })
+    } catch (error) {
+
+    }
+
 }
 
 app.get("/", (req, res) => {
@@ -29,6 +52,17 @@ app.get("/", (req, res) => {
 });
 
 app.get('/books', getBooks)
+
+app.get('/book/:book_id', async (req, res) => {
+    const { book_id } = req.params
+    try {
+        const result = await pool.getBook(book_id)
+        res.status(200).json(result)
+    } catch (error) {
+        console.error(`Error fetching book with identifier ${book_id}`)
+        res.status(500).json({ error: 'An error occurred while fetching the requested book.' });
+    }
+});
 
 app.get('/books/average_time', async (req, res) => {
     try {
@@ -107,6 +141,11 @@ app.put('/users/:book_id/reading_time', async (req, res) => {
 
 // DELETE
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server listening on the port ${PORT}`);
 })
+
+module.exports = {
+    server,
+    app
+}
