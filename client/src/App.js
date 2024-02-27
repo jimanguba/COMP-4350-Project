@@ -2,7 +2,6 @@
 import './App.css';
 import Home from './pages/Home'
 import Statistics from './pages/Statistics'
-import ViewBook from './pages/ViewBook'
 import BookList from './pages/BookList';
 
 // eslint-disable-next-line
