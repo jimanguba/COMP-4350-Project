@@ -238,7 +238,7 @@
     "yocto-queue": "^0.1.0"
   },
   "scripts": {
-    "test": "echo 'Tests not yet implemented'"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
