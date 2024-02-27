@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
-import Login from '../src/Components/Login'; // Adjust the import path if necessary
+import Login from '../src/components/Login'; // Adjust the import path if necessary
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
