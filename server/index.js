@@ -131,11 +131,18 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
             WHERE cb.user_id = $1
         `, [user_id]);
 
-        const calendarData = result.rows.map(row => ({
-            day: row.date_end.toISOString().split('T')[0],
-            value: 1,
-            book: row.title
-        }));
+        const calendarData = result.rows.map(row => {
+            if (!isNaN(row.date_end)) {
+                return {
+                    day: row.date_end.toISOString().split('T')[0],
+                    value: 1,
+                    book: row.title
+                };
+            } else {
+                console.error(`Invalid date value for row with title ${row.title}`);
+                return null;
+            }
+        }).filter(data => data !== null);
 
         res.status(200).json(calendarData);
     } catch (error) {
