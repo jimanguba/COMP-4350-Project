@@ -3,11 +3,11 @@
  * @param {Book} book - The Book being displayed
  */
 
-import BookDetailsCard from "../components/BookDetailsCard";
-import BookCoverCard from "../components/BookCoverCard";
+import BookDetailsCard from "./BookDetailsCard";
+import BookCoverCard from "./BookCoverCard";
 import "../assets/styles/ViewBook.css"
 
-export default function ViewBook(book) {
+export default function ViewBook({book}) {
 
     // Takes a new Book and updates the currentBook
     // (intended for updating a Book's details, rather than actually changing books)
@@ -16,6 +16,8 @@ export default function ViewBook(book) {
     const updateBookDetails = newBookDetails => {
         ;
     }
+
+    console.log(book)
 
     return (
         <div className="viewBook">
