@@ -1,5 +1,6 @@
 
 require("dotenv").config({ path: __dirname + "/.env" });
+require("dotenv").config({ path: __dirname + "/.env.local" });
 const express = require('express');
 const app = express();
 const bcrypt = require("bcryptjs");
