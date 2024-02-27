@@ -4,6 +4,7 @@
  * @param {function} updateBookDetails - Callback to update the Book
  */
 
+import React from "react";
 import "../assets/styles/BookDetailsCard.css"
 import { useState } from "react"
 

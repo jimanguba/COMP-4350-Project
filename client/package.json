@@ -45,6 +45,12 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "moduleNameMapper": {
+        "^axios$": "axios/dist/node/axios.cjs",
+        "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+      }
+  },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
