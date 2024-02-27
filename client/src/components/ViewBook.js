@@ -18,8 +18,6 @@ export default function ViewBook({book}) {
         ;
     }
 
-    console.log(book)
-
     return (
         <div className="viewBook">
             <BookCoverCard book={book} size={"large"} />
