@@ -8,7 +8,7 @@
  */
 
 import React from "react";
-import "../assets/styles/BookCoverCard.css"
+import "../styles/BookCoverCard.css"
 
 export default function BookCoverCard({book, size}) {
 

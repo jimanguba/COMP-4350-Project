@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import "../assets/styles/BookDetailsCard.css"
+import "../styles/BookDetailsCard.css"
 import { useState } from "react"
 
 export default function BookDetailsCard({book, updateBookDetails}) {

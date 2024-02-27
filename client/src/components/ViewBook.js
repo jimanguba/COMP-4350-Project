@@ -6,7 +6,7 @@
 import React from "react";
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
-import "../assets/styles/ViewBook.css"
+import "../styles/ViewBook.css"
 
 export default function ViewBook({book}) {
 

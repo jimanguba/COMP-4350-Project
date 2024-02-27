@@ -9,7 +9,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import BookCoverCard from "../components/BookCoverCard"
 import { Link } from "react-router-dom"
-import "../assets/styles/BookList.css"
+import "../styles/BookList.css"
 
 
 export default function BookList() {
