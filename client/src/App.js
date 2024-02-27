@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
-import Login from '../src/Components/Login'; // Adjust the import path if necessary
+import Login from '../src/components/Login'; // Adjust the import path if necessary
 import ReviewsList from './components/ReviewList'; // Adjust the import path if necessary
 import Home from './pages/Home'
 import Statistics from './pages/Statistics'
@@ -10,8 +10,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 // eslint-disable-next-line
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 function App() {
