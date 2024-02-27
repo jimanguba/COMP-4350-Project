@@ -23,8 +23,6 @@ export default function BookDetailsCard({book, updateBookDetails}) {
         pages: 0,
     }
 
-    console.log("Title: " + book.title)
-
     const editButtonCallback = () => {
         if (editing)
             updateBookDetails(newBook)

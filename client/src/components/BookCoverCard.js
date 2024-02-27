@@ -17,7 +17,7 @@ export default function BookCoverCard({book, size}) {
     // Size is "large" or "small", defaulting to "small"
     return (
         <div className={`bookCoverCard ` + (size === "large" ? `large` : `small`)}>
-            <p className="title">{book.title}</p>
+            <p className="title">{book.title ? book.title : "Untitled"}</p>
         </div>
     )
 }
