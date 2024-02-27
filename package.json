@@ -1,0 +1,11 @@
+{
+  "name": "comp-4350-project",
+  "version": "1.0.0",
+  "description": "| Name             | GitHub Username  | Email                   |\r | ---------------- | ---------------- | ----------------------- |\r | Jillian Manguba  | jimanguba        | manguba3@myumanitoba.ca |\r | Vedant Pulahru   | Vedant1206       | pulahruv@myumanitoba.ca |\r | Christopher Eu   | ChristopherE0    | euc@myumanitoba.ca      |\r | Kate Walley      | KatieCodess      | walleyk1@myumanitoba.ca |\r | Ty Brass         | TyBrass          | brasst@myumanitoba.ca   |",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
