@@ -1,5 +1,52 @@
 CREATE DATABASE bookshelf;
 
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    book_goal INTEGER,
+    reviews_id INTEGER,
+    want_to_read_id INTEGER,
+    curr_reading_id INTEGER
+);
+
+CREATE TABLE completed_books (
+    completed_id SERIAL PRIMARY KEY,
+    book_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    reading_time INTEGER,
+    date_start DATE,
+    date_end DATE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id)
+);
+
+CREATE TABLE reviews (
+    review_id SERIAL PRIMARY KEY,
+    book_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    comment TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id)
+);
+
+CREATE TABLE want_to_read (
+    book_id INTEGER,
+    user_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id),
+    PRIMARY KEY (book_id, user_id)
+);
+
+CREATE TABLE curr_reading (
+    book_id INTEGER,
+    user_id INTEGER,
+    reading_time INTEGER,
+    page_progress INTEGER,
+    date_start DATE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id),
+    PRIMARY KEY (book_id, user_id)
+);
+
 CREATE TABLE books(
     book_id SERIAL PRIMARY KEY,
     title VARCHAR(255),
@@ -25,3 +72,7 @@ INSERT INTO users (user_id, user_name, user_password) VALUES (1,  'Harper Lee', 
 INSERT INTO users (user_id, user_name, user_password) VALUES (2,  'George Orwell', 'Science Fiction');
 INSERT INTO users (user_id, user_name, user_password) VALUES (3,  'John Steinbeck','Tragedy');
 INSERT INTO users (user_id, user_name, user_password) VALUES (4,  'William Shakespeare','Tragedy');
+INSERT INTO users (user_id, book_goal, reviews_id, want_to_read_id, curr_reading_id) VALUES (1, 20, 0, 1, 1);
+INSERT INTO completed_books (book_id, user_id, reading_time, date_start, date_end) VALUES (1, 1, 30, '2024-01-01', '2024-01-31');
+INSERT INTO reviews (book_id, user_id, comment) VALUES (1, 1, 'My favourite book everrrrrr');
+INSERT INTO want_to_read (book_id, user_id) VALUES (4, 1);

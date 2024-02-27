@@ -1,0 +1,17 @@
+.bookList {
+    margin: auto;
+    width: 20%;
+    margin-top: 10px;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}

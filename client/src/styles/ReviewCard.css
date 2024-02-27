@@ -1,0 +1,85 @@
+.review-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 16px 0;
+    background: #fff;
+  }
+  .star {
+    color: #ffd700; /* gold color for stars */
+    margin-right: 4px; /* space between stars */
+  }
+  
+  .verified-purchase-icon {
+    color: #4CAF50; /* color for verified purchase */
+    margin-left: 8px; /* space after stars */
+  }
+  
+  .review-header {
+    align-items: left;
+    margin-bottom: 8px;
+  }
+  
+  .reviewer-name {
+    font-weight: bold;
+  }
+  
+  .review-date {
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
+
+  .review-tag {
+    display: inline-block;
+    background-color: #5e5959; /* or any other color you prefer */
+    color: rgb(255, 255, 255);
+    padding: 2px 6px;
+    margin-right: 5px;
+    border-radius: 3px;
+    font-size: 0.8em;
+  }
+  .review-size-color {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .review-content {
+    font-size: 0.9rem;
+  }
+  
+  .review-reply {
+    margin-top: 10px;
+    padding-left: 20px;
+    border-left: 2px solid #ccc;
+    color: #666;
+  }
+  
+  .review-reply:first-child {
+    margin-top: 20px;
+  }
+  
+  .review-reply:last-child {
+    margin-bottom: 10px;
+  }
+  .review-reply:hover {
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }
+  
+  /* Animation for reply appearance */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .review-reply {
+    animation: slideIn 0.3s ease-out;
+  }

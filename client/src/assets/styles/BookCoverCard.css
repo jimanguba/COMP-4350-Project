@@ -1,0 +1,20 @@
+.bookCoverCard {
+    width: 85px;
+    height: 110px;    
+    background-color: tan;
+    border-width: 2px;
+    border-style: double;
+    border-color: black;
+}
+
+.large {
+    width: 170px;
+    height: 220px;
+}
+
+.title {
+    text-align: center;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: smaller;
+}
