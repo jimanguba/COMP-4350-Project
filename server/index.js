@@ -8,7 +8,7 @@ const pool = require("./database");
 const bodyParser = require('body-parser');
 const bookUtil = require('./book');
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
@@ -120,6 +120,28 @@ app.get('/users/:user_id', async (req, res) => {
     }
 });
 
+app.get('/users/:user_id/calendar-data', async (req, res) => {
+    try {
+        const { user_id } = req.params;
+        const result = await pool.query(`
+            SELECT cb.date_end, b.title
+            FROM completed_books cb
+            INNER JOIN books b ON cb.book_id = b.book_id
+            WHERE cb.user_id = $1
+        `, [user_id]);
+
+        const calendarData = result.rows.map(row => ({
+            day: row.date_end.toISOString().split('T')[0],
+            value: 1,
+            book: row.title
+        }));
+
+        res.status(200).json(calendarData);
+    } catch (error) {
+        console.error('Error fetching calendar data:', error.message);
+        res.status(500).json({ error: 'Error fetching calendar data' });
+    }
+});
 
 // UPDATE
 app.put('/users/:book_id/reading_time', async (req, res) => {
