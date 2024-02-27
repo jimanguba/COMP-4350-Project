@@ -28,7 +28,7 @@ function App() {
                 <div className="main-content">
                     <Routes>
                         <Route exact path="/" element={<Home />} />
-                        <Route path="/statistics" element={<Statistics />} />
+                        <Route path="/statistics" element={<Statistics user_id={1}/>} /> {/* TODO: in sprint 3 - user_id is hardcoded - change user_id to something more dynamic*/}
                         <Route path="/book-list" element={<BookList />} />
                         <Route path="/review" element={<ReviewsList />} />
                         
