@@ -7,22 +7,10 @@
 
 import axios from 'axios';
 
-const serverUrl = "http://localhost:5001"
-
 export async function getBooks() {
     let data
     try {
-        data = await axios.get(`${serverUrl}/books`);
-    } catch (error) {
-        console.log(error.message);
-    }
-    return data
-}
-
-export async function getBook(id) {
-    let data
-    try {
-        data = await axios.get(`${serverUrl}/books/${id}`);
+        data = await axios.get(`/books`);
     } catch (error) {
         console.log(error.message);
     }

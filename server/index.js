@@ -68,7 +68,6 @@ app.get('/books/average_time', async (req, res) => {
     try {
         const result = await pool.query('SELECT ROUND(AVG(reading_time), 2) AS average_time FROM completed_books');
         const averageTime = result.rows[0].average_time;
-
         res.status(200).json({ average_time: averageTime });
     } catch (error) {
         console.error('Error calculating average reading time:', error.message);

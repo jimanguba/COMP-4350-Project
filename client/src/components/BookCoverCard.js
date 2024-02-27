@@ -7,7 +7,8 @@
  * Or should we leave that to the containing component?
  */
 
-import "../assets/styles/BookCoverCard.css"
+import React from "react";
+import "../styles/BookCoverCard.css"
 
 export default function BookCoverCard({book, size}) {
 
@@ -16,8 +17,8 @@ export default function BookCoverCard({book, size}) {
     // - large: when displayed on a ViewBookPage
     // Size is "large" or "small", defaulting to "small"
     return (
-        <div className={`bookCoverCard ` + (size === "large" ? `large` : `small`)}>
-            <p className="title">{book.title}</p>
+        <div className={`bookCoverCard ` + (size === "large" ? `large` : `small`)} data-testid="book-cover-card" >
+            <p className="title">{book.title ? book.title : "Untitled"}</p>
         </div>
     )
 }

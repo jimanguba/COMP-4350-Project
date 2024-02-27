@@ -4,13 +4,16 @@
  * @param {function} updateBookDetails - Callback to update the Book
  */
 
-import "../assets/styles/BookDetailsCard.css"
+import React from "react";
+import "../styles/BookDetailsCard.css"
 import { useState } from "react"
 
 export default function BookDetailsCard({book, updateBookDetails}) {
     
     // Are we editing currently? If not, disable inputs and style them properly
     const [editing, setEditing] = useState(false)
+
+    console.log(book)
 
     // "new book" to be built from the input values below, and POSTed
     // as a replacement for the old
