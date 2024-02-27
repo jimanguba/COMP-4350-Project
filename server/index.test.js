@@ -1,4 +1,4 @@
-const sut = require('./index.js')
+const sut = require('./index')
 const pg = require('pg')
 const request = require('supertest')
 
