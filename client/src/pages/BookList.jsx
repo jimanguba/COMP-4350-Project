@@ -15,8 +15,8 @@ import "../assets/styles/BookList.css"
 export default function BookList() {
     const [query, setQuery] = useState("")
     const [books, setBooks] = useState()
-    
-    getBooks().then(data => setBooks(data))
+
+    getBooks().then(data => setBooks(data | []))
 
     // Each list item contains a BookCoverCard, linking to the BookDetailsPage
     return (
