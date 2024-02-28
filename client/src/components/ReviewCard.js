@@ -26,7 +26,7 @@ const ReviewCard = ({ review, addReply }) => {
         <div className="review-rating">
           {stars}
           {review.verifiedPurchase && (
-            <FontAwesomeIcon icon={faCheckCircle} className="verified-purchase-icon" />
+            <FontAwesomeIcon icon={faCheckCircle} className="verified-purchase-icon" data-testid="verified-purchase-icon"/>
           )}
         </div>
         <span className="review-date">{review.date}</span>
