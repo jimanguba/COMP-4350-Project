@@ -15,6 +15,10 @@ if(process.env.PG_CONN_STRING) {
     })
 }
 
+module.exports = {
+    query: (text, params) => pool.query(text, params)
+  };
+
 function getAllBooks(params) {
     return pool.query('SELECT * FROM books', params)
 }
