@@ -6,8 +6,6 @@ import Statistics from './pages/Statistics'
 import BookList from './pages/BookList';
 import './App.css';
 import ViewBook from './components/ViewBook';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 // eslint-disable-next-line
 
