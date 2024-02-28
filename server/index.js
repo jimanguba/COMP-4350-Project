@@ -85,6 +85,8 @@ const getBooks = (req, res) => {
 
 }
 
+app.get("/books", getBooks)
+
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
