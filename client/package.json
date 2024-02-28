@@ -1,11 +1,12 @@
 {
   "name": "client",
-  "version": "0.1.0",
-  "private": true,
-  "proxy": "http://localhost:5001/",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-common-types": "^6.5.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
@@ -295,6 +296,7 @@
     "get-package-type": "^0.1.0",
     "get-stream": "^6.0.1",
     "get-symbol-description": "^1.0.1",
+    "get-user-locale": "^2.3.1",
     "glob": "^7.2.3",
     "glob-parent": "^6.0.2",
     "glob-to-regexp": "^0.4.1",
@@ -884,10 +886,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "echo 'Tests not yet implemented'",
     "eject": "react-scripts eject"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "browserslist": {
@@ -902,14 +903,7 @@
       "last 1 safari version"
     ]
   },
-  "jest": {
-    "moduleNameMapper": {
-      "^axios$": "axios/dist/node/axios.cjs",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
-    }
-  },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "axios-mock-adapter": "^1.22.0"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

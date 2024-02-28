@@ -46,27 +46,6 @@ const mockCalendar = [
     { title: 'Book Title 2', date_end: new Date('2024-02-01'), value: 1 },
 ];
 
-test('Inserting proper book returns status 200 and success message', (done) => {
-    pool.query.mockResolvedValue("nil")
-    request(sut.app)
-        .post('/books/new')
-        .send(exampleBook)
-        .expect(200)
-        .expect(response => {
-            expect(response.body).toEqual('Successfully added the book.')
-        })
-})
-
-test('Inserting improper book returns status 400 and error message', (done) => {
-    pool.query.mockResolvedValue("nil")
-    request(sut.app)
-        post('/books/new')
-        .send(notABook)
-        .expect(400)
-        .expect(response => {
-            expect(response.body).toEqual('Failed to create a book with the given data')
-        })
-})
 
 //Unit Test 1 - Correct username and password Sign Up
 test('Status 200 should be returned', (done) => {
@@ -255,3 +234,34 @@ test('Fetching calendar data returns status 200 and calendar data', async () => 
             expect(response.body.map(({ book, day, value }) => ({ book, day, value }))).toEqual(mockCalendar.map(({ title, date_end, value }) => ({ book: title, day: date_end.toISOString().split('T')[0], value })));
         });
 });
+
+test('Inserting proper book returns status 200 and success message', (done) => {
+    pool.query.mockResolvedValue("nil")
+    request(sut.app)
+        .post('/books/new')
+        .send(exampleBook)
+        .expect(200)
+        .expect(response => {
+            expect(response.body).toEqual('Successfully added the book.')
+        })
+        .end((err, res) => {
+            if(err) return done(err)
+            return done()
+        })
+});
+
+test('Inserting improper book returns status 400 and error message', (done) => {
+    pool.query.mockResolvedValue("nil")
+    request(sut.app)
+        .post('/books/new')
+        .send(notABook)
+        .expect(400)
+        .expect(response => {
+            expect(response.body).toEqual('Failed to create a book with the given data')
+        })
+        .end((err, res) => {
+            if(err) return done(err)
+            return done()
+        })
+});
+
