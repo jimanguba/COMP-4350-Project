@@ -13,7 +13,7 @@ const LoginForm = () => {
 
   const loginClick = (event) => {
     event.preventDefault();
-    axios.get('/login', {
+    axios.get('http://localhost:5000/login', {
       params: {
         username: username,
         password:password
@@ -33,7 +33,7 @@ const LoginForm = () => {
 
   const SignUpClick = (event) => {
     event.preventDefault();
-    axios.get('/signup', {
+    axios.get('http://localhost:5000/signup', {
       params: {
         username: username,
         password:password
