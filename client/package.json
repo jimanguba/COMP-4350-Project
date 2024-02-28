@@ -10,6 +10,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@testing-library/jest-dom": "^5.17.0",
     "@mui/material": "^5.15.11",
     "abab": "^2.0.6",
     "abbrev": "^1.1.1",
@@ -910,6 +911,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "axios-mock-adapter": "^1.22.0"
   },
