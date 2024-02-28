@@ -60,7 +60,7 @@ test('Inserting proper book returns status 200 and success message', (done) => {
 test('Inserting improper book returns status 400 and error message', (done) => {
     pool.query.mockResolvedValue("nil")
     request(sut.app)
-        post('/books/new')
+        .post('/books/new')
         .send(notABook)
         .expect(400)
         .expect(response => {
