@@ -2,7 +2,6 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "dependencies": {
     "abbrev": "^1.1.1",
     "agent-base": "^6.0.2",
@@ -237,6 +236,8 @@
     "yargs-parser": "^21.1.1",
     "yocto-queue": "^0.1.0"
   },
+  "main": "bookshelf.js",
+  "proxy": "http://localhost:5001/",
   "scripts": {
     "test": "jest"
   },

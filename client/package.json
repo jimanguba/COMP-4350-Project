@@ -1,8 +1,8 @@
 {
   "name": "client",
-  "version": "1.0.0",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:5001/",
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
@@ -884,7 +884,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "echo 'Tests not yet implemented'",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "keywords": [],
@@ -901,5 +901,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^axios$": "axios/dist/node/axios.cjs",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "axios-mock-adapter": "^1.22.0"
   }
 }

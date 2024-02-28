@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/styles/ProgressBar.css';
+import '../styles/ProgressBar.css';
 
 function ProgressBar({ progress }) {
     return (

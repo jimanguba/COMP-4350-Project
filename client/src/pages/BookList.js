@@ -5,18 +5,30 @@
  * lists), by adjusting which Books we GET from the database
  */
 
-import { useState } from "react"
-import { getBooks } from "../lib/requests"
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import BookCoverCard from "../components/BookCoverCard"
 import { Link } from "react-router-dom"
-import "../assets/styles/BookList.css"
+import "../styles/BookList.css"
 
 
 export default function BookList() {
     const [query, setQuery] = useState("")
     const [books, setBooks] = useState()
+
     
-    getBooks().then(data => setBooks(data))
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { data } = await axios.get('/books');
+                setBooks(data);
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+        fetchData();
+    }, []);
 
     // Each list item contains a BookCoverCard, linking to the BookDetailsPage
     return (
@@ -24,7 +36,7 @@ export default function BookList() {
             <input type="text" placeholder="search titles..." value={query} onChange={e => setQuery(e.target.value)}></input>
             <ul>
                 {books && books.filter(book => book.title.toLowerCase().includes(query.toLowerCase())).map(book => (
-                    <Link href="/view-book"><li><BookCoverCard book={book} size={"small"} /></li></Link>
+                    <Link key={book.book_id} to="/view-book"><li><BookCoverCard book={book} size={"small"} /></li></Link>
                 ))}
             </ul> 
         </div>
