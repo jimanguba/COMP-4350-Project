@@ -1,0 +1,8 @@
+/* Styling for ToReadButton and HaveReadButton components */
+
+.readingStateButton {
+    border-radius: 10px;
+    width: 170px;
+    height: 40px;
+    cursor: pointer;
+}

@@ -7,6 +7,7 @@ import React from "react";
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
 import "../styles/ViewBook.css"
+import ToReadButton from "./ToReadButton";
 
 export default function ViewBook({book}) {
 
@@ -21,6 +22,7 @@ export default function ViewBook({book}) {
     return (
         <div className="viewBook">
             <BookCoverCard book={book} size={"large"} />
+            <ToReadButton book={book} />
             <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
         </div>
     )
