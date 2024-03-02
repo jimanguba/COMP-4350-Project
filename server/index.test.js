@@ -47,7 +47,7 @@ const mockCalendar = [
 ];
 
 
-//Unit Test 1 - Correct username and password Sign Up
+// Unit Test 1 - Correct username and password Sign Up
 test('Status 200 should be returned', (done) => {
     pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 })
     request(sut.app)
