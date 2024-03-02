@@ -13,11 +13,12 @@ export default function ToReadButton({book}) {
     const [onToRead, setOnToRead] = useState(false)
 
     const toggleReadingState = () => {
-        ; // Set state and update DB
+        // Set state and update DB
         console.log("Pressed to-read!")
+        setOnToRead(!onToRead)
     }
 
     return (
-        <button className="readingStateButton" onClick={toggleReadingState}>{onToRead ? "Remove from To-Read" : "Add to To-Read"}</button>
+        <button className={`readingStateButton ${onToRead ? "onToRead" : "offToRead"}`} onClick={toggleReadingState}>{onToRead ? "On To-Read" : "Add to To-Read"}</button>
     )
 }

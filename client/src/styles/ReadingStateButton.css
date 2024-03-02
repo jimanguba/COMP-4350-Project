@@ -5,4 +5,14 @@
     width: 170px;
     height: 40px;
     cursor: pointer;
+    font-size: x-small;
+}
+
+.onToRead {
+    background-color: green;
+    color: white;
+}
+
+.onToRead:hover {
+    background-color: darkred;
 }
