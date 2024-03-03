@@ -16,8 +16,8 @@ export default function ToReadButton({book}) {
     // Update DB, and GET again)
     const toggleReadingState = () => {
         console.log("Pressed to-read!");
-        putToRead(book.id);
-        setOnToRead(getToRead(book.id));
+        // putToRead(book.id);
+        // setOnToRead(getToRead(book.id));
     }
 
     return (

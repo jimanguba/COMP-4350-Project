@@ -10,3 +10,9 @@
     background: #f9f9f9;
     border: 1px solid #e1e1e1;
 }
+
+.readButtonsContainer {
+    display: flex;
+    gap: 5px;
+    width: 174px;
+}

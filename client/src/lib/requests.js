@@ -39,3 +39,26 @@ export async function putToRead(book_id) {
     }
     return data
 }   
+
+
+// Get a book's have-read list value
+export async function getHaveRead(book_id) {
+    let data
+    try {
+        data = await axios.get(`/books/${book_id}/have-read`);
+    } catch (error) {
+        console.log(error.message);
+    }
+    return data
+}
+
+// Update a book's have-read list value 
+export async function putHaveRead(book_id) {
+    let data
+    try {
+        data = await axios.put(`/books/${book_id}/have-read`);
+    } catch (error) {
+        console.log(error.message);
+    }
+    return data
+}

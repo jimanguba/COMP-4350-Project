@@ -8,6 +8,7 @@ import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
 import "../styles/ViewBook.css"
 import ToReadButton from "./ToReadButton";
+import HaveReadButton from "./HaveReadButton";
 
 export default function ViewBook({book}) {
 
@@ -22,7 +23,10 @@ export default function ViewBook({book}) {
     return (
         <div className="viewBook">
             <BookCoverCard book={book} size={"large"} />
-            <ToReadButton book={book} />
+            <div className="readButtonsContainer">
+                <ToReadButton book={book} />
+                <HaveReadButton book={book} />
+            </div>
             <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
         </div>
     )
