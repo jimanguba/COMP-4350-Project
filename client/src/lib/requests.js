@@ -7,6 +7,7 @@
 
 import axios from 'axios';
 
+// Get all books
 export async function getBooks() {
     let data
     try {
@@ -16,3 +17,25 @@ export async function getBooks() {
     }
     return data
 }
+
+// Get a book's to-read list value
+export async function getToRead(book_id) {
+    let data
+    try {
+        data = await axios.get(`/books/${book_id}/to-read`);
+    } catch (error) {
+        console.log(error.message);
+    }
+    return data
+}
+
+// Update a book's to-read list value
+export async function putToRead(book_id) {
+    let data
+    try {
+        data = await axios.put(`/books/${book_id}/to-read`);
+    } catch (error) {
+        console.log(error.message);
+    }
+    return data
+}   

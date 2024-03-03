@@ -6,16 +6,18 @@
 import React from 'react'
 import { useState } from 'react'
 import '../styles/ReadingStateButton.css'
+import { getToRead, putToRead } from '../lib/requests'
 
 export default function ToReadButton({book}) {
 
     // Init by GETting whether or not this is on to-read list
-    const [onToRead, setOnToRead] = useState(false)
+    const [onToRead, setOnToRead] = useState(getToRead(book.id))
 
+    // Update DB, and GET again)
     const toggleReadingState = () => {
-        // Set state and update DB
-        console.log("Pressed to-read!")
-        setOnToRead(!onToRead)
+        console.log("Pressed to-read!");
+        putToRead(book.id);
+        setOnToRead(getToRead(book.id));
     }
 
     return (
