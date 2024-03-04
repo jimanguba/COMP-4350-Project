@@ -36,7 +36,11 @@ export default function BookList() {
             <input type="text" placeholder="search titles..." value={query} onChange={e => setQuery(e.target.value)}></input>
             <ul>
                 {books && books.filter(book => book.title.toLowerCase().includes(query.toLowerCase())).map(book => (
-                    <Link key={book.book_id} to="/view-book"><li><BookCoverCard book={book} size={"small"} /></li></Link>
+                    <Link key={book.book_id} to={`/view-book/${book.book_id}`}>
+                        <li>
+                            <BookCoverCard book={book} size={"small"} />
+                        </li>
+                    </Link>
                 ))}
             </ul> 
         </div>
