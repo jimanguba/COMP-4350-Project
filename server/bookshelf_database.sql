@@ -66,6 +66,12 @@ INSERT INTO books (book_id, title, author, pages, genre) VALUES (2,  '1984', 'Ge
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (3,  'Of Mice and Men', 'John Steinbeck', 112,'Tragedy');
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (4,  'Macbeth', 'William Shakespeare', 120,'Tragedy');
 
+ALTER TABLE reviews ADD COLUMN rating INTEGER;
+ALTER TABLE reviews ADD COLUMN review_title VARCHAR(255);
+ALTER TABLE reviews ADD COLUMN review_date DATE;
+
+INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date) 
+VALUES (1, 1, 'This is my FAV', 5, 'Lost Within Imagination', '2024-08-15');
 
 
 INSERT INTO users (user_id, user_name, user_password) VALUES (1,  'Harper Lee', 'Thriller');
