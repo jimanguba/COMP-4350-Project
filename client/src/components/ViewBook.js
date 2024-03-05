@@ -4,13 +4,16 @@
  */
 
 import React from "react";
+import { useLocation } from "react-router-dom";
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
 import "../styles/ViewBook.css"
 import ToReadButton from "./ToReadButton";
 import HaveReadButton from "./HaveReadButton";
 
-export default function ViewBook({book}) {
+export default function ViewBook() {
+    const location = useLocation();
+    const book = location.state ? location.state.book : null;
 
     // Takes a new Book and updates the currentBook
     // (intended for updating a Book's details, rather than actually changing books)
