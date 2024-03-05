@@ -11,6 +11,7 @@ import { getHaveRead, putHaveRead } from '../lib/requests'
 export default function HaveReadButton({book}) {
 
     // Init by GETting whether or not this is on have-read list
+    // _ may need to pass user_id
     const [onHaveRead, setOnHaveRead] = useState(getHaveRead(book.id))
 
     // Update DB, and GET again)

@@ -12,6 +12,8 @@ import ToReadButton from "./ToReadButton";
 import HaveReadButton from "./HaveReadButton";
 
 export default function ViewBook() {
+
+    // Access data passed as state
     const location = useLocation();
     const book = location.state ? location.state.book : null;
 

@@ -5,10 +5,10 @@
  * lists), by adjusting which Books we GET from the database
  */
 
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import BookCoverCard from "../components/BookCoverCard"
 import { Link } from "react-router-dom"
+import { getBooks } from "../lib/requests"
 import "../styles/BookList.css"
 
 export default function BookList() {
@@ -16,16 +16,7 @@ export default function BookList() {
     const [books, setBooks] = useState()
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { data } = await axios.get('/books');
-                setBooks(data);
-            } catch (error) {
-                console.error(error.message);
-            }
-        }
-
-        fetchData();
+        getBooks().then(data => setBooks(data.data)).catch(error => console.log(error.message))
     }, []);
 
     return (

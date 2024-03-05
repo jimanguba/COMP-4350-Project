@@ -11,6 +11,7 @@ import { getToRead, putToRead } from '../lib/requests'
 export default function ToReadButton({book}) {
 
     // Init by GETting whether or not this is on to-read list
+    // _ may need to pass user_id
     const [onToRead, setOnToRead] = useState(getToRead(book.id))
 
     // Update DB, and GET again)
