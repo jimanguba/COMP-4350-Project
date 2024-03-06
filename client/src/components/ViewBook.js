@@ -7,32 +7,36 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
+import ReviewsList from "./ReviewList";
 import "../styles/ViewBook.css"
 
 
 export default function ViewBook() {
     const [book, setBook] = useState(null);
+    const [reviews, setReviews] = useState([]);
     const { book_id } = useParams();
 
     useEffect(() => {
         const fetchBookDetails = async () => {
             try {
                 const response = await axios.get(`/book/${book_id}`);
-                setBook(response.data);
+                console.log(response.data);
+                setBook(response.data.book); 
+                setReviews(Array.isArray(response.data.reviews) ? response.data.reviews : []);
+
             } catch (error) {
                 console.error(`Error fetching book with identifier ${book_id}:`, error);
             }
         };
-
+    
         fetchBookDetails();
-    }, [book_id]); // This will re-run when book_id changes
+    }, [book_id]);
 
     // Function to update book details
     const updateBookDetails = async (newBookDetails) => {
         try {
             const response = await axios.put(`/books/${book_id}`, newBookDetails);
-            setBook(response.data); // Update the book details with the response
-            console.log('Book details updated successfully.');
+            setBook(response.data.book); 
         } catch (error) {
             console.error('Error updating book details:', error);
         }
@@ -47,6 +51,15 @@ export default function ViewBook() {
         <div className="viewBook">
             <BookCoverCard book={book} size={"large"} />
             <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
+            <ReviewsList reviews={reviews}/>
+            
         </div>
+        
     );
 }
+/*<div>
+                <ReviewForm addReview={addReview} />
+                {reviews.map((review, index) => (
+                    <ReviewCard key={index} review={review} addReply={addReply} />
+                ))}
+            </div> */

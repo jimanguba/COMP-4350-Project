@@ -71,7 +71,11 @@ ALTER TABLE reviews ADD COLUMN review_title VARCHAR(255);
 ALTER TABLE reviews ADD COLUMN review_date DATE;
 
 INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date) 
-VALUES (1, 1, 'This is my FAV', 5, 'Lost Within Imagination', '2024-08-15');
+VALUES 
+(1, 1, 'This is my FAV', 5, 'Lost Within Imagination', '2024-08-15'),
+(2, 2, 'A timeless classic that still resonates', 5, 'Timeless Classic', '2024-08-16'),
+(3, 3, 'A poignant narrative of friendship and dreams', 4, 'Poignant Narrative', '2024-08-17'),
+(4, 4, 'A tragic tale masterfully told', 5, 'Tragic and Masterful', '2024-08-18');
 
 
 INSERT INTO users (user_id, user_name, user_password) VALUES (1,  'Harper Lee', 'Thriller');
