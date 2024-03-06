@@ -64,15 +64,17 @@ CREATE TABLE users(
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (1,  'To Kill a Mockingbird', 'Harper Lee', 384,'Thriller');
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (2,  '1984', 'George Orwell', 336, 'Science Fiction');
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (3,  'Of Mice and Men', 'John Steinbeck', 112,'Tragedy');
-INSERT INTO books (book_id, title, author, pages, genre) VALUES (4,  'Macbeth', 'William Shakespeare', 120,'Tragedy');
-
-
+INSERT INTO books (book_id, title, author, pages, genre) VALUES (4,  'Macbeth', 'William Shakespeare', 120,'Tragedy');s
 
 INSERT INTO users (user_id, user_name, user_password) VALUES (1,  'Harper Lee', 'Thriller');
 INSERT INTO users (user_id, user_name, user_password) VALUES (2,  'George Orwell', 'Science Fiction');
 INSERT INTO users (user_id, user_name, user_password) VALUES (3,  'John Steinbeck','Tragedy');
 INSERT INTO users (user_id, user_name, user_password) VALUES (4,  'William Shakespeare','Tragedy');
 INSERT INTO users (user_id, book_goal, reviews_id, want_to_read_id, curr_reading_id) VALUES (1, 20, 0, 1, 1);
-INSERT INTO completed_books (book_id, user_id, reading_time, date_start, date_end) VALUES (1, 1, 30, '2024-01-01', '2024-01-31');
 INSERT INTO reviews (book_id, user_id, comment) VALUES (1, 1, 'My favourite book everrrrrr');
 INSERT INTO want_to_read (book_id, user_id) VALUES (4, 1);
+
+INSERT INTO completed_books (book_id, user_id, reading_time, date_start, date_end) VALUES (1, 1, 30, '2024-01-01', '2024-01-31');
+INSERT INTO completed_books (book_id, user_id, reading_time, date_start, date_end) VALUES (2, 1, 30, '2024-02-01', '2024-03-31');
+INSERT INTO completed_books (book_id, user_id, reading_time, date_start, date_end) VALUES (3, 1, 100, '2024-02-01', '2024-03-27');
+INSERT INTO completed_books (book_id, user_id, reading_time, date_start, date_end) VALUES (4, 1, 160, '2024-02-02', '2024-03-25');
