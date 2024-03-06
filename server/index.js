@@ -52,6 +52,67 @@ app.get('/signup', async (req, res) => {
   res.json({response: "ok"});
 })
 
+//if no number entered then create new
+//otherwise update with new 
+app.get("/goalCreate", async (req, res) => {
+    try {
+        let str = req.url;
+        str = str.substring(2)
+
+        console.log(req.url)
+      
+        var partsArray = str.split('&');
+        var textStr = partsArray[0].split('=');
+        var statusStr = partsArray[1].split('=');
+        var goalNumStr = partsArray[2].split('=');
+        var  text = textStr[1];
+        var status = statusStr[1];
+        var goalNum = goalNumStr[1];
+
+        console.log(goalNum)
+
+        text = text.replace(/\+/g, '%20')
+        text = decodeURIComponent(text); 
+
+        if(goalNum=='')
+        {
+            pool.query('INSERT INTO goals (goal_text, goal_status) VALUES ($1  ,$2 )', [ text, status]);
+        }
+        else
+        {
+            const result1 = await pool.query('SELECT count(*) FROM goals WHERE goal_id = $1 GROUP BY goal_id',[goalNum]);
+            if(result1.rowCount==0) 
+            {
+                return res.status(400).json({errors: [{msg: "Goal doesn't exist"}] });
+            }
+            else
+            {
+                console.log("I reach the point to change the query")
+                pool.query('UPDATE goals SET goal_text=$1, goal_status=$2 WHERE goal_id=$3',[text,status, goalNum]);
+            }
+        }
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'An error occurred while inserting the goal' });
+    }
+
+})
+
+app.get("/getGoals", async (req, res) => {
+    
+    try {
+        pool.query('SELECT * FROM goals',(error, goals) => {
+            if (error) {
+                throw error
+            }
+            res.status(200).json(goals.rows)
+        })
+    } catch (error) {
+
+    }
+
+})
+
 // CREATE
 app.post("/books/new", async (req, res) => {
     try {

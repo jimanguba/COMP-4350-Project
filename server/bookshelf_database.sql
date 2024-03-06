@@ -61,6 +61,13 @@ CREATE TABLE users(
     user_password VARCHAR(255)
 );
 
+CREATE TABLE goals(
+    goal_id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    goal_text TEXT,
+    goal_status VARCHAR(255)
+);
+
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (1,  'To Kill a Mockingbird', 'Harper Lee', 384,'Thriller');
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (2,  '1984', 'George Orwell', 336, 'Science Fiction');
 INSERT INTO books (book_id, title, author, pages, genre) VALUES (3,  'Of Mice and Men', 'John Steinbeck', 112,'Tragedy');
