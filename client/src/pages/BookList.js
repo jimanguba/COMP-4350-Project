@@ -11,12 +11,10 @@ import BookCoverCard from "../components/BookCoverCard"
 import { Link } from "react-router-dom"
 import "../styles/BookList.css"
 
-
 export default function BookList() {
     const [query, setQuery] = useState("")
     const [books, setBooks] = useState()
 
-    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -30,7 +28,6 @@ export default function BookList() {
         fetchData();
     }, []);
 
-    // Each list item contains a BookCoverCard, linking to the BookDetailsPage
     return (
         <div className="bookList">
             <input type="text" placeholder="search titles..." value={query} onChange={e => setQuery(e.target.value)}></input>
