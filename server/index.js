@@ -288,7 +288,7 @@ app.put('/users/:book_id/reading_time', async (req, res) => {
 // DELETE
 
 let server;
-let bootup = (async () => {
+(async () => {
     server = app.listen(PORT, () => {
       console.log(`Server listening on the port ${PORT}`);
     })
@@ -299,6 +299,5 @@ let bootup = (async () => {
 
 module.exports = {
     server,
-    app,
-    bootup
+    app
 }
