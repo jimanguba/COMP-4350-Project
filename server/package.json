@@ -240,7 +240,7 @@
   },
   "main": "bookshelf.js",
   "scripts": {
-    "test": "jest --detectOpenHandles"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

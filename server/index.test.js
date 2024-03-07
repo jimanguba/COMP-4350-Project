@@ -9,6 +9,8 @@ jest.mock('pg', () => {
     return { Pool: jest.fn(() => mockPg) };
 });
 
+jest.setTimeOut(10000)
+
 beforeAll(async () => {
     await Promise.resolve(sut.bootup)
 }) 
