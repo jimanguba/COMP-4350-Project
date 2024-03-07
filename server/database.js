@@ -18,23 +18,30 @@ let pool = new Pool({
 const getKeyVaultSecrets = async () => {
   // Create a key vault secret client
   console.log("Key vault secrets called")
-  let secretClient = new SecretClient(vaultUri, new DefaultAzureCredential());
+  let secretClient;
   try {
-    // Iterate through each secret in the vault
-    listPropertiesOfSecrets = secretClient.listPropertiesOfSecrets();
-    while (true) {
-      let { done, value } = await listPropertiesOfSecrets.next();
-      if (done) {
-        break;
+    secretClient = new SecretClient(vaultUri, new DefaultAzureCredential());
+  } catch (err) {
+    console.log("Failed to generate client, (Probably not authenticated")
+  }
+  if(secretClient) {
+    try {
+      // Iterate through each secret in the vault
+      listPropertiesOfSecrets = secretClient.listPropertiesOfSecrets();
+      while (true) {
+        let { done, value } = await listPropertiesOfSecrets.next();
+        if (done) {
+          break;
+        }
+        // Only load enabled secrets - getSecret will return an error for disabled secrets
+        if (value.enabled) {
+          const secret = await secretClient.getSecret(value.name);
+          vaultSecretsMap[value.name] = secret.value;
+        }
       }
-      // Only load enabled secrets - getSecret will return an error for disabled secrets
-      if (value.enabled) {
-        const secret = await secretClient.getSecret(value.name);
-        vaultSecretsMap[value.name] = secret.value;
-      }
+    } catch(err) {
+      console.log(err.message)
     }
-  } catch(err) {
-    console.log(err.message)
   }
 }
 
