@@ -46,7 +46,7 @@ const getKeyVaultSecrets = async () => {
 }
 
 const connectToDatabase = async () => {
-    await getKeyVaultSecrets()
+    // await getKeyVaultSecrets()
     pool = new Pool({
         user: 'postgres',
         password: 'ferrets',
@@ -64,12 +64,12 @@ const connectToDatabase = async () => {
         connectionType = 'Azure database via connection string'
     }
 
-    if(process.env.DBVAULTSTRING in vaultSecretsMap) {
-        pool = new Pool({
-            connectionString: vaultSecretsMap[process.env.DBVAULTSTRING]
-        })
-        connectionType = 'Azure database via key vault secret'
-    }
+    // if(process.env.DBVAULTSTRING in vaultSecretsMap) {
+    //     pool = new Pool({
+    //         connectionString: vaultSecretsMap[process.env.DBVAULTSTRING]
+    //     })
+    //     connectionType = 'Azure database via key vault secret'
+    // }
 
     console.log(`Connection type: ${connectionType}`)
 }
