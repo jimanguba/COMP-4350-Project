@@ -18,35 +18,24 @@ let pool = new Pool({
 const getKeyVaultSecrets = async () => {
   // Create a key vault secret client
   console.log("Key vault secrets called")
-  let secretClient;
-  try {
-    secretClient = new SecretClient(vaultUri, new DefaultAzureCredential());
-  } catch (err) {
-    console.log("Failed to generate client, (Probably not authenticated")
-  }
-  if(secretClient) {
+  let secretClient = new SecretClient(vaultUri, new DefaultAzureCredential());
     try {
       // Iterate through each secret in the vault
       listPropertiesOfSecrets = secretClient.listPropertiesOfSecrets();
-      while (true) {
-        let { done, value } = await listPropertiesOfSecrets.next();
-        if (done) {
-          break;
-        }
+      for await (let secretProperties of secretClient.listPropertiesOfSecrets()) {
         // Only load enabled secrets - getSecret will return an error for disabled secrets
-        if (value.enabled) {
-          const secret = await secretClient.getSecret(value.name);
-          vaultSecretsMap[value.name] = secret.value;
+        if (secretProperties.enabled) {
+          const secret = await secretClient.getSecret(secretProperties.name);
+          vaultSecretsMap[secretProperties.name] = secret.value;
         }
       }
     } catch(err) {
       console.log(err.message)
     }
-  }
 }
 
 const connectToDatabase = async () => {
-    // await getKeyVaultSecrets()
+    await getKeyVaultSecrets()
     pool = new Pool({
         user: 'postgres',
         password: 'ferrets',
@@ -64,12 +53,12 @@ const connectToDatabase = async () => {
         connectionType = 'Azure database via connection string'
     }
 
-    // if(process.env.DBVAULTSTRING in vaultSecretsMap) {
-    //     pool = new Pool({
-    //         connectionString: vaultSecretsMap[process.env.DBVAULTSTRING]
-    //     })
-    //     connectionType = 'Azure database via key vault secret'
-    // }
+    if(process.env.DBVAULTSTRING in vaultSecretsMap) {
+        pool = new Pool({
+            connectionString: vaultSecretsMap[process.env.DBVAULTSTRING]
+        })
+        connectionType = 'Azure database via key vault secret'
+    }
 
     console.log(`Connection type: ${connectionType}`)
 }
