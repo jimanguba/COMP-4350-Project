@@ -8,6 +8,7 @@ const pool = require("./database");
 var cors = require('cors');
 const bodyParser = require('body-parser');
 const bookUtil = require('./book');
+const db = require('./database')
 
 app.use(cors());
 app.use(express.json());
@@ -286,11 +287,18 @@ app.put('/users/:book_id/reading_time', async (req, res) => {
 
 // DELETE
 
-const server = app.listen(PORT, () => {
-    console.log(`Server listening on the port ${PORT}`);
-})
+let server;
+let bootup = (async () => {
+    server = app.listen(PORT, () => {
+      console.log(`Server listening on the port ${PORT}`);
+    })
+    await db.connectToDatabase()
+})().catch(err => console.log(err))
+
+
 
 module.exports = {
     server,
-    app
+    app,
+    bootup
 }

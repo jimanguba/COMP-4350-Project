@@ -9,6 +9,10 @@ jest.mock('pg', () => {
     return { Pool: jest.fn(() => mockPg) };
 });
 
+beforeAll(async () => {
+    await Promise.resolve(sut.bootup)
+}) 
+
 beforeEach(() => {
     pool = new pg.Pool();
 })
