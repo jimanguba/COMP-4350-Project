@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons';
 import { faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons';
 import { faStarHalfAlt as faStarHalf } from '@fortawesome/free-solid-svg-icons';
-
+import BookImg from '../images/book.png'
 
 function StatisticsYear({ user_id }) {
     const [averageReadingTime, setAverageReadingTime] = useState(null);
@@ -68,9 +68,14 @@ function StatisticsYear({ user_id }) {
     return (
         <div>
             <h3>So far this year....</h3>
-            <p>Your average reading time is {averageReadingTime} minutes</p>
-            <p>Your average book rating is {Number(averageRating).toFixed(2)}{averageRating && averageStars(averageRating)}</p>
-        </div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img src={BookImg} alt="Book" style={{ marginRight: '10px', width: '100px', height: 'auto' }} />
+                <div>
+                    <p>Your average reading time is {averageReadingTime} minutes</p>
+                    <p>Your average book rating is {averageRating && Number(averageRating).toFixed(2)}{averageRating && averageStars(averageRating)}</p>
+                </div>
+            </div>
+		</div>
     );
 }
 
