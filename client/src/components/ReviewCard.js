@@ -1,45 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import '../styles/ReviewCard.css';
 import ReplyForm from '../components/ReplyForm';
+import axios from 'axios';
 
 
 const ReviewCard = ({ review, addReply }) => {
-
-  // Create an array of star elements
-  const stars = Array.from({ length: review.rating }, (_, index) => (
-    <FontAwesomeIcon key={index} icon={faStar} className="star" />
-  ));
-
+  const [userName, setUserName] = useState('');
   const [showReplyForm, setShowReplyForm] = useState(false);
+
+  useEffect(() => {
+    // Function to fetch the user name from the API
+    const fetchUserName = async () => {
+      try {
+        const response = await axios.get(`/user/${review.user_id}`);
+        setUserName(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching user name:', error);
+        setUserName('Anonymous');
+      }
+    };
+
+    // Call the function if user_id is available
+    if (review.user_id) {
+      fetchUserName();
+    }
+  }, [review.user_id]);
+
+
+  console.log('Review prop in ReviewCard:', review);
+
+  const stars = Array.from({ length: review.rating || 0 }, (_, index) => (<FontAwesomeIcon key={index} icon={faStar} className="star" />));
+
+  
 
   const submitReply = (replyText) => {
     addReply(review, replyText);
     setShowReplyForm(false);
   };
 
+  // Default tags and replies to an empty array if null
+  const tags = Array.isArray(review.tags) ? review.tags : [];
+  const replies = Array.isArray(review.replies) ? review.replies : [];
+
   return (
     <div className="review-card">
       <div className="review-header">
-        <span className="reviewer-name">{review.reviewer}</span>
+        <span className="reviewer-name">{userName}</span>
         <div className="review-rating">
           {stars}
           {review.verifiedPurchase && (
             <FontAwesomeIcon icon={faCheckCircle} className="verified-purchase-icon" />
           )}
         </div>
-        <span className="review-date">{review.date}</span>
+        <span className="review-date">{review.review_date}</span>
       </div>
       <div className="review-tags">
-        {review.tags.map((tag, index) => (
+        {tags.map((tag, index) => (
           <span key={index} className="review-tag">{tag}</span>
         ))}
       </div>
-      <div className="review-content">{review.content}</div>
+      <div className="review-content">{review.comment}</div>
       <button onClick={() => setShowReplyForm(!showReplyForm)}>Reply</button>
       {showReplyForm && <ReplyForm submitReply={submitReply} />}
-      {review.replies?.map((reply, index) => (
+      {replies.map((reply, index) => (
         <div key={index} className="review-reply">
           {reply}
         </div>

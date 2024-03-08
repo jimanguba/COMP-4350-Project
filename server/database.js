@@ -24,10 +24,16 @@ function getAllBooks(params) {
 }
 
 async function getBook(identifier) {
-    queryResult = await pool.query('SELECT * FROM books WHERE book_id = $1', [identifier])
-    bookData = queryResult?.rowCount > 0 ? queryResult.rows[0] : undefined
-    return bookUtil.validateBook(bookData) ? bookData : undefined
-}
+    try {
+      const queryResult = await pool.query('SELECT * FROM books WHERE book_id = $1', [identifier]);
+      const bookData = queryResult?.rowCount > 0 ? queryResult.rows[0] : undefined;
+      return bookUtil.validateBook(bookData) ? bookData : undefined;
+    } catch (error) {
+      console.error('Error fetching book:', error);
+      throw error;
+    }
+  }
+  
 
 function insertBook(newBook) {
     return bookUtil.validateBook(newBook) ?
