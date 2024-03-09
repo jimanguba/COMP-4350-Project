@@ -1,0 +1,24 @@
+name: Build and publish docker files of client and server
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      [ "main" ]
+
+jobs:
+  publish_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: build
+        run: |
+          docker build ./server -t christophere0/comp4350-bookshelf:server
+          docker build ./client -t christophere0/comp4350-bookshelf:client
+      - name: publish
+        run: |
+          docker login -u christophere0 -p ${{ secrets.DOCKER_COMP4350_TOKEN }}
+          docker push christophere0/comp4350-bookshelf:server
+          docker push christophere0/comp4350-bookshelf:client
+
