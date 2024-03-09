@@ -29,17 +29,22 @@ function App() {
             <Sidebar className = "app">
                 <Menu>
                     <MenuItem
-                        component={<Link to="/" className="link" />}
-                        icon={
-                            <MenuOutlinedIcon
-                                onClick={() => {
-                                    collapseSidebar();
-                                    }}
-                                    />
-                                }
+                        icon={<MenuOutlinedIcon
+                            onClick={() => {
+                                collapseSidebar();
+                            }}
+                        />}
                     >
-                        <h2>BOOKSHELF</h2>
+                        <Link to="/">
+                            <h2>BOOKSHELF</h2>
+                        </Link>
                     </MenuItem>
+                    {/* <MenuItem
+                        component={<Link to="/" />}
+                        icon={<HomeOutlinedIcon />}
+                    >
+                        Home
+                    </MenuItem> */}
                     <MenuItem
                         component={<Link to="/statistics"/>}
                         icon={<AssessmentOutlinedIcon />}

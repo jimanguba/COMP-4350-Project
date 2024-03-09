@@ -189,6 +189,7 @@ app.get('/login', async (req, res) => {
   res.json({response: "ok"});
 })
 
+/*
 app.get('/book/:book_id', async (req, res) => {
     const { book_id } = req.params
     try {
@@ -199,6 +200,47 @@ app.get('/book/:book_id', async (req, res) => {
         res.status(500).json({ error: 'An error occurred while fetching the requested book.' });
     }
 });
+*/
+app.get('/book/:book_id', async (req, res) => {
+    const { book_id } = req.params;
+    try {
+        // Fetch book details using the existing function
+        const bookData = await pool.getBook(book_id); // Using the getBook function directly
+        //console.log('hey');
+        //console.log('bookData', bookData);
+
+        if (!bookData) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
+
+        // Assuming you want to keep the logic to fetch reviews for the book
+        const reviewsResult = await pool.query('SELECT * FROM reviews WHERE book_id = $1', [book_id]);
+        const reviewsData = reviewsResult.rows;
+        //console.log('reviewsData', reviewsData);
+        // Send book details and reviews together
+        res.status(200).json({ book: bookData, reviews: reviewsData });
+    } catch (error) {
+        console.error(`Error fetching book with identifier ${book_id}:`, error);
+        res.status(500).json({ error: 'An error occurred while fetching the requested book and its reviews.' });
+    }
+});
+
+app.get('/user/:user_id', async (req, res) => {
+    const { user_id } = req.params;
+    try {
+      const query = 'SELECT user_name FROM users WHERE user_id = $1;';
+      const result = await pool.query(query, [user_id]);
+      if (result.rows.length > 0) {
+        res.status(200).json(result.rows[0].user_name);
+      } else {
+        res.status(404).json({ error: 'User not found.' });
+      }
+    } catch (error) {
+      console.error(`Error fetching user with identifier ${user_id}:`, error);
+      res.status(500).json({ error: 'An error occurred while fetching the user name.' });
+    }
+  });
+
 
 app.get('/books/average_time', async (req, res) => {
     try {
