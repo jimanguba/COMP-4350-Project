@@ -31,24 +31,25 @@ app.get('/signup', async (req, res) => {
     const result1 = await pool.query('SELECT count(*) FROM users WHERE user_name = $1 GROUP BY user_id',[username]);
     if(result1.rowCount!=0) 
     {
+        console.log("1")
       const result2 = await pool.query('SELECT user_password FROM users WHERE user_name = $1',[username]);
       return res.status(400).json({errors: [{msg: "Username Already Taken"}] });
     }
     else  
     {
+        console.log("2")
       if(password.length>=5)
       {
+        console.log("3")
         const result3 = await pool.query('INSERT INTO users (user_name, user_password) VALUES ($1  ,$2 )', [ username, await bcrypt.hash(password, salt)]);
         
         //get the user id returned 
         const result4 = await pool.query('SELECT user_id FROM users WHERE user_name = $1',[username]);
-        var id_user = console.log(result2.rows[0].user_id)
 
-        if(await bcrypt.compare(password, pw))
-        {
-          console.log("Login Success") 
-          res.send({response: "ok",data:id_user});      
-        }
+        console.log( result4.rows[0].user_id)
+
+        console.log("Login Success") 
+        res.status(200).json({"data": result4.rows[0].user_id});   
     }
       else
       {
@@ -178,12 +179,10 @@ app.get('/login', async (req, res) => {
       const result2 = await pool.query('SELECT user_password, user_id FROM users WHERE user_name = $1',[username]);
       var pw = result2.rows[0].user_password;
 
-      var id_user = console.log(result2.rows[0].user_id)
-
       if(await bcrypt.compare(password, pw))
       {
         console.log("Login Success") 
-        res.send({response: "ok",data:id_user});      
+        res.status(200).json({"data": result2.rows[0].user_id});     
       }
       else
       {
