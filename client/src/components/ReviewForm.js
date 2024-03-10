@@ -35,6 +35,8 @@ const ReviewForm = ({ addReview }) => {
       date: dateString,
       verifiedPurchase: false
     };
+    console.log('helllooooooooooooooooooooooooooooooooooooo')
+    console.log(newReview);
     addReview(newReview);
     setReviewerName('');
     setRating(0);
@@ -43,7 +45,7 @@ const ReviewForm = ({ addReview }) => {
   };
 
   return (
-    <div className="form-container">
+    <div className="ReviewForm">
       <form onSubmit={handleSubmit}>
         <input
           className="review-input"

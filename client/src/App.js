@@ -54,19 +54,19 @@ function App() {
                     >
                         Book List
                     </MenuItem>
-                    <MenuItem
+                    {/*<MenuItem
                         component={<Link to="/review" />}
                         icon={<RateReviewOutlinedIcon />}
                     >
                         Review
-                    </MenuItem>
+                </MenuItem>*/}
                 </Menu>
             </Sidebar>
-            <section>
+            <section className="section-background">
                 <Routes>
                     <Route exact path="/" element={<Home />} />
                     <Route path="/statistics" element={<Statistics user_id={1}/>} /> {/* TODO: in sprint 3 - user_id is hardcoded - change user_id to something more dynamic*/}
-                    <Route path="/view-book" element={<ViewBook book={{title: "1984", genre: "sci-fi", author: "George Orwell", pages: 172}}/>} />   {/* TODO: similar to the above statistics, this needs to be made dynamic */}
+                    <Route path="/view-book/:book_id" element={<ViewBook />} />
                     <Route path="/book-list" element={<BookList />} />
                     <Route path="/review" element={<ReviewsList />} />
                     <Route path='/login' element={<Login/>} />
