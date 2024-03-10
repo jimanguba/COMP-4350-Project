@@ -75,32 +75,48 @@ app.get("/goalCreate", async (req, res) => {
         var textStr = partsArray[0].split('=');
         var statusStr = partsArray[1].split('=');
         var goalNumStr = partsArray[2].split('=');
+        var userValStr = partsArray[3].split('=');
+
         var  text = textStr[1];
         var status = statusStr[1];
         var goalNum = goalNumStr[1];
+        var userVal = userValStr[1];
 
-        console.log(goalNum)
+        console.log(userVal)
 
         text = text.replace(/\+/g, '%20')
         text = decodeURIComponent(text); 
 
         if(goalNum=='')
         {
-            pool.query('INSERT INTO goals (goal_text, goal_status) VALUES ($1  ,$2 )', [ text, status]);
+            const result1 = await pool.query('SELECT goal_id_to_user FROM goals WHERE user_id = $1 ORDER BY goal_id DESC',[userVal]);
+            if(result1.rowCount==0)
+            {
+                //No goals for this user yet
+                pool.query('INSERT INTO goals (user_id, goal_id_to_user, goal_text, goal_status) VALUES ($1  ,$2 , $3, $4)', [userVal, 1,text, status]);
+            }
+            else
+            {
+                var last_value = result1.rows[0].goal_id_to_user
+                pool.query('INSERT INTO goals (user_id, goal_id_to_user, goal_text, goal_status) VALUES ($1  ,$2,$3, $4 )', [userVal, last_value+1,text, status]);
+            }
         }
         else
         {
-            const result1 = await pool.query('SELECT count(*) FROM goals WHERE goal_id = $1 GROUP BY goal_id',[goalNum]);
-            if(result1.rowCount==0) 
+            //Edit an existing goal
+            const result2 = await pool.query('SELECT goal_id FROM goals WHERE goal_id_to_user = $1 AND user_id = $2',[goalNum, userVal]);
+            var goal_id_fix = result2.rows[0].goal_id
+            if(result2.rowCount==0) 
             {
                 return res.status(400).json({errors: [{msg: "Goal doesn't exist"}] });
             }
             else
             {
                 console.log("I reach the point to change the query")
-                pool.query('UPDATE goals SET goal_text=$1, goal_status=$2 WHERE goal_id=$3',[text,status, goalNum]);
+                pool.query('UPDATE goals SET goal_text=$1, goal_status=$2 WHERE goal_id=$3',[text,status, goal_id_fix]);
             }
         }
+
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: 'An error occurred while inserting the goal' });
@@ -111,13 +127,21 @@ app.get("/goalCreate", async (req, res) => {
 app.get("/getGoals", async (req, res) => {
     
     try {
-        pool.query('SELECT * FROM goals',(error, goals) => {
-            if (error) {
-                throw error
-            }
-            res.status(200).json(goals.rows)
-        })
-    } catch (error) {
+        let str = req.url;
+        str = str.substring(2)
+
+        var partsArray = str.split('&');
+
+        var userValStr = partsArray[0].split('=');
+        var userVal = userValStr[1];
+
+        console.log(userVal)
+
+        const result1 = await pool.query('SELECT * FROM goals WHERE user_id = $1',[userVal])
+
+        res.status(200).json(result1.rows)
+    }
+    catch (error) {
 
     }
 

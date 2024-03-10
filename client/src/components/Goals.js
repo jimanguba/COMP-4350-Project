@@ -6,8 +6,10 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import TextField from '@mui/material/TextField';
 import Sidebar from '../components/Sidebar';
+import Cookies from 'universal-cookie';
 
 import '../styles/Goals.css'; 
+
 var config = {
     headers: {
         'Content-Length': 0,
@@ -17,6 +19,7 @@ var config = {
 };
 
 const GoalForm = () =>{
+  const cookies = new Cookies(null, { path: '/' });
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [goalText, setGoalText] = useState('');
@@ -28,7 +31,7 @@ const GoalForm = () =>{
         const fetchData = async () =>{
           setLoading(true);
           try {
-            const {data: response} = await axios.get('/getGoals');
+            const {data: response} = await axios.get('/getGoals', {params:{ userId: cookies.get('userID')}});
             setData(response);
           } catch (error) {
             console.error(error.message);
@@ -45,7 +48,8 @@ const GoalForm = () =>{
             params: {
                 goalText: goalText,
                 goalStauts:goalStauts,
-                goalNumber:goalNumber
+                goalNumber:goalNumber,
+                userId: cookies.get('userID')
             }
           })
     .catch(function(error)
@@ -74,6 +78,7 @@ return(
         <label className ="label" for="status">Choose a goal status   </label>
 
         <select name="status" id="status" onChange={ (event) =>  { setGoalStatus(event.target.value) } }>
+        <option value="" disabled selected>Select your option</option>
         <option value="in-progress">In-Progress</option>
         <option value="complete">Complete</option>
         <option value="abandoned">Abandoned</option>
@@ -97,7 +102,7 @@ return(
           <tbody>
             { data.map(item => (
               <tr key={item.goal_id}>
-                <td>{item.goal_id}</td>
+                <td>{item.goal_id_to_user}</td>
                 <td>{item.goal_text}</td>
                 <td>{item.goal_status}</td>
               </tr>
