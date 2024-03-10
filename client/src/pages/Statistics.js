@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import ProgressBar from '../components/ProgressBar';
 import Calendar from '../components/Calendar';
+import Sidebar from '../components/Sidebar';
 
 function Statistics({ user_id }) {
     const [progress, setProgress] = useState(0);
@@ -59,6 +60,8 @@ function Statistics({ user_id }) {
     }, [yearlyReadingGoal, user_id]);
 
     return (
+        <div style={{display: "flex", height: "100vh"}}>
+    <Sidebar />
         <div>
             <h2>Reading Statistics</h2>
             <div>
@@ -73,6 +76,7 @@ function Statistics({ user_id }) {
             <div style={{ height: '400px' }}>
                 <Calendar data={calendarData} />
             </div>
+        </div>
         </div>
     );
 }

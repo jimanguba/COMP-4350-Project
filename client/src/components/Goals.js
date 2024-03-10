@@ -5,6 +5,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import TextField from '@mui/material/TextField';
+import Sidebar from '../components/Sidebar';
+
 import '../styles/Goals.css'; 
 var config = {
     headers: {
@@ -55,6 +57,8 @@ const GoalForm = () =>{
     
  
 return(
+    <div style={{display: "flex", height: "100vh"}}>
+    <Sidebar />
     <div class="form-container"> 
     <h1 className="h1"> User Goals</h1>
     <h2 className="h2">Enter in your reading goals below, you can then mark your goals as completed or if you want change them as you go!</h2>
@@ -100,6 +104,7 @@ return(
             ))}
           </tbody>
         </table> 
+    </div>
     </div>
 );
 }

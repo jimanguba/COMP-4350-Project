@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import Sidebar from './Sidebar';
 
 const MyCalendar = ({ data }) => {
     const [selectedDate, setSelectedDate] = useState(null);
@@ -43,6 +44,8 @@ const MyCalendar = ({ data }) => {
     };
 
     return (
+        <div style={{display: "flex", height: "100vh"}}>
+        <Sidebar />
         <div className="calendar-container">
             <div className="calendar-wrapper">
                 <h2 className="calendar-heading">Your Reading Calendar</h2>
@@ -69,6 +72,7 @@ const MyCalendar = ({ data }) => {
                     /* Add more styles for higher values as needed */
                 `}
             </style>
+        </div>
         </div>
     );
 };

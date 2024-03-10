@@ -21,7 +21,7 @@ const LoginForm = () => {
     }).then(function(response){
       if(response.status == 200)
       {
-        navigate('/Home');
+        navigate('/home');
       }
     })
     .catch(function(error)
@@ -41,7 +41,7 @@ const LoginForm = () => {
     }).then(function(response){
       if(response.status == 200)
       {
-        navigate('/Home');
+        navigate('/home');
       }
     })
     .catch(function(error)
@@ -54,7 +54,7 @@ const LoginForm = () => {
   if(!loginflag)
   {
     return (
-      <div class="form-container"> 
+      <div className="form-container"> 
         <h1 className="h1"> Bookshelf</h1>
           <form>
             <TextField
@@ -73,7 +73,7 @@ const LoginForm = () => {
             />
             <div class="flex">
               <form class="flex-item">
-                <button class="button" onClick={loginClick}>Log In</button>
+                <button class="button2" onClick={loginClick}>Log In</button>
               </form>
               <form class="flex-item">
                 <button class="button2" onClick={SignUpClick}>Sign Up</button>
