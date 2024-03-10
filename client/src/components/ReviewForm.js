@@ -35,8 +35,6 @@ const ReviewForm = ({ addReview }) => {
       date: dateString,
       verifiedPurchase: false
     };
-    console.log('helllooooooooooooooooooooooooooooooooooooo')
-    console.log(newReview);
     addReview(newReview);
     setReviewerName('');
     setRating(0);
