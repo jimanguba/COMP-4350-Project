@@ -61,20 +61,7 @@ function App() {
                         component={<Link to="/goals" />}
                         icon={<BallotIcon />}
                     >
-                        Book List
-                    </MenuItem>
-                    <MenuItem
-                        component={<Link to="/login" />}
-                        icon={<LogoutIcon />}
-                    >
-                        Log Out
-                    </MenuItem>
-                
-                    <MenuItem
-                        component={<Link to="/goals" />}
-                        icon={<BallotIcon />}
-                    >
-                        Book List
+                        Goals
                     </MenuItem>
                     <MenuItem
                         component={<Link to="/login" />}
