@@ -10,6 +10,7 @@ import React, { useState, useEffect } from 'react';
 import BookCoverCard from "../components/BookCoverCard"
 import { Link } from "react-router-dom"
 import "../styles/BookList.css"
+import Sidebar from '../components/Sidebar';
 
 export default function BookList() {
     const [query, setQuery] = useState("")
@@ -29,6 +30,8 @@ export default function BookList() {
     }, []);
 
     return (
+        <div style={{display: "flex", height: "100vh"}}>
+        <Sidebar />
         <div className="bookList">
             <input type="text" placeholder="search titles..." value={query} onChange={e => setQuery(e.target.value)}></input>
             <ul>
@@ -40,6 +43,7 @@ export default function BookList() {
                     </Link>
                 ))}
             </ul> 
+        </div>
         </div>
     )
 }

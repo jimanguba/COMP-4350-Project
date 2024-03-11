@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import '../styles/StatisticsCalendar.css';
 
-const MyCalendar = ({ data }) => {
+const StatisticsCalendar = ({ data }) => {
     const [selectedDate, setSelectedDate] = useState(null);
 
     const onChange = date => {
-        console.log(date);
         setSelectedDate(date);
     };
 
@@ -18,22 +18,6 @@ const MyCalendar = ({ data }) => {
         return 'Select a date to view book title';
     };
 
-    const getColorForBooksRead = value => {
-        const colors = [
-            '#CAF0F8',
-            '#ADE8F4',
-            '#90E0EF',
-            '#48CAE4',
-            '#00B4D8',
-            '#0096C7',
-            '#0077B6',
-            '#023E8A',
-            '#03045E'
-        ];
-
-        return colors[value % colors.length-1];
-    };
-
     const tileClassName = ({ date }) => {
         const matchingData = data.find(d => d.day === date.toISOString().split('T')[0]);
         if (matchingData) {
@@ -43,9 +27,9 @@ const MyCalendar = ({ data }) => {
     };
 
     return (
-        <div className="calendar-container">
-            <div className="calendar-wrapper">
-                <h2 className="calendar-heading">Your Reading Calendar</h2>
+        <div className='row'>
+            <div className='calendar-wrapper'>
+                <h2>Your Reading Calendar</h2>
                 <Calendar
                     onChange={onChange}
                     value={selectedDate}
@@ -55,22 +39,8 @@ const MyCalendar = ({ data }) => {
             <div className="book-title-wrapper">
                 <h3 className="book-title">{getBookTitle()}</h3>
             </div>
-            <style>
-                {`
-                    .book-tile {
-                        border-radius: 0;
-                    }
-                    .book-tile-1 {
-                        background-color: ${getColorForBooksRead(1)};
-                    }
-                    .book-tile-2 {
-                        background-color: ${getColorForBooksRead(2)};
-                    }
-                    /* Add more styles for higher values as needed */
-                `}
-            </style>
         </div>
     );
 };
 
-export default MyCalendar;
+export default StatisticsCalendar;

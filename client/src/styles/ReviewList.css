@@ -1,0 +1,36 @@
+.reviews-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .review-form-container {
+    width: 100%; /* Adjust the width as needed, or set to a max-width if you prefer */
+    /* Additional styles for the review form container if necessary */
+  }
+  
+  .review-card-container {
+    width: 100%; /* Adjust the width as needed, or set to a max-width if you prefer */
+    /* Additional styles for the review cards container if necessary */
+  }
+  
+  /* If you want all the review cards to be the same width as the form */
+  .review-card-container,
+  .review-form-container {
+    max-width: 800px; /* or whatever max-width you prefer */
+  }
+  
+  /* You might want to add some responsive design features as well */
+  @media (max-width: 768px) {
+    .reviews-list-container {
+      padding: 10px;
+    }
+  
+    .review-card-container,
+    .review-form-container {
+      max-width: 100%;
+    }
+  }
+  
