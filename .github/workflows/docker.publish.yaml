@@ -5,6 +5,8 @@ on:
   push:
     branches:
       [ "main" ]
+  pull_request:
+    branches: [ "chris-docker-publish" ]
 
 jobs:
   publish_image:
