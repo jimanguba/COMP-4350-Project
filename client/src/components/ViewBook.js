@@ -52,9 +52,11 @@ export default function ViewBook() {
     return (
         <div className="viewBook">
             <BookCoverCard book={book} size={"large"} />
+            <div className="readingStateContainer">
+                <ToReadButton book_id={book_id} />
+                <HaveReadButton book_id={book_id} />
+            </div>
             <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
-            <ToReadButton book_id={book_id} />
-            <HaveReadButton book_id={book_id} />
             <ReviewsList reviews={reviews}/>
         </div>
         

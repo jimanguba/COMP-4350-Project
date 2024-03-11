@@ -2,6 +2,8 @@
 
 .readingStateButton {
     border-radius: 10px;
+    width: 200px;
+    height: 60px;
     cursor: pointer;
     font-size: x-small;
 }

@@ -3,10 +3,10 @@
  * @param {Object} book
  */
 
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/ReadingStateButton.css'
 import Cookies from 'universal-cookie'
+import axios from 'axios';
 
 export default function HaveReadButton({book_id}) {
     const cookies = new Cookies(null, { path: '/' })

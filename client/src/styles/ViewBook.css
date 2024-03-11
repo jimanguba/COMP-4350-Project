@@ -21,6 +21,10 @@
     align-items: center; /* Aligns children in the center of the container on the cross axis */
   }
   
+.readingStateContainer {
+    display: flex;
+    gap: 10px;
+}
 
 @media (max-width: 768px) {
     .viewBook {
