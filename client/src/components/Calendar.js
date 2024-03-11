@@ -45,7 +45,6 @@ const MyCalendar = ({ data }) => {
 
     return (
         <div style={{display: "flex", height: "100vh"}}>
-        <Sidebar />
         <div className="calendar-container">
             <div className="calendar-wrapper">
                 <h2 className="calendar-heading">Your Reading Calendar</h2>
