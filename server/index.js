@@ -242,9 +242,10 @@ app.get('/user/:user_id', async (req, res) => {
   });
 
 
-app.get('/books/average_time', async (req, res) => {
+app.get('/books/:user_id/average_time', async (req, res) => {
+    const { user_id } = req.params;
     try {
-        const result = await pool.query('SELECT ROUND(AVG(reading_time), 2) AS average_time FROM completed_books');
+        const result = await pool.query('SELECT ROUND(AVG(reading_time), 2) AS average_time FROM completed_books where user_id = $1', [user_id]);
         const averageTime = result.rows[0].average_time;
         res.status(200).json({ average_time: averageTime });
     } catch (error) {
@@ -302,7 +303,7 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
     try {
         const { user_id } = req.params;
         const result = await pool.query(`
-            SELECT cb.date_end, b.title
+            SELECT cb.date_end, b.title, b.author
             FROM completed_books cb
             INNER JOIN books b ON cb.book_id = b.book_id
             WHERE cb.user_id = $1
@@ -313,7 +314,8 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
                 return {
                     day: row.date_end.toISOString().split('T')[0],
                     value: 1,
-                    book: row.title
+                    book: row.title,
+                    author: row.author
                 };
             } else {
                 console.error(`Invalid date value for row with title ${row.title}`);
