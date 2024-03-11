@@ -6,18 +6,31 @@
 import React from 'react'
 import { useState } from 'react'
 import '../styles/ReadingStateButton.css'
-import { getHaveRead, putHaveRead } from '../lib/requests'
 
 export default function HaveReadButton({book}) {
+    const [onHaveRead, setOnHaveRead] = useState(false)
 
-    // Init by GETting whether or not this is on have-read list
-    const [onHaveRead, setOnHaveRead] = useState(getHaveRead(book.id))
+    useEffect(() => {
+        axios.get(`/books/${book_id}/have-read`)
+            .then(response => {
+                const { haveRead } = response.data;
+                setOnHaveRead(haveRead);
+            })
+            .catch(error => {
+                console.error('Error fetching have-read:', error);
+            })
+    }, []);
 
-    // Update DB, and GET again)
     const toggleReadingState = () => {
         console.log("Pressed have-read!");
-        putHaveRead(book.id);
-        setOnHaveRead(getHaveRead(book.id));
+        axios.put(`/books/${book_id}/have-read`, {haveRead: !onHaveRead})
+            .then(response => {
+                console.log(response.data)
+                setOnToRead(response.data.haveRead);
+            })
+            .catch(error => {
+                console.error('Error updating have-read status:', error);
+            })
     }
 
     return (

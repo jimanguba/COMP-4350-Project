@@ -6,18 +6,31 @@
 import React from 'react'
 import { useState } from 'react'
 import '../styles/ReadingStateButton.css'
-import { getToRead, putToRead } from '../lib/requests'
 
 export default function ToReadButton({book}) {
+    const [onToRead, setOnToRead] = useState(false)
 
-    // Init by GETting whether or not this is on to-read list
-    const [onToRead, setOnToRead] = useState(getToRead(book.id))
+    useEffect(() => {
+        axios.get(`/books/${book_id}/to-read`)
+            .then(response => {
+                const { haveRead } = response.data;
+                setOnHaveRead(haveRead);
+            })
+            .catch(error => {
+                console.error('Error fetching to-read:', error);
+            })
+    }, []);
 
-    // Update DB, and GET again)
     const toggleReadingState = () => {
         console.log("Pressed to-read!");
-        putToRead(book.id);
-        setOnToRead(getToRead(book.id));
+        axios.put(`/books/${book_id}/to-read`, {toRead: !onToRead})
+            .then(response => {
+                console.log(response.data)
+                setOnToRead(response.data.toRead);
+            })
+            .catch(error => {
+                console.error('Error updating to-read status:', error);
+            })
     }
 
     return (
