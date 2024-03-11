@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons';
 import { faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons';
 import '../styles/ReviewForm.css'; // Make sure you have the correct path to your CSS file
+import Sidebar from './Sidebar';
 
 // Define the genres or tags for the dropdown
 const genres = ['Action', 'Romance', 'Horror', 'Sci-Fi', 'Fantasy', 'Mystery', 'Thriller', 'Biography'];
@@ -43,7 +44,9 @@ const ReviewForm = ({ addReview }) => {
   };
 
   return (
-    <div className="ReviewForm">
+    <div style={{display: "flex", height: "100vh"}}>
+    <Sidebar />
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
         <input
           className="review-input"
@@ -88,6 +91,7 @@ const ReviewForm = ({ addReview }) => {
 
         <button type="submit" className="submit-btn">Submit Review</button>
       </form>
+    </div>
     </div>
   );
 };

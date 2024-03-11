@@ -64,6 +64,7 @@ CREATE TABLE users(
 CREATE TABLE goals(
     goal_id SERIAL PRIMARY KEY,
     user_id INTEGER,
+    goal_id_to_user INTEGER,
     goal_text TEXT,
     goal_status VARCHAR(255)
 );
