@@ -85,7 +85,7 @@ return(
         </select>
 
         <label className ="label" for="goalNumber">   Goal Number:   </label> 
-        <input  type = "text" id="goalNumber" 
+        <input  className = "input" type = "text" id="goalNumber" 
                   placeholder="Goal to change" required onChange={ (event) =>  { setGoalNumber(event.target.value) } }> 
         </input> 
 

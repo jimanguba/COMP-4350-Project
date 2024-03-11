@@ -50,6 +50,10 @@ th {
 
 
   .form-container {
+    max-width: 600px;
+    max-height: 375px;
+    margin: 20px auto;
+    padding: 20px;
     background: #FFF7F1;
     border: 1px solid #FFE4C9;
     justify-content: center;
@@ -73,14 +77,15 @@ th {
     color: white;
     cursor: pointer;
     position: relative;
-    right: -450px;
-    top: -135px;
+    right: -440px;
+    top: -190px;
   }
   
   .button:hover {
     background-color: #d698a0;
   }
-  
+
+
   .button2{
     justify-content: center;
     display: inline-block;

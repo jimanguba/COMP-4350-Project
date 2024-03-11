@@ -1,16 +1,11 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
-import ProgressBar from '../components/ProgressBar';
-import Calendar from '../components/Calendar';
-import Sidebar from '../components/Sidebar';
-=======
 import StatisticsGoal from '../components/StatisticsGoal';
 import StatisticsYear from '../components/StatisticsYear';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../styles/StatisticsCalendar.css';
->>>>>>> sprint-3
+import Sidebar from '../components/Sidebar';
 
 function Statistics({ user_id }) {
     const [calendarData, setCalendarData] = useState([]);
