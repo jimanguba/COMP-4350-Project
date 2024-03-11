@@ -9,6 +9,8 @@ import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
 import ReviewsList from "./ReviewList";
 import "../styles/ViewBook.css"
+import ToReadButton from "./ToReadButton";
+import HaveReadButton from "./HaveReadButton";
 
 
 export default function ViewBook() {
@@ -51,8 +53,9 @@ export default function ViewBook() {
         <div className="viewBook">
             <BookCoverCard book={book} size={"large"} />
             <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
+            <ToReadButton book_id={book_id} />
+            <HaveReadButton book_id={book_id} />
             <ReviewsList reviews={reviews}/>
-            
         </div>
         
     );

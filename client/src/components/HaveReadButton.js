@@ -7,7 +7,7 @@ import React from 'react'
 import { useState } from 'react'
 import '../styles/ReadingStateButton.css'
 
-export default function HaveReadButton({book}) {
+export default function HaveReadButton({book_id}) {
     const [onHaveRead, setOnHaveRead] = useState(false)
 
     useEffect(() => {
