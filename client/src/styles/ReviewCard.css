@@ -23,9 +23,15 @@
     align-items: left;
     margin-bottom: 8px;
   }
-  
+ 
+   
+  .Title-card {
+    font-weight: bold;
+    font-size: 1rem;
+  }
   .reviewer-name {
     font-weight: bold;
+    font-size: 0.9rem;
   }
   
   .review-date {

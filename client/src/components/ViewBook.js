@@ -54,15 +54,9 @@ export default function ViewBook() {
             <div className="viewBook">
                 <BookCoverCard book={book} size={"large"} />
                 <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
-                <ReviewsList reviews={reviews}/>
+                <ReviewsList reviews={reviews} bookId={book_id}/>
                 
             </div>
         </div>
     );
 }
-/*<div>
-                <ReviewForm addReview={addReview} />
-                {reviews.map((review, index) => (
-                    <ReviewCard key={index} review={review} addReply={addReply} />
-                ))}
-            </div> */
