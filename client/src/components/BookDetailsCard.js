@@ -32,27 +32,29 @@ export default function BookDetailsCard({book, updateBookDetails}) {
 
     return (
         <div className={`bookDetailsCard ` + (!editing ? `currentlyEditing` : ``)}>
-            <label htmlFor="title">Title</label>
-            <br></br>
-            <input type="text" id="title" value={book.title} onChange={e => newBook.title = e.target.value}></input>
-            <br></br>
-            <br></br>
-            <label htmlFor="author">Author</label>
-            <br></br>
-            <input type="text" id="author" value={book.author} onChange={e => newBook.author = e.target.value}></input>
-            <br></br>
-            <br></br>
-            <label htmlFor="pages">Pages</label>
-            <br></br>
-            <input type="number" id="pages" value={book.pages} onChange={e => newBook.pages = e.target.value}></input>
-            <br></br>
-            <br></br>
-            <label htmlFor="genre">Genre</label>
-            <br></br>
-            <input type="text" id="genre" value={book.genre} onChange={e => newBook.genre = e.target.value}></input>
-            <br></br>
-            <br></br>
-            <button className="submit-btn" onClick={editButtonCallback}>{!editing ? "Edit Book Details" : "Submit Changes"}</button>
+             <div className="detail-field">
+                <label htmlFor="title">Title</label>
+                <input type="text" id="title" value={book.title} onChange={e => newBook.title = e.target.value} />
+            </div>
+            
+            <div className="detail-field">
+                <label htmlFor="author">Author</label>
+                <input type="text" id="author" value={book.author} onChange={e => newBook.author = e.target.value} />
+            </div>
+            
+            <div className="detail-field">
+                <label htmlFor="pages">Pages</label>
+                <input type="number" id="pages" value={book.pages} onChange={e => newBook.pages = e.target.value} />
+            </div>
+            
+            <div className="detail-field">
+                <label htmlFor="genre">Genre</label>
+                <input type="text" id="genre" value={book.genre} onChange={e => newBook.genre = e.target.value} />
+            </div>
+            
+            <button className="submit-btn" onClick={editButtonCallback}>
+                {!editing ? "Edit Book Details" : "Submit Changes"}
+            </button>
         </div>
     )
 }

@@ -43,7 +43,7 @@ const ReviewForm = ({ addReview }) => {
   };
 
   return (
-    <div className="form-container">
+    <div className="ReviewForm">
       <form onSubmit={handleSubmit}>
         <input
           className="review-input"

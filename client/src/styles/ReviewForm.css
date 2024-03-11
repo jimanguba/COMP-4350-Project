@@ -1,11 +1,36 @@
-/* ReviewForm.css */
-.form-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border: 1px solid #e1e1e1;
-  }
+* {
+  box-sizing: border-box;
+}
+.ReviewForm{
+  box-sizing: border-box;
+  max-width: 1200px; /* Remove any max-width restrictions */
+  margin: 20px auto; /* Center the form within its parent */box-sizing: border-box; /* Include padding and border in the element's total width and height */
+
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  width: 80%; 
+  background: white;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px; /* Consistent border-radius */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent box-shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ensure buttons inside the form are not stretched */
+.ReviewForm .submit-btn, .submit-btn {
+  width: auto; /* Let the button size according to its content */
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px; /* Spacing above the button */
+}
   
   .rating {
     margin-bottom: 10px;
@@ -50,16 +75,7 @@
     outline: none;
     border-color: #007bff;
   }
-  
-  .submit-btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-  }
-  
+
   .submit-btn:hover {
     background-color: #0056b3;
   }

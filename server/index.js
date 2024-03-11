@@ -205,19 +205,12 @@ app.get('/book/:book_id', async (req, res) => {
     const { book_id } = req.params;
     try {
         // Fetch book details using the existing function
-        const bookData = await pool.getBook(book_id); // Using the getBook function directly
-        //console.log('hey');
-        //console.log('bookData', bookData);
-
+        const bookData = await pool.getBook(book_id); 
         if (!bookData) {
             return res.status(404).json({ message: 'Book not found' });
         }
-
-        // Assuming you want to keep the logic to fetch reviews for the book
         const reviewsResult = await pool.query('SELECT * FROM reviews WHERE book_id = $1', [book_id]);
         const reviewsData = reviewsResult.rows;
-        //console.log('reviewsData', reviewsData);
-        // Send book details and reviews together
         res.status(200).json({ book: bookData, reviews: reviewsData });
     } catch (error) {
         console.error(`Error fetching book with identifier ${book_id}:`, error);
