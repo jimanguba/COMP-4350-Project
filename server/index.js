@@ -52,6 +52,67 @@ app.get('/signup', async (req, res) => {
   res.json({response: "ok"});
 })
 
+//if no number entered then create new
+//otherwise update with new 
+app.get("/goalCreate", async (req, res) => {
+    try {
+        let str = req.url;
+        str = str.substring(2)
+
+        console.log(req.url)
+      
+        var partsArray = str.split('&');
+        var textStr = partsArray[0].split('=');
+        var statusStr = partsArray[1].split('=');
+        var goalNumStr = partsArray[2].split('=');
+        var  text = textStr[1];
+        var status = statusStr[1];
+        var goalNum = goalNumStr[1];
+
+        console.log(goalNum)
+
+        text = text.replace(/\+/g, '%20')
+        text = decodeURIComponent(text); 
+
+        if(goalNum=='')
+        {
+            pool.query('INSERT INTO goals (goal_text, goal_status) VALUES ($1  ,$2 )', [ text, status]);
+        }
+        else
+        {
+            const result1 = await pool.query('SELECT count(*) FROM goals WHERE goal_id = $1 GROUP BY goal_id',[goalNum]);
+            if(result1.rowCount==0) 
+            {
+                return res.status(400).json({errors: [{msg: "Goal doesn't exist"}] });
+            }
+            else
+            {
+                console.log("I reach the point to change the query")
+                pool.query('UPDATE goals SET goal_text=$1, goal_status=$2 WHERE goal_id=$3',[text,status, goalNum]);
+            }
+        }
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'An error occurred while inserting the goal' });
+    }
+
+})
+
+app.get("/getGoals", async (req, res) => {
+    
+    try {
+        pool.query('SELECT * FROM goals',(error, goals) => {
+            if (error) {
+                throw error
+            }
+            res.status(200).json(goals.rows)
+        })
+    } catch (error) {
+
+    }
+
+})
+
 // CREATE
 app.post("/books/new", async (req, res) => {
     try {
@@ -128,6 +189,7 @@ app.get('/login', async (req, res) => {
   res.json({response: "ok"});
 })
 
+/*
 app.get('/book/:book_id', async (req, res) => {
     const { book_id } = req.params
     try {
@@ -138,6 +200,47 @@ app.get('/book/:book_id', async (req, res) => {
         res.status(500).json({ error: 'An error occurred while fetching the requested book.' });
     }
 });
+*/
+app.get('/book/:book_id', async (req, res) => {
+    const { book_id } = req.params;
+    try {
+        // Fetch book details using the existing function
+        const bookData = await pool.getBook(book_id); // Using the getBook function directly
+        //console.log('hey');
+        //console.log('bookData', bookData);
+
+        if (!bookData) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
+
+        // Assuming you want to keep the logic to fetch reviews for the book
+        const reviewsResult = await pool.query('SELECT * FROM reviews WHERE book_id = $1', [book_id]);
+        const reviewsData = reviewsResult.rows;
+        //console.log('reviewsData', reviewsData);
+        // Send book details and reviews together
+        res.status(200).json({ book: bookData, reviews: reviewsData });
+    } catch (error) {
+        console.error(`Error fetching book with identifier ${book_id}:`, error);
+        res.status(500).json({ error: 'An error occurred while fetching the requested book and its reviews.' });
+    }
+});
+
+app.get('/user/:user_id', async (req, res) => {
+    const { user_id } = req.params;
+    try {
+      const query = 'SELECT user_name FROM users WHERE user_id = $1;';
+      const result = await pool.query(query, [user_id]);
+      if (result.rows.length > 0) {
+        res.status(200).json(result.rows[0].user_name);
+      } else {
+        res.status(404).json({ error: 'User not found.' });
+      }
+    } catch (error) {
+      console.error(`Error fetching user with identifier ${user_id}:`, error);
+      res.status(500).json({ error: 'An error occurred while fetching the user name.' });
+    }
+  });
+
 
 app.get('/books/:user_id/average_time', async (req, res) => {
     const { user_id } = req.params;

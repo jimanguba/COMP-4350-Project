@@ -1,0 +1,100 @@
+.h1 {
+    text-align: center;
+    font-family: 'Futura', Arial, sans-serif;
+    color: #B47B84;
+  }
+
+  .h2 {
+    text-align: center;
+    font-family: 'Futura', Arial, sans-serif;
+    color: #99b393;
+  }
+ 
+  
+  .container{
+    text-align: center;
+  }
+  
+  .textarea{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+  }
+
+  .table, th, td{
+    border: 1px solid #B47B84;
+    border-collapse: collapse;
+    
+  }
+
+  th, td {
+  	padding: 10px;
+}
+
+th {
+	background-color: #FDDF95;
+}
+
+  .select
+  {
+    margin-left: 10px;
+  }
+
+  .label
+  {
+    font-family: 'Futura', Arial, sans-serif;
+    color: #B47B84;
+    }
+
+
+  .form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #FFF7F1;
+    border: 1px solid #FFE4C9;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .flex {
+    display: flex;
+    justify-content: center;
+  }
+    
+  .flex-item + .flex-item {
+    margin-left: 10px;
+  }
+    
+  .button {
+    padding: 10px 20px;
+    background-color: #E78895;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    right: -450px;
+    top: -135px;
+  }
+  
+  .button:hover {
+    background-color: #d698a0;
+  }
+  
+  .button2{
+    justify-content: center;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #E78895;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+  }
+    
+  .button2:hover {
+    background-color: #d698a0;
+  }
