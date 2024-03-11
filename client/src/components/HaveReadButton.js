@@ -6,14 +6,17 @@
 import React from 'react'
 import { useState } from 'react'
 import '../styles/ReadingStateButton.css'
+import Cookies from 'universal-cookie'
 
 export default function HaveReadButton({book_id}) {
+    const cookies = new Cookies(null, { path: '/' })
+    const user_id = cookies.get('user_id');
     const [onHaveRead, setOnHaveRead] = useState(false)
 
     useEffect(() => {
-        axios.get(`/books/${book_id}/have-read`)
+        axios.get(`/users/${user_id}/${book_id}`)
             .then(response => {
-                const { haveRead } = response.data;
+                const { haveRead } = response.data.haveRead;
                 setOnHaveRead(haveRead);
             })
             .catch(error => {
@@ -23,7 +26,7 @@ export default function HaveReadButton({book_id}) {
 
     const toggleReadingState = () => {
         console.log("Pressed have-read!");
-        axios.put(`/books/${book_id}/have-read`, {haveRead: !onHaveRead})
+        axios.put(`/users/${user_id}/${book_id}`, {haveRead: !onHaveRead})
             .then(response => {
                 console.log(response.data)
                 setOnToRead(response.data.haveRead);
