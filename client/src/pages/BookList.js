@@ -30,20 +30,20 @@ export default function BookList() {
     }, []);
 
     return (
-        <div style={{display: "flex", height: "100vh"}}>
-        <Sidebar />
-        <div className="bookList">
-            <input type="text" placeholder="search titles..." value={query} onChange={e => setQuery(e.target.value)}></input>
-            <ul>
-                {books && books.filter(book => book.title.toLowerCase().includes(query.toLowerCase())).map(book => (
-                    <Link key={book.book_id} to={`/view-book/${book.book_id}`}>
-                        <li>
-                            <BookCoverCard book={book} size={"small"} />
-                        </li>
-                    </Link>
-                ))}
-            </ul> 
-        </div>
+        <div style={{ display: "flex", height: "100vh" }}>
+            <Sidebar />
+            <div className="bookList">
+                <input type="text" placeholder="search titles..." value={query} onChange={e => setQuery(e.target.value)}></input>
+                <ul>
+                    {books && books.filter(book => book.title.toLowerCase().includes(query.toLowerCase())).map(book => (
+                        <Link key={book.book_id} to={`/view-book/${book.book_id}`}>
+                            <li>
+                                <BookCoverCard book={book} size={"small"} />
+                            </li>
+                        </Link>
+                    ))}
+                </ul> 
+            </div>
         </div>
     )
 }
