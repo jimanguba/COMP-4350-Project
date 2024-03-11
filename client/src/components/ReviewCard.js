@@ -48,21 +48,21 @@ const ReviewCard = ({ review, addReply }) => {
   return (
     <div className="review-card">
       <div className="review-header">
-        <span className="reviewer-name">{userName}</span>
+        <span className="reviewer-name">{userName || review.reviewer}</span>
         <div className="review-rating">
           {stars}
           {review.verifiedPurchase && (
             <FontAwesomeIcon icon={faCheckCircle} className="verified-purchase-icon" />
           )}
         </div>
-        <span className="review-date">{review.review_date}</span>
+        <span className="review-date">{review.review_date || review.date}</span>
       </div>
       <div className="review-tags">
         {tags.map((tag, index) => (
           <span key={index} className="review-tag">{tag}</span>
         ))}
       </div>
-      <div className="review-content">{review.comment}</div>
+      <div className="review-content">{review.comment || review.content}</div>
       <button onClick={() => setShowReplyForm(!showReplyForm)}>Reply</button>
       {showReplyForm && <ReplyForm submitReply={submitReply} />}
       {replies.map((reply, index) => (

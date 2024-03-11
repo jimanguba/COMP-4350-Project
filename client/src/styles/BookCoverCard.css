@@ -1,20 +1,22 @@
 .bookCoverCard {
-    width: 85px;
-    height: 110px;    
     background-color: lightgrey;
-    border-width: 2px;
-    border-style: double;
-    border-color: black;
+    border: 2px double black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Space between cover card and details */
+}
+.bookCoverCard.large {
+    width: 40%; /* This will make the book cover card take the full width of its container */
+    max-width: 800px; /* You can set a maximum width to ensure it doesn't get too wide on large screens */
+    height: 20rem; /* This will keep the aspect ratio of the content intact */
+    /* Other styles remain the same */
 }
 
-.large {
-    width: 170px;
-    height: 220px;
-}
 
 .title {
-    text-align: center;
-    color: black;
     font-family: 'Times New Roman', Times, serif;
-    font-size: smaller;
+    font-size: 1rem; /* Adapting font size to rem units */
+    color: black;
+    text-align: center;
 }

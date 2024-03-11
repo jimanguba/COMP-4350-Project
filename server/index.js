@@ -239,19 +239,12 @@ app.get('/book/:book_id', async (req, res) => {
     const { book_id } = req.params;
     try {
         // Fetch book details using the existing function
-        const bookData = await pool.getBook(book_id); // Using the getBook function directly
-        //console.log('hey');
-        //console.log('bookData', bookData);
-
+        const bookData = await pool.getBook(book_id); 
         if (!bookData) {
             return res.status(404).json({ message: 'Book not found' });
         }
-
-        // Assuming you want to keep the logic to fetch reviews for the book
         const reviewsResult = await pool.query('SELECT * FROM reviews WHERE book_id = $1', [book_id]);
         const reviewsData = reviewsResult.rows;
-        //console.log('reviewsData', reviewsData);
-        // Send book details and reviews together
         res.status(200).json({ book: bookData, reviews: reviewsData });
     } catch (error) {
         console.error(`Error fetching book with identifier ${book_id}:`, error);
@@ -276,9 +269,10 @@ app.get('/user/:user_id', async (req, res) => {
   });
 
 
-app.get('/books/average_time', async (req, res) => {
+app.get('/books/:user_id/average_time', async (req, res) => {
+    const { user_id } = req.params;
     try {
-        const result = await pool.query('SELECT ROUND(AVG(reading_time), 2) AS average_time FROM completed_books');
+        const result = await pool.query('SELECT ROUND(AVG(reading_time), 2) AS average_time FROM completed_books where user_id = $1', [user_id]);
         const averageTime = result.rows[0].average_time;
         res.status(200).json({ average_time: averageTime });
     } catch (error) {
@@ -336,7 +330,7 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
     try {
         const { user_id } = req.params;
         const result = await pool.query(`
-            SELECT cb.date_end, b.title
+            SELECT cb.date_end, b.title, b.author
             FROM completed_books cb
             INNER JOIN books b ON cb.book_id = b.book_id
             WHERE cb.user_id = $1
@@ -347,7 +341,8 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
                 return {
                     day: row.date_end.toISOString().split('T')[0],
                     value: 1,
-                    book: row.title
+                    book: row.title,
+                    author: row.author
                 };
             } else {
                 console.error(`Invalid date value for row with title ${row.title}`);

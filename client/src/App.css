@@ -14,3 +14,8 @@
   flex: 1;
   padding: 20px;
 }
+section {
+  flex: 1; /* This will allow the section to grow and fill the remaining space */
+  padding: 10px; /* Add padding if you want some space inside the section */
+  overflow-y: auto; /* To handle scrolling if the content is taller than the screen */
+}
