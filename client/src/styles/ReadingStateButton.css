@@ -1,0 +1,16 @@
+/* Styling for ToReadButton and HaveReadButton components */
+
+.readingStateButton {
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: x-small;
+}
+
+.onToRead {
+    background-color: green;
+    color: white;
+}
+
+.onToRead:hover {
+    background-color: darkred;
+}
