@@ -2,6 +2,7 @@ const Pool = require("pg").Pool;
 const { DefaultAzureCredential } = require("@azure/identity");
 const { SecretClient } = require("@azure/keyvault-secrets");
 const bookUtil = require('./book');
+const fs = require('fs')
 
 const vaultUri = `https://${process.env.VAULTNAME}.vault.azure.net/`;
 
@@ -46,9 +47,13 @@ const connectToDatabase = async () => {
 
     connectionType = 'Local'
 
-    if(process.env.PG_CONN_STRING) {
+    if(process.env.PG_CONN_STRING || process.env.PG_CONN_STRING_FILE) {
+        connString = process.env.PG_CONN_STRING
+        if(process.env.PG_CONN_STRING_FILE) {
+          connString = fs.readFileSync(process.env.PG_CONN_STRING_FILE, 'utf8')
+        }
         pool = new Pool({
-            connectionString: process.env.PG_CONN_STRING
+            connectionString: connString
         })
         connectionType = 'Azure database via connection string'
     }
