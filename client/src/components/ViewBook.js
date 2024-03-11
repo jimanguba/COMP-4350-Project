@@ -12,7 +12,6 @@ import "../styles/ViewBook.css"
 import ToReadButton from "./ToReadButton";
 import HaveReadButton from "./HaveReadButton";
 
-
 export default function ViewBook() {
     const [book, setBook] = useState(null);
     const [reviews, setReviews] = useState([]);

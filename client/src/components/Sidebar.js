@@ -45,12 +45,6 @@ const sidebar = () => {
             Book List
         </MenuItem>
         <MenuItem
-            component={<Link to="/review" />}
-            icon={<RateReviewOutlinedIcon />}
-        >
-            Review
-        </MenuItem>
-        <MenuItem
             component={<Link to="/goals" />}
             icon={<BallotOutlinedIcon />}
         >

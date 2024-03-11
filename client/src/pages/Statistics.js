@@ -63,7 +63,7 @@ function Statistics({ user_id }) {
     }, [user_id]);
 
     return (
-        <div style={{ width: '80vw' }}>
+        <div style={{ display: "flex", height: "100vh" }}>
         <Sidebar />
         <div>
             <StatisticsGoal user_id={user_id} />
