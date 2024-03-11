@@ -57,9 +57,3 @@ export default function ViewBook() {
         
     );
 }
-/*<div>
-                <ReviewForm addReview={addReview} />
-                {reviews.map((review, index) => (
-                    <ReviewCard key={index} review={review} addReply={addReply} />
-                ))}
-            </div> */
