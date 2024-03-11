@@ -3,32 +3,36 @@ import '../styles/LoginForm.css';
 import axios from "axios";
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginflag] = useState(false);
+  const cookies = new Cookies(null, { path: '/' });
    
   const navigate = useNavigate();
 
   const loginClick = (event) => {
-    event.preventDefault();
-    axios.get('/login', {
-      params: {
-        username: username,
-        password:password
-      }
-    }).then(function(response){
-      if(response.status == 200)
+event.preventDefault();
+      axios.get('/login', {
+        params: {
+          username: username,
+          password:password
+        }
+      }).then((response)=>{
+        var test1 = JSON.parse(JSON.stringify(response.data))
+        if(response.status == 200)
+        {
+          cookies.set('userID',test1.data);
+          navigate('/home');
+        }
+      })
+      .catch(function(error)
       {
-        navigate('/Home');
-      }
-    })
-    .catch(function(error)
-    {
-      console.log(error)
-      alert("Username does not exist or Password is Wrong");
-    })
+        console.log(error)
+        alert("Username already exists or Password is too short (must be length 5)");
+      })
   }
 
   const SignUpClick = (event) => {
@@ -38,10 +42,12 @@ const LoginForm = () => {
         username: username,
         password:password
       }
-    }).then(function(response){
+    }).then((response)=>{
+      var test1 = JSON.parse(JSON.stringify(response.data))
       if(response.status == 200)
       {
-        navigate('/Home');
+        cookies.set('userID',test1.data);
+        navigate('/home');
       }
     })
     .catch(function(error)
@@ -54,7 +60,7 @@ const LoginForm = () => {
   if(!loginflag)
   {
     return (
-      <div class="form-container"> 
+      <div className="form-container"> 
         <h1 className="h1"> Bookshelf</h1>
           <form>
             <TextField
@@ -73,7 +79,7 @@ const LoginForm = () => {
             />
             <div class="flex">
               <form class="flex-item">
-                <button class="button" onClick={loginClick}>Log In</button>
+                <button class="button2" onClick={loginClick}>Log In</button>
               </form>
               <form class="flex-item">
                 <button class="button2" onClick={SignUpClick}>Sign Up</button>

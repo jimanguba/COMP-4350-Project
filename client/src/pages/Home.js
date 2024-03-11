@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import Sidebar from '../components/Sidebar';
 
 function Home() {
     const [loading, setLoading] = useState(true);
@@ -22,6 +23,8 @@ function Home() {
     }, []);
 
     return (
+        <div style={{display: "flex", height: "100vh"}}>
+    <Sidebar />
         <div className='container my-5'>
             <h1 className="text-center mb-4">Home</h1>
             <div className="table-responsive">
@@ -54,6 +57,7 @@ function Home() {
                     </tbody>
                 </table>
             </div>
+        </div>
         </div>
     )
 };
