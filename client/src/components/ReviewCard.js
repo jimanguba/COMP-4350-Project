@@ -29,8 +29,10 @@ const ReviewCard = ({ review, addReply }) => {
     }
   }, [review.user_id]);
 
-  const stars = Array.from({ length: review.rating || 0 }, (_, index) => (<FontAwesomeIcon key={index} icon={faStar} className="star" />));
-
+  const stars = Array.from({ length: review.rating || 0 }, (_, index) => (
+    <FontAwesomeIcon key={index} icon={faStar} className="star" data-testid="star" />
+  ));
+  
   
 
   const submitReply = (replyText) => {
