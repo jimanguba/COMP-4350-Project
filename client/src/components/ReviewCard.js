@@ -29,11 +29,10 @@ const ReviewCard = ({ review, addReply }) => {
     }
   }, [review.user_id]);
 
-
-  console.log('Review prop in ReviewCard:', review);
-
-  const stars = Array.from({ length: review.rating || 0 }, (_, index) => (<FontAwesomeIcon key={index} icon={faStar} className="star" />));
-
+  const stars = Array.from({ length: review.rating || 0 }, (_, index) => (
+    <FontAwesomeIcon key={index} icon={faStar} className="star" data-testid="star" />
+  ));
+  
   
 
   const submitReply = (replyText) => {
@@ -48,6 +47,7 @@ const ReviewCard = ({ review, addReply }) => {
   return (
     <div className="review-card">
       <div className="review-header">
+        <div className="Title-card">{review.review_title}</div>
         <span className="reviewer-name">{userName || review.reviewer}</span>
         <div className="review-rating">
           {stars}

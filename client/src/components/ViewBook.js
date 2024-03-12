@@ -2,6 +2,7 @@
  * View a Book's cover and details
  * @param {Book} book - The Book being displayed
  */
+
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import axios from 'axios';
@@ -16,11 +17,9 @@ export default function ViewBook() {
     const [book, setBook] = useState(null);
     const [reviews, setReviews] = useState([]);
     const { book_id } = useParams();
-    const location = useLocation().pathname;
 
     useEffect(() => {
         const fetchBookDetails = async () => {
-            console.log("Fetching data....")
             setLoading(true);
             try {
                 const response = await axios.get(`/book/${book_id}`);
@@ -58,7 +57,7 @@ export default function ViewBook() {
                         <ToReadButton book_id={book_id} />
                     </div>
                     <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
-                    <ReviewsList reviews={reviews}/>
+                    <ReviewsList reviews={reviews} bookId={book_id}/>
                 </div>
             )
         }
