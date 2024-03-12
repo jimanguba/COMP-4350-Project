@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import ReviewCard from './ReviewCard';
 import ReviewForm from './ReviewForm';
+import ReviewFilter from './ReviewFilter'; 
 import '../styles/ReviewList.css'
 
 
 const ReviewsList = ({ reviews: initialReviews, bookId  }) => {
-  
-  
   const [reviews, setReviews] = useState(Array.isArray(initialReviews) ? initialReviews : []);
-  console.log(reviews);
+  const [filter, setFilter] = useState(null);
+  
+  // console.log(reviews);
   const addReply = (reviewToUpdate, replyText) => {
     setReviews(reviews.map(review => {
       if (review === reviewToUpdate) {
@@ -23,10 +24,13 @@ const ReviewsList = ({ reviews: initialReviews, bookId  }) => {
     setReviews([...reviews, newReview]);
   };
 
+  const filteredReviews = filter ? reviews.filter((review) => review.rating === filter) : reviews;
+
   return (
     <div className="reviews-container">
       <ReviewForm addReview={addReview} bookId={bookId}/>
-      {Array.isArray(reviews) && reviews.map((review, index) => (
+      <ReviewFilter setFilter={setFilter} />
+      {Array.isArray(filteredReviews) && filteredReviews.map((review, index) => (
         <ReviewCard key={index} review={review} addReply={addReply} />
       ))}
     </div>
