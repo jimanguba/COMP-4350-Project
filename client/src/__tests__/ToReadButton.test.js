@@ -40,6 +40,6 @@ describe('ToReadButton', () => {
         fireEvent.click(button);
 
         // Wait for the state to be updated
-        await waitFor(() => expect(button).toHaveTextContent(/On To-Read/i));
+        await waitFor(() => expect(button).toHaveTextContent(/Add to To-Read/i));
     });
 });
