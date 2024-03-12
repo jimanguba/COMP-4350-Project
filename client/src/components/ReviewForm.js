@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons';
 import { faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons';
 import '../styles/ReviewForm.css'; // Make sure you have the correct path to your CSS file
 import Sidebar from './Sidebar';
+import Cookies from 'universal-cookie'; 
+import axios from 'axios';
 
 // Define the genres or tags for the dropdown
 const genres = ['Action', 'Romance', 'Horror', 'Sci-Fi', 'Fantasy', 'Mystery', 'Thriller', 'Biography'];
 
-const ReviewForm = ({ addReview }) => {
-  const [reviewerName, setReviewerName] = useState('');
+const ReviewForm = ({ addReview, bookId }) => {
+  const [reviewTitle, setReviewTitle] = useState('');
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
+  const [userId, setUserId] = useState(''); 
+
+  useEffect(() => {
+    const cookies = new Cookies();
+    const userIdFromCookie = cookies.get('userID'); // Read the userID cookie
+    if (userIdFromCookie) {
+      setUserId(userIdFromCookie); // Set the user ID state if the cookie exists
+    }
+  }, []); 
 
   const toggleGenre = (genre) => {
     if (selectedTags.includes(genre)) {
@@ -21,26 +32,38 @@ const ReviewForm = ({ addReview }) => {
       setSelectedTags([...selectedTags, genre]);
     }
   };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const currentDate = new Date();
-    const dateString = `Reviewed on ${currentDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+    const dateString = currentDate.toISOString().slice(0, 10);
 
     const newReview = {
-      reviewer: reviewerName,
+      review_title: reviewTitle,
+      book_id: bookId,
+      user_id: userId,
       rating,
-      content: reviewText,
-      tags: selectedTags,
-      date: dateString,
-      verifiedPurchase: false
+      comment: reviewText,
+      review_date: dateString,
+      
+      //verifiedPurchase: false
+      //tags: selectedTags,
     };
-    addReview(newReview);
-    setReviewerName('');
-    setRating(0);
-    setReviewText('');
-    setSelectedTags([]);
+    try {
+      const response = await axios.post('/reviews/new', newReview);
+
+      // Assuming your addReview prop updates the parent state
+      addReview(response.data);
+
+      addReview(newReview);
+      setReviewTitle('');
+      setRating(0);
+      setReviewText('');
+      setSelectedTags([]);
+    } catch (error) {
+      // Handle errors, such as showing an error message to the user
+      console.error('Failed to submit review', error);
+    }
   };
 
   return (
@@ -49,9 +72,9 @@ const ReviewForm = ({ addReview }) => {
         <input
           className="review-input"
           type="text"
-          placeholder="Your name"
-          value={reviewerName}
-          onChange={(e) => setReviewerName(e.target.value)}
+           placeholder="Review Title"
+          value={reviewTitle}
+          onChange={(e) => setReviewTitle(e.target.value)}
           required
         />
 
@@ -73,7 +96,7 @@ const ReviewForm = ({ addReview }) => {
           onChange={(e) => setReviewText(e.target.value)}
           required
         />
-
+{/* 
         <div className="genre-buttons">
           {genres.map((genre, index) => (
             <button
@@ -86,7 +109,7 @@ const ReviewForm = ({ addReview }) => {
             </button>
           ))}
         </div>
-
+*/}
         <button type="submit" className="submit-btn">Submit Review</button>
       </form>
     </div>
