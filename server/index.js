@@ -32,16 +32,13 @@ app.get('/signup', async (req, res) => {
     const result1 = await pool.query('SELECT count(*) FROM users WHERE user_name = $1 GROUP BY user_id',[username]);
     if(result1.rowCount!=0) 
     {
-        console.log("1")
       const result2 = await pool.query('SELECT user_password FROM users WHERE user_name = $1',[username]);
       return res.status(400).json({errors: [{msg: "Username Already Taken"}] });
     }
     else  
     {
-        console.log("2")
       if(password.length>=5)
       {
-        console.log("3")
         const result3 = await pool.query('INSERT INTO users (user_name, user_password) VALUES ($1  ,$2 )', [ username, await bcrypt.hash(password, salt)]);
         
         //get the user id returned 
@@ -83,14 +80,12 @@ app.get("/goalCreate", async (req, res) => {
         var goalNum = goalNumStr[1];
         var userVal = userValStr[1];
 
-        console.log(userVal)
-
         text = text.replace(/\+/g, '%20')
         text = decodeURIComponent(text); 
 
         if(goalNum=='')
         {
-            const result1 = await pool.query('SELECT goal_id_to_user FROM goals WHERE user_id = $1 ORDER BY goal_id DESC',[userVal]);
+            const result1 = await pool.query('SELECT goal_id_to_user FROM goals WHERE user_id = $1 ORDER BY goal_id_to_user DESC',[userVal]);
             if(result1.rowCount==0)
             {
                 //No goals for this user yet
@@ -113,11 +108,10 @@ app.get("/goalCreate", async (req, res) => {
             }
             else
             {
-                console.log("I reach the point to change the query")
                 pool.query('UPDATE goals SET goal_text=$1, goal_status=$2 WHERE goal_id=$3',[text,status, goal_id_fix]);
             }
         }
-
+        res.status(200)
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: 'An error occurred while inserting the goal' });
@@ -135,8 +129,6 @@ app.get("/getGoals", async (req, res) => {
 
         var userValStr = partsArray[0].split('=');
         var userVal = userValStr[1];
-
-        console.log(userVal)
 
         const result1 = await pool.query('SELECT * FROM goals WHERE user_id = $1',[userVal])
 
