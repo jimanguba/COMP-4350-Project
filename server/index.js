@@ -252,6 +252,36 @@ app.get('/book/:book_id', async (req, res) => {
         res.status(500).json({ error: 'An error occurred while fetching the requested book and its reviews.' });
     }
 });
+app.post("/reviews/new", async (req, res) => {
+    // console.log(req.body); // Add this to log the request body for debugging
+    const { book_id, user_id, rating, comment, review_title, review_date } = req.body;
+
+    if (!book_id || !user_id || !rating || !comment || !review_title || !review_date) {
+        // console.log('book_id:', book_id);
+        // console.log('user_id:', user_id);
+        // console.log('rating:', rating);
+        // console.log('comment:', comment);
+        // console.log('review_title:', review_title);
+        // console.log('review_date:', review_date);
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
+    
+    // console.log("blahhhhhhhhhhhh");
+    try {
+        const insertReviewQuery = `
+            INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date)
+            VALUES ($1, $2, $3, $4, $5, $6)`;
+
+        const newReview = await pool.query(insertReviewQuery, [
+            book_id, user_id, comment, rating, review_title, review_date
+        ]);
+
+        res.status(201).json(newReview.rows[0]);
+    } catch (error) {
+        console.error('Error inserting new review:', error); // Log the full error object
+        res.status(500).json({ error: 'Error inserting new review', details: error.message });
+    }
+});
 
 app.get('/user/:user_id', async (req, res) => {
     const { user_id } = req.params;

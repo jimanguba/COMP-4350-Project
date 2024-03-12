@@ -5,6 +5,7 @@ import { faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons';
 import '../styles/ReviewForm.css'; // Make sure you have the correct path to your CSS file
 import Sidebar from './Sidebar';
 import Cookies from 'universal-cookie'; 
+import axios from 'axios';
 
 // Define the genres or tags for the dropdown
 const genres = ['Action', 'Romance', 'Horror', 'Sci-Fi', 'Fantasy', 'Mystery', 'Thriller', 'Biography'];
@@ -31,14 +32,11 @@ const ReviewForm = ({ addReview, bookId }) => {
       setSelectedTags([...selectedTags, genre]);
     }
   };
-  // console.log("heyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-  // console.log(userId);
-  // console.log(bookId);
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const currentDate = new Date();
-    const dateString = `Reviewed on ${currentDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+    const dateString = currentDate.toISOString().slice(0, 10);
 
     const newReview = {
       review_title: reviewTitle,
@@ -46,16 +44,25 @@ const ReviewForm = ({ addReview, bookId }) => {
       user_id: userId,
       rating,
       comment: reviewText,
-      //review_title: 
-      tags: selectedTags,
-      date: dateString,
+      //tags: selectedTags,
+      review_date: dateString,
       //verifiedPurchase: false
     };
-    addReview(newReview);
-    setReviewTitle('');
-    setRating(0);
-    setReviewText('');
-    setSelectedTags([]);
+    try {
+      const response = await axios.post('/reviews/new', newReview);
+
+      // Assuming your addReview prop updates the parent state
+      addReview(response.data);
+
+      addReview(newReview);
+      setReviewTitle('');
+      setRating(0);
+      setReviewText('');
+      setSelectedTags([]);
+    } catch (error) {
+      // Handle errors, such as showing an error message to the user
+      console.error('Failed to submit review', error);
+    }
   };
 
   return (
