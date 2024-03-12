@@ -9,7 +9,6 @@ const ReviewsList = ({ reviews: initialReviews, bookId  }) => {
   const [reviews, setReviews] = useState(Array.isArray(initialReviews) ? initialReviews : []);
   const [filter, setFilter] = useState(null);
   
-  // console.log(reviews);
   const addReply = (reviewToUpdate, replyText) => {
     setReviews(reviews.map(review => {
       if (review === reviewToUpdate) {

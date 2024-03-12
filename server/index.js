@@ -224,18 +224,6 @@ app.get('/login', async (req, res) => {
   }
 })
 
-/*
-app.get('/book/:book_id', async (req, res) => {
-    const { book_id } = req.params
-    try {
-        const result = await pool.getBook(book_id)
-        res.status(200).json(result)
-    } catch (error) {
-        console.error(`Error fetching book with identifier ${book_id}`)
-        res.status(500).json({ error: 'An error occurred while fetching the requested book.' });
-    }
-});
-*/
 app.get('/book/:book_id', async (req, res) => {
     const { book_id } = req.params;
     try {
@@ -253,20 +241,11 @@ app.get('/book/:book_id', async (req, res) => {
     }
 });
 app.post("/reviews/new", async (req, res) => {
-    // console.log(req.body); // Add this to log the request body for debugging
     const { book_id, user_id, rating, comment, review_title, review_date } = req.body;
 
     if (!book_id || !user_id || !rating || !comment || !review_title || !review_date) {
-        // console.log('book_id:', book_id);
-        // console.log('user_id:', user_id);
-        // console.log('rating:', rating);
-        // console.log('comment:', comment);
-        // console.log('review_title:', review_title);
-        // console.log('review_date:', review_date);
         return res.status(400).json({ message: 'Missing required fields' });
     }
-    
-    // console.log("blahhhhhhhhhhhh");
     try {
         const insertReviewQuery = `
             INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date)
