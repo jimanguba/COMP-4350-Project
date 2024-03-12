@@ -358,6 +358,64 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
     }
 });
 
+
+// CHECK / ADD / REMOVE from user's to-read list
+app.get('/users/:user_id/to_read/:book_id', async (req, res) => {
+    console.log("GETTT");
+    const { book_id, user_id } = req.params;
+    console.log(`getting status of book's (book_id:${book_id}) in user's (user_id${user_id}) to-read list`)
+    try {
+        // below lines within this try may be incorrect__
+        const result = await pool.query('SELECT toRead FROM to_read WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
+        if (result.rows.length === 0) {
+            res.status(404).json({ success: false, message: 'Book not found' });
+        } else {
+            res.json({ success: true, book: result.rows[0] });
+        }
+    } catch (error) {
+        console.error('Error getting to-read status:', error.message)
+    }
+});
+
+app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
+    const { book_id, user_id } = req.params;
+    const { to_read } = req.body;
+    console.log(`updating status of book's (book_id:${book_id}) in user's (user_id${user_id}) to-read list`)
+
+    // Add book_id to user_id's toRead array
+    if (to_read) {
+        try {
+            const result = await pool.query('UPDATE users SET toRead = ARRAY.APPEND(toRead, $2) WHERE user_id = $3 RETURNING *', [to_read, book_id, user_id]);
+            if (result.rows.length === 0) {
+                res.status(404).json({ success: false, message: 'Book not found' });
+            } else {
+                res.json({ success: true, book: result.rows[0] });
+            }
+        }  catch (error) {
+            console.error('Error changing to-read status:', error.message)
+        }
+    }
+    // Remove book_id to user_id's toRead array
+    else {
+        try {
+            const result = await pool.query('UPDATE users SET toRead = ARRAY.APPEND(toRead, $2) WHERE user_id = $3 RETURNING *', [to_read, book_id, user_id]);
+            if (result.rows.length === 0) {
+                res.status(404).json({ success: false, message: 'Book not found' });
+            } else {
+                res.json({ success: true, book: result.rows[0] });
+            }
+        }  catch (error) {
+            console.error('Error changing to-read status:', error.message)
+        }
+    }
+});
+
+
+// CHECK / ADD / REMOVE from user's have-read list
+// ____ can largely copy-paste the two above _____
+
+
+
 // UPDATE
 app.put('/users/:book_id/reading_time', async (req, res) => {
     const { book_id } = req.params;

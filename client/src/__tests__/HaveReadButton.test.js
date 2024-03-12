@@ -1,5 +1,5 @@
 /**
- * Button for adding/removing a book from the user's "to read"
+ * Button for adding/removing a book from the user's "to-read"
  * @param {Object} book
  */
 
@@ -14,7 +14,7 @@ export default function ToReadButton({book_id}) {
     const [onToRead, setOnToRead] = useState(false)
 
     useEffect(() => {
-        axios.get(`/users/${user_id}/to_read/${book_id}`)
+        axios.get(`/users/${user_id}/${book_id}`)
             .then(response => {
                 const { toRead } = response.data.toRead;
                 setOnToRead(toRead);
@@ -26,7 +26,7 @@ export default function ToReadButton({book_id}) {
 
     const toggleReadingState = () => {
         console.log("Pressed to-read!");
-        axios.put(`/users/${user_id}/to_read/${book_id}`, {toRead: !onToRead})
+        axios.put(`/users/${user_id}/${book_id}`, {toRead: !onToRead})
             .then(response => {
                 console.log(response.data)
                 setOnToRead(response.data.toRead);

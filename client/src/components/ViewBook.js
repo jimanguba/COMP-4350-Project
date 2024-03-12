@@ -3,7 +3,7 @@
  * @param {Book} book - The Book being displayed
  */
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from 'axios';
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
@@ -13,21 +13,26 @@ import ToReadButton from "./ToReadButton";
 import HaveReadButton from "./HaveReadButton";
 
 export default function ViewBook() {
+    const [loading, setLoading] = useState(true);
     const [book, setBook] = useState(null);
     const [reviews, setReviews] = useState([]);
     const { book_id } = useParams();
+    const location = useLocation().pathname;
 
     useEffect(() => {
         const fetchBookDetails = async () => {
+            console.log("Fetching data....")
+            setLoading(true);
             try {
                 const response = await axios.get(`/book/${book_id}`);
                 console.log(response.data);
                 setBook(response.data.book); 
                 setReviews(Array.isArray(response.data.reviews) ? response.data.reviews : []);
-
             } catch (error) {
                 console.error(`Error fetching book with identifier ${book_id}:`, error);
+                setBook({title: "No book selected", author: "No author", pages: 0, genre: "No genre" })
             }
+            setLoading(false);
         };
     
         fetchBookDetails();
@@ -43,21 +48,22 @@ export default function ViewBook() {
         }
     };
 
-    // If book is null (not fetched yet or an error occurred), you can return a loading indicator or null
-    if (!book) {
-        return <div>Book Not Found...</div>;
-    }
-
     return (
-        <div className="viewBook">
-            <BookCoverCard book={book} size={"large"} />
-            <div className="readingStateContainer">
-                <ToReadButton book_id={book_id} />
-                <HaveReadButton book_id={book_id} />
-            </div>
-            <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
-            <ReviewsList reviews={reviews}/>
-        </div>
-        
+        <>
+        {loading ? (
+                <p className="text-center">Loading...</p>
+            ) : (
+                <div className="viewBook">
+                    <BookCoverCard book={book} size={"large"} />
+                    <div className="readingStateContainer">
+                        <ToReadButton book_id={book_id} />
+                        <HaveReadButton book_id={book_id} />
+                    </div>
+                    <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
+                    <ReviewsList reviews={reviews}/>
+                </div>
+            )
+        }
+    </>
     );
 }
