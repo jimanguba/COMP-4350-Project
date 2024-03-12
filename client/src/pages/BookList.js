@@ -10,6 +10,7 @@ import React, { useState, useEffect } from 'react';
 import BookCoverCard from "../components/BookCoverCard"
 import { Link } from "react-router-dom"
 import "../styles/BookList.css"
+import Sidebar from '../components/Sidebar';
 
 export default function BookList() {
     const [query, setQuery] = useState("")
@@ -29,17 +30,20 @@ export default function BookList() {
     }, []);
 
     return (
-        <div className="bookList">
-            <input type="text" placeholder="search titles..." value={query} onChange={e => setQuery(e.target.value)}></input>
-            <ul>
-                {books && books.filter(book => book.title.toLowerCase().includes(query.toLowerCase())).map(book => (
-                    <Link key={book.book_id} to={`/view-book/${book.book_id}`}>
-                        <li>
-                            <BookCoverCard book={book} size={"small"} />
-                        </li>
-                    </Link>
-                ))}
-            </ul> 
+        <div style={{ display: "flex", height: "100vh" }}>
+            <Sidebar />
+            <div className="bookList">
+                <input type="text" placeholder="search titles..." value={query} onChange={e => setQuery(e.target.value)}></input>
+                <ul>
+                    {books && books.filter(book => book.title.toLowerCase().includes(query.toLowerCase())).map(book => (
+                        <Link key={book.book_id} to={`/view-book/${book.book_id}`}>
+                            <li>
+                                <BookCoverCard book={book} size={"small"} />
+                            </li>
+                        </Link>
+                    ))}
+                </ul> 
+            </div>
         </div>
     )
 }

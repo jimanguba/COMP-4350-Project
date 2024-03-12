@@ -1,10 +1,14 @@
 .review-card {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 16px;
-    margin: 16px 0;
-    background: #fff;
-  }
+  width: 80%; /* Match the width of the form-container */
+  margin: 20px auto; /* Center the card */
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px; /* Consistent border-radius */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent box-shadow */
+  text-align: left; 
+}
+
   .star {
     color: #ffd700; /* gold color for stars */
     margin-right: 4px; /* space between stars */

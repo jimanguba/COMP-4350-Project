@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReviewCard from './ReviewCard';
 import ReviewForm from './ReviewForm';
+import '../styles/ReviewList.css'
+
 
 const ReviewsList = ({ reviews: initialReviews }) => {
   
@@ -22,7 +24,7 @@ const ReviewsList = ({ reviews: initialReviews }) => {
   };
 
   return (
-    <div>
+    <div className="reviews-container">
       <ReviewForm addReview={addReview} />
       {Array.isArray(reviews) && reviews.map((review, index) => (
         <ReviewCard key={index} review={review} addReply={addReply} />

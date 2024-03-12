@@ -5,6 +5,7 @@ import StatisticsYear from '../components/StatisticsYear';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../styles/StatisticsCalendar.css';
+import Sidebar from '../components/Sidebar';
 
 function Statistics({ user_id }) {
     const [calendarData, setCalendarData] = useState([]);
@@ -62,7 +63,9 @@ function Statistics({ user_id }) {
     }, [user_id]);
 
     return (
-        <div style={{ width: '80vw' }}>
+        <div style={{ display: "flex", height: "100vh" }}>
+        <Sidebar />
+        <div>
             <StatisticsGoal user_id={user_id} />
             <StatisticsYear user_id={user_id} />
             <div className='row'>
@@ -81,6 +84,7 @@ function Statistics({ user_id }) {
                     </ul>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

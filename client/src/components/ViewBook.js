@@ -9,6 +9,7 @@ import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
 import ReviewsList from "./ReviewList";
 import "../styles/ViewBook.css"
+import Sidebar from '../components/Sidebar';
 
 
 export default function ViewBook() {
@@ -48,13 +49,15 @@ export default function ViewBook() {
     }
 
     return (
-        <div className="viewBook">
-            <BookCoverCard book={book} size={"large"} />
-            <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
-            <ReviewsList reviews={reviews}/>
-            
+        <div style={{display: "flex"}}>
+            <Sidebar />
+            <div className="viewBook">
+                <BookCoverCard book={book} size={"large"} />
+                <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
+                <ReviewsList reviews={reviews}/>
+                
+            </div>
         </div>
-        
     );
 }
 /*<div>

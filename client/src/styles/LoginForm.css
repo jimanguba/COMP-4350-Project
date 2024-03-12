@@ -20,6 +20,7 @@
 
 .form-container {
   max-width: 600px;
+  max-height: 300px;
   margin: 20px auto;
   padding: 20px;
   background: #FFF7F1;
@@ -37,28 +38,13 @@
   margin-left: 10px;
 }
   
-.button {
-  justify-content: center;
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #E78895;
-  border: none;
-  border-radius: 15px;
-  color: white;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #d698a0;
-}
-
 .button2{
   justify-content: center;
   display: inline-block;
   padding: 10px 20px;
   background-color: #E78895;
   border: none;
-  border-radius: 15px;
+  border-radius: 30px;
   color: white;
   cursor: pointer;
 }
