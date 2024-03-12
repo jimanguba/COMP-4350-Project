@@ -6,7 +6,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import ToReadButton from './ToReadButton';
+import ToReadButton from '../components/ToReadButton';
 
 describe('ToReadButton', () => {
     let mock;
@@ -26,6 +26,7 @@ describe('ToReadButton', () => {
     });
 
     it('toggles reading state when clicked', async () => {
+
         // Mock the GET request
         mock.onGet(`/users/1/to_read/1`).reply(200, { toRead: false });
 

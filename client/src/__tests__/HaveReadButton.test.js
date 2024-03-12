@@ -3,40 +3,44 @@
  * @param {Object} book
  */
 
-import React, { useState, useEffect } from 'react'
-import '../styles/ReadingStateButton.css'
-import Cookies from 'universal-cookie'
+import React from 'react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+import HaveReadButton from '../components/HaveReadButton';
 
-export default function ToReadButton({book_id}) {
-    const cookies = new Cookies(null, { path: '/' })
-    const user_id = cookies.get('user_id');
-    const [onToRead, setOnToRead] = useState(false)
+describe('HaveReadButton', () => {
+    let mock;
 
-    useEffect(() => {
-        axios.get(`/users/${user_id}/${book_id}`)
-            .then(response => {
-                const { toRead } = response.data.toRead;
-                setOnToRead(toRead);
-            })
-            .catch(error => {
-                console.error('Error fetching to-read:', error);
-            })
-    }, []);
+    beforeEach(() => {
+        mock = new MockAdapter(axios);
+    });
 
-    const toggleReadingState = () => {
-        console.log("Pressed to-read!");
-        axios.put(`/users/${user_id}/${book_id}`, {toRead: !onToRead})
-            .then(response => {
-                console.log(response.data)
-                setOnToRead(response.data.toRead);
-            })
-            .catch(error => {
-                console.error('Error updating to-read status:', error);
-            })
-    }
+    afterEach(() => {
+        mock.restore();
+    });
 
-    return (
-        <button className={`readingStateButton ${onToRead ? "onToRead" : "offToRead"}`} onClick={toggleReadingState}>{onToRead ? "On To-Read" : "Add to To-Read"}</button>
-    )
-}
+    it('renders without crashing', () => {
+        const { getByText } = render(<HaveReadButton book_id={1} />);
+        const button = getByText(/Mark as Read/i);
+        expect(button).toBeInTheDocument();
+    });
+
+    it('toggles reading state when clicked', async () => {
+
+        // Mock the GET request
+        mock.onGet(`/users/1/have_read/1`).reply(200, { haveRead: false });
+
+        // Mock the PUT request
+        mock.onPut(`/users/1/have_read/1`).reply(200, { haveRead: true });
+
+        const { getByText } = render(<HaveReadButton book_id={1} />);
+        const button = getByText(/Mark as Read/i);
+
+        // Click the button
+        fireEvent.click(button);
+
+        // Wait for the state to be updated
+        await waitFor(() => expect(button).toHaveTextContent(/Already Read/i));
+    });
+});
