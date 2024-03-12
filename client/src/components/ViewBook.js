@@ -10,7 +10,6 @@ import BookCoverCard from "./BookCoverCard";
 import ReviewsList from "./ReviewList";
 import "../styles/ViewBook.css"
 import ToReadButton from "./ToReadButton";
-import HaveReadButton from "./HaveReadButton";
 
 export default function ViewBook() {
     const [loading, setLoading] = useState(true);
@@ -57,7 +56,6 @@ export default function ViewBook() {
                     <BookCoverCard book={book} size={"large"} />
                     <div className="readingStateContainer">
                         <ToReadButton book_id={book_id} />
-                        <HaveReadButton book_id={book_id} />
                     </div>
                     <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
                     <ReviewsList reviews={reviews}/>

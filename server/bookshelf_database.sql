@@ -5,7 +5,6 @@ CREATE TABLE users (
     book_goal INTEGER,
     reviews_id INTEGER,
     want_to_read_id INTEGER,
-    have_read_id INTEGER,
     curr_reading_id INTEGER
 );
 
@@ -30,14 +29,6 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE want_to_read (
-    book_id INTEGER,
-    user_id INTEGER,
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (book_id) REFERENCES books(book_id),
-    PRIMARY KEY (book_id, user_id)
-);
-
-CREATE TABLE have_read (
     book_id INTEGER,
     user_id INTEGER,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
@@ -102,7 +93,6 @@ INSERT INTO users (user_id, user_name, user_password) VALUES (4,  'William Shake
 INSERT INTO users (user_id, book_goal, reviews_id, want_to_read_id, curr_reading_id) VALUES (1, 20, 0, 1, 1);
 INSERT INTO reviews (book_id, user_id, rating, review_title, comment, review_date) VALUES (2, 1, 4, 'Lost Within Imagination', 'My favourite book everrrrrr', '2024-08-15');
 INSERT INTO want_to_read (book_id, user_id) VALUES (4, 1);
-INSERT INTO have_read (book_id, user_id) VALUES (3, 2);
 
 INSERT INTO completed_books (book_id, user_id, reading_time, date_start, date_end) VALUES (1, 1, 30, '2024-01-01', '2024-01-31');
 INSERT INTO completed_books (book_id, user_id, reading_time, date_start, date_end) VALUES (2, 1, 30, '2024-02-01', '2024-03-31');
