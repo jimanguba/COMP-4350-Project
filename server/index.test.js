@@ -46,7 +46,6 @@ const mockCalendar = [
     { title: 'Book Title 2', date_end: new Date('2024-02-01'), value: 1 },
 ];
 
-
 //Unit Test 1 - Correct username and password Sign Up
 test('Correct user and password sign up. Status 200 should be returned', (done) => {
     pool.query.mockResolvedValue({ rows: [{user_id: 1}], rowCount: 0 })

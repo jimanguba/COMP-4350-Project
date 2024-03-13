@@ -57,8 +57,7 @@ const sidebar = () => {
             Log Out
         </MenuItem>
     </Menu>
-</Sidebar>
-    )
-}
+    </Sidebar>
+)}
 
 export default sidebar

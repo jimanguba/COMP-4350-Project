@@ -14,25 +14,25 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const loginClick = (event) => {
-event.preventDefault();
-      axios.get('/login', {
-        params: {
-          username: username,
-          password:password
-        }
-      }).then((response)=>{
-        var test1 = JSON.parse(JSON.stringify(response.data))
-        if(response.status == 200)
-        {
-          cookies.set('userID',test1.data);
-          navigate('/home');
-        }
-      })
-      .catch(function(error)
+    event.preventDefault();
+    axios.get('/login', {
+      params: {
+        username: username,
+        password:password
+      }
+    }).then((response)=>{
+      var test1 = JSON.parse(JSON.stringify(response.data))
+      if(response.status == 200)
       {
-        console.log(error)
-        alert("Username already exists or Password is too short (must be length 5)");
-      })
+        cookies.set('userID',test1.data);
+        navigate('/home');
+      }
+    })
+    .catch(function(error)
+    {
+      console.log(error)
+      alert("Username already exists or Password is too short (must be length 5)");
+    })
   }
 
   const SignUpClick = (event) => {
