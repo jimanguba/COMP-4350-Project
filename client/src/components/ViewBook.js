@@ -9,6 +9,7 @@ import axios from 'axios';
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
 import ReviewsList from "./ReviewList";
+import Sidebar from "./Sidebar";
 import "../styles/ViewBook.css"
 import ToReadButton from "./ToReadButton";
 
@@ -48,6 +49,7 @@ export default function ViewBook() {
 
     return (
         <>
+            <Sidebar />
         {loading ? (
                 <p className="text-center">Loading...</p>
             ) : (
