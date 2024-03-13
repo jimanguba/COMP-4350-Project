@@ -1,17 +1,99 @@
 .bookList {
     margin: auto;
-    width: 20%;
-    margin-top: 10px;
+    width: 80%; /* Adjust based on your layout needs */
+    max-width: 1000px; /* Ensuring it doesn't get too wide on larger screens */
+    margin-top: 30px;
+    padding: 20px;
+    background: #faedf3;;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+    display: flex;
+    flex-direction: column; /* Stack the search input and book list vertically */
+    align-items: center; /* Center the contents */
 }
 
-ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.bookList ul {
+    width: 100%; /* Full width to utilize the space */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Columns will have a min-width of 250px and a flexible width */
+    grid-auto-rows: 200px; /* Makes each row 200px tall */
+    gap: 15px; /* Adjust the space between the book cards */
+    padding: 0;
     list-style-type: none;
+}
+
+.bookList li {
+    width: 100%; /* The grid will control the width, this ensures the li fills the grid column */
+    height: 100%; /* li will fill the grid row height */
+}
+
+/* If your book cards have a specific class, you may want to adjust that class instead */
+.bookCoverCard {
+    width: 100%; /* This will make the book cover fill its container (li) */
+    height: 100%; /* This will make the book cover fill its container (li) */
+    
+}
+
+/* Adjustments for other elements can remain the same */
+
+input[type="text"] {
+    width: calc(100% - 40px); /* Adjust width to account for padding */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
 a {
     text-decoration: none;
     color: black;
+    transition: transform 0.2s ease-in-out; /* smooth transform on hover */
+}
+
+a:hover {
+    transform: translateY(-2px); /* slight lift effect on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* enhanced shadow on hover for the link */
+}
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .bookList ul {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .bookList {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .bookList ul {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .bookList ul {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .bookList {
+        width: 95%;
+        margin-top: 15px;
+        padding: 10px;
+    }
+
+    .bookList ul {
+        grid-template-columns: 1fr;
+    }
+
+    input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 8px;
+    }
 }

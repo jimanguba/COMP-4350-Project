@@ -46,10 +46,9 @@ const mockCalendar = [
     { title: 'Book Title 2', date_end: new Date('2024-02-01'), value: 1 },
 ];
 
-
 //Unit Test 1 - Correct username and password Sign Up
-test('Status 200 should be returned', (done) => {
-    pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 })
+test('Correct user and password sign up. Status 200 should be returned', (done) => {
+    pool.query.mockResolvedValue({ rows: [{user_id: 1}], rowCount: 0 })
     request(sut.app)
         .get("/signup")
         .query({ username: "kiwi_fruit",password: "kiwi_fruit"})
@@ -61,7 +60,7 @@ test('Status 200 should be returned', (done) => {
 })
 
 //Unit Test 2 - Correct username and password Login 
-test('Status 200 should be returned', (done) => {
+test('Correct user and password log in. Status 200 should be returned', (done) => {
     pool.query.mockResolvedValueOnce({ rows: [], rowCount: 1 })
     pool.query.mockResolvedValueOnce({ rows: [{user_password: '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu'}], rowCount: 1 })
     request(sut.app)
@@ -88,7 +87,7 @@ test('Status 400 should be returned', (done) => {
 })
 
 //Unit Test 4 - Sign up with a new Username but an existing password
-test('Status 200 should be returned', (done) => {
+test('Sign up with a new username but existing password. Status 200 should be returned', (done) => {
     pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 })
     request(sut.app)
         .get("/signup")
@@ -168,7 +167,7 @@ test('Status 400 should be returned', (done) => {
 })
 
 //Unit Test 10 -  Sign up with multiple spaces at start of user name and password
-test('Status 200 should be returned', (done) => {
+test('Sign up with multiple spaces at start of username and password. Status 200 should be returned', (done) => {
     pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 })
     request(sut.app)
         .get("/signup")
@@ -183,7 +182,7 @@ test('Status 200 should be returned', (done) => {
 test('Fetching average reading time returns status 200 and average time', async () => {
     pool.query.mockResolvedValue({ rows: [{ average_time: mockAverageTime }] });
     await request(sut.app)
-        .get('/books/average_time')
+        .get('/books/1/average_time')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(response => {

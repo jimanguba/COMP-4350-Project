@@ -29,11 +29,10 @@ const ReviewCard = ({ review, addReply }) => {
     }
   }, [review.user_id]);
 
-
-  console.log('Review prop in ReviewCard:', review);
-
-  const stars = Array.from({ length: review.rating || 0 }, (_, index) => (<FontAwesomeIcon key={index} icon={faStar} className="star" />));
-
+  const stars = Array.from({ length: review.rating || 0 }, (_, index) => (
+    <FontAwesomeIcon key={index} icon={faStar} className="star" data-testid="star" />
+  ));
+  
   
 
   const submitReply = (replyText) => {
@@ -48,21 +47,22 @@ const ReviewCard = ({ review, addReply }) => {
   return (
     <div className="review-card">
       <div className="review-header">
-        <span className="reviewer-name">{userName}</span>
+        <div className="Title-card">{review.review_title}</div>
+        <span className="reviewer-name">{userName || review.reviewer}</span>
         <div className="review-rating">
           {stars}
           {review.verifiedPurchase && (
             <FontAwesomeIcon icon={faCheckCircle} className="verified-purchase-icon" />
           )}
         </div>
-        <span className="review-date">{review.review_date}</span>
+        <span className="review-date">{review.review_date || review.date}</span>
       </div>
       <div className="review-tags">
         {tags.map((tag, index) => (
           <span key={index} className="review-tag">{tag}</span>
         ))}
       </div>
-      <div className="review-content">{review.comment}</div>
+      <div className="review-content">{review.comment || review.content}</div>
       <button onClick={() => setShowReplyForm(!showReplyForm)}>Reply</button>
       {showReplyForm && <ReplyForm submitReply={submitReply} />}
       {replies.map((reply, index) => (

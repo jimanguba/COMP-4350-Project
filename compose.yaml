@@ -1,0 +1,16 @@
+services:
+  client:
+    image: "christophere0/comp4350-bookshelf:client"
+    ports: 
+      - "3000:3000"
+  server:
+    image: "christophere0/comp4350-bookshelf:server"
+    ports: 
+      - "5001:5001"
+    environment:
+      PG_CONN_STRING_FILE: /run/secrets/db_string
+    secrets:
+      - db_string
+secrets:
+  db_string: 
+    file: ./server/db_string.txt
