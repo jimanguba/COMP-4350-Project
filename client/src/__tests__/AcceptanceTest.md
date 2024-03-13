@@ -56,15 +56,6 @@
 - **And** the input fields should be populated with the current details of '1984'
 - **And** the "Edit Book Details" button should be visible
 
-<!-- ### Scenario: Editing Book Details on ViewBook Page
-- **Given** I am on the `ViewBook` page for '1984'
-- **When** I click on the "Edit Book Details" button for '1984'
-- **Then** the input fields should become editable
-- **When** I modify the details in the input fields
-- **And** click the "Submit Changes" button
-- **Then** the updated details for '1984' should be saved
-- **And** the input fields should become non-editable -->
-
 ### Scenario: Displaying Reviews on ViewBook Page
 - **Given** I am on the `ViewBook` page for '1984'
 - **Then** the `ReviewsList` component should display existing reviews for '1984'
@@ -107,3 +98,54 @@
 ### Scenario: Viewing Review Replies
 - **Given** there are reviews with replies in the `ReviewList`
 - **Then** each reply should be displayed under the corresponding `ReviewCard`
+
+## Feature: Sign Up
+
+### Scenario: Sign Up - with correct info
+- **Given** I am on the `Login` page
+- **When** I enter in a new username and long enough password (more than 5 chars)
+- **Then** I should successfully be logged in and see `Home`
+
+### Scenario: Sign Up - existing username
+- **Given** I am on the `Login` page
+- **When** I enter in an existing username and long enough password (more than 5 chars)
+- **Then** I see an error alert and `Home` isn't seen 
+
+### Scenario: Sign Up - ok username too short password
+- **Given** I am on the `Login` page
+- **When** I enter in a new username and too short password less than (5 chars)
+- **Then** I see an error alert and `Home` isn't seen 
+
+### Scenario: Sign Up - already used username too short password
+- **Given** I am on the `Login` page
+- **When** I enter in an old username and too short password less than (5 chars)
+- **Then** I see an error alert and `Home` isn't seen 
+
+## Feature: Log In
+
+### Scenario: Log In - with correct info
+- **Given** I am on the `Login` page
+- **When** I enter an existing username and the password for this account
+- **Then** I should successfully be logged in and see `Home`
+
+### Scenario: Log In - not existing username
+- **Given** I am on the `Login` page
+- **When** I enter an non-existing username and some password
+- **Then** I see an error alert and `Home` isn't seen 
+
+### Scenario: Log In - ok username wrong password
+- **Given** I am on the `Login` page
+- **When** I enter an existing username and not the password for this account
+- **Then** I see an error alert and `Home` isn't seen 
+
+## Feature: Goals
+
+### Scenario: Add a goal
+- **Given** I am on the `Goals` page
+- **When** I enter the information to create the goal add press the button to create the goal
+- **Then** Once the page is refreshed the goal should be visible
+
+### Scenario: Update a goal
+- **Given** I am on the `Goals` page
+- **When** I enter the information to edit the goal add press the button to create the goal
+- **Then** Once the page is refreshed the changes to the goal should be visible
