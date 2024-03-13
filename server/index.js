@@ -367,6 +367,54 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
     }
 });
 
+
+// CHECK / ADD / REMOVE from user's to-read list
+app.get('/users/:user_id/to_read/:book_id', async (req, res) => {
+    const { book_id, user_id } = req.params;
+    console.log(`getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
+    try {
+        const result = await pool.query('SELECT * FROM want_to_read WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
+        console.log("RESULT ROWS: " + result.rows);
+        if (result.rows.length === 0) {
+            console.log("TO_READ: " + false)
+            res.status(200).json({toRead: false});
+        } else {
+            console.log("TO_READ: " + true)
+            res.status(200).json({toRead: true});
+        }
+    } catch (error) {
+        console.error('Error getting to-read status:', error.message)
+    }
+});
+
+app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
+    const { book_id, user_id } = req.params;
+    const { to_read } = req.body;
+    console.log(`updating status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
+
+    console.log("TO_READ: " + to_read)
+
+    if (to_read) {
+        try {
+            console.log("INSERT INTO")
+            const result = await pool.query('INSERT INTO want_to_read (book_id, user_id) VALUES ($2, $1)', [user_id, book_id]);
+            res.status(200).json(result.rows);
+        }  catch (error) {
+            console.error('Error changing to-read status:', error.message)
+        }
+    }
+    else {
+        try {
+            console.log("DELETE FROM")
+            const result = await pool.query('DELETE FROM want_to_read WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
+            res.status(200).json(result.rows);
+        }  catch (error) {
+            console.error('Error changing to-read status:', error.message)
+        }
+    }
+});
+
+
 // UPDATE
 app.put('/users/:book_id/reading_time', async (req, res) => {
     const { book_id } = req.params;
