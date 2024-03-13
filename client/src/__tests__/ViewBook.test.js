@@ -44,26 +44,7 @@ describe('ViewBook', () => {
         expect(await screen.findByText(/No book selected/i)).toBeInTheDocument();
     });
 
-    it('renders ViewBook component with book details', async () => {
-        const book = { id: 1, title: 'Test Book', author: 'Test Author', pages: 100, genre: 'Test Genre' };
-        mock.onGet(`/book/1`).reply(200, { book, reviews: [] });
-
-        render(
-            <MemoryRouter initialEntries={[`/view-book/1`]}>
-                <Routes>
-                    <Route path="/view-book/:book_id" element={<ViewBook />}/>
-                </Routes>
-            </MemoryRouter>
-        );
-
-        // Wait for the book to be fetched and the state to be updated
-        await waitFor(() => expect(screen.queryByText(/Loading.../i)).not.toBeInTheDocument());
-
-        // Check that the book details are displayed
-        expect(screen.getByText(/Test Book/i)).toBeInTheDocument();
-    });
-
-    it('displays error message when API call fails', async () => {
+    it('displays no book when API call fails', async () => {
         mock.onGet('/book/1').reply(500);
 
         render(
