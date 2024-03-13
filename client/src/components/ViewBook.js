@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from 'axios';
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
@@ -24,7 +24,6 @@ export default function ViewBook() {
             setLoading(true);
             try {
                 const response = await axios.get(`/book/${book_id}`);
-                console.log(response.data);
                 setBook(response.data.book); 
                 setReviews(Array.isArray(response.data.reviews) ? response.data.reviews : []);
             } catch (error) {
@@ -37,16 +36,6 @@ export default function ViewBook() {
         fetchBookDetails();
     }, [book_id]);
 
-    // Function to update book details
-    const updateBookDetails = async (newBookDetails) => {
-        try {
-            const response = await axios.put(`/books/${book_id}`, newBookDetails);
-            setBook(response.data.book); 
-        } catch (error) {
-            console.error('Error updating book details:', error);
-        }
-    };
-
     return (
         <>
             <Sidebar />
@@ -58,7 +47,7 @@ export default function ViewBook() {
                     <div className="readingStateContainer">
                         <ToReadButton book_id={book_id} />
                     </div>
-                    <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
+                    <BookDetailsCard book={book} />
                     <ReviewsList reviews={reviews} bookId={book_id}/>
                 </div>
             )
