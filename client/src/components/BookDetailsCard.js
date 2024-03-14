@@ -23,6 +23,7 @@ export default function BookDetailsCard({book}) {
     }
 
     const editButtonCallback = async () => {
+        console.log('editing:', editing)
         if (editing) {
             try {
                 await axios.put(`/book/${newBook.book_id}`, newBook);
