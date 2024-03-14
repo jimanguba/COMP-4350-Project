@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from 'axios';
 import BookDetailsCard from "./BookDetailsCard";
 import BookCoverCard from "./BookCoverCard";
@@ -12,6 +12,7 @@ import ReviewsList from "./ReviewList";
 import Sidebar from "./Sidebar";
 import "../styles/ViewBook.css"
 import ToReadButton from "./ToReadButton";
+import CompletedBookButton from "./CompletedBookButton";
 
 export default function ViewBook() {
     const [loading, setLoading] = useState(true);
@@ -57,6 +58,7 @@ export default function ViewBook() {
                     <BookCoverCard book={book} size={"large"} />
                     <div className="readingStateContainer">
                         <ToReadButton book_id={book_id} />
+                        <CompletedBookButton book_id={book_id} />
                     </div>
                     <BookDetailsCard book={book} updateBookDetails={updateBookDetails} />
                     <ReviewsList reviews={reviews} bookId={book_id}/>

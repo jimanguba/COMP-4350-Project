@@ -363,15 +363,12 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
 // CHECK / ADD / REMOVE from user's to-read list
 app.get('/users/:user_id/to_read/:book_id', async (req, res) => {
     const { book_id, user_id } = req.params;
-    console.log(`getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
+    console.log(`Getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
     try {
         const result = await pool.query('SELECT * FROM want_to_read WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
-        console.log("RESULT ROWS: " + result.rows);
         if (result.rows.length === 0) {
-            console.log("TO_READ: " + false)
             res.status(200).json({toRead: false});
         } else {
-            console.log("TO_READ: " + true)
             res.status(200).json({toRead: true});
         }
     } catch (error) {
@@ -383,12 +380,8 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
     const { book_id, user_id } = req.params;
     const { to_read } = req.body;
     console.log(`updating status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
-
-    console.log("TO_READ: " + to_read)
-
     if (to_read) {
         try {
-            console.log("INSERT INTO")
             const result = await pool.query('INSERT INTO want_to_read (book_id, user_id) VALUES ($2, $1)', [user_id, book_id]);
             res.status(200).json(result.rows);
         }  catch (error) {
@@ -397,11 +390,49 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
     }
     else {
         try {
-            console.log("DELETE FROM")
             const result = await pool.query('DELETE FROM want_to_read WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
             res.status(200).json(result.rows);
         }  catch (error) {
             console.error('Error changing to-read status:', error.message)
+        }
+    }
+});
+
+// CHECK / ADD / REMOVE from user's completed-books list
+app.get('/users/:user_id/completed_books/:book_id', async (req, res) => {
+    const { book_id, user_id } = req.params;
+    console.log(`getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) completed-books list`)
+    try {
+        const result = await pool.query('SELECT * FROM completed_books WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
+        if (result.rows.length === 0) {
+            res.status(200).json({completed: false});
+        } else {
+            res.status(200).json({completed: true});
+        }
+    } catch (error) {
+        console.error('Error getting completed-books status:', error.message)
+    }
+});
+
+app.put('/users/:user_id/completed_books/:book_id', async (req, res) => {
+    const { book_id, user_id } = req.params;
+    const { completed_books } = req.body;
+
+    console.log(`updating status of book's (book_id ${book_id}) in user's (user_id ${user_id}) completed-books list`)
+    if (completed_books) {
+        try {
+            const result = await pool.query('INSERT INTO completed_books (book_id, user_id) VALUES ($2, $1)', [user_id, book_id]);
+            res.status(200).json(result.rows);
+        }  catch (error) {
+            console.error('Error changing completed-books status:', error.message)
+        }
+    }
+    else {
+        try {
+            const result = await pool.query('DELETE FROM completed_books WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
+            res.status(200).json(result.rows);
+        }  catch (error) {
+            console.error('Error changing completed-books status:', error.message)
         }
     }
 });
