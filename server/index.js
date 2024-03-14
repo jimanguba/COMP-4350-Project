@@ -363,15 +363,12 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
 // CHECK / ADD / REMOVE from user's to-read list
 app.get('/users/:user_id/to_read/:book_id', async (req, res) => {
     const { book_id, user_id } = req.params;
-    console.log(`getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
+    console.log(`Getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
     try {
         const result = await pool.query('SELECT * FROM want_to_read WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
-        console.log("RESULT ROWS: " + result.rows);
         if (result.rows.length === 0) {
-            console.log("TO_READ: " + false)
             res.status(200).json({toRead: false});
         } else {
-            console.log("TO_READ: " + true)
             res.status(200).json({toRead: true});
         }
     } catch (error) {
@@ -385,7 +382,6 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
     console.log(`updating status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
     if (to_read) {
         try {
-            console.log("INSERT INTO")
             const result = await pool.query('INSERT INTO want_to_read (book_id, user_id) VALUES ($2, $1)', [user_id, book_id]);
             res.status(200).json(result.rows);
         }  catch (error) {
@@ -394,7 +390,6 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
     }
     else {
         try {
-            console.log("DELETE FROM")
             const result = await pool.query('DELETE FROM want_to_read WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
             res.status(200).json(result.rows);
         }  catch (error) {
@@ -407,14 +402,11 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
 app.get('/users/:user_id/completed_books/:book_id', async (req, res) => {
     const { book_id, user_id } = req.params;
     console.log(`getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) completed-books list`)
-    console.log("GET COMPLETED BOOK: " + book_id + " " + user_id)
     try {
         const result = await pool.query('SELECT * FROM completed_books WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
         if (result.rows.length === 0) {
-            console.log("BAD")
             res.status(200).json({completed: false});
         } else {
-            console.log("GOOD")
             res.status(200).json({completed: true});
         }
     } catch (error) {
@@ -426,7 +418,6 @@ app.put('/users/:user_id/completed_books/:book_id', async (req, res) => {
     const { book_id, user_id } = req.params;
     const { completed_books } = req.body;
 
-    console.log("COMPLETED_BOOKS: " + completed_books)
     console.log(`updating status of book's (book_id ${book_id}) in user's (user_id ${user_id}) completed-books list`)
     if (completed_books) {
         try {
