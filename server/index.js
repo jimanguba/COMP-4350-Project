@@ -383,9 +383,6 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
     const { book_id, user_id } = req.params;
     const { to_read } = req.body;
     console.log(`updating status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
-
-    console.log("TO_READ: " + to_read)
-
     if (to_read) {
         try {
             console.log("INSERT INTO")
@@ -402,6 +399,49 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
             res.status(200).json(result.rows);
         }  catch (error) {
             console.error('Error changing to-read status:', error.message)
+        }
+    }
+});
+
+// CHECK / ADD / REMOVE from user's completed-books list
+app.get('/users/:user_id/completed_books/:book_id', async (req, res) => {
+    const { book_id, user_id } = req.params;
+    console.log(`getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) completed-books list`)
+    console.log("GET COMPLETED BOOK: " + book_id + " " + user_id)
+    try {
+        const result = await pool.query('SELECT * FROM completed_books WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
+        if (result.rows.length === 0) {
+            console.log("BAD")
+            res.status(200).json({completed: false});
+        } else {
+            console.log("GOOD")
+            res.status(200).json({completed: true});
+        }
+    } catch (error) {
+        console.error('Error getting completed-books status:', error.message)
+    }
+});
+
+app.put('/users/:user_id/completed_books/:book_id', async (req, res) => {
+    const { book_id, user_id } = req.params;
+    const { completed_books } = req.body;
+
+    console.log("COMPLETED_BOOKS: " + completed_books)
+    console.log(`updating status of book's (book_id ${book_id}) in user's (user_id ${user_id}) completed-books list`)
+    if (completed_books) {
+        try {
+            const result = await pool.query('INSERT INTO completed_books (book_id, user_id) VALUES ($2, $1)', [user_id, book_id]);
+            res.status(200).json(result.rows);
+        }  catch (error) {
+            console.error('Error changing completed-books status:', error.message)
+        }
+    }
+    else {
+        try {
+            const result = await pool.query('DELETE FROM completed_books WHERE user_id = $1 AND book_id = $2', [user_id, book_id]);
+            res.status(200).json(result.rows);
+        }  catch (error) {
+            console.error('Error changing completed-books status:', error.message)
         }
     }
 });
