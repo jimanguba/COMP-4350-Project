@@ -232,6 +232,19 @@ app.get('/book/:book_id', async (req, res) => {
         res.status(500).json({ error: 'An error occurred while fetching the requested book and its reviews.' });
     }
 });
+
+app.put('/book/:book_id', async (req, res) => {
+    const { book_id } = req.params;
+    const book = req.body;
+    try {
+        const result = await pool.updateBook(book);
+        res.status(200).json({ success: result });
+    } catch (error) {
+        console.error(`Error updating book with identifier ${book_id}:`, error);
+        res.status(500).json({ error: 'An error occurred while updating the book.' });
+    }
+});
+
 app.post("/reviews/new", async (req, res) => {
     const { book_id, user_id, rating, comment, review_title, review_date } = req.body;
 
