@@ -9,7 +9,7 @@ import axios from 'axios';
 import "../styles/BookDetailsCard.css"
 import { useState } from "react"
 
-export default function BookDetailsCard({book}) {
+export default function BookDetailsCard({book, setBook}) {
     
     // Are we editing currently? If not, disable inputs and style them properly
     const [editing, setEditing] = useState(false)
@@ -27,6 +27,7 @@ export default function BookDetailsCard({book}) {
         if (editing) {
             try {
                 await axios.put(`/book/${newBook.book_id}`, newBook);
+                setBook(newBook);
             } catch (error) {
                 console.error('Error updating book details:', error);
             }

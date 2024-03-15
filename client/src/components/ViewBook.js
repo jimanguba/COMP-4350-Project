@@ -49,7 +49,7 @@ export default function ViewBook() {
                         <ToReadButton book_id={book_id} />
                         <CompletedBookButton book_id={book_id} />
                     </div>
-                    <BookDetailsCard book={book} />
+                    <BookDetailsCard book={book} setBook={setBook} />
                     <ReviewsList reviews={reviews} bookId={book_id}/>
                 </div>
             )
