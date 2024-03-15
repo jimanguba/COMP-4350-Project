@@ -14,7 +14,6 @@ export default function CompletedBookButton({book_id}) {
     const [onCompletedBooks, setOnCompletedBooks] = useState(false)
 
     useEffect(() => {
-        console.log("GETTING")
         axios.get(`/users/${user_id}/completed_books/${book_id}`)
             .then(response => {
                 setOnCompletedBooks(response.data.completed)
