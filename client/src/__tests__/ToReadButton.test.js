@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import ToReadButton from '../components/ToReadButton';
@@ -20,9 +20,8 @@ describe('ToReadButton', () => {
     });
 
     it('renders without crashing', () => {
-        const { getByText } = render(<ToReadButton book_id={1} />);
-        const button = getByText(/Add to To-Read/i);
-        expect(button).toBeInTheDocument();
+        render(<ToReadButton book_id={1} />);
+        expect(screen.getByText('Add to To-Read')).toBeInTheDocument();
     });
 
     it('toggles reading state when clicked', async () => {
@@ -33,13 +32,16 @@ describe('ToReadButton', () => {
         // Mock the PUT request
         mock.onPut(`/users/1/to_read/1`).reply(200, { toRead: true });
 
-        const { getByText } = render(<ToReadButton book_id={1} />);
-        const button = getByText(/Add to To-Read/i);
+       render(<ToReadButton book_id={1} />);
+
+        expect(screen.getByText('Add to To-Read')).toBeInTheDocument();
+
+        const button = screen.getByText('Add to To-Read');
 
         // Click the button
         fireEvent.click(button);
 
         // Wait for the state to be updated
-        await waitFor(() => expect(button).toHaveTextContent(/Add to To-Read/i));
+        expect(screen.getByText('Add to To-Read')).toBeInTheDocument();
     });
 });
