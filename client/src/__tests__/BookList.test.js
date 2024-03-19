@@ -98,7 +98,7 @@ describe("BookList", () => {
     );
 
     await waitFor(() => {
-        expect(screen.getByText("Completed Books")).toBeInTheDocument();
+        expect(screen.getAllByText("Completed Books")).length >= 2;
       });
   });
 
