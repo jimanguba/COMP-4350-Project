@@ -170,7 +170,6 @@ const getBooks = (req, res) => {
     } catch (error) {
 
     }
-
 }
 
 app.get("/books", getBooks)
@@ -374,6 +373,18 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
 
 
 // CHECK / ADD / REMOVE from user's to-read list
+app.get('/users/:user_id/to_read', async (req, res) => {
+    const { user_id } = req.params;
+    console.log(`getting user's (user_id ${user_id}) to-read list`)
+    try {
+        const result = await pool.query('SELECT books.* FROM books JOIN want_to_read ON books.book_id = want_to_read.book_id WHERE want_to_read.user_id = $1', [user_id]);
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error('Error fetching to-read list:', error.message);
+        res.status(500).json({ error: 'Error fetching to-read list' });
+    }
+});
+
 app.get('/users/:user_id/to_read/:book_id', async (req, res) => {
     const { book_id, user_id } = req.params;
     console.log(`Getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`)
@@ -412,6 +423,18 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
 });
 
 // CHECK / ADD / REMOVE from user's completed-books list
+app.get('/users/:user_id/completed_books', async (req, res) => {
+    const { user_id } = req.params;
+    console.log(`getting user's (user_id ${user_id}) completed-books list`)
+    try {
+        const result = await pool.query('SELECT books.* FROM books JOIN completed_books ON books.book_id = completed_books.book_id WHERE completed_books.user_id = $1', [user_id]);
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error('Error fetching completed-books list:', error.message);
+        res.status(500).json({ error: 'Error fetching completed-books list' });
+    }
+});
+
 app.get('/users/:user_id/completed_books/:book_id', async (req, res) => {
     const { book_id, user_id } = req.params;
     console.log(`getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) completed-books list`)
