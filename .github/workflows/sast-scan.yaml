@@ -16,7 +16,7 @@ jobs:
       - name: Perform scan
         uses: AppThreat/sast-scan-action@master
         with:
-          type: "javascript"
+          type: "nodejs"
 
       - name: Upload results
         uses: actions/upload-artifact@v2
