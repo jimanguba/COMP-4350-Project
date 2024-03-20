@@ -1,0 +1,26 @@
+name: Static Analysis Scan
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  Scan-Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Perform scan
+        uses: AppThreat/sast-scan-action@master
+        with:
+          type: "javascript"
+
+      - name: Upload results
+        uses: actions/upload-artifact@v2
+        with:
+          name: sast-results
+          path: /sast-results
+
