@@ -19,6 +19,7 @@ jobs:
         uses: AppThreat/sast-scan-action@master
         with:
           type: "nodejs"
+          src: /github/workspace/client
 
       - name: Upload results
         uses: actions/upload-artifact@v2
