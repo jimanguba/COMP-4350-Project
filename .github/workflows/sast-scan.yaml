@@ -10,20 +10,17 @@ jobs:
   Scan-Build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Perform scan
+      - name: Perform Scan
         uses: AppThreat/sast-scan-action@master
         with:
           type: "nodejs"
-          src: /github/workspace/client
-
-      - name: Upload results
-        uses: actions/upload-artifact@v3
+      - name: Upload Report
+        uses: actions/upload-artifact@v1
         with:
-          name: sast-results
-          path: sast-results
+          name: reports
+          path: reports
+            
 
