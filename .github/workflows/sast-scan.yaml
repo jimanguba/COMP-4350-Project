@@ -12,6 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
+          pwd
           ls
       - name: Perform Scan
         uses: AppThreat/sast-scan-action@master
