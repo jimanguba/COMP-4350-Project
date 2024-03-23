@@ -12,6 +12,7 @@ import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import '../styles/StyleForm.css'; 
 
 const sidebar = () => {
+    const { collapseSidebar } = useProSidebar();
     return (
     <Sidebar className = "app">
     <Menu>
@@ -26,12 +27,6 @@ const sidebar = () => {
                 <h2>BOOKSHELF</h2>
             </Link>
         </MenuItem>
-        {/* <MenuItem
-            component={<Link to="/" />}
-            icon={<HomeOutlinedIcon />}
-        >
-            Home
-        </MenuItem> */}
         <MenuItem
             component={<Link to="/statistics"/>}
             icon={<AssessmentOutlinedIcon />}
