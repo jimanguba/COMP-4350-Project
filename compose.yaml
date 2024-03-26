@@ -1,10 +1,10 @@
 services:
   client:
-    image: "christophere0/comp4350-bookshelf:client"
+    build: .\client
     ports: 
       - "3000:3000"
   server:
-    image: "christophere0/comp4350-bookshelf:server"
+    build: .\server
     ports: 
       - "5001:5001"
     environment:

@@ -1,3 +1,4 @@
+
 /**
  * View a Book's cover and details
  * @param {Book} book - The Book being displayed
@@ -26,7 +27,13 @@ export default function ViewBook() {
             try {
                 const response = await axios.get(`/book/${book_id}`);
                 setBook(response.data.book); 
-                setReviews(Array.isArray(response.data.reviews) ? response.data.reviews : []);
+                // Sort reviews by rating in descending order immediately after fetching
+                const sortedReviews = Array.isArray(response.data.reviews)
+                    ? response.data.reviews.sort((a, b) => b.rating - a.rating)
+                    : [];
+    
+                console.log('Sorted Reviews:', sortedReviews); // Log the sorted reviews
+                setReviews(sortedReviews);
             } catch (error) {
                 console.error(`Error fetching book with identifier ${book_id}:`, error);
                 setBook({title: "No book selected", author: "No author", pages: 0, genre: "No genre" })
