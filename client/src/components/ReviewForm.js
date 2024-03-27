@@ -96,7 +96,7 @@ const ReviewForm = ({ addReview, bookId }) => {
           onChange={(e) => setReviewText(e.target.value)}
           required
         />
-{/* 
+         
         <div className="genre-buttons">
           {genres.map((genre, index) => (
             <button
@@ -109,7 +109,7 @@ const ReviewForm = ({ addReview, bookId }) => {
             </button>
           ))}
         </div>
-*/}
+
         <button type="submit" className="submit-btn">Submit Review</button>
       </form>
     </div>

@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
 import ReviewCard from './ReviewCard';
 import ReviewForm from './ReviewForm';
+import ReviewDateFilter from './ReviewDateFilter'; 
 import ReviewFilter from './ReviewFilter'; 
+import { subDays, isWithinInterval } from 'date-fns'; 
 import '../styles/ReviewList.css'
 
+const wasReviewCreatedInTimeFrame = (reviewDate, daysAgo) => {
+  const start = subDays(new Date(), daysAgo);
+  const end = new Date();
+
+  // Set the hours for the start and end to encompass the entire day
+  start.setHours(0, 0, 0, 0);
+  end.setHours(23, 59, 59, 999);
+
+  return isWithinInterval(reviewDate, { start, end });
+};
 
 const ReviewsList = ({ reviews: initialReviews, bookId  }) => {
   const [reviews, setReviews] = useState(Array.isArray(initialReviews) ? initialReviews : []);
   const [filter, setFilter] = useState(null);
+  const [dateFilter, setDateFilter] = useState("");
   
   const addReply = (reviewToUpdate, replyText) => {
     setReviews(reviews.map(review => {
@@ -23,13 +36,44 @@ const ReviewsList = ({ reviews: initialReviews, bookId  }) => {
     setReviews([...reviews, newReview]);
   };
 
-  const filteredReviews = filter ? reviews.filter((review) => review.rating === filter) : reviews;
+  // Function to check if the review was created exactly days ago
+  // Function to check if the review was created exactly days ago
+const isReviewFromExactDaysAgo = (reviewDate, daysAgo) => {
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
+  startOfDay.setDate(startOfDay.getDate() - daysAgo);
+
+  const endOfDay = new Date();
+  endOfDay.setHours(23, 59, 59, 999);
+  endOfDay.setDate(endOfDay.getDate() - daysAgo);
+
+  return reviewDate >= startOfDay && reviewDate <= endOfDay;
+};
+const applyDateFilter = (review, dateFilter) => {
+  const reviewDate = new Date(review.review_date);
+
+  switch (dateFilter) {
+    case "1":
+      return wasReviewCreatedInTimeFrame(reviewDate, 1);
+    case "7":
+      return wasReviewCreatedInTimeFrame(reviewDate, 7);
+    case "30":
+      return wasReviewCreatedInTimeFrame(reviewDate, 30);
+    default:
+      return true; // If no date filter is set, show all reviews
+  }
+};
+
+const filteredReviews = reviews
+  .filter(review => !filter || review.rating === filter) // Apply rating filter if set
+  .filter(review => applyDateFilter(review, dateFilter));  // Apply date filter
 
   return (
     <div className="reviews-container">
       <ReviewForm addReview={addReview} bookId={bookId}/>
       <ReviewFilter setFilter={setFilter} />
-      {Array.isArray(filteredReviews) && filteredReviews.map((review, index) => (
+      <ReviewDateFilter setDateFilter={setDateFilter} />
+      {filteredReviews.map((review, index) => (
         <ReviewCard key={index} review={review} addReply={addReply} />
       ))}
     </div>
