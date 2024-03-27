@@ -45,8 +45,8 @@ export default function ViewBook() {
     }, [book_id]);
 
     return (
-        <>
-            <Sidebar />
+        <div style={{ display: "flex"}}>
+        <Sidebar />
         {loading ? (
                 <p className="text-center">Loading...</p>
             ) : (
@@ -61,6 +61,6 @@ export default function ViewBook() {
                 </div>
             )
         }
-    </>
+    </div>
     );
 }
