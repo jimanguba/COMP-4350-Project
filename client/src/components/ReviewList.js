@@ -71,8 +71,10 @@ const filteredReviews = reviews
   return (
     <div className="reviews-container">
       <ReviewForm addReview={addReview} bookId={bookId}/>
-      <ReviewFilter setFilter={setFilter} />
-      <ReviewDateFilter setDateFilter={setDateFilter} />
+      <div style={{ display: "flex", justifycontent: "flex-end", marginbottom: "20px", alignitems: "right"}}>
+        <ReviewFilter setFilter={setFilter} />
+        <ReviewDateFilter setDateFilter={setDateFilter} />
+      </div>
       {filteredReviews.map((review, index) => (
         <ReviewCard key={index} review={review} addReply={addReply} />
       ))}
