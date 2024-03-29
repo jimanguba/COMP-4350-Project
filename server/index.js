@@ -246,18 +246,20 @@ app.put('/book/:book_id', async (req, res) => {
 });
 
 app.post("/reviews/new", async (req, res) => {
-    const { book_id, user_id, rating, comment, review_title, review_date } = req.body;
+    const { book_id, user_id, rating, comment, review_title, review_date, tags } = req.body;
 
     if (!book_id || !user_id || !rating || !comment || !review_title || !review_date) {
         return res.status(400).json({ message: 'Missing required fields' });
     }
+
     try {
         const insertReviewQuery = `
-            INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date)
-            VALUES ($1, $2, $3, $4, $5, $6)`;
+            INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date, tags)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING *`;
 
         const newReview = await pool.query(insertReviewQuery, [
-            book_id, user_id, comment, rating, review_title, review_date
+            book_id, user_id, comment, rating, review_title, review_date, tags
         ]);
 
         res.status(201).json(newReview.rows[0]);
@@ -266,6 +268,7 @@ app.post("/reviews/new", async (req, res) => {
         res.status(500).json({ error: 'Error inserting new review', details: error.message });
     }
 });
+
 
 app.get('/user/:user_id', async (req, res) => {
     const { user_id } = req.params;

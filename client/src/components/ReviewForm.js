@@ -45,9 +45,7 @@ const ReviewForm = ({ addReview, bookId }) => {
       rating,
       comment: reviewText,
       review_date: dateString,
-      
-      //verifiedPurchase: false
-      //tags: selectedTags,
+      tags: selectedTags,
     };
     try {
       const response = await axios.post('/reviews/new', newReview);
