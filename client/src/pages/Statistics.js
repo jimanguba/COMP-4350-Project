@@ -51,6 +51,8 @@ function Statistics({ user_id }) {
                     }
                 } catch (error) {
                     console.error('Error fetching book details:', error);
+                    setBookDetails('Failed to fetch book details');
+                    setBookImage('');
                 }
             } else {
                 setBookDetails('');

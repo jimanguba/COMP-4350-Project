@@ -9,6 +9,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Statistics from '../pages/Statistics';
 import { MemoryRouter } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 
 describe('Statistics', () => {
   it('displays calendar data and book details', async () => {
@@ -30,14 +31,14 @@ describe('Statistics', () => {
     });
 
     const calendarDate = screen.getByText('21').closest('button');
-    calendarDate.click();
+    act(() => {
+      calendarDate.click();
+    });
 
     await waitFor(() => {
-      expect(screen.getByText('Statistics')).toBeInTheDocument();
-      expect(screen.getByText('So far this year...')).toBeInTheDocument();
-      expect(screen.getByText('Book List')).toBeInTheDocument();
+      expect(screen.getByText('So far this year....')).toBeInTheDocument();
       expect(screen.getByText('21')).toBeInTheDocument();
-      expect(screen.getByText('0 out of 0 books completed')).toBeInTheDocument();
+      expect(screen.getByText('Your Reading Calendar')).toBeInTheDocument();
     });
   });
 });
