@@ -11,8 +11,8 @@
 
 .book-title-wrapper {
     flex: 1;
-    margin-right: 25%;
-    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
     background-color: #e8fbff;
     border-radius: 10px;

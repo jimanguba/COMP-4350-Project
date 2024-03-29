@@ -12,6 +12,7 @@ import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import '../styles/StyleForm.css'; 
 
 const sidebar = () => {
+    const { collapseSidebar } = useProSidebar();
     return (
     <Sidebar className = "app">
     <Menu>
