@@ -479,6 +479,35 @@ let server;
 })().catch(err => console.log(err))
 
 
+app.post("/reviews/:review_id/replies", async (req, res) => {
+    const { review_id } = req.params;
+    const { user_id, reply_text } = req.body;
+
+    if (!user_id || !reply_text) {
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    try {
+        const newReply = await db.insertReply(review_id, user_id, reply_text);
+        res.status(201).json(newReply.rows[0]);
+    } catch (error) {
+        console.error('Error inserting new reply:', error);
+        res.status(500).json({ error: 'Error inserting new reply', details: error.message });
+    }
+});
+
+app.get("/reviews/:review_id/replies", async (req, res) => {
+    const { review_id } = req.params;
+
+    try {
+        const replies = await db.getRepliesByReviewId(review_id);
+        res.status(200).json(replies.rows);
+    } catch (error) {
+        console.error('Error fetching replies for review:', error);
+        res.status(500).json({ error: 'Error fetching replies for review', details: error.message });
+    }
+});
+
 
 module.exports = {
     server,

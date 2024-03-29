@@ -113,11 +113,24 @@ async function updateBook(book) {
     }
 }
 
+function insertReply(review_id, user_id, reply_text) {
+  return pool.query(
+      'INSERT INTO replies (review_id, user_id, reply_text) VALUES ($1, $2, $3) RETURNING *',
+      [review_id, user_id, reply_text]
+  );
+}
+
+function getRepliesByReviewId(review_id) {
+  return pool.query('SELECT * FROM replies WHERE review_id = $1', [review_id]);
+}
+
 module.exports = {
     query: (text, params) => pool.query(text, params),
     getAllBooks,
     getBook,
     insertBook,
     updateBook,
-    connectToDatabase
+    connectToDatabase,
+    insertReply,
+    getRepliesByReviewId
   };
