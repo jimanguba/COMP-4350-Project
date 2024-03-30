@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
+import { Sidebar, Menu, MenuItem, useProSidebar, ProSidebarProvider } from 'react-pro-sidebar';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ListIcon from '@mui/icons-material/ListAlt';
@@ -11,7 +11,8 @@ import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import '../styles/StyleForm.css'; 
 
-const sidebar = () => {
+const sidebarComponent = () => {
+    const { collapseSidebar } = useProSidebar();
     return (
     <Sidebar className = "app">
     <Menu>
@@ -59,5 +60,11 @@ const sidebar = () => {
     </Menu>
     </Sidebar>
 )}
+
+const sidebar = () => (
+    <ProSidebarProvider>
+        <sidebarComponent />
+    </ProSidebarProvider>
+)
 
 export default sidebar
