@@ -173,6 +173,22 @@ const getBooks = (req, res) => {
 
 }
 
+app.get("/books/genre/:genre", async (req, res) => {
+    const { genre } = req.params;
+    const { book_id } = req.query; // Current book ID to exclude
+
+    try {
+        const query = 'SELECT * FROM books WHERE genre = $1 AND book_id != $2';
+        const values = [genre, book_id];
+        const { rows } = await pool.query(query, values);
+        res.json(rows);
+    } catch (error) {
+        console.error(`Error fetching books from genre '${genre}' excluding book ID ${book_id}:`, error);
+        res.status(500).json({ message: "Error fetching books", error: error.message });
+    }
+});
+
+
 app.get("/books", getBooks)
 
 app.get("/", (req, res) => {
