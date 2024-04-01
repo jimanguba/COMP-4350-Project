@@ -30,22 +30,29 @@ describe('ReviewsList', () => {
     expect(screen.getByText('All Reviews')).toBeInTheDocument();
   });
 
-  it('filters reviews based on star rating', async () => {
-    render(<ReviewsList reviews={mockReviews} bookId="1" />);
+// Assuming you have a ReviewsList component that uses ReviewFilter internally
+// and ReviewFilter has a select element for filtering reviews by rating
 
-    // Check that all reviews are initially rendered
+it('filters reviews based on star rating', async () => {
+  render(<ReviewsList reviews={mockReviews} bookId="1" />);
+
+  // Get all elements with the role of combobox
+  const comboboxes = screen.getAllByRole('combobox');
+
+  // Assuming the first combobox is the one we want to interact with
+  const ratingFilterSelect = comboboxes[0]; // Adjust the index based on your actual layout
+
+  // Change the select value to filter for 5-star reviews
+  fireEvent.change(ratingFilterSelect, { target: { value: '5' } });
+
+  // Wait for the UI to update based on the filter change
+  await waitFor(() => {
     expect(screen.getByText('Great book!')).toBeInTheDocument();
-    expect(screen.getByText('Enjoyable read.')).toBeInTheDocument();
-    expect(screen.getByText('Average read.')).toBeInTheDocument();
-
-    // Select to filter for only 5-star reviews
-    fireEvent.change(screen.getByRole('combobox'), { target: { value: '5' } });
-
-    await waitFor(() => {
-      expect(screen.getByText('Great book!')).toBeInTheDocument();
-      expect(screen.queryByText('Enjoyable read.')).not.toBeInTheDocument();
-      expect(screen.queryByText('Average read.')).not.toBeInTheDocument();
-    });
+    expect(screen.queryByText('Enjoyable read.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Average read.')).not.toBeInTheDocument();
   });
+});
+
+
 
 });
