@@ -172,6 +172,21 @@ const getBooks = (req, res) => {
     }
 }
 
+app.get("/books/genre/:genre", async (req, res) => {
+    const { genre } = req.params;
+    const { book_id } = req.query; // Current book ID to exclude
+
+    try {
+        const query = 'SELECT * FROM books WHERE genre = $1 AND book_id != $2';
+        const values = [genre, book_id];
+        const { rows } = await pool.query(query, values);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching books", error: error.message });
+    }
+});
+
+
 app.get("/books", getBooks)
 
 app.get("/", (req, res) => {
@@ -245,18 +260,20 @@ app.put('/book/:book_id', async (req, res) => {
 });
 
 app.post("/reviews/new", async (req, res) => {
-    const { book_id, user_id, rating, comment, review_title, review_date } = req.body;
+    const { book_id, user_id, rating, comment, review_title, review_date, tags } = req.body;
 
     if (!book_id || !user_id || !rating || !comment || !review_title || !review_date) {
         return res.status(400).json({ message: 'Missing required fields' });
     }
+
     try {
         const insertReviewQuery = `
-            INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date)
-            VALUES ($1, $2, $3, $4, $5, $6)`;
+            INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date, tags)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING *`;
 
         const newReview = await pool.query(insertReviewQuery, [
-            book_id, user_id, comment, rating, review_title, review_date
+            book_id, user_id, comment, rating, review_title, review_date, tags
         ]);
 
         res.status(201).json(newReview.rows[0]);
@@ -265,6 +282,7 @@ app.post("/reviews/new", async (req, res) => {
         res.status(500).json({ error: 'Error inserting new review', details: error.message });
     }
 });
+
 
 app.get('/user/:user_id', async (req, res) => {
     const { user_id } = req.params;
@@ -501,6 +519,35 @@ let server;
     await db.connectToDatabase()
 })().catch(err => console.log(err))
 
+
+app.post("/reviews/:review_id/replies", async (req, res) => {
+    const { review_id } = req.params;
+    const { user_id, reply_text } = req.body;
+
+    if (!user_id || !reply_text) {
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    try {
+        const newReply = await db.insertReply(review_id, user_id, reply_text);
+        res.status(201).json(newReply.rows[0]);
+    } catch (error) {
+        console.error('Error inserting new reply:', error);
+        res.status(500).json({ error: 'Error inserting new reply', details: error.message });
+    }
+});
+
+app.get("/reviews/:review_id/replies", async (req, res) => {
+    const { review_id } = req.params;
+
+    try {
+        const replies = await db.getRepliesByReviewId(review_id);
+        res.status(200).json(replies.rows);
+    } catch (error) {
+        console.error('Error fetching replies for review:', error);
+        res.status(500).json({ error: 'Error fetching replies for review', details: error.message });
+    }
+});
 
 
 module.exports = {

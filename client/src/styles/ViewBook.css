@@ -26,6 +26,12 @@
     gap: 10px;
 }
 
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh; /* Use 100% if it's within another container that fills the viewport */
+  }
+  
 @media (max-width: 768px) {
     .viewBook {
         width: 90%; /* More width on smaller screens for better use of space */

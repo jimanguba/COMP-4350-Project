@@ -1,11 +1,11 @@
-.review-filter {
+.review-filter, .review-date-filter {
     display: flex;
     justify-content: flex-end; /* Align to the right */
     align-items: right; /* Align vertically */
     margin: 10px;
   }
   
-  .review-filter select {
+  .review-filter select, .review-date-filter select {
     padding: 10px 20px;
     border-radius: 20px;
     border: 1px solid #cccccc;
@@ -20,12 +20,12 @@
   }
   
   /* Styling for the dropdown arrow */
-  .review-filter select::-ms-expand {
+  .review-filter select::-ms-expand, .review-date-filter select::-ms-expand{
     display: none; /* Removes default style for IE */
   }
   
   /* Style to add an arrow symbol */
-  .review-filter:after {
+  .review-filter:after, .review-date-filter:after {
     content: '▼';
     font-size: 1rem;
     position: absolute;
@@ -36,13 +36,13 @@
   }
   
   /* Style for options */
-  .review-filter option {
+  .review-filter option, .review-date-filter option {
     padding: 10px;
   }
   
   /* You might want to add media queries if responsiveness is needed */
   @media (max-width: 768px) {
-    .review-filter select {
+    .review-filter select, .review-date-filter select {
       width: 100%;
     }
   }
