@@ -9,6 +9,8 @@ import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined'; // 
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
+import ChecklistIcon from '@mui/icons-material/Checklist';
+import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import '../styles/StyleForm.css'; 
 
 const sidebarComponent = () => {
@@ -50,6 +52,18 @@ const sidebarComponent = () => {
             icon={<BallotOutlinedIcon />}
         >
             Goals
+        </MenuItem>
+        <MenuItem
+            component={<Link to="/to-read" />}
+            icon={<AddToQueueIcon />}
+        >
+            Books To Read
+        </MenuItem>
+        <MenuItem
+            component={<Link to="/completed-books" />}
+            icon={<ChecklistIcon />}
+        >
+            Completed Books
         </MenuItem>
         <MenuItem
             component={<Link to="/login" />}

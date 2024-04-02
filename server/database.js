@@ -2,7 +2,8 @@ const Pool = require("pg").Pool;
 const { DefaultAzureCredential } = require("@azure/identity");
 const { SecretClient } = require("@azure/keyvault-secrets");
 const bookUtil = require('./book');
-const fs = require('fs')
+const fs = require('fs');
+const { boolean } = require("yargs");
 
 const vaultUri = `https://${process.env.VAULTNAME}.vault.azure.net/`;
 
@@ -100,7 +101,16 @@ function insertBook(newBook) {
                 AND author=$6)`
         , [newBook.title, newBook.author, newBook.pages, newBook.genre, newBook.title, newBook.author]
     ) : false
-    
+}
+
+async function updateBook(book) {
+    try {
+        const queryResult = await pool.query(`UPDATE books SET title=$1, author=$2, pages=$3, genre=$4 WHERE book_id=$5`, [book.title, book.author, book.pages, book.genre, book.book_id])
+        return queryResult.rowCount > 0;
+    } catch (error) {
+        console.error('Error updating book:', error);
+        throw error;
+    }
 }
 
 module.exports = {
@@ -108,5 +118,6 @@ module.exports = {
     getAllBooks,
     getBook,
     insertBook,
+    updateBook,
     connectToDatabase
   };

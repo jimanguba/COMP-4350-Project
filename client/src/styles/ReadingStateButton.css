@@ -9,10 +9,30 @@
 }
 
 .onToRead {
-    background-color: green;
+    background-color: lightgreen;
+    color: black;
+}
+
+.offToRead:hover {
+    background-color: darkgreen;
+    color: white;
+}
+
+.onCompletedBooks {
+    background-color: tan;
+    color: black;
+}
+
+.offCompletedBooks:hover {
+    background-color: darkgoldenrod;
+}
+
+.onCompletedBooks:hover {
+    background-color: darkred;
     color: white;
 }
 
 .onToRead:hover {
     background-color: darkred;
+    color: white;
 }
