@@ -13,7 +13,7 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import '../styles/StyleForm.css'; 
 
-const sidebarComponent = () => {
+const sidebar = () => {
     const { collapseSidebar } = useProSidebar();
     return (
     <Sidebar className = "app">
@@ -74,11 +74,5 @@ const sidebarComponent = () => {
     </Menu>
     </Sidebar>
 )}
-
-const sidebar = () => (
-    <ProSidebarProvider>
-        <sidebarComponent />
-    </ProSidebarProvider>
-)
 
 export default sidebar
