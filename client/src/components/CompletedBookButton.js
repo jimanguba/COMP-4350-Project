@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react'
 import '../styles/ReadingStateButton.css'
 import Cookies from 'universal-cookie'
 import axios from 'axios';
+import { API_URL } from '../constants';
 
 export default function CompletedBookButton({book_id}) {
     const cookies = new Cookies(null, { path: '/' })
@@ -14,7 +15,7 @@ export default function CompletedBookButton({book_id}) {
     const [onCompletedBooks, setOnCompletedBooks] = useState(false)
 
     useEffect(() => {
-        axios.get(`/users/${user_id}/completed_books/${book_id}`)
+        axios.get(`${API_URL}/users/${user_id}/completed_books/${book_id}`)
             .then(response => {
                 setOnCompletedBooks(response.data.completed)
             })
@@ -22,7 +23,7 @@ export default function CompletedBookButton({book_id}) {
     }, []);
 
     const toggleReadingState = () => {
-        axios.put(`/users/${user_id}/completed_books/${book_id}`, {completed_books: !onCompletedBooks})
+        axios.put(`${API_URL}/users/${user_id}/completed_books/${book_id}`, {completed_books: !onCompletedBooks})
             .then(() => setOnCompletedBooks(!onCompletedBooks))
             .catch(error => console.error('Error updating completed books status:', error))
     }

@@ -8,6 +8,7 @@ import React from "react";
 import axios from 'axios';
 import "../styles/BookDetailsCard.css"
 import { useState } from "react"
+import { API_URL } from "../constants";
 
 export default function BookDetailsCard({book, setBook}) {
     
@@ -26,7 +27,7 @@ export default function BookDetailsCard({book, setBook}) {
         console.log('editing:', editing)
         if (editing) {
             try {
-                await axios.put(`/book/${newBook.book_id}`, newBook);
+                await axios.put(`${API_URL}/book/${newBook.book_id}`, newBook);
                 setBook(newBook);
             } catch (error) {
                 console.error('Error updating book details:', error);

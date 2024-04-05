@@ -6,6 +6,7 @@ import '../styles/ReviewForm.css'; // Make sure you have the correct path to you
 import Sidebar from './Sidebar';
 import Cookies from 'universal-cookie'; 
 import axios from 'axios';
+import { API_URL } from '../constants';
 
 // Define the genres or tags for the dropdown
 const genres = ['Action', 'Romance', 'Horror', 'Sci-Fi', 'Fantasy', 'Mystery', 'Thriller', 'Biography'];
@@ -48,7 +49,7 @@ const ReviewForm = ({ addReview, bookId }) => {
       tags: selectedTags,
     };
     try {
-      const response = await axios.post('/reviews/new', newReview);
+      const response = await axios.post(`${API_URL}/reviews/new`, newReview);
 
       // Assuming your addReview prop updates the parent state
       addReview(response.data);

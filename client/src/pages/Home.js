@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
+import { API_URL } from '../constants';
 
 function Home() {
     const [loading, setLoading] = useState(true);
@@ -11,7 +12,7 @@ function Home() {
             console.log("Fetching data....")
             setLoading(true);
             try {
-                const { data: response } = await axios.get('/books');
+                const { data: response } = await axios.get(`${API_URL}/books`);
                 setData(response);
             } catch (error) {
                 console.error(error.message);

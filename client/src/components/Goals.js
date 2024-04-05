@@ -9,6 +9,7 @@ import Sidebar from '../components/Sidebar';
 import Cookies from 'universal-cookie';
 
 import '../styles/Goals.css'; 
+import { API_URL } from '../constants';
 
 var config = {
     headers: {
@@ -31,7 +32,7 @@ const GoalForm = () =>{
         const fetchData = async () =>{
           setLoading(true);
           try {
-            const {data: response} = await axios.get('/getGoals', {params:{ userId: cookies.get('userID')}});
+            const {data: response} = await axios.get(`${API_URL}/getGoals`, {params:{ userId: cookies.get('userID')}});
             setData(response);
           } catch (error) {
             console.error(error.message);
@@ -44,7 +45,7 @@ const GoalForm = () =>{
 
     const addGoal = (event) => {
         event.preventDefault();
-        axios.get('/goalCreate', {
+        axios.get(`${API_URL}/goalCreate`, {
             params: {
                 goalText: goalText,
                 goalStauts:goalStauts,

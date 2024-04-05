@@ -4,6 +4,7 @@ import axios from "axios";
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import { API_URL } from '../constants';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -15,7 +16,7 @@ const LoginForm = () => {
 
   const loginClick = (event) => {
     event.preventDefault();
-    axios.get('/login', {
+    axios.get(`${API_URL}/login`, {
       params: {
         username: username,
         password:password
@@ -37,7 +38,7 @@ const LoginForm = () => {
 
   const SignUpClick = (event) => {
     event.preventDefault();
-    axios.get('/signup', {
+    axios.get(`${API_URL}/signup`, {
       params: {
         username: username,
         password:password

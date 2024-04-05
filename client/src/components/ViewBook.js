@@ -9,6 +9,7 @@ import "../styles/ViewBook.css";
 import ToReadButton from "./ToReadButton";
 import CompletedBookButton from "./CompletedBookButton";
 import GenreRecommendations from './GenreRecommendations';
+import { API_URL } from "../constants";
 
 export default function ViewBook() {
     const [loading, setLoading] = useState(true);
@@ -20,7 +21,7 @@ export default function ViewBook() {
         const fetchBookDetails = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`/book/${book_id}`);
+                const response = await axios.get(`${API_URL}/book/${book_id}`);
                 setBook(response.data.book);
                 console.log('Fetched book details:', response.data.book);
                 const sortedReviews = Array.isArray(response.data.reviews)

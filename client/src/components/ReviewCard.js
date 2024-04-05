@@ -5,6 +5,7 @@ import '../styles/ReviewCard.css';
 import ReplyForm from '../components/ReplyForm';
 import axios from 'axios';
 import Cookies from 'universal-cookie'; 
+import { API_URL } from '../constants';
 
 const ReviewCard = ({ review, addReply }) => {
   const [userName, setUserName] = useState('');
@@ -15,7 +16,7 @@ const ReviewCard = ({ review, addReply }) => {
     const names = {};
     try {
       const responses = await Promise.all(
-        uniqueUserIds.map(userId => axios.get(`/users/${userId}`))
+        uniqueUserIds.map(userId => axios.get(`${API_URL}/users/${userId}`))
       );
       responses.forEach(response => {
         const user = response.data;
@@ -35,7 +36,7 @@ const ReviewCard = ({ review, addReply }) => {
     // Function to fetch the user name from the API
     const fetchUserName = async () => {
       try {
-        const response = await axios.get(`/user/${review.user_id}`);
+        const response = await axios.get(`${API_URL}/user/${review.user_id}`);
         setUserName(response.data);
         console.log(response.data);
       } catch (error) {
@@ -45,7 +46,7 @@ const ReviewCard = ({ review, addReply }) => {
     };
     const fetchReplies = async () => {
       try {
-        const response = await axios.get(`/reviews/${review.review_id}/replies`);
+        const response = await axios.get(`${API_URL}/reviews/${review.review_id}/replies`);
         setReviewReplies(response.data);
       } catch (error) {
         console.error('Error fetching replies:', error);
@@ -81,7 +82,7 @@ const ReviewCard = ({ review, addReply }) => {
     try {
       const cookies = new Cookies();
       const userIdFromCookie = cookies.get('userID'); // Read the userID cookie
-      const response = await axios.post(`/reviews/${review.review_id}/replies`, {
+      const response = await axios.post(`${API_URL}/reviews/${review.review_id}/replies`, {
         user_id: userIdFromCookie, // This should be the ID of the user making the reply
         reply_text: replyText,
       });
