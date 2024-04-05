@@ -2,6 +2,7 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import StatisticsYear from '../components/StatisticsYear';
+import { API_URL } from '../constants';
 
 jest.mock('axios');
 
@@ -30,8 +31,8 @@ describe('StatisticsYear component', () => {
         });
 
         // Check if API requests were made with the correct URLs
-        expect(axios.get).toHaveBeenCalledWith('/books/1/average_time');
-        expect(axios.get).toHaveBeenCalledWith('/users/1/average_rating');
+        expect(axios.get).toHaveBeenCalledWith(`${API_URL}/books/1/average_time`);
+        expect(axios.get).toHaveBeenCalledWith(`${API_URL}/users/1/average_rating`);
 
         // Check if API requests were made only once
         expect(axios.get).toHaveBeenCalledTimes(2);
@@ -48,8 +49,8 @@ describe('StatisticsYear component', () => {
             expect(console.error).toHaveBeenCalledWith('Error fetching average rating:', new Error('Failed to fetch average rating'));
         });
 
-        expect(axios.get).toHaveBeenCalledWith('/books/1/average_time');
-        expect(axios.get).toHaveBeenCalledWith('/users/1/average_rating');
+        expect(axios.get).toHaveBeenCalledWith(`${API_URL}/books/1/average_time`);
+        expect(axios.get).toHaveBeenCalledWith(`${API_URL}/users/1/average_rating`);
 
         expect(axios.get).toHaveBeenCalledTimes(2);
     });
