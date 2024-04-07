@@ -51,7 +51,7 @@ th {
 
   .form-container {
     max-width: 600px;
-    max-height: 375px;
+    max-height: 10000px;
     margin: 20px auto;
     padding: 20px;
     background: #FFF7F1;
