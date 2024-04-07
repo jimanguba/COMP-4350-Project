@@ -33,8 +33,8 @@ const StatisticsCalendar = ({ data }) => {
   }
 
   return (
-    <div className="row">
-      <div className="calendar-wrapper">
+    <div className='row'>
+      <div className='calendar-wrapper'>
         <h2>Your Reading Calendar</h2>
         <Calendar
           onChange={onChange}
@@ -42,8 +42,8 @@ const StatisticsCalendar = ({ data }) => {
           tileClassName={tileClassName}
         />
       </div>
-      <div className="book-title-wrapper">
-        <h3 className="book-title">{getBookTitle()}</h3>
+      <div className='book-title-wrapper'>
+        <h3 className='book-title'>{getBookTitle()}</h3>
       </div>
     </div>
   )

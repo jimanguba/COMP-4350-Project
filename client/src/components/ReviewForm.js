@@ -73,41 +73,41 @@ const ReviewForm = ({ addReview, bookId }) => {
   }
 
   return (
-    <div className="form-container">
+    <div className='form-container'>
       <form onSubmit={handleSubmit}>
         <input
-          className="review-input"
-          type="text"
-          placeholder="Review Title"
+          className='review-input'
+          type='text'
+          placeholder='Review Title'
           value={reviewTitle}
           onChange={(e) => setReviewTitle(e.target.value)}
           required
         />
 
-        <div className="rating">
+        <div className='rating'>
           {[...Array(5)].map((_, index) => (
             <FontAwesomeIcon
               key={index}
               icon={index < rating ? faStarFilled : faStarEmpty}
-              className="star"
+              className='star'
               onClick={() => setRating(index + 1)}
             />
           ))}
         </div>
 
         <textarea
-          className="review-input"
-          placeholder="Enter your review"
+          className='review-input'
+          placeholder='Enter your review'
           value={reviewText}
           onChange={(e) => setReviewText(e.target.value)}
           required
         />
 
-        <div className="genre-buttons">
+        <div className='genre-buttons'>
           {genres.map((genre, index) => (
             <button
               key={index}
-              type="button"
+              type='button'
               className={`genre-button ${selectedTags.includes(genre) ? 'selected' : ''}`}
               onClick={() => toggleGenre(genre)}
             >
@@ -116,7 +116,7 @@ const ReviewForm = ({ addReview, bookId }) => {
           ))}
         </div>
 
-        <button type="submit" className="submit-btn">
+        <button type='submit' className='submit-btn'>
           Submit Review
         </button>
       </form>

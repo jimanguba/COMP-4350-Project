@@ -75,7 +75,7 @@ const ReviewsList = ({ reviews: initialReviews, bookId }) => {
     .filter((review) => applyDateFilter(review, dateFilter)) // Apply date filter
 
   return (
-    <div className="reviews-container">
+    <div className='reviews-container'>
       <ReviewForm addReview={addReview} bookId={bookId} />
       <div
         style={{

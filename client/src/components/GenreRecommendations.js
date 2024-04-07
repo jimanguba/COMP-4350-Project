@@ -47,19 +47,19 @@ const GenreRecommendations = ({ genre, currentBookId }) => {
   return (
     <div>
       <h3>Books You Might Like</h3>
-      <button className="scroll-button left" onClick={() => scroll(-300)}>
+      <button className='scroll-button left' onClick={() => scroll(-300)}>
         &lt;
       </button>
-      <div className="genre-recommendations-container" ref={scrollContainerRef}>
+      <div className='genre-recommendations-container' ref={scrollContainerRef}>
         {relatedBooks.map((book) => (
-          <div key={book.book_id} className="book-item">
+          <div key={book.book_id} className='book-item'>
             <Link to={`/view-book/${book.book_id}`}>
               <BookCoverCard book={book} size={'small'} />
             </Link>
           </div>
         ))}
       </div>
-      <button className="scroll-button right" onClick={() => scroll(300)}>
+      <button className='scroll-button right' onClick={() => scroll(300)}>
         &gt;
       </button>
     </div>

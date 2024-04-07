@@ -11,9 +11,9 @@ const ReviewFilter = ({ setFilter }) => {
   }
 
   return (
-    <div className="review-filter">
-      <select onChange={handleFilterChange} defaultValue="all">
-        <option value="all">All Reviews</option>
+    <div className='review-filter'>
+      <select onChange={handleFilterChange} defaultValue='all'>
+        <option value='all'>All Reviews</option>
         {[1, 2, 3, 4, 5].map((star) => (
           <option key={star} value={star}>
             {star} Star{star > 1 ? 's' : ''}

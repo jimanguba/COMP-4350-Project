@@ -41,26 +41,26 @@ const SettingsForm = () => {
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
-      <div className="form-container">
-        <h1 className="h1">Settings</h1>
+      <div className='form-container'>
+        <h1 className='h1'>Settings</h1>
         <form>
           <TextField
-            class="TextField2"
-            type="password"
-            placeholder="New Password"
+            class='TextField2'
+            type='password'
+            placeholder='New Password'
             onChange={(event) => {
               setPassword(event.target.value)
             }}
             required
           />
-          <div class="flex">
-            <form class="flex-item">
-              <button class="button2" onClick={changePassword}>
+          <div class='flex'>
+            <form class='flex-item'>
+              <button class='button2' onClick={changePassword}>
                 Change Password
               </button>
             </form>
-            <form class="flex-item">
-              <button class="button2" onClick={resetGoals}>
+            <form class='flex-item'>
+              <button class='button2' onClick={resetGoals}>
                 Reset Goals
               </button>
             </form>

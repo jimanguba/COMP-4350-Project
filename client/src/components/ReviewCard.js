@@ -79,8 +79,8 @@ const ReviewCard = ({ review, addReply }) => {
     <FontAwesomeIcon
       key={index}
       icon={faStar}
-      className="star"
-      data-testid="star"
+      className='star'
+      data-testid='star'
     />
   ))
 
@@ -112,44 +112,44 @@ const ReviewCard = ({ review, addReply }) => {
   const replies = Array.isArray(review.replies) ? review.replies : []
 
   return (
-    <div className="review-card">
-      <div className="review-header">
-        <div className="Title-card">{review.review_title}</div>
-        <span className="reviewer-name">{userName || review.reviewer}</span>
-        <div className="review-rating">
+    <div className='review-card'>
+      <div className='review-header'>
+        <div className='Title-card'>{review.review_title}</div>
+        <span className='reviewer-name'>{userName || review.reviewer}</span>
+        <div className='review-rating'>
           {stars}
           {review.verifiedPurchase && (
             <FontAwesomeIcon
               icon={faCheckCircle}
-              className="verified-purchase-icon"
+              className='verified-purchase-icon'
             />
           )}
         </div>
-        <span className="review-date">{review.review_date || review.date}</span>
+        <span className='review-date'>{review.review_date || review.date}</span>
       </div>
-      <div className="review-tags">
+      <div className='review-tags'>
         {tags.map((tag, index) => (
-          <span key={index} className="review-tag">
+          <span key={index} className='review-tag'>
             {tag}
           </span>
         ))}
       </div>
-      <div className="review-content">{review.comment || review.content}</div>
+      <div className='review-content'>{review.comment || review.content}</div>
       <button onClick={() => setShowReplyForm(!showReplyForm)}>Reply</button>
       {showReplyForm && <ReplyForm submitReply={submitReply} />}
 
-      <div className="review-replies">
+      <div className='review-replies'>
         {reviewReplies.map((reply, index) => (
-          <div key={index} className="review-reply">
-            <div className="review-reply-header">
-              <span className="reply-user-name">
+          <div key={index} className='review-reply'>
+            <div className='review-reply-header'>
+              <span className='reply-user-name'>
                 {replyUserNames[reply.user_id] || 'Anonymous'}
               </span>
-              <span className="reply-date">
+              <span className='reply-date'>
                 {new Date(reply.reply_date).toLocaleDateString()}
               </span>
             </div>
-            <div className="reply-text">{reply.reply_text}</div>
+            <div className='reply-text'>{reply.reply_text}</div>
           </div>
         ))}
       </div>

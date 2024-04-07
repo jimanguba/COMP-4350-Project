@@ -23,14 +23,14 @@ function App() {
 
   return (
     <div
-      className="container my-5"
+      className='container my-5'
       style={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
       }}
     >
-      <table className="table table-striped">
+      <table className='table table-striped'>
         <thead>
           <tr>
             <th>Title</th>

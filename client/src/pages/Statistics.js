@@ -99,8 +99,8 @@ function Statistics({ user_id }) {
       <div>
         <StatisticsGoal user_id={user_id} />
         <StatisticsYear user_id={user_id} />
-        <div className="row">
-          <div className="calendar-wrapper">
+        <div className='row'>
+          <div className='calendar-wrapper'>
             <h2>Your Reading Calendar</h2>
             <Calendar
               onChange={onChange}
@@ -108,16 +108,16 @@ function Statistics({ user_id }) {
               tileClassName={tileClassName}
             />
           </div>
-          <div className="book-title-wrapper">
-            <h3 className="book-title">{getBookDate()}</h3>
+          <div className='book-title-wrapper'>
+            <h3 className='book-title'>{getBookDate()}</h3>
             <ul>
               <li>{bookDetails}</li>
               {bookImage ? (
                 <li>
                   <img
                     src={bookImage}
-                    alt="Book Cover"
-                    className="book-cover"
+                    alt='Book Cover'
+                    className='book-cover'
                   />
                 </li>
               ) : null}

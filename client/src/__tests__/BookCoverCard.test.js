@@ -23,7 +23,7 @@ describe('BookCoverCard', () => {
       title: 'Sample Book Title'
     }
 
-    render(<BookCoverCard book={book} size="large" />)
+    render(<BookCoverCard book={book} size='large' />)
     expect(screen.getByText('Sample Book Title')).toBeInTheDocument()
     expect(screen.getByTestId('book-cover-card')).toHaveClass('large')
   })

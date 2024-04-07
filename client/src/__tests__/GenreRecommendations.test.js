@@ -16,7 +16,7 @@ jest.mock('react-router-dom', () => ({
 describe('GenreRecommendations', () => {
   it('displays a loading message while fetching related books', () => {
     const { getByText } = render(
-      <GenreRecommendations genre="Fantasy" currentBookId="1" />
+      <GenreRecommendations genre='Fantasy' currentBookId='1' />
     )
     expect(getByText(/Loading related books.../i)).toBeInTheDocument()
   })
@@ -25,7 +25,7 @@ describe('GenreRecommendations', () => {
     axios.get.mockResolvedValueOnce({ data: [] })
 
     const { getByText } = render(
-      <GenreRecommendations genre="Fantasy" currentBookId="1" />
+      <GenreRecommendations genre='Fantasy' currentBookId='1' />
     )
 
     await waitFor(() => {
@@ -44,7 +44,7 @@ describe('GenreRecommendations', () => {
     axios.get.mockResolvedValueOnce({ data: relatedBooks })
 
     const { getByText } = render(
-      <GenreRecommendations genre="Fantasy" currentBookId="1" />
+      <GenreRecommendations genre='Fantasy' currentBookId='1' />
     )
 
     // Wait for the axios response to be processed and the component to update

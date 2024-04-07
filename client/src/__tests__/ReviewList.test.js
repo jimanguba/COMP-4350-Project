@@ -16,7 +16,7 @@ const mockReviews = [
 
 describe('ReviewsList', () => {
   it('renders correctly with initial reviews', () => {
-    render(<ReviewsList reviews={mockReviews} bookId="1" />)
+    render(<ReviewsList reviews={mockReviews} bookId='1' />)
 
     // Check for the presence of initial reviews
     expect(screen.getByText('Great book!')).toBeInTheDocument()
@@ -31,7 +31,7 @@ describe('ReviewsList', () => {
   // and ReviewFilter has a select element for filtering reviews by rating
 
   it('filters reviews based on star rating', async () => {
-    render(<ReviewsList reviews={mockReviews} bookId="1" />)
+    render(<ReviewsList reviews={mockReviews} bookId='1' />)
 
     // Get all elements with the role of combobox
     const comboboxes = screen.getAllByRole('combobox')

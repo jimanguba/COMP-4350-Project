@@ -24,7 +24,7 @@ describe('ReviewForm', () => {
   })
 
   it('renders the review form correctly', () => {
-    render(<ReviewForm addReview={mockAddReview} bookId="1" />)
+    render(<ReviewForm addReview={mockAddReview} bookId='1' />)
     expect(screen.getByPlaceholderText('Review Title')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Enter your review')).toBeInTheDocument()
     // Using querySelectorAll to select by class name as a workaround

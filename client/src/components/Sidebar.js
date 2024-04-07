@@ -13,7 +13,7 @@ import '../styles/StyleForm.css'
 
 const sidebar = () => {
   return (
-    <Sidebar className="app">
+    <Sidebar className='app'>
       <Menu>
         <MenuItem
           icon={
@@ -24,7 +24,7 @@ const sidebar = () => {
             />
           }
         >
-          <Link to="/">
+          <Link to='/'>
             <h2>BOOKSHELF</h2>
           </Link>
         </MenuItem>
@@ -35,36 +35,36 @@ const sidebar = () => {
             Home
         </MenuItem> */}
         <MenuItem
-          component={<Link to="/statistics" />}
+          component={<Link to='/statistics' />}
           icon={<AssessmentOutlinedIcon />}
         >
           Statistics
         </MenuItem>
-        <MenuItem component={<Link to="/book-list" />} icon={<ListIcon />}>
+        <MenuItem component={<Link to='/book-list' />} icon={<ListIcon />}>
           Book List
         </MenuItem>
         <MenuItem
-          component={<Link to="/goals" />}
+          component={<Link to='/goals' />}
           icon={<BallotOutlinedIcon />}
         >
           Goals
         </MenuItem>
-        <MenuItem component={<Link to="/to-read" />} icon={<AddToQueueIcon />}>
+        <MenuItem component={<Link to='/to-read' />} icon={<AddToQueueIcon />}>
           Books To Read
         </MenuItem>
         <MenuItem
-          component={<Link to="/completed-books" />}
+          component={<Link to='/completed-books' />}
           icon={<ChecklistIcon />}
         >
           Completed Books
         </MenuItem>
         <MenuItem
-          component={<Link to="/settings" />}
+          component={<Link to='/settings' />}
           icon={<SettingsOutlinedIcon />}
         >
           Settings
         </MenuItem>
-        <MenuItem component={<Link to="/login" />} icon={<LogoutIcon />}>
+        <MenuItem component={<Link to='/login' />} icon={<LogoutIcon />}>
           Log Out
         </MenuItem>
       </Menu>

@@ -40,51 +40,51 @@ export default function BookDetailsCard({ book, setBook }) {
         `bookDetailsCard ` + (editing ? `currentlyEditing` : `disabled`)
       }
     >
-      <div className="detail-field">
-        <label htmlFor="title">Title</label>
+      <div className='detail-field'>
+        <label htmlFor='title'>Title</label>
         <input
-          type="text"
-          id="title"
+          type='text'
+          id='title'
           disabled={!editing}
           defaultValue={book.title}
           onChange={(e) => (newBook.title = e.target.value)}
         />
       </div>
 
-      <div className="detail-field">
-        <label htmlFor="author">Author</label>
+      <div className='detail-field'>
+        <label htmlFor='author'>Author</label>
         <input
-          type="text"
-          id="author"
+          type='text'
+          id='author'
           disabled={!editing}
           defaultValue={book.author}
           onChange={(e) => (newBook.author = e.target.value)}
         />
       </div>
 
-      <div className="detail-field">
-        <label htmlFor="pages">Pages</label>
+      <div className='detail-field'>
+        <label htmlFor='pages'>Pages</label>
         <input
-          type="number"
-          id="pages"
+          type='number'
+          id='pages'
           disabled={!editing}
           defaultValue={book.pages}
           onChange={(e) => (newBook.pages = e.target.value)}
         />
       </div>
 
-      <div className="detail-field">
-        <label htmlFor="genre">Genre</label>
+      <div className='detail-field'>
+        <label htmlFor='genre'>Genre</label>
         <input
-          type="text"
-          id="genre"
+          type='text'
+          id='genre'
           disabled={!editing}
           defaultValue={book.genre}
           onChange={(e) => (newBook.genre = e.target.value)}
         />
       </div>
 
-      <button className="submit-btn" onClick={editButtonCallback}>
+      <button className='submit-btn' onClick={editButtonCallback}>
         {!editing ? 'Edit Book Details' : 'Submit Changes'}
       </button>
     </div>

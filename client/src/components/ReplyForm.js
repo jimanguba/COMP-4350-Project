@@ -12,12 +12,12 @@ const ReplyForm = ({ submitReply }) => {
   return (
     <form onSubmit={handleSubmit}>
       <textarea
-        placeholder="Write a reply..."
+        placeholder='Write a reply...'
         value={replyText}
         onChange={(e) => setReplyText(e.target.value)}
         required
       />
-      <button type="submit">Submit Reply</button>
+      <button type='submit'>Submit Reply</button>
     </form>
   )
 }

@@ -63,35 +63,35 @@ const LoginForm = () => {
 
   if (!loginflag) {
     return (
-      <div className="form-container">
-        <h1 className="h1"> Bookshelf</h1>
+      <div className='form-container'>
+        <h1 className='h1'> Bookshelf</h1>
         <form>
           <TextField
-            class="TextField1"
-            type="text"
-            placeholder="Username"
+            class='TextField1'
+            type='text'
+            placeholder='Username'
             onChange={(event) => {
               setUsername(event.target.value)
             }}
             required
           />
           <TextField
-            class="TextField2"
-            type="password"
-            placeholder="Password"
+            class='TextField2'
+            type='password'
+            placeholder='Password'
             onChange={(event) => {
               setPassword(event.target.value)
             }}
             required
           />
-          <div class="flex">
-            <form class="flex-item">
-              <button class="button2" onClick={loginClick}>
+          <div class='flex'>
+            <form class='flex-item'>
+              <button class='button2' onClick={loginClick}>
                 Log In
               </button>
             </form>
-            <form class="flex-item">
-              <button class="button2" onClick={SignUpClick}>
+            <form class='flex-item'>
+              <button class='button2' onClick={SignUpClick}>
                 Sign Up
               </button>
             </form>

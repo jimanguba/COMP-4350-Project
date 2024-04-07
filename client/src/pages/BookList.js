@@ -43,7 +43,7 @@ export default function BookList({ type }) {
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
-      <div className="bookList">
+      <div className='bookList'>
         {type === 'all' ? (
           <h1>All Books</h1>
         ) : type === 'completed' ? (
@@ -54,8 +54,8 @@ export default function BookList({ type }) {
           <h1>Books</h1>
         )}
         <input
-          type="text"
-          placeholder="search titles..."
+          type='text'
+          placeholder='search titles...'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         ></input>

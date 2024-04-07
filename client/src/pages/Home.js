@@ -25,10 +25,10 @@ function Home() {
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
-      <div className="container my-5">
-        <h1 className="text-center mb-4">Home</h1>
-        <div className="table-responsive">
-          <table className="table table-striped">
+      <div className='container my-5'>
+        <h1 className='text-center mb-4'>Home</h1>
+        <div className='table-responsive'>
+          <table className='table table-striped'>
             <thead>
               <tr>
                 <th>#</th>
@@ -41,7 +41,7 @@ function Home() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="5" className="text-center">
+                  <td colSpan='5' className='text-center'>
                     Loading...
                   </td>
                 </tr>

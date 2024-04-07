@@ -42,11 +42,11 @@ export default function ViewBook() {
     <div style={{ display: 'flex' }}>
       <Sidebar />
       {loading ? (
-        <p className="text-center">Loading...</p>
+        <p className='text-center'>Loading...</p>
       ) : (
-        <div className="viewBook">
+        <div className='viewBook'>
           <BookCoverCard book={book} size={'large'} />
-          <div className="readingStateContainer">
+          <div className='readingStateContainer'>
             <ToReadButton book_id={book_id} />
             <CompletedBookButton book_id={book_id} />
           </div>
