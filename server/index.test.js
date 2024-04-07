@@ -1,5 +1,6 @@
 const sut = require('./index')
 const pg = require('pg')
+const pool = require('./database')
 const request = require('supertest')
 
 jest.mock('pg', () => {
@@ -49,7 +50,6 @@ const mockCalendar = [
   { title: 'Book Title 2', date_end: new Date('2024-02-01'), value: 1 }
 ]
 
-//Unit Test 1 - Correct username and password Sign Up
 test('Correct user and password sign up. Status 200 should be returned', (done) => {
   pool.query.mockResolvedValue({ rows: [{ user_id: 1 }], rowCount: 0 })
   request(sut.app)
@@ -62,7 +62,6 @@ test('Correct user and password sign up. Status 200 should be returned', (done) 
     })
 })
 
-//Unit Test 2 - Correct username and password Login
 test('Correct user and password log in. Status 200 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({ rows: [], rowCount: 1 })
   pool.query.mockResolvedValueOnce({
@@ -84,7 +83,6 @@ test('Correct user and password log in. Status 200 should be returned', (done) =
     })
 })
 
-//Unit Test 3 - Sign up with an existing username
 test('Status 400 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({ rows: [], rowCount: 1 })
   request(sut.app)
@@ -97,7 +95,6 @@ test('Status 400 should be returned', (done) => {
     })
 })
 
-//Unit Test 4 - Sign up with a new Username but an existing password
 test('Sign up with a new username but existing password. Status 200 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 })
   request(sut.app)
@@ -110,7 +107,6 @@ test('Sign up with a new username but existing password. Status 200 should be re
     })
 })
 
-//Unit Test 5 - Login existing Username but wrong password
 test('Status 400 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({ rows: [], rowCount: 1 })
   pool.query.mockResolvedValueOnce({
@@ -132,7 +128,6 @@ test('Status 400 should be returned', (done) => {
     })
 })
 
-//Unit Test 6 - Login with not existing username
 test('Status 400 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 })
   request(sut.app)
@@ -145,7 +140,6 @@ test('Status 400 should be returned', (done) => {
     })
 })
 
-//Unit Test 7 - Sign up with existing UN and too short pw
 test('Status 400 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({ rows: [], rowCount: 1 })
   request(sut.app)
@@ -158,7 +152,6 @@ test('Status 400 should be returned', (done) => {
     })
 })
 
-//Unit Test 8 - Sign up with a new user name and too short a pw
 test('Status 400 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 })
   request(sut.app)
@@ -171,7 +164,6 @@ test('Status 400 should be returned', (done) => {
     })
 })
 
-//Unit Test 9 - Login correct UN and short pw
 test('Status 400 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({ rows: [], rowCount: 1 })
   pool.query.mockResolvedValueOnce({
@@ -193,7 +185,6 @@ test('Status 400 should be returned', (done) => {
     })
 })
 
-//Unit Test 10 -  Sign up with multiple spaces at start of user name and password
 test('Sign up with multiple spaces at start of username and password. Status 200 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 })
   request(sut.app)
