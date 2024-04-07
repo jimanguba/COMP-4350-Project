@@ -8,7 +8,6 @@ import '@testing-library/jest-dom/extend-expect'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import ReviewForm from '../components/ReviewForm' // Update the path as necessary
-import Cookies from 'universal-cookie'
 
 // Mocking the universal-cookie module
 jest.mock('universal-cookie')

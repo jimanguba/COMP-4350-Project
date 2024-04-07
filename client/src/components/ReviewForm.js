@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons'
 import { faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons'
 import '../styles/ReviewForm.css' // Make sure you have the correct path to your CSS file
-import Sidebar from './Sidebar'
 import Cookies from 'universal-cookie'
 import axios from 'axios'
 

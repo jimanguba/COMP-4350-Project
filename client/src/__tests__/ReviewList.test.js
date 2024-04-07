@@ -6,8 +6,6 @@ import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import ReviewsList from '../components/ReviewList'
-import ReviewForm from '../components/ReviewForm'
-import ReviewFilter from '../components/ReviewFilter'
 
 // Mock data for initial reviews
 const mockReviews = [

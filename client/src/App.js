@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import React from 'react'
 import Login from '../src/components/Login' // Adjust the import path if necessary
 import ReviewsList from './components/ReviewList' // Adjust the import path if necessary
@@ -11,19 +10,6 @@ import Goals from '../src/components/Goals'
 import './App.css'
 import ViewBook from './components/ViewBook'
 import Settings from './pages/Settings'
-import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar'
-import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined'
-import LogoutIcon from '@mui/icons-material/Logout'
-import ListIcon from '@mui/icons-material/ListAlt'
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
-import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined' // Statistics
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
-import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined'
-import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined'
-import { useEffect, useState } from 'react'
-import ReviewForm from './components/ReviewForm'
-
-// eslint-disable-next-line
 
 function App() {
   return (
