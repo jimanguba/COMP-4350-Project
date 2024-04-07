@@ -11,16 +11,16 @@ describe('ReviewDateFilter', () => {
     // Check for the select element and its default value
     expect(screen.getByRole('combobox')).toBeInTheDocument()
     expect(screen.getByRole('option', { name: 'All Dates' }).selected).toBe(
-      true,
+      true
     )
 
     // Verify all options are present
     ;['All Dates', 'Last 24 hours', 'Last week', 'Last month'].forEach(
       (optionText) => {
         expect(
-          screen.getByRole('option', { name: optionText }),
+          screen.getByRole('option', { name: optionText })
         ).toBeInTheDocument()
-      },
+      }
     )
   })
 

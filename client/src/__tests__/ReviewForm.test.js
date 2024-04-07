@@ -35,17 +35,17 @@ describe('ReviewForm', () => {
 
   it('submits a review with valid data', async () => {
     mockAxios.onPost('/reviews/new').reply(200, {
-      message: 'Review added successfully',
+      message: 'Review added successfully'
     })
 
     const bookId = '1'
     render(<ReviewForm addReview={mockAddReview} bookId={bookId} />)
 
     fireEvent.change(screen.getByPlaceholderText('Review Title'), {
-      target: { value: 'Great Book' },
+      target: { value: 'Great Book' }
     })
     fireEvent.change(screen.getByPlaceholderText('Enter your review'), {
-      target: { value: 'This is a fantastic read!' },
+      target: { value: 'This is a fantastic read!' }
     })
     // Using querySelectorAll to simulate clicking the 4th star
     fireEvent.click(document.querySelectorAll('.star')[3]) // Set rating to 4 stars

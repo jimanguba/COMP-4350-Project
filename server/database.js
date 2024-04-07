@@ -14,7 +14,7 @@ let pool = new Pool({
   password: 'ferrets',
   host: 'localhost',
   port: 5432,
-  database: 'bookshelf',
+  database: 'bookshelf'
 })
 
 const getKeyVaultSecrets = async () => {
@@ -43,7 +43,7 @@ const connectToDatabase = async () => {
     password: 'ferrets',
     host: 'localhost',
     port: 5432,
-    database: 'bookshelf',
+    database: 'bookshelf'
   })
 
   connectionType = 'Local'
@@ -54,14 +54,14 @@ const connectToDatabase = async () => {
       connString = fs.readFileSync(process.env.PG_CONN_STRING_FILE, 'utf8')
     }
     pool = new Pool({
-      connectionString: connString,
+      connectionString: connString
     })
     connectionType = 'Azure database via connection string'
   }
 
   if (process.env.DBVAULTSTRING in vaultSecretsMap) {
     pool = new Pool({
-      connectionString: vaultSecretsMap[process.env.DBVAULTSTRING],
+      connectionString: vaultSecretsMap[process.env.DBVAULTSTRING]
     })
     connectionType = 'Azure database via key vault secret'
   }
@@ -70,7 +70,7 @@ const connectToDatabase = async () => {
 }
 
 module.exports = {
-  query: (text, params) => pool.query(text, params),
+  query: (text, params) => pool.query(text, params)
 }
 
 function getAllBooks(params) {
@@ -81,7 +81,7 @@ async function getBook(identifier) {
   try {
     const queryResult = await pool.query(
       'SELECT * FROM books WHERE book_id = $1',
-      [identifier],
+      [identifier]
     )
     const bookData = queryResult?.rowCount > 0 ? queryResult.rows[0] : undefined
     return bookUtil.validateBook(bookData) ? bookData : undefined
@@ -106,8 +106,8 @@ function insertBook(newBook) {
           newBook.pages,
           newBook.genre,
           newBook.title,
-          newBook.author,
-        ],
+          newBook.author
+        ]
       )
     : false
 }
@@ -116,7 +116,7 @@ async function updateBook(book) {
   try {
     const queryResult = await pool.query(
       `UPDATE books SET title=$1, author=$2, pages=$3, genre=$4 WHERE book_id=$5`,
-      [book.title, book.author, book.pages, book.genre, book.book_id],
+      [book.title, book.author, book.pages, book.genre, book.book_id]
     )
     return queryResult.rowCount > 0
   } catch (error) {
@@ -128,7 +128,7 @@ async function updateBook(book) {
 function insertReply(review_id, user_id, reply_text) {
   return pool.query(
     'INSERT INTO replies (review_id, user_id, reply_text) VALUES ($1, $2, $3) RETURNING *',
-    [review_id, user_id, reply_text],
+    [review_id, user_id, reply_text]
   )
 }
 
@@ -144,5 +144,5 @@ module.exports = {
   updateBook,
   connectToDatabase,
   insertReply,
-  getRepliesByReviewId,
+  getRepliesByReviewId
 }

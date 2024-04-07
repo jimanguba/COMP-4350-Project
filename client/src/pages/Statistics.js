@@ -20,7 +20,7 @@ function Statistics({ user_id }) {
   const getBookDate = () => {
     if (selectedDate) {
       const matchingData = calendarData.find(
-        (d) => d.day === selectedDate.toISOString().split('T')[0],
+        (d) => d.day === selectedDate.toISOString().split('T')[0]
       )
       if (matchingData) {
         const date = matchingData.day.split('-')
@@ -35,7 +35,7 @@ function Statistics({ user_id }) {
   const getBookDetails = async () => {
     if (selectedDate) {
       const matchingData = calendarData.find(
-        (d) => d.day === selectedDate.toISOString().split('T')[0],
+        (d) => d.day === selectedDate.toISOString().split('T')[0]
       )
       if (matchingData) {
         const { book, author } = matchingData
@@ -45,7 +45,7 @@ function Statistics({ user_id }) {
 
         try {
           const response = await axios.get(
-            `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&key=AIzaSyAbhwnp3JTNJFChJXIFMNmiKCPnoGLeQ44`,
+            `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&key=AIzaSyAbhwnp3JTNJFChJXIFMNmiKCPnoGLeQ44`
           )
           const items = response.data.items
           if (items && items.length > 0) {
@@ -69,7 +69,7 @@ function Statistics({ user_id }) {
 
   const tileClassName = ({ date }) => {
     const matchingData = calendarData.find(
-      (d) => d.day === date.toISOString().split('T')[0],
+      (d) => d.day === date.toISOString().split('T')[0]
     )
     if (matchingData) {
       return `book-tile book-tile-${matchingData.value}`

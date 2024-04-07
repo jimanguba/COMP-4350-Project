@@ -28,22 +28,22 @@ describe('BookList', () => {
         title: 'Book 1',
         author: 'Author 1',
         pages: 200,
-        genre: 'Fiction',
+        genre: 'Fiction'
       },
       {
         book_id: 2,
         title: 'Book 2',
         author: 'Author 2',
         pages: 250,
-        genre: 'Non-fiction',
-      },
+        genre: 'Non-fiction'
+      }
     ]
     mock.onGet('/books').reply(200, mockedBooks)
 
     render(
       <MemoryRouter>
         <BookList type={'all'} />
-      </MemoryRouter>,
+      </MemoryRouter>
     )
 
     // Waiting for books to be fetched and displayed
@@ -59,22 +59,22 @@ describe('BookList', () => {
         title: 'Book 1',
         author: 'Author 1',
         pages: 200,
-        genre: 'Fiction',
+        genre: 'Fiction'
       },
       {
         book_id: 2,
         title: 'Book 2',
         author: 'Author 2',
         pages: 250,
-        genre: 'Non-fiction',
-      },
+        genre: 'Non-fiction'
+      }
     ]
     mock.onGet('/books').reply(200, mockedBooks)
 
     render(
       <MemoryRouter>
         <BookList type={'all'} />
-      </MemoryRouter>,
+      </MemoryRouter>
     )
 
     // Waiting for books to be fetched and displayed
@@ -93,7 +93,7 @@ describe('BookList', () => {
     render(
       <MemoryRouter>
         <BookList type={'completed'} />
-      </MemoryRouter>,
+      </MemoryRouter>
     )
 
     await waitFor(() => {
@@ -105,7 +105,7 @@ describe('BookList', () => {
     render(
       <MemoryRouter>
         <BookList type={'to-read'} />
-      </MemoryRouter>,
+      </MemoryRouter>
     )
 
     await waitFor(() => {

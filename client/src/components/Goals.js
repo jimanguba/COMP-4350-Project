@@ -13,9 +13,9 @@ import '../styles/Goals.css'
 var config = {
   headers: {
     'Content-Length': 0,
-    'Content-Type': 'text/plain',
+    'Content-Type': 'text/plain'
   },
-  responseType: 'text',
+  responseType: 'text'
 }
 
 const GoalForm = () => {
@@ -31,7 +31,7 @@ const GoalForm = () => {
       setLoading(true)
       try {
         const { data: response } = await axios.get('/getGoals', {
-          params: { userId: cookies.get('userID') },
+          params: { userId: cookies.get('userID') }
         })
         setData(response)
       } catch (error) {
@@ -51,8 +51,8 @@ const GoalForm = () => {
           goalText: goalText,
           goalStauts: goalStauts,
           goalNumber: goalNumber,
-          userId: cookies.get('userID'),
-        },
+          userId: cookies.get('userID')
+        }
       })
       .catch(function (error) {
         console.log(error)

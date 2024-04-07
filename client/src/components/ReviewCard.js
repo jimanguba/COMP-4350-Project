@@ -15,7 +15,7 @@ const ReviewCard = ({ review, addReply }) => {
     const names = {}
     try {
       const responses = await Promise.all(
-        uniqueUserIds.map((userId) => axios.get(`/users/${userId}`)),
+        uniqueUserIds.map((userId) => axios.get(`/users/${userId}`))
       )
       responses.forEach((response) => {
         const user = response.data
@@ -53,7 +53,7 @@ const ReviewCard = ({ review, addReply }) => {
     if (reviewReplies.length > 0) {
       // Get unique user_ids from the replies
       const uniqueUserIds = [
-        ...new Set(reviewReplies.map((reply) => reply.user_id)),
+        ...new Set(reviewReplies.map((reply) => reply.user_id))
       ]
       fetchReplyUserNames(uniqueUserIds)
     }
@@ -69,7 +69,7 @@ const ReviewCard = ({ review, addReply }) => {
   useEffect(() => {
     if (reviewReplies.length > 0) {
       const uniqueUserIds = [
-        ...new Set(reviewReplies.map((reply) => reply.user_id)),
+        ...new Set(reviewReplies.map((reply) => reply.user_id))
       ]
       fetchReplyUserNames(uniqueUserIds)
     }
@@ -92,8 +92,8 @@ const ReviewCard = ({ review, addReply }) => {
         `/reviews/${review.review_id}/replies`,
         {
           user_id: userIdFromCookie, // This should be the ID of the user making the reply
-          reply_text: replyText,
-        },
+          reply_text: replyText
+        }
       )
 
       // Update the local component state with the new reply

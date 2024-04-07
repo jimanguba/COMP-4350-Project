@@ -15,7 +15,7 @@ describe('ReplyForm', () => {
     expect(screen.getByPlaceholderText('Write a reply...')).toBeInTheDocument()
     // Check if submit button is in the document
     expect(
-      screen.getByRole('button', { name: 'Submit Reply' }),
+      screen.getByRole('button', { name: 'Submit Reply' })
     ).toBeInTheDocument()
   })
 

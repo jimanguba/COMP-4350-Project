@@ -18,7 +18,7 @@ describe('StatisticsGoal component', () => {
     await waitFor(() => {
       expect(document.body).toHaveTextContent("Test User's Reading Statistics")
       expect(document.body).toHaveTextContent(
-        "Your Yearly Reading Goal: Keep going! You're 50% there!",
+        "Your Yearly Reading Goal: Keep going! You're 50% there!"
       )
       expect(document.body).toHaveTextContent('5 out of 10 books completed')
     })

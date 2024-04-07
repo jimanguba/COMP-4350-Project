@@ -18,7 +18,7 @@ describe('ReviewCard', () => {
     verifiedPurchase: true,
     comment: 'This product is amazing!',
     tags: ['Durable', 'Stylish'],
-    review_date: '2023-01-01',
+    review_date: '2023-01-01'
   }
 
   it('renders correctly with a given review', async () => {
@@ -30,15 +30,15 @@ describe('ReviewCard', () => {
       {
         reply_text: 'Thanks for your feedback!',
         user_id: 'user456',
-        reply_date: '2023-01-02',
-      },
+        reply_date: '2023-01-02'
+      }
     ])
 
     render(<ReviewCard review={reviewMock} addReply={() => {}} />)
 
     // You might need to wait for the replies to be fetched and rendered
     await waitFor(() =>
-      expect(screen.getByText('Thanks for your feedback!')).toBeInTheDocument(),
+      expect(screen.getByText('Thanks for your feedback!')).toBeInTheDocument()
     )
   })
 
@@ -49,7 +49,7 @@ describe('ReviewCard', () => {
     render(<ReviewCard review={reviewMock} addReply={() => {}} />)
 
     await waitFor(() =>
-      expect(screen.getByText('John Doe')).toBeInTheDocument(),
+      expect(screen.getByText('John Doe')).toBeInTheDocument()
     )
   })
 

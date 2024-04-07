@@ -27,7 +27,7 @@ function App() {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
       }}
     >
       <table className="table table-striped">

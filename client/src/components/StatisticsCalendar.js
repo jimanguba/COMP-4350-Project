@@ -13,7 +13,7 @@ const StatisticsCalendar = ({ data }) => {
   const getBookTitle = () => {
     if (selectedDate) {
       const matchingData = data.find(
-        (d) => d.day === selectedDate.toISOString().split('T')[0],
+        (d) => d.day === selectedDate.toISOString().split('T')[0]
       )
       return matchingData
         ? `You read: ${matchingData.book}`
@@ -24,7 +24,7 @@ const StatisticsCalendar = ({ data }) => {
 
   const tileClassName = ({ date }) => {
     const matchingData = data.find(
-      (d) => d.day === date.toISOString().split('T')[0],
+      (d) => d.day === date.toISOString().split('T')[0]
     )
     if (matchingData) {
       return `book-tile book-tile-${matchingData.value}`

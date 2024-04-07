@@ -10,7 +10,7 @@ import BookCoverCard from '../components/BookCoverCard'
 describe('BookCoverCard', () => {
   it('renders BookCoverCard with default "small" size', () => {
     const book = {
-      title: 'Sample Book Title',
+      title: 'Sample Book Title'
     }
 
     render(<BookCoverCard book={book} />)
@@ -20,7 +20,7 @@ describe('BookCoverCard', () => {
 
   it('renders BookCoverCard with "large" size', () => {
     const book = {
-      title: 'Sample Book Title',
+      title: 'Sample Book Title'
     }
 
     render(<BookCoverCard book={book} size="large" />)

@@ -4,7 +4,7 @@ const request = require('supertest')
 
 jest.mock('pg', () => {
   const mockPg = {
-    query: jest.fn(),
+    query: jest.fn()
   }
   return { Pool: jest.fn(() => mockPg) }
 })
@@ -26,14 +26,14 @@ const exampleBook = {
   title: 'The Eye of the World',
   author: 'Robert Jordan',
   pages: 832,
-  genre: 'High Fantasy',
+  genre: 'High Fantasy'
 }
 
 const notABook = {
   sally: 'The salamander',
   has: {
-    far: 'too many legs',
-  },
+    far: 'too many legs'
+  }
 }
 
 const mockUserId = 1
@@ -41,12 +41,12 @@ const mockAverageTime = 24
 const mockAverageRating = 4.5
 const mockProgress = [
   { book_id: 1, progress: 50 },
-  { book_id: 2, progress: 30 },
+  { book_id: 2, progress: 30 }
 ]
 const mockCompletedBooksCount = [{ count: 10 }]
 const mockCalendar = [
   { title: 'Book Title 1', date_end: new Date('2024-01-31'), value: 1 },
-  { title: 'Book Title 2', date_end: new Date('2024-02-01'), value: 1 },
+  { title: 'Book Title 2', date_end: new Date('2024-02-01'), value: 1 }
 ]
 
 //Unit Test 1 - Correct username and password Sign Up
@@ -69,10 +69,10 @@ test('Correct user and password log in. Status 200 should be returned', (done) =
     rows: [
       {
         user_password:
-          '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu',
-      },
+          '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu'
+      }
     ],
-    rowCount: 1,
+    rowCount: 1
   })
   request(sut.app)
     .get('/login')
@@ -117,10 +117,10 @@ test('Status 400 should be returned', (done) => {
     rows: [
       {
         user_password:
-          '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu',
-      },
+          '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu'
+      }
     ],
-    rowCount: 1,
+    rowCount: 1
   })
   request(sut.app)
     .get('/login')
@@ -178,10 +178,10 @@ test('Status 400 should be returned', (done) => {
     rows: [
       {
         user_password:
-          '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu',
-      },
+          '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu'
+      }
     ],
-    rowCount: 1,
+    rowCount: 1
   })
   request(sut.app)
     .get('/login')
@@ -219,7 +219,7 @@ test('Fetching average reading time returns status 200 and average time', async 
 
 test('Fetching average rating returns status 200 and average rating', async () => {
   pool.query.mockResolvedValue({
-    rows: [{ average_rating: mockAverageRating }],
+    rows: [{ average_rating: mockAverageRating }]
   })
   await request(sut.app)
     .get(`/users/${mockUserId}/average_rating`)
@@ -260,13 +260,13 @@ test('Fetching calendar data returns status 200 and calendar data', async () => 
     .expect('Content-Type', /json/)
     .expect((response) => {
       expect(
-        response.body.map(({ book, day, value }) => ({ book, day, value })),
+        response.body.map(({ book, day, value }) => ({ book, day, value }))
       ).toEqual(
         mockCalendar.map(({ title, date_end, value }) => ({
           book: title,
           day: date_end.toISOString().split('T')[0],
-          value,
-        })),
+          value
+        }))
       )
     })
 })
@@ -294,7 +294,7 @@ test('Inserting improper book returns status 400 and error message', (done) => {
     .expect(400)
     .expect((response) => {
       expect(response.body).toEqual(
-        'Failed to create a book with the given data',
+        'Failed to create a book with the given data'
       )
     })
     .end((err, res) => {

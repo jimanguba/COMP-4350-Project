@@ -20,7 +20,7 @@ const GenreRecommendations = ({ genre, currentBookId }) => {
       try {
         // Assuming the server will exclude the current book based on the `book_id` query parameter
         const response = await axios.get(`/books/genre/${genre}`, {
-          params: { book_id: currentBookId },
+          params: { book_id: currentBookId }
         })
 
         setRelatedBooks(response.data)

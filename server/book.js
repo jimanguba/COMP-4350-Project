@@ -9,7 +9,7 @@ class Book {
     'A Darker Shade of Magic',
     'V.E. Schwab',
     400,
-    'Fantasy',
+    'Fantasy'
   )
 }
 
@@ -31,5 +31,5 @@ function validateBook(book) {
 
 module.exports = {
   createNewBook,
-  validateBook,
+  validateBook
 }

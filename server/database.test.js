@@ -7,19 +7,19 @@ const exampleBook = {
   title: 'The Eye of the World',
   author: 'Robert Jordan',
   pages: 832,
-  genre: 'High Fantasy',
+  genre: 'High Fantasy'
 }
 
 const notABook = {
   sally: 'The salamander',
   has: {
-    far: 'too many legs',
-  },
+    far: 'too many legs'
+  }
 }
 
 jest.mock('pg', () => {
   const mockPg = {
-    query: jest.fn(),
+    query: jest.fn()
   }
   return { Pool: jest.fn(() => mockPg) }
 })
@@ -45,7 +45,7 @@ test('getBook runs the correct SELECT statement with the correct parameter', () 
 
   expect(pool.query).toBeCalledTimes(1)
   expect(pool.query).toBeCalledWith('SELECT * FROM books WHERE book_id = $1', [
-    1,
+    1
   ])
   expect(result == exampleBook)
 })
@@ -56,7 +56,7 @@ test('getBook recieves invalid book back and returns undefined', () => {
 
   expect(pool.query).toBeCalledTimes(1)
   expect(pool.query).toBeCalledWith('SELECT * FROM books WHERE book_id = $1', [
-    1,
+    1
   ])
   expect(!result)
 })
@@ -79,7 +79,7 @@ test('Insert book with a valid book to return the result of the query', () => {
     832,
     'High Fantasy',
     'The Eye of the World',
-    'Robert Jordan',
+    'Robert Jordan'
   ])
   expect(result === 'Successful insertion')
 })

@@ -25,7 +25,7 @@ describe('StatisticsYear component', () => {
 
     await waitFor(() => {
       expect(
-        getByText('Your average reading time is 60 minutes'),
+        getByText('Your average reading time is 60 minutes')
       ).toBeInTheDocument()
       expect(getByText('Your average book rating is 3.50')).toBeInTheDocument()
       expect(getByAltText('Book')).toBeInTheDocument()
@@ -48,11 +48,11 @@ describe('StatisticsYear component', () => {
     await waitFor(() => {
       expect(console.error).toHaveBeenCalledWith(
         'Error fetching average reading time:',
-        new Error('Failed to fetch average time'),
+        new Error('Failed to fetch average time')
       )
       expect(console.error).toHaveBeenCalledWith(
         'Error fetching average rating:',
-        new Error('Failed to fetch average rating'),
+        new Error('Failed to fetch average rating')
       )
     })
 

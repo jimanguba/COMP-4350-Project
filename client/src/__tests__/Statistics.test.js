@@ -16,14 +16,14 @@ describe('Statistics', () => {
     const mockAxios = new MockAdapter(axios)
     const mockedCalendarData = [
       { day: '2024-03-21', book: 'Book 1', author: 'Author 1', value: 1 },
-      { day: '2024-03-22', book: 'Book 2', author: 'Author 2', value: 2 },
+      { day: '2024-03-22', book: 'Book 2', author: 'Author 2', value: 2 }
     ]
     mockAxios.onGet('/users/123/calendar-data').reply(200, mockedCalendarData)
 
     render(
       <MemoryRouter>
         <Statistics user_id={123} />
-      </MemoryRouter>,
+      </MemoryRouter>
     )
 
     await waitFor(() => {

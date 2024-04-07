@@ -19,7 +19,7 @@ const wasReviewCreatedInTimeFrame = (reviewDate, daysAgo) => {
 
 const ReviewsList = ({ reviews: initialReviews, bookId }) => {
   const [reviews, setReviews] = useState(
-    Array.isArray(initialReviews) ? initialReviews : [],
+    Array.isArray(initialReviews) ? initialReviews : []
   )
   const [filter, setFilter] = useState(null)
   const [dateFilter, setDateFilter] = useState('')
@@ -34,7 +34,7 @@ const ReviewsList = ({ reviews: initialReviews, bookId }) => {
           return { ...review, replies: updatedReplies }
         }
         return review
-      }),
+      })
     )
   }
 
@@ -82,7 +82,7 @@ const ReviewsList = ({ reviews: initialReviews, bookId }) => {
           display: 'flex',
           justifycontent: 'flex-end',
           marginbottom: '20px',
-          alignitems: 'right',
+          alignitems: 'right'
         }}
       >
         <ReviewFilter setFilter={setFilter} />

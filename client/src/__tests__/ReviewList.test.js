@@ -13,7 +13,7 @@ import ReviewFilter from '../components/ReviewFilter'
 const mockReviews = [
   { id: 1, rating: 5, comment: 'Great book!', replies: [] },
   { id: 2, rating: 4, comment: 'Enjoyable read.', replies: [] },
-  { id: 3, rating: 3, comment: 'Average read.', replies: [] },
+  { id: 3, rating: 3, comment: 'Average read.', replies: [] }
 ]
 
 describe('ReviewsList', () => {

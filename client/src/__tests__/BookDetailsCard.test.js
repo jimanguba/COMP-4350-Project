@@ -13,7 +13,7 @@ describe('BookDetailsCard', () => {
       title: 'Sample Book Title',
       author: 'Sample Author',
       pages: 200,
-      genre: 'Fiction',
+      genre: 'Fiction'
     }
 
     render(<BookDetailsCard book={book} />)
@@ -29,7 +29,7 @@ describe('BookDetailsCard', () => {
       title: 'Sample Book Title',
       author: 'Sample Author',
       pages: 200,
-      genre: 'Fiction',
+      genre: 'Fiction'
     }
 
     const updateBookDetailsMock = jest.fn()
@@ -37,16 +37,16 @@ describe('BookDetailsCard', () => {
     render(<BookDetailsCard book={book} />)
     fireEvent.click(screen.getByText('Edit Book Details'))
     fireEvent.change(screen.getByLabelText(/title/i), {
-      target: { value: 'New Title' },
+      target: { value: 'New Title' }
     })
     fireEvent.change(screen.getByLabelText(/author/i), {
-      target: { value: 'New Author' },
+      target: { value: 'New Author' }
     })
     fireEvent.change(screen.getByLabelText(/pages/i), {
-      target: { value: '300' },
+      target: { value: '300' }
     })
     fireEvent.change(screen.getByLabelText(/genre/i), {
-      target: { value: 'New Genre' },
+      target: { value: 'New Genre' }
     })
     fireEvent.click(screen.getByText('Submit Changes'))
 

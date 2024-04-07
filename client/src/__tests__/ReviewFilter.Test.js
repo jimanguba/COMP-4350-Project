@@ -17,7 +17,7 @@ describe('ReviewFilter', () => {
       '2 Stars',
       '3 Stars',
       '4 Stars',
-      '5 Stars',
+      '5 Stars'
     ].forEach((text) => {
       expect(screen.getByRole('option', { name: text })).toBeInTheDocument()
     })
@@ -38,7 +38,7 @@ describe('ReviewFilter', () => {
     render(<ReviewFilter setFilter={setFilterMock} />)
 
     fireEvent.change(screen.getByRole('combobox'), {
-      target: { value: 'all' },
+      target: { value: 'all' }
     })
 
     expect(setFilterMock).toHaveBeenCalledWith(null)

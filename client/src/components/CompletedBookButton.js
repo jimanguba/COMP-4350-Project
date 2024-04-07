@@ -25,11 +25,11 @@ export default function CompletedBookButton({ book_id }) {
   const toggleReadingState = () => {
     axios
       .put(`/users/${user_id}/completed_books/${book_id}`, {
-        completed_books: !onCompletedBooks,
+        completed_books: !onCompletedBooks
       })
       .then(() => setOnCompletedBooks(!onCompletedBooks))
       .catch((error) =>
-        console.error('Error updating completed books status:', error),
+        console.error('Error updating completed books status:', error)
       )
   }
 

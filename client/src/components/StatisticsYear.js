@@ -19,15 +19,15 @@ function StatisticsYear({ user_id }) {
     for (let i = 0; i < 5; i++) {
       if (i < fullStars) {
         stars.push(
-          <FontAwesomeIcon key={i} icon={faStarFilled} className="star" />,
+          <FontAwesomeIcon key={i} icon={faStarFilled} className="star" />
         )
       } else if (i === fullStars && hasHalfStar) {
         stars.push(
-          <FontAwesomeIcon key={i} icon={faStarHalf} className="star" />,
+          <FontAwesomeIcon key={i} icon={faStarHalf} className="star" />
         )
       } else {
         stars.push(
-          <FontAwesomeIcon key={i} icon={faStarEmpty} className="star" />,
+          <FontAwesomeIcon key={i} icon={faStarEmpty} className="star" />
         )
       }
     }

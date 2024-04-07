@@ -4,25 +4,25 @@ const validBook = {
   title: 'A Good Book',
   author: 'Author Man',
   pages: 250,
-  genre: 'Action',
+  genre: 'Action'
 }
 
 const invalidBook = {
   title: 'A Bad Book',
   pages: 50,
-  genre: 'Bad',
+  genre: 'Bad'
 }
 
 const garbage = {
   jake: {
     fromStateFarm: {
-      will: 'Remember',
+      will: 'Remember'
     },
     noMatter: {
-      how: 'fast you run',
-    },
+      how: 'fast you run'
+    }
   },
-  he: 'is faster',
+  he: 'is faster'
 }
 
 test('Valid book returns true', () => {
@@ -42,7 +42,7 @@ test('Created book has all properties', () => {
     title: 'A New Book',
     author: 'The New Guy',
     pages: 100,
-    genre: 'Dystopian',
+    genre: 'Dystopian'
   })
   expect(!!bookUnderTest.title).toBe(true)
   expect(!!bookUnderTest.author).toBe(true)

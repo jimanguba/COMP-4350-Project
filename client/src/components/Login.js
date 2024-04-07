@@ -19,8 +19,8 @@ const LoginForm = () => {
       .get('/login', {
         params: {
           username: username,
-          password: password,
-        },
+          password: password
+        }
       })
       .then((response) => {
         var test1 = JSON.parse(JSON.stringify(response.data))
@@ -32,7 +32,7 @@ const LoginForm = () => {
       .catch(function (error) {
         console.log(error)
         alert(
-          'Username already exists or Password is too short (must be length 5)',
+          'Username already exists or Password is too short (must be length 5)'
         )
       })
   }
@@ -43,8 +43,8 @@ const LoginForm = () => {
       .get('/signup', {
         params: {
           username: username,
-          password: password,
-        },
+          password: password
+        }
       })
       .then((response) => {
         var test1 = JSON.parse(JSON.stringify(response.data))
@@ -56,7 +56,7 @@ const LoginForm = () => {
       .catch(function (error) {
         console.log(error)
         alert(
-          'Username already exists or Password is too short (must be length 5)',
+          'Username already exists or Password is too short (must be length 5)'
         )
       })
   }

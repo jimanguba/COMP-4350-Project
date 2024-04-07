@@ -16,7 +16,7 @@ const genres = [
   'Fantasy',
   'Mystery',
   'Thriller',
-  'Biography',
+  'Biography'
 ]
 
 const ReviewForm = ({ addReview, bookId }) => {
@@ -54,7 +54,7 @@ const ReviewForm = ({ addReview, bookId }) => {
       rating,
       comment: reviewText,
       review_date: dateString,
-      tags: selectedTags,
+      tags: selectedTags
     }
     try {
       const response = await axios.post('/reviews/new', newReview)

@@ -20,7 +20,7 @@ function StatisticsGoal({ user_id }) {
 
         // Fetch reading progress after updating the reading goal
         const readingProgressResponse = await axios.get(
-          `/users/${user_id}/books/num_completed`,
+          `/users/${user_id}/books/num_completed`
         )
         const countData = readingProgressResponse.data[0]
         if (
