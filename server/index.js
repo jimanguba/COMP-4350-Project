@@ -549,6 +549,55 @@ app.get("/reviews/:review_id/replies", async (req, res) => {
     }
 });
 
+app.get("/resetGoals", async (req, res) => {
+    
+    try {
+        let str = req.url;
+        str = str.substring(2)
+
+        var partsArray = str.split('&');
+
+        var userValStr = partsArray[0].split('=');
+        var userVal = userValStr[1];
+
+        const result1 = await pool.query('DELETE FROM goals WHERE user_id = $1',[userVal])
+        return res.status(200)
+    }
+    catch (error) {
+
+    }
+
+})
+
+app.get('/changePassword', async (req, res) => {
+    let str = req.url;
+    str = str.substring(2)
+  
+    var partsArray = str.split('&');
+    var userIdStr = partsArray[0].split('=');
+    var passwordStr = partsArray[1].split('=');
+    var userId = userIdStr[1];
+    var password = passwordStr[1];
+  
+    const salt = await bcrypt.genSalt(10) ;
+  
+    try{
+        if(password.length>=5)
+        {
+        //Update
+          await pool.query('UPDATE users SET user_password = $1 WHERE user_id = $2', [ await bcrypt.hash(password, salt), userId]);
+          console.log("Password Change Success")   
+          return res.status(200)
+        }
+        else
+        {
+          return res.status(400).json({errors: [{msg: "Password is too short must be at least length 5"}] });
+        }
+    }
+    catch{
+      res.status(500).send("Server error.");
+    }
+  })
 
 module.exports = {
     server,
