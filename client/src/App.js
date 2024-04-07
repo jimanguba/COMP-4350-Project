@@ -10,6 +10,7 @@ import BookList from './pages/BookList';
 import Goals from '../src/components/Goals';
 import './App.css';
 import ViewBook from './components/ViewBook';
+import Settings from './pages/Settings'
 import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -40,7 +41,8 @@ function App() {
                         <Route path="/review" element={<ReviewsList />} />
                         <Route path="/login" element={<Login/>} />
                         <Route path="/home" element={<Home/>} />
-                        <Route path="/goals" element={<Goals />} /> {/* TODO: Same deal make this dynamic for each user gotta be a group chat*/}
+                        <Route path="/goals" element={<Goals />} /> 
+                        <Route path="/settings" element={<Settings />} /> 
                     </Routes>
             </div>
             </Router>
