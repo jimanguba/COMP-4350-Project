@@ -38,7 +38,7 @@
 
 /* Adjustments for other elements can remain the same */
 
-input[type="text"] {
+input[type='text'] {
   width: calc(100% - 40px); /* Adjust width to account for padding */
   padding: 10px;
   margin-bottom: 20px;
@@ -94,7 +94,7 @@ a:hover {
     grid-template-columns: 1fr;
   }
 
-  input[type="text"] {
+  input[type='text'] {
     width: calc(100% - 20px);
     padding: 8px;
   }

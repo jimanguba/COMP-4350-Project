@@ -1,65 +1,65 @@
-import React, { useState } from "react";
-import "../styles/LoginForm.css";
-import axios from "axios";
-import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
+import React, { useState } from 'react'
+import '../styles/LoginForm.css'
+import axios from 'axios'
+import TextField from '@mui/material/TextField'
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 const LoginForm = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginflag] = useState(false);
-  const cookies = new Cookies(null, { path: "/" });
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [loginflag] = useState(false)
+  const cookies = new Cookies(null, { path: '/' })
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const loginClick = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     axios
-      .get("/login", {
+      .get('/login', {
         params: {
           username: username,
           password: password,
         },
       })
       .then((response) => {
-        var test1 = JSON.parse(JSON.stringify(response.data));
+        var test1 = JSON.parse(JSON.stringify(response.data))
         if (response.status == 200) {
-          cookies.set("userID", test1.data);
-          navigate("/home");
+          cookies.set('userID', test1.data)
+          navigate('/home')
         }
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(error)
         alert(
-          "Username already exists or Password is too short (must be length 5)",
-        );
-      });
-  };
+          'Username already exists or Password is too short (must be length 5)',
+        )
+      })
+  }
 
   const SignUpClick = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     axios
-      .get("/signup", {
+      .get('/signup', {
         params: {
           username: username,
           password: password,
         },
       })
       .then((response) => {
-        var test1 = JSON.parse(JSON.stringify(response.data));
+        var test1 = JSON.parse(JSON.stringify(response.data))
         if (response.status == 200) {
-          cookies.set("userID", test1.data);
-          navigate("/home");
+          cookies.set('userID', test1.data)
+          navigate('/home')
         }
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(error)
         alert(
-          "Username already exists or Password is too short (must be length 5)",
-        );
-      });
-  };
+          'Username already exists or Password is too short (must be length 5)',
+        )
+      })
+  }
 
   if (!loginflag) {
     return (
@@ -71,7 +71,7 @@ const LoginForm = () => {
             type="text"
             placeholder="Username"
             onChange={(event) => {
-              setUsername(event.target.value);
+              setUsername(event.target.value)
             }}
             required
           />
@@ -80,7 +80,7 @@ const LoginForm = () => {
             type="password"
             placeholder="Password"
             onChange={(event) => {
-              setPassword(event.target.value);
+              setPassword(event.target.value)
             }}
             required
           />
@@ -98,7 +98,7 @@ const LoginForm = () => {
           </div>
         </form>
       </div>
-    );
+    )
   }
-};
-export default LoginForm;
+}
+export default LoginForm

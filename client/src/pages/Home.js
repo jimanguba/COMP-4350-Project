@@ -1,29 +1,29 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import Sidebar from "../components/Sidebar";
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import Sidebar from '../components/Sidebar'
 
 function Home() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching data....");
-      setLoading(true);
+      console.log('Fetching data....')
+      setLoading(true)
       try {
-        const { data: response } = await axios.get("/books");
-        setData(response);
+        const { data: response } = await axios.get('/books')
+        setData(response)
       } catch (error) {
-        console.error(error.message);
+        console.error(error.message)
       }
-      setLoading(false);
-    };
+      setLoading(false)
+    }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
       <div className="container my-5">
         <h1 className="text-center mb-4">Home</h1>
@@ -61,7 +61,7 @@ function Home() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

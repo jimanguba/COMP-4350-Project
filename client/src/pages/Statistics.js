@@ -1,100 +1,100 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import StatisticsGoal from "../components/StatisticsGoal";
-import StatisticsYear from "../components/StatisticsYear";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import "../styles/StatisticsCalendar.css";
-import Sidebar from "../components/Sidebar";
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import StatisticsGoal from '../components/StatisticsGoal'
+import StatisticsYear from '../components/StatisticsYear'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css'
+import '../styles/StatisticsCalendar.css'
+import Sidebar from '../components/Sidebar'
 
 function Statistics({ user_id }) {
-  const [calendarData, setCalendarData] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [bookDetails, setBookDetails] = useState("");
-  const [bookImage, setBookImage] = useState("");
+  const [calendarData, setCalendarData] = useState([])
+  const [selectedDate, setSelectedDate] = useState(null)
+  const [bookDetails, setBookDetails] = useState('')
+  const [bookImage, setBookImage] = useState('')
 
   const onChange = (date) => {
-    setSelectedDate(date);
-  };
+    setSelectedDate(date)
+  }
 
   const getBookDate = () => {
     if (selectedDate) {
       const matchingData = calendarData.find(
-        (d) => d.day === selectedDate.toISOString().split("T")[0],
-      );
+        (d) => d.day === selectedDate.toISOString().split('T')[0],
+      )
       if (matchingData) {
-        const date = matchingData.day.split("-");
-        const dateDisplay = new Date(date).toDateString();
-        return `On ${dateDisplay}...`;
+        const date = matchingData.day.split('-')
+        const dateDisplay = new Date(date).toDateString()
+        return `On ${dateDisplay}...`
       } else {
-        return "No book read on selected date";
+        return 'No book read on selected date'
       }
     }
-    return "Select a date to view book details";
-  };
+    return 'Select a date to view book details'
+  }
   const getBookDetails = async () => {
     if (selectedDate) {
       const matchingData = calendarData.find(
-        (d) => d.day === selectedDate.toISOString().split("T")[0],
-      );
+        (d) => d.day === selectedDate.toISOString().split('T')[0],
+      )
       if (matchingData) {
-        const { book, author } = matchingData;
-        setBookDetails(`You read: ${book} by ${author}`);
-        const query = `${book} ${author}`;
-        const encodedQuery = encodeURIComponent(query);
+        const { book, author } = matchingData
+        setBookDetails(`You read: ${book} by ${author}`)
+        const query = `${book} ${author}`
+        const encodedQuery = encodeURIComponent(query)
 
         try {
           const response = await axios.get(
             `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&key=AIzaSyAbhwnp3JTNJFChJXIFMNmiKCPnoGLeQ44`,
-          );
-          const items = response.data.items;
+          )
+          const items = response.data.items
           if (items && items.length > 0) {
-            const firstItem = items[0];
-            const bookCover = firstItem.volumeInfo.imageLinks?.thumbnail;
+            const firstItem = items[0]
+            const bookCover = firstItem.volumeInfo.imageLinks?.thumbnail
             if (bookCover) {
-              setBookImage(bookCover);
+              setBookImage(bookCover)
             }
           }
         } catch (error) {
-          console.error("Error fetching book details:", error);
-          setBookDetails("Failed to fetch book details");
-          setBookImage("");
+          console.error('Error fetching book details:', error)
+          setBookDetails('Failed to fetch book details')
+          setBookImage('')
         }
       } else {
-        setBookDetails("");
-        setBookImage("");
+        setBookDetails('')
+        setBookImage('')
       }
     }
-  };
+  }
 
   const tileClassName = ({ date }) => {
     const matchingData = calendarData.find(
-      (d) => d.day === date.toISOString().split("T")[0],
-    );
+      (d) => d.day === date.toISOString().split('T')[0],
+    )
     if (matchingData) {
-      return `book-tile book-tile-${matchingData.value}`;
+      return `book-tile book-tile-${matchingData.value}`
     }
-    return null;
-  };
+    return null
+  }
 
   useEffect(() => {
     // Fetch calendar data
     axios
       .get(`/users/${user_id}/calendar-data`)
       .then((response) => {
-        setCalendarData(response.data);
+        setCalendarData(response.data)
       })
       .catch((error) => {
-        console.error("Error fetching calendar data:", error);
-      });
-  }, [user_id]);
+        console.error('Error fetching calendar data:', error)
+      })
+  }, [user_id])
 
   useEffect(() => {
-    getBookDetails();
-  }, [selectedDate, calendarData]);
+    getBookDetails()
+  }, [selectedDate, calendarData])
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
       <div>
         <StatisticsGoal user_id={user_id} />
@@ -126,7 +126,7 @@ function Statistics({ user_id }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Statistics;
+export default Statistics

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 const ReplyForm = ({ submitReply }) => {
-  const [replyText, setReplyText] = useState("");
+  const [replyText, setReplyText] = useState('')
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    submitReply(replyText);
-    setReplyText("");
-  };
+    event.preventDefault()
+    submitReply(replyText)
+    setReplyText('')
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -19,7 +19,7 @@ const ReplyForm = ({ submitReply }) => {
       />
       <button type="submit">Submit Reply</button>
     </form>
-  );
-};
+  )
+}
 
-export default ReplyForm;
+export default ReplyForm

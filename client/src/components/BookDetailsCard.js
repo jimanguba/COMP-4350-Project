@@ -4,14 +4,14 @@
  * @param {function} updateBookDetails - Callback to update the Book
  */
 
-import React from "react";
-import axios from "axios";
-import "../styles/BookDetailsCard.css";
-import { useState } from "react";
+import React from 'react'
+import axios from 'axios'
+import '../styles/BookDetailsCard.css'
+import { useState } from 'react'
 
 export default function BookDetailsCard({ book, setBook }) {
   // Are we editing currently? If not, disable inputs and style them properly
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(false)
 
   let newBook = {
     title: book.title,
@@ -19,20 +19,20 @@ export default function BookDetailsCard({ book, setBook }) {
     genre: book.genre,
     pages: book.pages,
     book_id: book.book_id,
-  };
+  }
 
   const editButtonCallback = async () => {
-    console.log("editing:", editing);
+    console.log('editing:', editing)
     if (editing) {
       try {
-        await axios.put(`/book/${newBook.book_id}`, newBook);
-        setBook(newBook);
+        await axios.put(`/book/${newBook.book_id}`, newBook)
+        setBook(newBook)
       } catch (error) {
-        console.error("Error updating book details:", error);
+        console.error('Error updating book details:', error)
       }
     }
-    setEditing(!editing);
-  };
+    setEditing(!editing)
+  }
 
   return (
     <div
@@ -85,8 +85,8 @@ export default function BookDetailsCard({ book, setBook }) {
       </div>
 
       <button className="submit-btn" onClick={editButtonCallback}>
-        {!editing ? "Edit Book Details" : "Submit Changes"}
+        {!editing ? 'Edit Book Details' : 'Submit Changes'}
       </button>
     </div>
-  );
+  )
 }

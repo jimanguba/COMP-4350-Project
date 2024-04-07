@@ -1,9 +1,9 @@
-import React from "react";
-import "../styles/ReviewFilter.css";
+import React from 'react'
+import '../styles/ReviewFilter.css'
 const ReviewDateFilter = ({ setDateFilter }) => {
   const handleDateFilterChange = (event) => {
-    setDateFilter(event.target.value);
-  };
+    setDateFilter(event.target.value)
+  }
 
   return (
     <div className="review-date-filter">
@@ -14,7 +14,7 @@ const ReviewDateFilter = ({ setDateFilter }) => {
         <option value="30">Last month</option>
       </select>
     </div>
-  );
-};
+  )
+}
 
-export default ReviewDateFilter;
+export default ReviewDateFilter

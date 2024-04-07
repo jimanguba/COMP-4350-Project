@@ -1,5 +1,5 @@
-import React from "react";
-import "../styles/ProgressBar.css";
+import React from 'react'
+import '../styles/ProgressBar.css'
 
 function ProgressBar({ progress }) {
   return (
@@ -8,7 +8,7 @@ function ProgressBar({ progress }) {
         <span className="progress-label">{progress}%</span>
       </div>
     </div>
-  );
+  )
 }
 
-export default ProgressBar;
+export default ProgressBar

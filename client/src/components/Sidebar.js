@@ -1,18 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
-import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
-import LogoutIcon from "@mui/icons-material/Logout";
-import ListIcon from "@mui/icons-material/ListAlt";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined"; // Statistics
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
-import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
-import ChecklistIcon from "@mui/icons-material/Checklist";
-import AddToQueueIcon from "@mui/icons-material/AddToQueue";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import "../styles/StyleForm.css";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar'
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined'
+import LogoutIcon from '@mui/icons-material/Logout'
+import ListIcon from '@mui/icons-material/ListAlt'
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
+import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined' // Statistics
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
+import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined'
+import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined'
+import ChecklistIcon from '@mui/icons-material/Checklist'
+import AddToQueueIcon from '@mui/icons-material/AddToQueue'
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
+import '../styles/StyleForm.css'
 
 const sidebar = () => {
   return (
@@ -22,7 +22,7 @@ const sidebar = () => {
           icon={
             <MenuOutlinedIcon
               onClick={() => {
-                collapseSidebar();
+                collapseSidebar()
               }}
             />
           }
@@ -72,7 +72,7 @@ const sidebar = () => {
         </MenuItem>
       </Menu>
     </Sidebar>
-  );
-};
+  )
+}
 
-export default sidebar;
+export default sidebar

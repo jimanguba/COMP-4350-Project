@@ -1,12 +1,12 @@
 .h1 {
   text-align: center;
-  font-family: "Futura", Arial, sans-serif;
+  font-family: 'Futura', Arial, sans-serif;
   color: #b47b84;
 }
 
 .h2 {
   text-align: center;
-  font-family: "Futura", Arial, sans-serif;
+  font-family: 'Futura', Arial, sans-serif;
   color: #99b393;
 }
 
@@ -43,7 +43,7 @@ th {
 }
 
 .label {
-  font-family: "Futura", Arial, sans-serif;
+  font-family: 'Futura', Arial, sans-serif;
   color: #b47b84;
 }
 

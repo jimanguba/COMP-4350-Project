@@ -1,51 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
-import { faStar as faStarFilled } from "@fortawesome/free-solid-svg-icons";
-import "../styles/ReviewForm.css"; // Make sure you have the correct path to your CSS file
-import Sidebar from "./Sidebar";
-import Cookies from "universal-cookie";
-import axios from "axios";
+import React, { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons'
+import { faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons'
+import '../styles/ReviewForm.css' // Make sure you have the correct path to your CSS file
+import Sidebar from './Sidebar'
+import Cookies from 'universal-cookie'
+import axios from 'axios'
 
 // Define the genres or tags for the dropdown
 const genres = [
-  "Action",
-  "Romance",
-  "Horror",
-  "Sci-Fi",
-  "Fantasy",
-  "Mystery",
-  "Thriller",
-  "Biography",
-];
+  'Action',
+  'Romance',
+  'Horror',
+  'Sci-Fi',
+  'Fantasy',
+  'Mystery',
+  'Thriller',
+  'Biography',
+]
 
 const ReviewForm = ({ addReview, bookId }) => {
-  const [reviewTitle, setReviewTitle] = useState("");
-  const [rating, setRating] = useState(0);
-  const [reviewText, setReviewText] = useState("");
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [userId, setUserId] = useState("");
+  const [reviewTitle, setReviewTitle] = useState('')
+  const [rating, setRating] = useState(0)
+  const [reviewText, setReviewText] = useState('')
+  const [selectedTags, setSelectedTags] = useState([])
+  const [userId, setUserId] = useState('')
 
   useEffect(() => {
-    const cookies = new Cookies();
-    const userIdFromCookie = cookies.get("userID"); // Read the userID cookie
+    const cookies = new Cookies()
+    const userIdFromCookie = cookies.get('userID') // Read the userID cookie
     if (userIdFromCookie) {
-      setUserId(userIdFromCookie); // Set the user ID state if the cookie exists
+      setUserId(userIdFromCookie) // Set the user ID state if the cookie exists
     }
-  }, []);
+  }, [])
 
   const toggleGenre = (genre) => {
     if (selectedTags.includes(genre)) {
-      setSelectedTags(selectedTags.filter((tag) => tag !== genre));
+      setSelectedTags(selectedTags.filter((tag) => tag !== genre))
     } else {
-      setSelectedTags([...selectedTags, genre]);
+      setSelectedTags([...selectedTags, genre])
     }
-  };
+  }
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const currentDate = new Date();
-    const dateString = currentDate.toISOString().slice(0, 10);
+    const currentDate = new Date()
+    const dateString = currentDate.toISOString().slice(0, 10)
 
     const newReview = {
       review_title: reviewTitle,
@@ -55,23 +55,23 @@ const ReviewForm = ({ addReview, bookId }) => {
       comment: reviewText,
       review_date: dateString,
       tags: selectedTags,
-    };
+    }
     try {
-      const response = await axios.post("/reviews/new", newReview);
+      const response = await axios.post('/reviews/new', newReview)
 
       // Assuming your addReview prop updates the parent state
-      addReview(response.data);
+      addReview(response.data)
 
-      addReview(newReview);
-      setReviewTitle("");
-      setRating(0);
-      setReviewText("");
-      setSelectedTags([]);
+      addReview(newReview)
+      setReviewTitle('')
+      setRating(0)
+      setReviewText('')
+      setSelectedTags([])
     } catch (error) {
       // Handle errors, such as showing an error message to the user
-      console.error("Failed to submit review", error);
+      console.error('Failed to submit review', error)
     }
-  };
+  }
 
   return (
     <div className="form-container">
@@ -109,7 +109,7 @@ const ReviewForm = ({ addReview, bookId }) => {
             <button
               key={index}
               type="button"
-              className={`genre-button ${selectedTags.includes(genre) ? "selected" : ""}`}
+              className={`genre-button ${selectedTags.includes(genre) ? 'selected' : ''}`}
               onClick={() => toggleGenre(genre)}
             >
               {genre}
@@ -122,7 +122,7 @@ const ReviewForm = ({ addReview, bookId }) => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ReviewForm;
+export default ReviewForm

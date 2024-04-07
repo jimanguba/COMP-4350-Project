@@ -1,45 +1,45 @@
-import React, { useState } from "react";
-import "../styles/LoginForm.css";
-import axios from "axios";
-import TextField from "@mui/material/TextField";
-import Cookies from "universal-cookie";
-import Sidebar from "../components/Sidebar";
+import React, { useState } from 'react'
+import '../styles/LoginForm.css'
+import axios from 'axios'
+import TextField from '@mui/material/TextField'
+import Cookies from 'universal-cookie'
+import Sidebar from '../components/Sidebar'
 
 const SettingsForm = () => {
-  const [password, setPassword] = useState("");
-  const cookies = new Cookies(null, { path: "/" });
+  const [password, setPassword] = useState('')
+  const cookies = new Cookies(null, { path: '/' })
 
   const resetGoals = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     axios
-      .get("/resetGoals", {
+      .get('/resetGoals', {
         params: {
-          userId: cookies.get("userID"),
+          userId: cookies.get('userID'),
         },
       })
       .catch(function (error) {
-        console.log(error);
-        alert("Something went wrong");
-      });
-  };
+        console.log(error)
+        alert('Something went wrong')
+      })
+  }
 
   const changePassword = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     axios
-      .get("/changePassword", {
+      .get('/changePassword', {
         params: {
-          userId: cookies.get("userID"),
+          userId: cookies.get('userID'),
           password: password,
         },
       })
       .catch(function (error) {
-        console.log(error);
-        alert("Password is too short (must be length 5)");
-      });
-  };
+        console.log(error)
+        alert('Password is too short (must be length 5)')
+      })
+  }
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
       <div className="form-container">
         <h1 className="h1">Settings</h1>
@@ -49,7 +49,7 @@ const SettingsForm = () => {
             type="password"
             placeholder="New Password"
             onChange={(event) => {
-              setPassword(event.target.value);
+              setPassword(event.target.value)
             }}
             required
           />
@@ -68,6 +68,6 @@ const SettingsForm = () => {
         </form>
       </div>
     </div>
-  );
-};
-export default SettingsForm;
+  )
+}
+export default SettingsForm

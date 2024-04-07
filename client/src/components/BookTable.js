@@ -1,33 +1,33 @@
-import "../components/BookTable";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import '../components/BookTable'
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      setLoading(true)
       try {
-        const { data: response } = await axios.get("/books");
-        setData(response);
+        const { data: response } = await axios.get('/books')
+        setData(response)
       } catch (error) {
-        console.error(error.message);
+        console.error(error.message)
       }
-      setLoading(false);
-    };
+      setLoading(false)
+    }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   return (
     <div
       className="container my-5"
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <table className="table table-striped">
@@ -52,7 +52,7 @@ function App() {
         </tbody>
       </table>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

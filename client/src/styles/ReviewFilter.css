@@ -30,7 +30,7 @@
 /* Style to add an arrow symbol */
 .review-filter:after,
 .review-date-filter:after {
-  content: "▼";
+  content: '▼';
   font-size: 1rem;
   position: absolute;
   right: 35px;

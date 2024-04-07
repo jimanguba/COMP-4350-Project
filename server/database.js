@@ -1,94 +1,93 @@
-const Pool = require("pg").Pool;
-const { DefaultAzureCredential } = require("@azure/identity");
-const { SecretClient } = require("@azure/keyvault-secrets");
-const bookUtil = require("./book");
-const fs = require("fs");
-const { boolean } = require("yargs");
+const Pool = require('pg').Pool
+const { DefaultAzureCredential } = require('@azure/identity')
+const { SecretClient } = require('@azure/keyvault-secrets')
+const bookUtil = require('./book')
+const fs = require('fs')
+const { boolean } = require('yargs')
 
-const vaultUri = `https://${process.env.VAULTNAME}.vault.azure.net/`;
+const vaultUri = `https://${process.env.VAULTNAME}.vault.azure.net/`
 
-let vaultSecretsMap = {};
+let vaultSecretsMap = {}
 
 let pool = new Pool({
-  user: "postgres",
-  password: "ferrets",
-  host: "localhost",
+  user: 'postgres',
+  password: 'ferrets',
+  host: 'localhost',
   port: 5432,
-  database: "bookshelf",
-});
+  database: 'bookshelf',
+})
 
 const getKeyVaultSecrets = async () => {
   // Create a key vault secret client
-  console.log("Key vault secrets called");
-  let secretClient = new SecretClient(vaultUri, new DefaultAzureCredential());
+  console.log('Key vault secrets called')
+  let secretClient = new SecretClient(vaultUri, new DefaultAzureCredential())
   try {
     // Iterate through each secret in the vault
-    listPropertiesOfSecrets = secretClient.listPropertiesOfSecrets();
+    listPropertiesOfSecrets = secretClient.listPropertiesOfSecrets()
     for await (let secretProperties of secretClient.listPropertiesOfSecrets()) {
       // Only load enabled secrets - getSecret will return an error for disabled secrets
       if (secretProperties.enabled) {
-        const secret = await secretClient.getSecret(secretProperties.name);
-        vaultSecretsMap[secretProperties.name] = secret.value;
+        const secret = await secretClient.getSecret(secretProperties.name)
+        vaultSecretsMap[secretProperties.name] = secret.value
       }
     }
   } catch (err) {
-    console.log(err.message);
+    console.log(err.message)
   }
-};
+}
 
 const connectToDatabase = async () => {
-  await getKeyVaultSecrets();
+  await getKeyVaultSecrets()
   pool = new Pool({
-    user: "postgres",
-    password: "ferrets",
-    host: "localhost",
+    user: 'postgres',
+    password: 'ferrets',
+    host: 'localhost',
     port: 5432,
-    database: "bookshelf",
-  });
+    database: 'bookshelf',
+  })
 
-  connectionType = "Local";
+  connectionType = 'Local'
 
   if (process.env.PG_CONN_STRING || process.env.PG_CONN_STRING_FILE) {
-    connString = process.env.PG_CONN_STRING;
+    connString = process.env.PG_CONN_STRING
     if (process.env.PG_CONN_STRING_FILE) {
-      connString = fs.readFileSync(process.env.PG_CONN_STRING_FILE, "utf8");
+      connString = fs.readFileSync(process.env.PG_CONN_STRING_FILE, 'utf8')
     }
     pool = new Pool({
       connectionString: connString,
-    });
-    connectionType = "Azure database via connection string";
+    })
+    connectionType = 'Azure database via connection string'
   }
 
   if (process.env.DBVAULTSTRING in vaultSecretsMap) {
     pool = new Pool({
       connectionString: vaultSecretsMap[process.env.DBVAULTSTRING],
-    });
-    connectionType = "Azure database via key vault secret";
+    })
+    connectionType = 'Azure database via key vault secret'
   }
 
-  console.log(`Connection type: ${connectionType}`);
-};
+  console.log(`Connection type: ${connectionType}`)
+}
 
 module.exports = {
   query: (text, params) => pool.query(text, params),
-};
+}
 
 function getAllBooks(params) {
-  return pool.query("SELECT * FROM books", params);
+  return pool.query('SELECT * FROM books', params)
 }
 
 async function getBook(identifier) {
   try {
     const queryResult = await pool.query(
-      "SELECT * FROM books WHERE book_id = $1",
+      'SELECT * FROM books WHERE book_id = $1',
       [identifier],
-    );
-    const bookData =
-      queryResult?.rowCount > 0 ? queryResult.rows[0] : undefined;
-    return bookUtil.validateBook(bookData) ? bookData : undefined;
+    )
+    const bookData = queryResult?.rowCount > 0 ? queryResult.rows[0] : undefined
+    return bookUtil.validateBook(bookData) ? bookData : undefined
   } catch (error) {
-    console.error("Error fetching book:", error);
-    throw error;
+    console.error('Error fetching book:', error)
+    throw error
   }
 }
 
@@ -110,7 +109,7 @@ function insertBook(newBook) {
           newBook.author,
         ],
       )
-    : false;
+    : false
 }
 
 async function updateBook(book) {
@@ -118,23 +117,23 @@ async function updateBook(book) {
     const queryResult = await pool.query(
       `UPDATE books SET title=$1, author=$2, pages=$3, genre=$4 WHERE book_id=$5`,
       [book.title, book.author, book.pages, book.genre, book.book_id],
-    );
-    return queryResult.rowCount > 0;
+    )
+    return queryResult.rowCount > 0
   } catch (error) {
-    console.error("Error updating book:", error);
-    throw error;
+    console.error('Error updating book:', error)
+    throw error
   }
 }
 
 function insertReply(review_id, user_id, reply_text) {
   return pool.query(
-    "INSERT INTO replies (review_id, user_id, reply_text) VALUES ($1, $2, $3) RETURNING *",
+    'INSERT INTO replies (review_id, user_id, reply_text) VALUES ($1, $2, $3) RETURNING *',
     [review_id, user_id, reply_text],
-  );
+  )
 }
 
 function getRepliesByReviewId(review_id) {
-  return pool.query("SELECT * FROM replies WHERE review_id = $1", [review_id]);
+  return pool.query('SELECT * FROM replies WHERE review_id = $1', [review_id])
 }
 
 module.exports = {
@@ -146,4 +145,4 @@ module.exports = {
   connectToDatabase,
   insertReply,
   getRepliesByReviewId,
-};
+}

@@ -7,8 +7,8 @@
  * Or should we leave that to the containing component?
  */
 
-import React from "react";
-import "../styles/BookCoverCard.css";
+import React from 'react'
+import '../styles/BookCoverCard.css'
 
 export default function BookCoverCard({ book, size }) {
   // Two standard sizes for BookCoverCard:
@@ -17,10 +17,10 @@ export default function BookCoverCard({ book, size }) {
   // Size is "large" or "small", defaulting to "small"
   return (
     <div
-      className={`bookCoverCard ` + (size === "large" ? `large` : `small`)}
+      className={`bookCoverCard ` + (size === 'large' ? `large` : `small`)}
       data-testid="book-cover-card"
     >
-      <p className="title">{book.title ? book.title : "Untitled"}</p>
+      <p className="title">{book.title ? book.title : 'Untitled'}</p>
     </div>
-  );
+  )
 }

@@ -2,66 +2,66 @@
 //let the user add in new goals and change existing goals
 //Count the number completed goals and the number in progress goals
 
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import TextField from "@mui/material/TextField";
-import Sidebar from "../components/Sidebar";
-import Cookies from "universal-cookie";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import TextField from '@mui/material/TextField'
+import Sidebar from '../components/Sidebar'
+import Cookies from 'universal-cookie'
 
-import "../styles/Goals.css";
+import '../styles/Goals.css'
 
 var config = {
   headers: {
-    "Content-Length": 0,
-    "Content-Type": "text/plain",
+    'Content-Length': 0,
+    'Content-Type': 'text/plain',
   },
-  responseType: "text",
-};
+  responseType: 'text',
+}
 
 const GoalForm = () => {
-  const cookies = new Cookies(null, { path: "/" });
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [goalText, setGoalText] = useState("");
-  const [goalStauts, setGoalStatus] = useState("");
-  const [goalNumber, setGoalNumber] = useState("");
+  const cookies = new Cookies(null, { path: '/' })
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([])
+  const [goalText, setGoalText] = useState('')
+  const [goalStauts, setGoalStatus] = useState('')
+  const [goalNumber, setGoalNumber] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      setLoading(true)
       try {
-        const { data: response } = await axios.get("/getGoals", {
-          params: { userId: cookies.get("userID") },
-        });
-        setData(response);
+        const { data: response } = await axios.get('/getGoals', {
+          params: { userId: cookies.get('userID') },
+        })
+        setData(response)
       } catch (error) {
-        console.error(error.message);
+        console.error(error.message)
       }
-      setLoading(false);
-    };
+      setLoading(false)
+    }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const addGoal = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     axios
-      .get("/goalCreate", {
+      .get('/goalCreate', {
         params: {
           goalText: goalText,
           goalStauts: goalStauts,
           goalNumber: goalNumber,
-          userId: cookies.get("userID"),
+          userId: cookies.get('userID'),
         },
       })
       .catch(function (error) {
-        console.log(error);
-        alert("Something went wrong");
-      });
-  };
+        console.log(error)
+        alert('Something went wrong')
+      })
+  }
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
       <div class="form-container">
         <h1 className="h1"> User Goals</h1>
@@ -78,19 +78,19 @@ const GoalForm = () => {
             id="goalInput"
             placeholder="Enter your goal"
             onChange={(event) => {
-              setGoalText(event.target.value);
+              setGoalText(event.target.value)
             }}
           ></textarea>
 
           <label className="label" for="status">
-            Choose a goal status{" "}
+            Choose a goal status{' '}
           </label>
 
           <select
             name="status"
             id="status"
             onChange={(event) => {
-              setGoalStatus(event.target.value);
+              setGoalStatus(event.target.value)
             }}
           >
             <option value="" disabled selected>
@@ -102,8 +102,8 @@ const GoalForm = () => {
           </select>
 
           <label className="label" for="goalNumber">
-            {" "}
-            Goal Number:{" "}
+            {' '}
+            Goal Number:{' '}
           </label>
           <input
             className="input"
@@ -112,13 +112,13 @@ const GoalForm = () => {
             placeholder="Goal to change"
             required
             onChange={(event) => {
-              setGoalNumber(event.target.value);
+              setGoalNumber(event.target.value)
             }}
           ></input>
 
           <button className="button" onClick={addGoal}>
-            {" "}
-            Add/Edit Goal{" "}
+            {' '}
+            Add/Edit Goal{' '}
           </button>
         </table>
         <table className="table">
@@ -141,7 +141,7 @@ const GoalForm = () => {
         </table>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default GoalForm;
+export default GoalForm
