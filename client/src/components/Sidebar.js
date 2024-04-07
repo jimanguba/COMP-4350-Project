@@ -1,33 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
-import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
-import LogoutIcon from '@mui/icons-material/Logout';
-import ListIcon from '@mui/icons-material/ListAlt';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined'; // Statistics
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined';
-import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
-import ChecklistIcon from '@mui/icons-material/Checklist';
-import AddToQueueIcon from '@mui/icons-material/AddToQueue';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import '../styles/StyleForm.css'; 
+import React from "react";
+import { Link } from "react-router-dom";
+import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
+import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ListIcon from "@mui/icons-material/ListAlt";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined"; // Statistics
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
+import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
+import ChecklistIcon from "@mui/icons-material/Checklist";
+import AddToQueueIcon from "@mui/icons-material/AddToQueue";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import "../styles/StyleForm.css";
 
 const sidebar = () => {
-    return (
-    <Sidebar className = "app">
-    <Menu>
+  return (
+    <Sidebar className="app">
+      <Menu>
         <MenuItem
-            icon={<MenuOutlinedIcon
-                onClick={() => {
-                    collapseSidebar();
-                }}
-            />}
+          icon={
+            <MenuOutlinedIcon
+              onClick={() => {
+                collapseSidebar();
+              }}
+            />
+          }
         >
-            <Link to="/">
-                <h2>BOOKSHELF</h2>
-            </Link>
+          <Link to="/">
+            <h2>BOOKSHELF</h2>
+          </Link>
         </MenuItem>
         {/* <MenuItem
             component={<Link to="/" />}
@@ -36,49 +38,41 @@ const sidebar = () => {
             Home
         </MenuItem> */}
         <MenuItem
-            component={<Link to="/statistics"/>}
-            icon={<AssessmentOutlinedIcon />}
+          component={<Link to="/statistics" />}
+          icon={<AssessmentOutlinedIcon />}
         >
-            Statistics
+          Statistics
+        </MenuItem>
+        <MenuItem component={<Link to="/book-list" />} icon={<ListIcon />}>
+          Book List
         </MenuItem>
         <MenuItem
-            component={<Link to="/book-list" />}
-            icon={<ListIcon />}
+          component={<Link to="/goals" />}
+          icon={<BallotOutlinedIcon />}
         >
-            Book List
+          Goals
+        </MenuItem>
+        <MenuItem component={<Link to="/to-read" />} icon={<AddToQueueIcon />}>
+          Books To Read
         </MenuItem>
         <MenuItem
-            component={<Link to="/goals" />}
-            icon={<BallotOutlinedIcon />}
+          component={<Link to="/completed-books" />}
+          icon={<ChecklistIcon />}
         >
-            Goals
+          Completed Books
         </MenuItem>
         <MenuItem
-            component={<Link to="/to-read" />}
-            icon={<AddToQueueIcon />}
+          component={<Link to="/settings" />}
+          icon={<SettingsOutlinedIcon />}
         >
-            Books To Read
+          Settings
         </MenuItem>
-        <MenuItem
-            component={<Link to="/completed-books" />}
-            icon={<ChecklistIcon />}
-        >
-            Completed Books
+        <MenuItem component={<Link to="/login" />} icon={<LogoutIcon />}>
+          Log Out
         </MenuItem>
-        <MenuItem
-            component={<Link to="/settings" />}
-            icon={<SettingsOutlinedIcon />}
-        >
-            Settings
-        </MenuItem>
-        <MenuItem
-            component={<Link to="/login" />}
-            icon={<LogoutIcon />}
-        >
-            Log Out
-        </MenuItem>
-    </Menu>
+      </Menu>
     </Sidebar>
-)}
+  );
+};
 
-export default sidebar
+export default sidebar;

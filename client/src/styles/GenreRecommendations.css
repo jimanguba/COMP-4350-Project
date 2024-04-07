@@ -1,42 +1,42 @@
 .genre-recommendations-container {
-    overflow-x: auto;
-    white-space: nowrap;
-    position: relative;
-    padding: 20px 0; /* Added padding for better spacing */
+  overflow-x: auto;
+  white-space: nowrap;
+  position: relative;
+  padding: 20px 0; /* Added padding for better spacing */
 }
 
 .book-item {
-    display: inline-block;
-    white-space: normal;
-    margin: 0 15px; /* Increased margin for spacing between items */
-    width: 200px; /* Width for each book item */
-    height: 300px; /* Height for each book item */
-    /* Adjust width and height as needed */
+  display: inline-block;
+  white-space: normal;
+  margin: 0 15px; /* Increased margin for spacing between items */
+  width: 200px; /* Width for each book item */
+  height: 300px; /* Height for each book item */
+  /* Adjust width and height as needed */
 }
 
 /* Style for the book covers within each book item */
 .book-item img {
-    width: 100%; /* Full width of the parent */
-    height: auto; /* Keep aspect ratio */
-    border: 1px solid #ccc; /* Optional border for visibility */
+  width: 100%; /* Full width of the parent */
+  height: auto; /* Keep aspect ratio */
+  border: 1px solid #ccc; /* Optional border for visibility */
 }
 
 .scroll-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #ffffff;
-    border: none;
-    cursor: pointer;
-    z-index: 2; /* Ensure the button is above the book items */
-    padding: 10px 20px; /* Padding for larger clickable area */
-    margin: 0 10px; /* Space from the edge */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+  z-index: 2; /* Ensure the button is above the book items */
+  padding: 10px 20px; /* Padding for larger clickable area */
+  margin: 0 10px; /* Space from the edge */
 }
 
 .scroll-button.left {
-    left: 0;
+  left: 0;
 }
 
 .scroll-button.right {
-    right: 0;
+  right: 0;
 }

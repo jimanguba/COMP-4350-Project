@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const ReplyForm = ({ submitReply }) => {
-  const [replyText, setReplyText] = useState('');
+  const [replyText, setReplyText] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     submitReply(replyText);
-    setReplyText('');
+    setReplyText("");
   };
 
   return (

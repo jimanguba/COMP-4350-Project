@@ -1,38 +1,38 @@
 /* Styling for ToReadButton and HaveReadButton components */
 
 .readingStateButton {
-    border-radius: 10px;
-    width: 200px;
-    height: 60px;
-    cursor: pointer;
-    font-size: x-small;
+  border-radius: 10px;
+  width: 200px;
+  height: 60px;
+  cursor: pointer;
+  font-size: x-small;
 }
 
 .onToRead {
-    background-color: lightgreen;
-    color: black;
+  background-color: lightgreen;
+  color: black;
 }
 
 .offToRead:hover {
-    background-color: darkgreen;
-    color: white;
+  background-color: darkgreen;
+  color: white;
 }
 
 .onCompletedBooks {
-    background-color: tan;
-    color: black;
+  background-color: tan;
+  color: black;
 }
 
 .offCompletedBooks:hover {
-    background-color: darkgoldenrod;
+  background-color: darkgoldenrod;
 }
 
 .onCompletedBooks:hover {
-    background-color: darkred;
-    color: white;
+  background-color: darkred;
+  color: white;
 }
 
 .onToRead:hover {
-    background-color: darkred;
-    color: white;
+  background-color: darkred;
+  color: white;
 }

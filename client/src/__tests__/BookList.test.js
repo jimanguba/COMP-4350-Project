@@ -11,16 +11,15 @@ import BookList from "../pages/BookList";
 import { MemoryRouter } from "react-router-dom";
 
 describe("BookList", () => {
-    let mock;
+  let mock;
 
-    beforeEach(() => {
-        mock = new MockAdapter(axios);
-    });
+  beforeEach(() => {
+    mock = new MockAdapter(axios);
+  });
 
-    afterEach(() => {
-        mock.restore();
-    });
-
+  afterEach(() => {
+    mock.restore();
+  });
 
   it("renders a list of books", async () => {
     const mockedBooks = [
@@ -44,7 +43,7 @@ describe("BookList", () => {
     render(
       <MemoryRouter>
         <BookList type={"all"} />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     // Waiting for books to be fetched and displayed
@@ -75,7 +74,7 @@ describe("BookList", () => {
     render(
       <MemoryRouter>
         <BookList type={"all"} />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     // Waiting for books to be fetched and displayed
@@ -90,27 +89,27 @@ describe("BookList", () => {
     expect(screen.queryByText("Book 2")).not.toBeInTheDocument();
   });
 
-  it('renders compeleted book list page', async () => {
+  it("renders compeleted book list page", async () => {
     render(
-        <MemoryRouter>
-            <BookList type={"completed"} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <BookList type={"completed"} />
+      </MemoryRouter>,
     );
 
     await waitFor(() => {
-        expect(screen.getAllByText("Completed Books")).length >= 2;
-      });
+      expect(screen.getAllByText("Completed Books")).length >= 2;
+    });
   });
 
-  it('renders to-read book list page', async () => {
+  it("renders to-read book list page", async () => {
     render(
-        <MemoryRouter>
-            <BookList type={"to-read"} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <BookList type={"to-read"} />
+      </MemoryRouter>,
     );
 
     await waitFor(() => {
-        expect(screen.getByText("Want To Read")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Want To Read")).toBeInTheDocument();
+    });
   });
 });

@@ -5,7 +5,7 @@
   background: #fff;
   border: 1px solid #e1e1e1;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .verified-purchase-icon {
-  color: #4CAF50;
+  color: #4caf50;
   margin-left: 8px;
 }
 

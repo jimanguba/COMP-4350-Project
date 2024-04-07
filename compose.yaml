@@ -1,16 +1,16 @@
 services:
   client:
     build: .\client
-    ports: 
+    ports:
       - "3000:3000"
   server:
     build: .\server
-    ports: 
+    ports:
       - "5001:5001"
     environment:
       PG_CONN_STRING_FILE: /run/secrets/db_string
     secrets:
       - db_string
 secrets:
-  db_string: 
+  db_string:
     file: ./server/db_string.txt

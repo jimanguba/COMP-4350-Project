@@ -1,47 +1,47 @@
 .viewBook {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 80%; /* Increased width for a better layout */
-    max-width: 1200px; /* Adjust max-width for better spacing */
-    margin: 30px auto;
-    padding: 20px;
-    background: #faedf3;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    align-items: center; /* Center align the children vertically */
-    justify-content: flex-start; /* Align children to the start of the cross axis */
-    overflow: hidden; /* Prevents children from overflowing the container */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 80%; /* Increased width for a better layout */
+  max-width: 1200px; /* Adjust max-width for better spacing */
+  margin: 30px auto;
+  padding: 20px;
+  background: #faedf3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  align-items: center; /* Center align the children vertically */
+  justify-content: flex-start; /* Align children to the start of the cross axis */
+  overflow: hidden; /* Prevents children from overflowing the container */
 }
 .reviews-container {
-    width: 100%; /* Use full width of the parent container */
-    display: flex; /* Use flexbox to manage children */
-    flex-direction: column; /* Stack children vertically */
-    gap: 20px; /* Optional: Adds space between children if needed */
-    align-items: center; /* Aligns children in the center of the container on the cross axis */
-  }
-  
+  width: 100%; /* Use full width of the parent container */
+  display: flex; /* Use flexbox to manage children */
+  flex-direction: column; /* Stack children vertically */
+  gap: 20px; /* Optional: Adds space between children if needed */
+  align-items: center; /* Aligns children in the center of the container on the cross axis */
+}
+
 .readingStateContainer {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .container {
-    display: flex;
-    flex-direction: row;
-    height: 100vh; /* Use 100% if it's within another container that fills the viewport */
-  }
-  
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Use 100% if it's within another container that fills the viewport */
+}
+
 @media (max-width: 768px) {
-    .viewBook {
-        width: 90%; /* More width on smaller screens for better use of space */
-        padding: 20px;
-    }
+  .viewBook {
+    width: 90%; /* More width on smaller screens for better use of space */
+    padding: 20px;
+  }
 }
 
 @media (max-width: 480px) {
-    .viewBook {
-        width: 95%; /* Almost full width on very small screens */
-        padding: 15px;
-    }
+  .viewBook {
+    width: 95%; /* Almost full width on very small screens */
+    padding: 15px;
+  }
 }
