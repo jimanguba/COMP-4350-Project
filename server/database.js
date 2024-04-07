@@ -3,11 +3,10 @@ const { DefaultAzureCredential } = require('@azure/identity')
 const { SecretClient } = require('@azure/keyvault-secrets')
 const bookUtil = require('./book')
 const fs = require('fs')
-const { boolean } = require('yargs')
 
 const vaultUri = `https://${process.env.VAULTNAME}.vault.azure.net/`
 
-let vaultSecretsMap = {}
+const vaultSecretsMap = {}
 
 let pool = new Pool({
   user: 'postgres',

@@ -32,8 +32,6 @@ describe('BookDetailsCard', () => {
       genre: 'Fiction'
     }
 
-    const updateBookDetailsMock = jest.fn()
-
     render(<BookDetailsCard book={book} />)
     fireEvent.click(screen.getByText('Edit Book Details'))
     fireEvent.change(screen.getByLabelText(/title/i), {

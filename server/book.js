@@ -13,14 +13,14 @@ class Book {
   )
 }
 
-function createNewBook(data) {
+function createNewBook (data) {
   if (validateBook(data)) {
     return new Book(data.title, data.author, data.pages, data.genre)
   }
   return null
 }
 
-function validateBook(book) {
+function validateBook (book) {
   return (
     !!book?.title &&
     !!book?.author &&
