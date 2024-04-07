@@ -78,8 +78,8 @@ ALTER TABLE reviews ADD COLUMN rating INTEGER;
 ALTER TABLE reviews ADD COLUMN review_title VARCHAR(255);
 ALTER TABLE reviews ADD COLUMN review_date DATE;
 
-INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date) 
-VALUES 
+INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date)
+VALUES
 (1, 1, 'This is my FAV', 5, 'Lost Within Imagination', '2024-08-15'),
 (2, 2, 'A timeless classic that still resonates', 5, 'Timeless Classic', '2024-08-16'),
 (3, 3, 'A poignant narrative of friendship and dreams', 4, 'Poignant Narrative', '2024-08-17'),
