@@ -37,7 +37,7 @@ export default function BookDetailsCard({ book, setBook }) {
   return (
     <div
       className={
-        `bookDetailsCard ` + (editing ? `currentlyEditing` : `disabled`)
+        'bookDetailsCard ' + (editing ? 'currentlyEditing' : 'disabled')
       }
     >
       <div className='detail-field'>

@@ -47,7 +47,6 @@ app.get('/signup', async (req, res) => {
           [username, await bcrypt.hash(password, salt)]
         )
 
-        //get the user id returned
         const result4 = await pool.query(
           'SELECT user_id FROM users WHERE user_name = $1',
           [username]
@@ -68,8 +67,6 @@ app.get('/signup', async (req, res) => {
   }
 })
 
-//if no number entered then create new
-//otherwise update with new
 app.get('/goalCreate', async (req, res) => {
   try {
     let str = req.url
@@ -97,7 +94,6 @@ app.get('/goalCreate', async (req, res) => {
         [userVal]
       )
       if (result1.rowCount == 0) {
-        //No goals for this user yet
         pool.query(
           'INSERT INTO goals (user_id, goal_id_to_user, goal_text, goal_status) VALUES ($1  ,$2 , $3, $4)',
           [userVal, 1, text, status]
@@ -110,7 +106,6 @@ app.get('/goalCreate', async (req, res) => {
         )
       }
     } else {
-      //Edit an existing goal
       const result2 = await pool.query(
         'SELECT goal_id FROM goals WHERE goal_id_to_user = $1 AND user_id = $2',
         [goalNum, userVal]
@@ -152,7 +147,6 @@ app.get('/getGoals', async (req, res) => {
   } catch (error) {}
 })
 
-// CREATE
 app.post('/books/new', async (req, res) => {
   try {
     const newData = bookUtil.createNewBook(req.body)
@@ -171,7 +165,6 @@ app.post('/books/new', async (req, res) => {
   }
 })
 
-// READ
 const getBooks = (req, res) => {
   try {
     pool.getAllBooks((error, books) => {
@@ -185,7 +178,7 @@ const getBooks = (req, res) => {
 
 app.get('/books/genre/:genre', async (req, res) => {
   const { genre } = req.params
-  const { book_id } = req.query // Current book ID to exclude
+  const { book_id } = req.query 
 
   try {
     const query = 'SELECT * FROM books WHERE genre = $1 AND book_id != $2'
@@ -247,7 +240,6 @@ app.get('/login', async (req, res) => {
 app.get('/book/:book_id', async (req, res) => {
   const { book_id } = req.params
   try {
-    // Fetch book details using the existing function
     const bookData = await pool.getBook(book_id)
     if (!bookData) {
       return res.status(404).json({ message: 'Book not found' })
@@ -259,7 +251,7 @@ app.get('/book/:book_id', async (req, res) => {
     const reviewsData = reviewsResult.rows
     res.status(200).json({ book: bookData, reviews: reviewsData })
   } catch (error) {
-    console.error(`Error fetching book with identifier ${book_id}:`, error)
+    console.error('Error fetching book with identifier ${book_id}:', error)
     res.status(500).json({
       error:
         'An error occurred while fetching the requested book and its reviews.'
@@ -274,7 +266,7 @@ app.put('/book/:book_id', async (req, res) => {
     const result = await pool.updateBook(book)
     res.status(200).json({ success: result })
   } catch (error) {
-    console.error(`Error updating book with identifier ${book_id}:`, error)
+    console.error('Error updating book with identifier ${book_id}:', error)
     res
       .status(500)
       .json({ error: 'An error occurred while updating the book.' })
@@ -297,10 +289,7 @@ app.post('/reviews/new', async (req, res) => {
   }
 
   try {
-    const insertReviewQuery = `
-            INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date, tags)
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
-            RETURNING *`
+    const insertReviewQuery = 'INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date, tags) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *'
 
     const newReview = await pool.query(insertReviewQuery, [
       book_id,
@@ -314,7 +303,7 @@ app.post('/reviews/new', async (req, res) => {
 
     res.status(201).json(newReview.rows[0])
   } catch (error) {
-    console.error('Error inserting new review:', error) // Log the full error object
+    console.error('Error inserting new review:', error) 
     res
       .status(500)
       .json({ error: 'Error inserting new review', details: error.message })
@@ -332,7 +321,7 @@ app.get('/user/:user_id', async (req, res) => {
       res.status(404).json({ error: 'User not found.' })
     }
   } catch (error) {
-    console.error(`Error fetching user with identifier ${user_id}:`, error)
+    console.error('Error fetching user with identifier ${user_id}:', error)
     res
       .status(500)
       .json({ error: 'An error occurred while fetching the user name.' })
@@ -416,12 +405,7 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
   try {
     const { user_id } = req.params
     const result = await pool.query(
-      `
-            SELECT cb.date_end, b.title, b.author
-            FROM completed_books cb
-            INNER JOIN books b ON cb.book_id = b.book_id
-            WHERE cb.user_id = $1
-        `,
+      'SELECT cb.date_end, b.title, b.author FROM completed_books cb INNER JOIN books b ON cb.book_id = b.book_id WHERE cb.user_id = $1',
       [user_id]
     )
 
@@ -435,7 +419,7 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
             author: row.author
           }
         } else {
-          console.error(`Invalid date value for row with title ${row.title}`)
+          console.error('Invalid date value for row with title ${row.title}')
           return null
         }
       })
@@ -448,10 +432,9 @@ app.get('/users/:user_id/calendar-data', async (req, res) => {
   }
 })
 
-// CHECK / ADD / REMOVE from user's to-read list
 app.get('/users/:user_id/to_read', async (req, res) => {
   const { user_id } = req.params
-  console.log(`getting user's (user_id ${user_id}) to-read list`)
+  console.log('getting user (user_id ${user_id}) to-read list')
   try {
     const result = await pool.query(
       'SELECT books.* FROM books JOIN want_to_read ON books.book_id = want_to_read.book_id WHERE want_to_read.user_id = $1',
@@ -467,7 +450,7 @@ app.get('/users/:user_id/to_read', async (req, res) => {
 app.get('/users/:user_id/to_read/:book_id', async (req, res) => {
   const { book_id, user_id } = req.params
   console.log(
-    `Getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`
+    'Getting status of book (book_id ${book_id}) in user (user_id ${user_id}) to-read list'
   )
   try {
     const result = await pool.query(
@@ -488,7 +471,7 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
   const { book_id, user_id } = req.params
   const { to_read } = req.body
   console.log(
-    `updating status of book's (book_id ${book_id}) in user's (user_id ${user_id}) to-read list`
+    'updating status of book (book_id ${book_id}) in user (user_id ${user_id}) to-read list'
   )
   if (to_read) {
     try {
@@ -513,10 +496,9 @@ app.put('/users/:user_id/to_read/:book_id', async (req, res) => {
   }
 })
 
-// CHECK / ADD / REMOVE from user's completed-books list
 app.get('/users/:user_id/completed_books', async (req, res) => {
   const { user_id } = req.params
-  console.log(`getting user's (user_id ${user_id}) completed-books list`)
+  console.log('getting user (user_id ${user_id}) completed-books list')
   try {
     const result = await pool.query(
       'SELECT books.* FROM books JOIN completed_books ON books.book_id = completed_books.book_id WHERE completed_books.user_id = $1',
@@ -532,7 +514,7 @@ app.get('/users/:user_id/completed_books', async (req, res) => {
 app.get('/users/:user_id/completed_books/:book_id', async (req, res) => {
   const { book_id, user_id } = req.params
   console.log(
-    `getting status of book's (book_id ${book_id}) in user's (user_id ${user_id}) completed-books list`
+    'getting status of book (book_id ${book_id}) in user (user_id ${user_id}) completed-books list'
   )
   try {
     const result = await pool.query(
@@ -554,7 +536,7 @@ app.put('/users/:user_id/completed_books/:book_id', async (req, res) => {
   const { completed_books } = req.body
 
   console.log(
-    `updating status of book's (book_id ${book_id}) in user's (user_id ${user_id}) completed-books list`
+    'updating status of book (book_id ${book_id}) in user (user_id ${user_id}) completed-books list'
   )
   if (completed_books) {
     try {
@@ -579,11 +561,10 @@ app.put('/users/:user_id/completed_books/:book_id', async (req, res) => {
   }
 })
 
-// UPDATE
 app.put('/users/:book_id/reading_time', async (req, res) => {
   const { book_id } = req.params
   const { reading_time } = req.body
-  console.log(`updating book_id:${book_id} time to ${reading_time} minutes`)
+  console.log('updating book_id:${book_id} time to ${reading_time} minutes')
   try {
     const result = await pool.query(
       'UPDATE books SET reading_time = $1 WHERE book_id = $2 RETURNING *',
@@ -599,12 +580,10 @@ app.put('/users/:book_id/reading_time', async (req, res) => {
   }
 })
 
-// DELETE
-
 let server
 ;(async () => {
   server = app.listen(PORT, () => {
-    console.log(`Server listening on the port ${PORT}`)
+    console.log('Server listening on the port ${PORT}')
   })
   await db.connectToDatabase()
 })().catch((err) => console.log(err))
@@ -674,7 +653,6 @@ app.get('/changePassword', async (req, res) => {
 
   try {
     if (password.length >= 5) {
-      //Update
       await pool.query(
         'UPDATE users SET user_password = $1 WHERE user_id = $2',
         [await bcrypt.hash(password, salt), userId]

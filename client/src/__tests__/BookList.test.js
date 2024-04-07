@@ -42,7 +42,7 @@ describe('BookList', () => {
 
     render(
       <MemoryRouter>
-        <BookList type={'all'} />
+        <BookList type='all' />
       </MemoryRouter>
     )
 
@@ -73,7 +73,7 @@ describe('BookList', () => {
 
     render(
       <MemoryRouter>
-        <BookList type={'all'} />
+        <BookList type='all' />
       </MemoryRouter>
     )
 
@@ -92,7 +92,7 @@ describe('BookList', () => {
   it('renders compeleted book list page', async () => {
     render(
       <MemoryRouter>
-        <BookList type={'completed'} />
+        <BookList type='completed' />
       </MemoryRouter>
     )
 
@@ -104,7 +104,7 @@ describe('BookList', () => {
   it('renders to-read book list page', async () => {
     render(
       <MemoryRouter>
-        <BookList type={'to-read'} />
+        <BookList type='to-read' />
       </MemoryRouter>
     )
 

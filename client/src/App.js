@@ -20,9 +20,9 @@ function App () {
           <Route path='/statistics' element={<Statistics user_id={1} />} />
           <Route path='/view-book/:book_id' element={<ViewBook />} />
           <Route path='/reviews/new' element={<ReviewsForm />} />
-          <Route path='/book-list' element={<BookList type={'all'} />} />
-          <Route path='/completed-books' element={<BookList type={'completed'} />}/>
-          <Route path='/to-read' element={<BookList type={'to-read'} />} />
+          <Route path='/book-list' element={<BookList type='all' />} />
+          <Route path='/completed-books' element={<BookList type='completed' />}/>
+          <Route path='/to-read' element={<BookList type='to-read' />} />
           <Route path='/review' element={<ReviewsList />} />
           <Route path='/login' element={<Login />} />
           <Route path='/home' element={<Home />} />

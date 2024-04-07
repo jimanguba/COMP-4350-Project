@@ -4,7 +4,6 @@
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import TextField from '@mui/material/TextField'
 import Sidebar from '../components/Sidebar'
 import Cookies from 'universal-cookie'
 
@@ -63,65 +62,65 @@ const GoalForm = () => {
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
-      <div class='form-container'>
-        <h1 className='h1'> User Goals</h1>
-        <h2 className='h2'>
+      <div class="form-container">
+        <h1 className="h1"> User Goals</h1>
+        <h2 className="h2">
           Enter in your reading goals below, you can then mark your goals as
           completed or if you want change them as you go!
         </h2>
         <table>
-          <label className='label' for='goalInput'>
+          <label className="label" for="goalInput">
             Goal:
           </label>
           <textarea
-            className='textarea'
-            id='goalInput'
-            placeholder='Enter your goal'
+            className="textarea"
+            id="goalInput"
+            placeholder="Enter your goal"
             onChange={(event) => {
               setGoalText(event.target.value)
             }}
           ></textarea>
 
-          <label className='label' for='status'>
+          <label className="label" for="status">
             Choose a goal status{' '}
           </label>
 
           <select
-            name='status'
-            id='status'
+            name="status"
+            id="status"
             onChange={(event) => {
               setGoalStatus(event.target.value)
             }}
           >
-            <option value='' disabled selected>
+            <option value="" disabled selected>
               Select your option
             </option>
-            <option value='in-progress'>In-Progress</option>
-            <option value='complete'>Complete</option>
-            <option value='abandoned'>Abandoned</option>
+            <option value="in-progress">In-Progress</option>
+            <option value="complete">Complete</option>
+            <option value="abandoned">Abandoned</option>
           </select>
 
-          <label className='label' for='goalNumber'>
+          <label className="label" for="goalNumber">
             {' '}
             Goal Number:{' '}
           </label>
           <input
-            className='input'
-            type='text'
-            id='goalNumber'
-            placeholder='Goal to change'
+            className="input"
+            type="text"
+            id="goalNumber"
+            placeholder="Goal to change"
             required
             onChange={(event) => {
               setGoalNumber(event.target.value)
             }}
           ></input>
 
-          <button className='button' onClick={addGoal}>
+          <button className="button" onClick={addGoal}>
             {' '}
             Add/Edit Goal{' '}
           </button>
         </table>
-        <table className='table'>
+        <table className="table">
           <thead>
             <tr>
               <th>Goal Number</th>
