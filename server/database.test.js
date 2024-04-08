@@ -47,7 +47,7 @@ test('getBook runs the correct SELECT statement with the correct parameter', () 
   expect(pool.query).toBeCalledWith('SELECT * FROM books WHERE book_id = $1', [
     1
   ])
-  expect(result == exampleBook)
+  expect(result === exampleBook)
 })
 
 test('getBook recieves invalid book back and returns undefined', () => {

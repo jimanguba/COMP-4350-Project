@@ -22,7 +22,6 @@ const getKeyVaultSecrets = async () => {
   let secretClient = new SecretClient(vaultUri, new DefaultAzureCredential())
   try {
     // Iterate through each secret in the vault
-    listPropertiesOfSecrets = secretClient.listPropertiesOfSecrets()
     for await (const secretProperties of secretClient.listPropertiesOfSecrets()) {
       // Only load enabled secrets - getSecret will return an error for disabled secrets
       if (secretProperties.enabled) {
@@ -72,7 +71,7 @@ module.exports = {
   query: (text, params) => pool.query(text, params)
 }
 
-function getAllBooks(params) {
+function getAllBooks (params) {
   return pool.query('SELECT * FROM books', params)
 }
 
@@ -108,7 +107,7 @@ function insertBook (newBook) {
           newBook.author
         ]
       )
-    : false
+  : false
 }
 
 async function updateBook (book) {

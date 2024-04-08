@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import ProgressBar from '../components/ProgressBar'
 
-function StatisticsGoal({ userID }) {
+function StatisticsGoal ({ userID }) {
   const [progress, setProgress] = useState(0)
   const [count, setBooksCompleted] = useState(0)
   const [readingGoal, setReadingGoal] = useState(0)
