@@ -113,16 +113,15 @@ function Statistics ({ userID }) {
             <ul>
               <li>{bookDetails}</li>
               {bookImage 
-                ?
-                (
-                  <li>
-                    <img
-                      src={bookImage}
-                      alt='Book Cover'
-                      className='book-cover'
-                    />
-                  </li>
-                ) : null}
+                ?(
+                    <li>
+                      <img
+                        src={bookImage}
+                        alt='Book Cover'
+                        className='book-cover'
+                      />
+                    </li>
+                  ) : null}
             </ul>
           </div>
         </div>
