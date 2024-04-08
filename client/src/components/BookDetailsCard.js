@@ -9,11 +9,11 @@ import axios from 'axios'
 import '../styles/BookDetailsCard.css'
 import { useState } from 'react'
 
-export default function BookDetailsCard({ book, setBook }) {
+export default function BookDetailsCard ({ book, setBook }) {
   // Are we editing currently? If not, disable inputs and style them properly
   const [editing, setEditing] = useState(false)
 
-  let newBook = {
+  const newBook = {
     title: book.title,
     author: book.author,
     genre: book.genre,

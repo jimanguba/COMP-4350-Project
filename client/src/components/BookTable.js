@@ -2,7 +2,7 @@ import '../components/BookTable'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 
-function App() {
+function App () {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState([])
 

@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const bcrypt = require('bcryptjs')
 const pool = require('./database')
-let cors = require('cors')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const bookUtil = require('./book')
 const db = require('./database')
@@ -19,11 +19,11 @@ app.get('/signup', async (req, res) => {
   let str = req.url
   str = str.substring(2)
 
-  let partsArray = str.split('&')
-  let usernameStr = partsArray[0].split('=')
-  let passwordStr = partsArray[1].split('=')
-  let username = usernameStr[1]
-  let password = passwordStr[1]
+  const partsArray = str.split('&')
+  const usernameStr = partsArray[0].split('=')
+  const passwordStr = partsArray[1].split('=')
+  const username = usernameStr[1]
+  const password = passwordStr[1]
 
   const salt = await bcrypt.genSalt(10)
 
@@ -33,7 +33,7 @@ app.get('/signup', async (req, res) => {
       [username]
     )
     if (result1.rowCount !== 0) {
-      const result2 = await pool.query(
+      await pool.query(
         'SELECT userPassword FROM users WHERE userName = $1',
         [username]
       )
@@ -42,7 +42,7 @@ app.get('/signup', async (req, res) => {
         .json({ errors: [{ msg: 'Username Already Taken' }] })
     } else {
       if (password.length >= 5) {
-        const result3 = await pool.query(
+        await pool.query(
           'INSERT INTO users (userName, userPassword) VALUES ($1  ,$2 )',
           [username, await bcrypt.hash(password, salt)]
         )
@@ -74,16 +74,16 @@ app.get('/goalCreate', async (req, res) => {
 
     console.log(req.url)
 
-    let partsArray = str.split('&')
-    let textStr = partsArray[0].split('=')
-    let statusStr = partsArray[1].split('=')
-    let goalNumStr = partsArray[2].split('=')
-    let userValStr = partsArray[3].split('=')
+    const partsArray = str.split('&')
+    const textStr = partsArray[0].split('=')
+    const statusStr = partsArray[1].split('=')
+    const goalNumStr = partsArray[2].split('=')
+    const userValStr = partsArray[3].split('=')
 
     let text = textStr[1]
-    let status = statusStr[1]
-    let goalNum = goalNumStr[1]
-    let userVal = userValStr[1]
+    const status = statusStr[1]
+    const goalNum = goalNumStr[1]
+    const userVal = userValStr[1]
 
     text = text.replace(/\+/g, '%20')
     text = decodeURIComponent(text)
@@ -137,7 +137,7 @@ app.get('/getGoals', async (req, res) => {
     let partsArray = str.split('&')
 
     let userValStr = partsArray[0].split('=')
-    let userVal = userValStr[1]
+    const userVal = userValStr[1]
 
     const result1 = await pool.query('SELECT * FROM goals WHERE userID = $1', [
       userVal
@@ -201,18 +201,18 @@ app.get('/', (req, res) => {
 app.get('/login', async (req, res) => {
   let str = req.url
   str = str.substring(2)
-  let partsArray = str.split('&')
-  let usernameStr = partsArray[0].split('=')
-  let passwordStr = partsArray[1].split('=')
-  let username = usernameStr[1]
-  let password = passwordStr[1]
+  const partsArray = str.split('&')
+  const usernameStr = partsArray[0].split('=')
+  const passwordStr = partsArray[1].split('=')
+  const username = usernameStr[1]
+  const password = passwordStr[1]
 
   try {
     const result1 = await pool.query(
       'SELECT userID FROM users WHERE userName = $1',
       [username]
     )
-    if (result1.rowCount != 0) {
+    if (result1.rowCount !== 0) {
       const result2 = await pool.query(
         'SELECT userPassword, userID FROM users WHERE userName = $1',
         [username]
@@ -644,11 +644,11 @@ app.get('/changePassword', async (req, res) => {
   let str = req.url
   str = str.substring(2)
 
-  let partsArray = str.split('&')
-  let userIdStr = partsArray[0].split('=')
-  let passwordStr = partsArray[1].split('=')
-  let userId = userIdStr[1]
-  let password = passwordStr[1]
+  const partsArray = str.split('&')
+  const userIdStr = partsArray[0].split('=')
+  const passwordStr = partsArray[1].split('=')
+  const userId = userIdStr[1]
+  const password = passwordStr[1]
 
   const salt = await bcrypt.genSalt(10)
 

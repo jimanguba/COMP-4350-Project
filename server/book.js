@@ -1,10 +1,11 @@
 class Book {
   constructor(name, writer, pageCount, type) {
     ;(this.title = name),
-      (this.author = writer),
-      (this.pages = pageCount),
-      (this.genre = type)
+    (this.author = writer),
+    (this.pages = pageCount),
+    (this.genre = type)
   }
+
   static example = new Book(
     'A Darker Shade of Magic',
     'V.E. Schwab',
@@ -13,14 +14,14 @@ class Book {
   )
 }
 
-function createNewBook(data) {
+function createNewBook (data) {
   if (validateBook(data)) {
     return new Book(data.title, data.author, data.pages, data.genre)
   }
   return null
 }
 
-function validateBook(book) {
+function validateBook (book) {
   return (
     !!book?.title &&
     !!book?.author &&

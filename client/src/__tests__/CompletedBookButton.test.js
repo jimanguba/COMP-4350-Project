@@ -28,12 +28,12 @@ describe('CompletedBookButton', () => {
   it('toggles reading state when clicked', async () => {
     // Mock the GET request
     mock
-      .onGet(`/users/1/completed_books/1`)
+      .onGet('/users/1/completed_books/1')
       .reply(200, { completed_books: false })
 
     // Mock the PUT request
     mock
-      .onPut(`/users/1/completed_books/1`)
+      .onPut('/users/1/completed_books/1')
       .reply(200, { completed_books: true })
 
     const { getByText } = render(<CompletedBookButton book_id={1} />)

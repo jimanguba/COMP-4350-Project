@@ -35,9 +35,9 @@ const GoalForm = () => {
     axios
       .get('/goalCreate', {
         params: {
-          goalText: goalText,
-          goalStauts: goalStauts,
-          goalNumber: goalNumber,
+          goalText,
+          goalStauts,
+          goalNumber,
           userId: cookies.get('userID')
         }
       })
@@ -67,7 +67,7 @@ const GoalForm = () => {
             onChange={(event) => {
               setGoalText(event.target.value)
             }}
-          ></textarea>
+          />
 
           <label className='label' for='status'>
             Choose a goal status{' '}
