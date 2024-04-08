@@ -46,8 +46,8 @@ const mockProgress = [
 ]
 const mockCompletedBooksCount = [{ count: 10 }]
 const mockCalendar = [
-  { title: 'Book Title 1', date_end: new Date('2024-01-31'), value: 1 },
-  { title: 'Book Title 2', date_end: new Date('2024-02-01'), value: 1 }
+  { title: 'Book Title 1', dateEnd: new Date('2024-01-31'), value: 1 },
+  { title: 'Book Title 2', dateEnd: new Date('2024-02-01'), value: 1 }
 ]
 
 test('Correct user and password sign up. Status 200 should be returned', (done) => {
@@ -253,9 +253,9 @@ test('Fetching calendar data returns status 200 and calendar data', async () => 
       expect(
         response.body.map(({ book, day, value }) => ({ book, day, value }))
       ).toEqual(
-        mockCalendar.map(({ title, date_end, value }) => ({
+        mockCalendar.map(({ title, dateEnd, value }) => ({
           book: title,
-          day: date_end.toISOString().split('T')[0],
+          day: dateEnd.toISOString().split('T')[0],
           value
         }))
       )

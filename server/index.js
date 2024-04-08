@@ -32,7 +32,7 @@ app.get('/signup', async (req, res) => {
       'SELECT count(*) FROM users WHERE userName = $1 GROUP BY userID',
       [username]
     )
-    if (result1.rowCount != 0) {
+    if (result1.rowCount !== 0) {
       const result2 = await pool.query(
         'SELECT userPassword FROM users WHERE userName = $1',
         [username]
@@ -88,21 +88,21 @@ app.get('/goalCreate', async (req, res) => {
     text = text.replace(/\+/g, '%20')
     text = decodeURIComponent(text)
 
-    if (goalNum == '') {
+    if (goalNum === '') {
       const result1 = await pool.query(
         'SELECT goalIDToUser FROM goals WHERE userID = $1 ORDER BY goalIDToUser DESC',
         [userVal]
       )
-      if (result1.rowCount == 0) {
+      if (result1.rowCount === 0) {
         pool.query(
           'INSERT INTO goals (userID, goalIDToUser, goalText, goalStatus) VALUES ($1  ,$2 , $3, $4)',
           [userVal, 1, text, status]
         )
       } else {
-        var last_value = result1.rows[0].goalIDToUser
+        var lastValue = result1.rows[0].goalIDToUser
         pool.query(
           'INSERT INTO goals (userID, goalIDToUser, goalText, goalStatus) VALUES ($1  ,$2,$3, $4 )',
-          [userVal, last_value + 1, text, status]
+          [userVal, lastValue + 1, text, status]
         )
       }
     } else {
@@ -110,13 +110,13 @@ app.get('/goalCreate', async (req, res) => {
         'SELECT goalID FROM goals WHERE goalIDToUser = $1 AND userID = $2',
         [goalNum, userVal]
       )
-      var goalID_fix = result2.rows[0].goalID
+      var goalIDFix = result2.rows[0].goalID
       if (result2.rowCount == 0) {
         return res.status(400).json({ errors: [{ msg: "Goal doesn't exist" }] })
       } else {
         pool.query(
           'UPDATE goals SET goalText=$1, goalStatus=$2 WHERE goalID=$3',
-          [text, status, goalID_fix]
+          [text, status, goalIDFix]
         )
       }
     }

@@ -11,7 +11,7 @@ import './App.css'
 import ViewBook from './components/ViewBook'
 import Settings from './pages/Settings'
 
-function App() {
+function App () {
   return (
     <Router>
       <div>
