@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 
-function Home() {
+function Home () {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState([])
 
@@ -40,23 +40,25 @@ function Home() {
             </thead>
             <tbody>
               {loading ? 
-              (
-                <tr>
-                  <td colSpan='5' className='text-center'>
-                    Loading...
-                  </td>
-                </tr>
-              ) : (
-                data.map((item, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.title}</td>
-                    <td>{item.author}</td>
-                    <td>{item.pages}</td>
-                    <td>{item.genre}</td>
+                (
+                  <tr>
+                    <td colSpan='5' className='text-center'>
+                      Loading...
+                    </td>
                   </tr>
-                ))
-              )}
+                ) : 
+                (
+                  data.map((item, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.title}</td>
+                      <td>{item.author}</td>
+                      <td>{item.pages}</td>
+                      <td>{item.genre}</td>
+                    </tr>
+                  ))
+                )
+              }
             </tbody>
           </table>
         </div>
