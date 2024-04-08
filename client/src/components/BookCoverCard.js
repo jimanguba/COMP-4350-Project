@@ -10,7 +10,7 @@
 import React from 'react'
 import '../styles/BookCoverCard.css'
 
-export default function BookCoverCard({ book, size }) {
+export default function BookCoverCard ({ book, size }) {
   // Two standard sizes for BookCoverCard:
   // - small: when displayed in a list or on a shelf
   // - large: when displayed on a ViewBookPage

@@ -8,7 +8,7 @@ CREATE TABLE users (
     currReadingID INTEGER
 );
 
-CREATE TABLE completed_books (
+CREATE TABLE completedBooks (
     completedID SERIAL PRIMARY KEY,
     bookID INTEGER NOT NULL,
     userID INTEGER NOT NULL,

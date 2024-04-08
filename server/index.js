@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const bcrypt = require('bcryptjs')
 const pool = require('./database')
-var cors = require('cors')
+let cors = require('cors')
 const bodyParser = require('body-parser')
 const bookUtil = require('./book')
 const db = require('./database')
@@ -19,11 +19,11 @@ app.get('/signup', async (req, res) => {
   let str = req.url
   str = str.substring(2)
 
-  var partsArray = str.split('&')
-  var usernameStr = partsArray[0].split('=')
-  var passwordStr = partsArray[1].split('=')
-  var username = usernameStr[1]
-  var password = passwordStr[1]
+  let partsArray = str.split('&')
+  let usernameStr = partsArray[0].split('=')
+  let passwordStr = partsArray[1].split('=')
+  let username = usernameStr[1]
+  let password = passwordStr[1]
 
   const salt = await bcrypt.genSalt(10)
 
@@ -74,16 +74,16 @@ app.get('/goalCreate', async (req, res) => {
 
     console.log(req.url)
 
-    var partsArray = str.split('&')
-    var textStr = partsArray[0].split('=')
-    var statusStr = partsArray[1].split('=')
-    var goalNumStr = partsArray[2].split('=')
-    var userValStr = partsArray[3].split('=')
+    let partsArray = str.split('&')
+    let textStr = partsArray[0].split('=')
+    let statusStr = partsArray[1].split('=')
+    let goalNumStr = partsArray[2].split('=')
+    let userValStr = partsArray[3].split('=')
 
-    var text = textStr[1]
-    var status = statusStr[1]
-    var goalNum = goalNumStr[1]
-    var userVal = userValStr[1]
+    let text = textStr[1]
+    let status = statusStr[1]
+    let goalNum = goalNumStr[1]
+    let userVal = userValStr[1]
 
     text = text.replace(/\+/g, '%20')
     text = decodeURIComponent(text)
@@ -99,7 +99,7 @@ app.get('/goalCreate', async (req, res) => {
           [userVal, 1, text, status]
         )
       } else {
-        var lastValue = result1.rows[0].goalIDToUser
+        let lastValue = result1.rows[0].goalIDToUser
         pool.query(
           'INSERT INTO goals (userID, goalIDToUser, goalText, goalStatus) VALUES ($1  ,$2,$3, $4 )',
           [userVal, lastValue + 1, text, status]
@@ -110,7 +110,7 @@ app.get('/goalCreate', async (req, res) => {
         'SELECT goalID FROM goals WHERE goalIDToUser = $1 AND userID = $2',
         [goalNum, userVal]
       )
-      var goalIDFix = result2.rows[0].goalID
+      let goalIDFix = result2.rows[0].goalID
       if (result2.rowCount == 0) {
         return res.status(400).json({ errors: [{ msg: "Goal doesn't exist" }] })
       } else {
@@ -134,10 +134,10 @@ app.get('/getGoals', async (req, res) => {
     let str = req.url
     str = str.substring(2)
 
-    var partsArray = str.split('&')
+    let partsArray = str.split('&')
 
-    var userValStr = partsArray[0].split('=')
-    var userVal = userValStr[1]
+    let userValStr = partsArray[0].split('=')
+    let userVal = userValStr[1]
 
     const result1 = await pool.query('SELECT * FROM goals WHERE userID = $1', [
       userVal
@@ -201,11 +201,11 @@ app.get('/', (req, res) => {
 app.get('/login', async (req, res) => {
   let str = req.url
   str = str.substring(2)
-  var partsArray = str.split('&')
-  var usernameStr = partsArray[0].split('=')
-  var passwordStr = partsArray[1].split('=')
-  var username = usernameStr[1]
-  var password = passwordStr[1]
+  let partsArray = str.split('&')
+  let usernameStr = partsArray[0].split('=')
+  let passwordStr = partsArray[1].split('=')
+  let username = usernameStr[1]
+  let password = passwordStr[1]
 
   try {
     const result1 = await pool.query(
@@ -217,7 +217,7 @@ app.get('/login', async (req, res) => {
         'SELECT userPassword, userID FROM users WHERE userName = $1',
         [username]
       )
-      var pw = result2.rows[0].userPassword
+      let pw = result2.rows[0].userPassword
 
       if (await bcrypt.compare(password, pw)) {
         console.log('Login Success')
@@ -274,7 +274,7 @@ app.put('/book/:bookID', async (req, res) => {
 })
 
 app.post('/reviews/new', async (req, res) => {
-  const { bookID, userID, rating, comment, review_title, review_date, tags } =
+  const { bookID, userID, rating, comment, reviewTitle, reviewDate, tags } =
     req.body
 
   if (
@@ -282,23 +282,23 @@ app.post('/reviews/new', async (req, res) => {
     !userID ||
     !rating ||
     !comment ||
-    !review_title ||
-    !review_date
+    !reviewTitle ||
+    !reviewDate
   ) {
     return res.status(400).json({ message: 'Missing required fields' })
   }
 
   try {
     const insertReviewQuery =
-      'INSERT INTO reviews (bookID, userID, comment, rating, review_title, review_date, tags) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *'
+      'INSERT INTO reviews (bookID, userID, comment, rating, reviewTitle, reviewDate, tags) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *'
 
     const newReview = await pool.query(insertReviewQuery, [
       bookID,
       userID,
       comment,
       rating,
-      review_title,
-      review_date,
+      reviewTitle,
+      reviewDate,
       tags
     ])
 
@@ -433,12 +433,12 @@ app.get('/users/:userID/calendar-data', async (req, res) => {
   }
 })
 
-app.get('/users/:userID/to_read', async (req, res) => {
+app.get('/users/:userID/ToRead', async (req, res) => {
   const { userID } = req.params
   console.log('getting user (userID ${userID}) to-read list')
   try {
     const result = await pool.query(
-      'SELECT books.* FROM books JOIN want_to_read ON books.bookID = want_to_read.bookID WHERE want_to_read.userID = $1',
+      'SELECT books.* FROM books JOIN wantToRead ON books.bookID = wantToRead.bookID WHERE wantToRead.userID = $1',
       [userID]
     )
     res.status(200).json(result.rows)
@@ -448,14 +448,14 @@ app.get('/users/:userID/to_read', async (req, res) => {
   }
 })
 
-app.get('/users/:userID/to_read/:bookID', async (req, res) => {
+app.get('/users/:userID/ToRead/:bookID', async (req, res) => {
   const { bookID, userID } = req.params
   console.log(
     'Getting status of book (bookID ${bookID}) in user (userID ${userID}) to-read list'
   )
   try {
     const result = await pool.query(
-      'SELECT * FROM want_to_read WHERE userID = $1 AND bookID = $2',
+      'SELECT * FROM wantToRead WHERE userID = $1 AND bookID = $2',
       [userID, bookID]
     )
     if (result.rows.length === 0) {
@@ -468,16 +468,16 @@ app.get('/users/:userID/to_read/:bookID', async (req, res) => {
   }
 })
 
-app.put('/users/:userID/to_read/:bookID', async (req, res) => {
+app.put('/users/:userID/ToRead/:bookID', async (req, res) => {
   const { bookID, userID } = req.params
-  const { to_read } = req.body
+  const { ToRead } = req.body
   console.log(
     'updating status of book (bookID ${bookID}) in user (userID ${userID}) to-read list'
   )
-  if (to_read) {
+  if (ToRead) {
     try {
       const result = await pool.query(
-        'INSERT INTO want_to_read (bookID, userID) VALUES ($2, $1)',
+        'INSERT INTO wantToRead (bookID, userID) VALUES ($2, $1)',
         [userID, bookID]
       )
       res.status(200).json(result.rows)
@@ -487,7 +487,7 @@ app.put('/users/:userID/to_read/:bookID', async (req, res) => {
   } else {
     try {
       const result = await pool.query(
-        'DELETE FROM want_to_read WHERE userID = $1 AND bookID = $2',
+        'DELETE FROM wantToRead WHERE userID = $1 AND bookID = $2',
         [userID, bookID]
       )
       res.status(200).json(result.rows)
@@ -628,12 +628,12 @@ app.get('/resetGoals', async (req, res) => {
     let str = req.url
     str = str.substring(2)
 
-    var partsArray = str.split('&')
+    let partsArray = str.split('&')
 
-    var userValStr = partsArray[0].split('=')
-    var userVal = userValStr[1]
+    let userValStr = partsArray[0].split('=')
+    let userVal = userValStr[1]
 
-    const result1 = await pool.query('DELETE FROM goals WHERE userID = $1', [
+    await pool.query('DELETE FROM goals WHERE userID = $1', [
       userVal
     ])
     return res.status(200)
@@ -644,11 +644,11 @@ app.get('/changePassword', async (req, res) => {
   let str = req.url
   str = str.substring(2)
 
-  var partsArray = str.split('&')
-  var userIdStr = partsArray[0].split('=')
-  var passwordStr = partsArray[1].split('=')
-  var userId = userIdStr[1]
-  var password = passwordStr[1]
+  let partsArray = str.split('&')
+  let userIdStr = partsArray[0].split('=')
+  let passwordStr = partsArray[1].split('=')
+  let userId = userIdStr[1]
+  let password = passwordStr[1]
 
   const salt = await bcrypt.genSalt(10)
 
