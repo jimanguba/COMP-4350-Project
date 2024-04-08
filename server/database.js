@@ -19,7 +19,7 @@ let pool = new Pool({
 const getKeyVaultSecrets = async () => {
   // Create a key vault secret client
   console.log('Key vault secrets called')
-  let secretClient = new SecretClient(vaultUri, new DefaultAzureCredential())
+  const secretClient = new SecretClient(vaultUri, new DefaultAzureCredential())
   try {
     // Iterate through each secret in the vault
     for await (const secretProperties of secretClient.listPropertiesOfSecrets()) {
@@ -106,8 +106,8 @@ function insertBook (newBook) {
           newBook.title,
           newBook.author
         ]
-      )
-  : false
+    )
+    : false
 }
 
 async function updateBook (book) {

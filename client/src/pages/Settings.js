@@ -29,7 +29,7 @@ const SettingsForm = () => {
       .get('/changePassword', {
         params: {
           userId: cookies.get('userID'),
-          password: password
+          password
         }
       })
       .catch(function (error) {
