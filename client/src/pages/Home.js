@@ -52,12 +52,12 @@ function Home () {
                   : (
                       data.map((item, index) => (
                         <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item.title}</td>
-                        <td>{item.author}</td>
-                        <td>{item.pages}</td>
-                        <td>{item.genre}</td>
-                      </tr>
+                          <td>{index + 1}</td>
+                          <td>{item.title}</td>
+                          <td>{item.author}</td>
+                          <td>{item.pages}</td>
+                          <td>{item.genre}</td>
+                        </tr>
                       ))
                     )
               }
