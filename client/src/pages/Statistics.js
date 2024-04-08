@@ -7,7 +7,7 @@ import 'react-calendar/dist/Calendar.css'
 import '../styles/StatisticsCalendar.css'
 import Sidebar from '../components/Sidebar'
 
-function Statistics({ user_id }) {
+function Statistics({ userID }) {
   const [calendarData, setCalendarData] = useState([])
   const [selectedDate, setSelectedDate] = useState(null)
   const [bookDetails, setBookDetails] = useState('')
@@ -80,14 +80,14 @@ function Statistics({ user_id }) {
   useEffect(() => {
     // Fetch calendar data
     axios
-      .get(`/users/${user_id}/calendar-data`)
+      .get(`/users/${userID}/calendar-data`)
       .then((response) => {
         setCalendarData(response.data)
       })
       .catch((error) => {
         console.error('Error fetching calendar data:', error)
       })
-  }, [user_id])
+  }, [userID])
 
   useEffect(() => {
     getBookDetails()
@@ -97,8 +97,8 @@ function Statistics({ user_id }) {
     <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
       <div>
-        <StatisticsGoal user_id={user_id} />
-        <StatisticsYear user_id={user_id} />
+        <StatisticsGoal userID={userID} />
+        <StatisticsYear userID={userID} />
         <div className='row'>
           <div className='calendar-wrapper'>
             <h2>Your Reading Calendar</h2>

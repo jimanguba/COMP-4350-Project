@@ -333,7 +333,7 @@ app.get('/books/:userID/average_time', async (req, res) => {
   const { userID } = req.params
   try {
     const result = await pool.query(
-      'SELECT ROUND(AVG(reading_time), 2) AS average_time FROM completed_books where userID = $1',
+      'SELECT ROUND(AVG(readingTime), 2) AS average_time FROM completedBooks where userID = $1',
       [userID]
     )
     const averageTime = result.rows[0].average_time
@@ -379,7 +379,7 @@ app.get('/users/:userID/books/num_completed', async (req, res) => {
   const { userID } = req.params
   try {
     const completedBooks = await pool.query(
-      'SELECT COUNT(*) FROM completed_books WHERE userID = $1',
+      'SELECT COUNT(*) FROM completedBooks WHERE userID = $1',
       [userID]
     )
     res.status(200).json(completedBooks.rows)
@@ -406,7 +406,7 @@ app.get('/users/:userID/calendar-data', async (req, res) => {
   try {
     const { userID } = req.params
     const result = await pool.query(
-      'SELECT cb.date_end, b.title, b.author FROM completed_books cb INNER JOIN books b ON cb.bookID = b.bookID WHERE cb.userID = $1',
+      'SELECT cb.date_end, b.title, b.author FROM completedBooks cb INNER JOIN books b ON cb.bookID = b.bookID WHERE cb.userID = $1',
       [userID]
     )
 
@@ -497,12 +497,12 @@ app.put('/users/:userID/to_read/:bookID', async (req, res) => {
   }
 })
 
-app.get('/users/:userID/completed_books', async (req, res) => {
+app.get('/users/:userID/completedBooks', async (req, res) => {
   const { userID } = req.params
   console.log('getting user (userID ${userID}) completed-books list')
   try {
     const result = await pool.query(
-      'SELECT books.* FROM books JOIN completed_books ON books.bookID = completed_books.bookID WHERE completed_books.userID = $1',
+      'SELECT books.* FROM books JOIN completedBooks ON books.bookID = completedBooks.bookID WHERE completedBooks.userID = $1',
       [userID]
     )
     res.status(200).json(result.rows)
@@ -512,14 +512,14 @@ app.get('/users/:userID/completed_books', async (req, res) => {
   }
 })
 
-app.get('/users/:userID/completed_books/:bookID', async (req, res) => {
+app.get('/users/:userID/completedBooks/:bookID', async (req, res) => {
   const { bookID, userID } = req.params
   console.log(
     'getting status of book (bookID ${bookID}) in user (userID ${userID}) completed-books list'
   )
   try {
     const result = await pool.query(
-      'SELECT * FROM completed_books WHERE userID = $1 AND bookID = $2',
+      'SELECT * FROM completedBooks WHERE userID = $1 AND bookID = $2',
       [userID, bookID]
     )
     if (result.rows.length === 0) {
@@ -532,17 +532,17 @@ app.get('/users/:userID/completed_books/:bookID', async (req, res) => {
   }
 })
 
-app.put('/users/:userID/completed_books/:bookID', async (req, res) => {
+app.put('/users/:userID/completedBooks/:bookID', async (req, res) => {
   const { bookID, userID } = req.params
-  const { completed_books } = req.body
+  const { completedBooks } = req.body
 
   console.log(
     'updating status of book (bookID ${bookID}) in user (userID ${userID}) completed-books list'
   )
-  if (completed_books) {
+  if (completedBooks) {
     try {
       const result = await pool.query(
-        'INSERT INTO completed_books (bookID, userID) VALUES ($2, $1)',
+        'INSERT INTO completedBooks (bookID, userID) VALUES ($2, $1)',
         [userID, bookID]
       )
       res.status(200).json(result.rows)
@@ -552,7 +552,7 @@ app.put('/users/:userID/completed_books/:bookID', async (req, res) => {
   } else {
     try {
       const result = await pool.query(
-        'DELETE FROM completed_books WHERE userID = $1 AND bookID = $2',
+        'DELETE FROM completedBooks WHERE userID = $1 AND bookID = $2',
         [userID, bookID]
       )
       res.status(200).json(result.rows)
@@ -562,14 +562,14 @@ app.put('/users/:userID/completed_books/:bookID', async (req, res) => {
   }
 })
 
-app.put('/users/:bookID/reading_time', async (req, res) => {
+app.put('/users/:bookID/readingTime', async (req, res) => {
   const { bookID } = req.params
-  const { reading_time } = req.body
-  console.log('updating bookID:${bookID} time to ${reading_time} minutes')
+  const { readingTime } = req.body
+  console.log('updating bookID:${bookID} time to ${readingTime} minutes')
   try {
     const result = await pool.query(
-      'UPDATE books SET reading_time = $1 WHERE bookID = $2 RETURNING *',
-      [reading_time, bookID]
+      'UPDATE books SET readingTime = $1 WHERE bookID = $2 RETURNING *',
+      [readingTime, bookID]
     )
     if (result.rows.length === 0) {
       res.status(404).json({ success: false, message: 'Book not found' })
@@ -589,16 +589,16 @@ let server
   await db.connectToDatabase()
 })().catch((err) => console.log(err))
 
-app.post('/reviews/:review_id/replies', async (req, res) => {
-  const { review_id } = req.params
-  const { userID, reply_text } = req.body
+app.post('/reviews/:reviewID/replies', async (req, res) => {
+  const { reviewID } = req.params
+  const { userID, replyText } = req.body
 
-  if (!userID || !reply_text) {
+  if (!userID || !replyText) {
     return res.status(400).json({ message: 'Missing required fields' })
   }
 
   try {
-    const newReply = await db.insertReply(review_id, userID, reply_text)
+    const newReply = await db.insertReply(reviewID, userID, replyText)
     res.status(201).json(newReply.rows[0])
   } catch (error) {
     console.error('Error inserting new reply:', error)
@@ -608,11 +608,11 @@ app.post('/reviews/:review_id/replies', async (req, res) => {
   }
 })
 
-app.get('/reviews/:review_id/replies', async (req, res) => {
-  const { review_id } = req.params
+app.get('/reviews/:reviewID/replies', async (req, res) => {
+  const { reviewID } = req.params
 
   try {
-    const replies = await db.getRepliesByReviewId(review_id)
+    const replies = await db.getRepliesByReviewId(reviewID)
     res.status(200).json(replies.rows)
   } catch (error) {
     console.error('Error fetching replies for review:', error)

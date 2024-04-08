@@ -79,7 +79,7 @@ function getAllBooks(params) {
 async function getBook(identifier) {
   try {
     const queryResult = await pool.query(
-      'SELECT * FROM books WHERE book_id = $1',
+      'SELECT * FROM books WHERE bookID = $1',
       [identifier]
     )
     const bookData = queryResult?.rowCount > 0 ? queryResult.rows[0] : undefined
@@ -124,15 +124,15 @@ async function updateBook(book) {
   }
 }
 
-function insertReply(review_id, user_id, reply_text) {
+function insertReply(reviewID, userID, replyText) {
   return pool.query(
-    'INSERT INTO replies (review_id, user_id, reply_text) VALUES ($1, $2, $3) RETURNING *',
-    [review_id, user_id, reply_text]
+    'INSERT INTO replies (reviewID, userID, replyText) VALUES ($1, $2, $3) RETURNING *',
+    [reviewID, userID, replyText]
   )
 }
 
-function getRepliesByReviewId(review_id) {
-  return pool.query('SELECT * FROM replies WHERE review_id = $1', [review_id])
+function getRepliesByReviewId(reviewID) {
+  return pool.query('SELECT * FROM replies WHERE reviewID = $1', [reviewID])
 }
 
 module.exports = {
