@@ -99,7 +99,7 @@ app.get('/goalCreate', async (req, res) => {
           [userVal, 1, text, status]
         )
       } else {
-        let lastValue = result1.rows[0].goalIDToUser
+        const lastValue = result1.rows[0].goalIDToUser
         pool.query(
           'INSERT INTO goals (userID, goalIDToUser, goalText, goalStatus) VALUES ($1  ,$2,$3, $4 )',
           [userVal, lastValue + 1, text, status]
@@ -110,8 +110,8 @@ app.get('/goalCreate', async (req, res) => {
         'SELECT goalID FROM goals WHERE goalIDToUser = $1 AND userID = $2',
         [goalNum, userVal]
       )
-      let goalIDFix = result2.rows[0].goalID
-      if (result2.rowCount == 0) {
+      const goalIDFix = result2.rows[0].goalID
+      if (result2.rowCount === 0) {
         return res.status(400).json({ errors: [{ msg: "Goal doesn't exist" }] })
       } else {
         pool.query(
@@ -134,9 +134,9 @@ app.get('/getGoals', async (req, res) => {
     let str = req.url
     str = str.substring(2)
 
-    let partsArray = str.split('&')
+    const partsArray = str.split('&')
 
-    let userValStr = partsArray[0].split('=')
+    const userValStr = partsArray[0].split('=')
     const userVal = userValStr[1]
 
     const result1 = await pool.query('SELECT * FROM goals WHERE userID = $1', [
@@ -628,10 +628,10 @@ app.get('/resetGoals', async (req, res) => {
     let str = req.url
     str = str.substring(2)
 
-    let partsArray = str.split('&')
+    const partsArray = str.split('&')
 
-    let userValStr = partsArray[0].split('=')
-    let userVal = userValStr[1]
+    const userValStr = partsArray[0].split('=')
+    const userVal = userValStr[1]
 
     await pool.query('DELETE FROM goals WHERE userID = $1', [
       userVal

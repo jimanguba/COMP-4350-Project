@@ -13,7 +13,7 @@ import '../styles/BookList.css'
 import Sidebar from '../components/Sidebar'
 import Cookies from 'universal-cookie'
 
-export default function BookList({ type }) {
+export default function BookList ({ type }) {
   const cookies = new Cookies(null, { path: '/' })
   const userID = cookies.get('userID')
   const [query, setQuery] = useState('')

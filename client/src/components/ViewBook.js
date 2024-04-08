@@ -10,7 +10,7 @@ import ToReadButton from './ToReadButton'
 import CompletedBookButton from './CompletedBookButton'
 import GenreRecommendations from './GenreRecommendations'
 
-export default function ViewBook() {
+export default function ViewBook () {
   const [loading, setLoading] = useState(true)
   const [book, setBook] = useState(null)
   const [reviews, setReviews] = useState([])

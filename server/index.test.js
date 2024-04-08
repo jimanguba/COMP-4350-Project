@@ -1,6 +1,6 @@
 const sut = require('./index')
 const pg = require('pg')
-const pool = require('./database')
+let pool = require('./database')
 const request = require('supertest')
 
 jest.mock('pg', () => {

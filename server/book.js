@@ -1,6 +1,6 @@
 class Book {
-  constructor(name, writer, pageCount, type) {
-    ;(this.title = name),
+  constructor (name, writer, pageCount, type) {
+    (this.title = name),
     (this.author = writer),
     (this.pages = pageCount),
     (this.genre = type)

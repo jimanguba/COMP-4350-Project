@@ -6,7 +6,7 @@ import { faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons'
 import { faStarHalfAlt as faStarHalf } from '@fortawesome/free-solid-svg-icons'
 import BookImg from '../images/book.png'
 
-function StatisticsYear({ userID }) {
+function StatisticsYear ({ userID }) {
   const [averageReadingTime, setAverageReadingTime] = useState(null)
   const [averageRating, setAverageRating] = useState(null)
 

@@ -23,7 +23,7 @@ const getKeyVaultSecrets = async () => {
   try {
     // Iterate through each secret in the vault
     listPropertiesOfSecrets = secretClient.listPropertiesOfSecrets()
-    for await (let secretProperties of secretClient.listPropertiesOfSecrets()) {
+    for await (const secretProperties of secretClient.listPropertiesOfSecrets()) {
       // Only load enabled secrets - getSecret will return an error for disabled secrets
       if (secretProperties.enabled) {
         const secret = await secretClient.getSecret(secretProperties.name)
@@ -45,10 +45,10 @@ const connectToDatabase = async () => {
     database: 'bookshelf'
   })
 
-  connectionType = 'Local'
+  let connectionType = 'Local'
 
   if (process.env.PG_CONN_STRING || process.env.PG_CONN_STRING_FILE) {
-    connString = process.env.PG_CONN_STRING
+    let connString = process.env.PG_CONN_STRING
     if (process.env.PG_CONN_STRING_FILE) {
       connString = fs.readFileSync(process.env.PG_CONN_STRING_FILE, 'utf8')
     }
@@ -76,7 +76,7 @@ function getAllBooks(params) {
   return pool.query('SELECT * FROM books', params)
 }
 
-async function getBook(identifier) {
+async function getBook (identifier) {
   try {
     const queryResult = await pool.query(
       'SELECT * FROM books WHERE bookID = $1',
@@ -90,7 +90,7 @@ async function getBook(identifier) {
   }
 }
 
-function insertBook(newBook) {
+function insertBook (newBook) {
   return bookUtil.validateBook(newBook)
     ? pool.query(
         `INSERT INTO books(title, author, pages, genre)
@@ -111,7 +111,7 @@ function insertBook(newBook) {
     : false
 }
 
-async function updateBook(book) {
+async function updateBook (book) {
   try {
     const queryResult = await pool.query(
       `UPDATE books SET title=$1, author=$2, pages=$3, genre=$4 WHERE book_id=$5`,

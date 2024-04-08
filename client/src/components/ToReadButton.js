@@ -8,21 +8,21 @@ import '../styles/ReadingStateButton.css'
 import Cookies from 'universal-cookie'
 import axios from 'axios'
 
-export default function ToReadButton({ book_id }) {
+export default function ToReadButton({ bookID }) {
   const cookies = new Cookies(null, { path: '/' })
-  const user_id = cookies.get('userID')
+  const userID = cookies.get('userID')
   const [onToRead, setOnToRead] = useState(false)
 
   useEffect(() => {
     axios
-      .get(`/users/${user_id}/to_read/${book_id}`)
+      .get(`/users/${userID}/toRead/${bookID}`)
       .then((response) => setOnToRead(response.data.toRead))
       .catch((error) => console.error('Error fetching to-read:', error))
   }, [])
 
   const toggleReadingState = () => {
     axios
-      .put(`/users/${user_id}/to_read/${book_id}`, { to_read: !onToRead })
+      .put(`/users/${userID}/toRead/${bookID}`, { toRead: !onToRead })
       .then(() => setOnToRead(!onToRead))
       .catch((error) => console.error('Error updating to-read status:', error))
   }
