@@ -11,7 +11,7 @@ import './App.css'
 import ViewBook from './components/ViewBook'
 import Settings from './pages/Settings'
 
-function App () {
+function App() {
   return (
     <Router>
       <div>
@@ -21,7 +21,10 @@ function App () {
           <Route path='/view-book/:book_id' element={<ViewBook />} />
           <Route path='/reviews/new' element={<ReviewsForm />} />
           <Route path='/book-list' element={<BookList type='all' />} />
-          <Route path='/completed-books' element={<BookList type='completed' />}/>
+          <Route
+            path='/completed-books'
+            element={<BookList type='completed' />}
+          />
           <Route path='/to-read' element={<BookList type='to-read' />} />
           <Route path='/review' element={<ReviewsList />} />
           <Route path='/login' element={<Login />} />

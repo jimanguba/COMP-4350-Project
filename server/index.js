@@ -178,7 +178,7 @@ const getBooks = (req, res) => {
 
 app.get('/books/genre/:genre', async (req, res) => {
   const { genre } = req.params
-  const { book_id } = req.query 
+  const { book_id } = req.query
 
   try {
     const query = 'SELECT * FROM books WHERE genre = $1 AND book_id != $2'
@@ -289,7 +289,8 @@ app.post('/reviews/new', async (req, res) => {
   }
 
   try {
-    const insertReviewQuery = 'INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date, tags) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *'
+    const insertReviewQuery =
+      'INSERT INTO reviews (book_id, user_id, comment, rating, review_title, review_date, tags) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *'
 
     const newReview = await pool.query(insertReviewQuery, [
       book_id,
@@ -303,7 +304,7 @@ app.post('/reviews/new', async (req, res) => {
 
     res.status(201).json(newReview.rows[0])
   } catch (error) {
-    console.error('Error inserting new review:', error) 
+    console.error('Error inserting new review:', error)
     res
       .status(500)
       .json({ error: 'Error inserting new review', details: error.message })
