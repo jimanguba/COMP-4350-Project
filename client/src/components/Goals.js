@@ -1,7 +1,3 @@
-//Show the user their goals
-//let the user add in new goals and change existing goals
-//Count the number completed goals and the number in progress goals
-
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Sidebar from '../components/Sidebar'
@@ -9,17 +5,9 @@ import Cookies from 'universal-cookie'
 
 import '../styles/Goals.css'
 
-var config = {
-  headers: {
-    'Content-Length': 0,
-    'Content-Type': 'text/plain'
-  },
-  responseType: 'text'
-}
-
 const GoalForm = () => {
   const cookies = new Cookies(null, { path: '/' })
-  const [loading, setLoading] = useState(true)
+  const setLoading = useState(true)
   const [data, setData] = useState([])
   const [goalText, setGoalText] = useState('')
   const [goalStauts, setGoalStatus] = useState('')
