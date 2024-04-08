@@ -40,8 +40,8 @@ function Home () {
             </thead>
             <tbody>
               {
-                loading 
-                ? 
+                loading
+                  ?
                     (
                       <tr>
                         <td colSpan='5' className='text-center'>
@@ -49,9 +49,9 @@ function Home () {
                         </td>
                       </tr>
                     )
-                : (
+                  : (
                       data.map((item, index) => (
-                      <tr key={index}>
+                        <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{item.title}</td>
                         <td>{item.author}</td>
@@ -59,7 +59,7 @@ function Home () {
                         <td>{item.genre}</td>
                       </tr>
                       ))
-                  )
+                    )
               }
             </tbody>
           </table>

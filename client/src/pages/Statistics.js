@@ -7,7 +7,7 @@ import 'react-calendar/dist/Calendar.css'
 import '../styles/StatisticsCalendar.css'
 import Sidebar from '../components/Sidebar'
 
-function Statistics({ userID }) {
+function Statistics ({ userID }) {
   const [calendarData, setCalendarData] = useState([])
   const [selectedDate, setSelectedDate] = useState(null)
   const [bookDetails, setBookDetails] = useState('')
@@ -112,7 +112,8 @@ function Statistics({ userID }) {
             <h3 className='book-title'>{getBookDate()}</h3>
             <ul>
               <li>{bookDetails}</li>
-              {bookImage ?
+              {bookImage 
+              ?
                 (
                 <li>
                   <img
