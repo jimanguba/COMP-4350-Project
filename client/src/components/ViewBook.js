@@ -45,7 +45,7 @@ export default function ViewBook () {
         <p className='text-center'>Loading...</p>
       ) : (
         <div className='viewBook'>
-          <BookCoverCard book={book} size={'large'} />
+          <BookCoverCard book={book} size='large' />
           <div className='readingStateContainer'>
             <ToReadButton bookID={bookID} />
             <CompletedBookButton bookID={bookID} />

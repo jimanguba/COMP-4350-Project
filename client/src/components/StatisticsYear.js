@@ -2,8 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons'
-import { faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons'
-import { faStarHalfAlt as faStarHalf } from '@fortawesome/free-solid-svg-icons'
+import { faStarHalfAlt as faStarHalf, faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons'
 import BookImg from '../images/book.png'
 
 function StatisticsYear ({ userID }) {

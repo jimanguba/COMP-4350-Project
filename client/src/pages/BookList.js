@@ -58,13 +58,15 @@ export default function BookList ({ type }) {
           placeholder='search titles...'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-        ></input>
+        />
         <ul>
           {books &&
             books
               .filter((book) => {
                 if (book.title)
+                {
                   return book.title.toLowerCase().includes(query.toLowerCase())
+                }  
               })
               .map((book) => (
                 <Link key={book.bookID} to={`/view-book/${book.bookID}`}>
