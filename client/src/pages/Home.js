@@ -40,25 +40,26 @@ function Home () {
             </thead>
             <tbody>
               {
-                loading ? 
-                (
-                  <tr>
-                    <td colSpan='5' className='text-center'>
-                      Loading...
-                    </td>
-                  </tr>
-                )
-                :(
-                  data.map((item, index) => (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{item.title}</td>
-                      <td>{item.author}</td>
-                      <td>{item.pages}</td>
-                      <td>{item.genre}</td>
-                    </tr>
-                  ))
-                )
+                loading 
+                ? 
+                    (
+                      <tr>
+                        <td colSpan='5' className='text-center'>
+                          Loading...
+                        </td>
+                      </tr>
+                    )
+                : (
+                      data.map((item, index) => (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.title}</td>
+                        <td>{item.author}</td>
+                        <td>{item.pages}</td>
+                        <td>{item.genre}</td>
+                      </tr>
+                      ))
+                  )
               }
             </tbody>
           </table>
