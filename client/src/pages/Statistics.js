@@ -112,16 +112,15 @@ function Statistics ({ userID }) {
             <h3 className='book-title'>{getBookDate()}</h3>
             <ul>
               <li>{bookDetails}</li>
-              {bookImage 
-                ?(
-                    <li>
-                      <img
-                        src={bookImage}
-                        alt='Book Cover'
-                        className='book-cover'
-                      />
-                    </li>
-                  ) : null}
+              {bookImage ? (
+                  <li>
+                    <img
+                      src={bookImage}
+                      alt='Book Cover'
+                      className='book-cover'
+                    />
+                  </li>
+                ) : null}
             </ul>
           </div>
         </div>
