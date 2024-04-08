@@ -44,16 +44,17 @@ export default function BookList ({ type }) {
     <div style={{ display: 'flex', height: '100vh' }}>
       <Sidebar />
       <div className='bookList'>
-        {type === 'all' ?
-          (
+        {
+          type === 'all' 
+          ?(
             <h1>All Books</h1>
           )
-          : type === 'completed' ?
-          (
+          : type === 'completed' 
+          ?(
             <h1>Completed Books</h1>
           ) 
-          : type === 'to-read' ?
-          (
+          : type === 'to-read' 
+          ?(
             <h1>Want To Read</h1>
           ) 
           : (
