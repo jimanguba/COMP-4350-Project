@@ -8,14 +8,14 @@ import '../styles/ReadingStateButton.css'
 import Cookies from 'universal-cookie'
 import axios from 'axios'
 
-export default function CompletedBookButton({ book_id }) {
+export default function CompletedBookButton({ bookID }) {
   const cookies = new Cookies(null, { path: '/' })
-  const user_id = cookies.get('userID')
+  const userID = cookies.get('userID')
   const [onCompletedBooks, setOnCompletedBooks] = useState(false)
 
   useEffect(() => {
     axios
-      .get(`/users/${user_id}/completed_books/${book_id}`)
+      .get(`/users/${userID}/completed_books/${bookID}`)
       .then((response) => {
         setOnCompletedBooks(response.data.completed)
       })
@@ -24,7 +24,7 @@ export default function CompletedBookButton({ book_id }) {
 
   const toggleReadingState = () => {
     axios
-      .put(`/users/${user_id}/completed_books/${book_id}`, {
+      .put(`/users/${userID}/completed_books/${bookID}`, {
         completed_books: !onCompletedBooks
       })
       .then(() => setOnCompletedBooks(!onCompletedBooks))

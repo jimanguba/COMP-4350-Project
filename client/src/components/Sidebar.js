@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar'
+import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ListIcon from '@mui/icons-material/ListAlt'
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined' // Statistics

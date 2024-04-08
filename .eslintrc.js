@@ -14,8 +14,8 @@ module.exports = {
       ],
       parserOptions: {
         sourceType: 'script'
-      },
-    },
+      }
+    }
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -24,5 +24,5 @@ module.exports = {
   rules: {
     semi: ['error', 'never'],
     camelcase: 'off'
-  },
+  }
 }

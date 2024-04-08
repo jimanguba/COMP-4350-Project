@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import ProgressBar from '../components/ProgressBar'
 
-function StatisticsGoal({ user_id }) {
+function StatisticsGoal({ userID }) {
   const [progress, setProgress] = useState(0)
   const [count, setBooksCompleted] = useState(0)
   const [readingGoal, setReadingGoal] = useState(0)
@@ -13,14 +13,14 @@ function StatisticsGoal({ user_id }) {
     const fetchData = async () => {
       try {
         // Fetch user data including reading goal
-        const userDataResponse = await axios.get(`/users/${user_id}`)
-        const { book_goal, user_name } = userDataResponse.data
-        setReadingGoal(book_goal)
-        setUsername(user_name)
+        const userDataResponse = await axios.get(`/users/${userID}`)
+        const { bookGoal, userName } = userDataResponse.data
+        setReadingGoal(bookGoal)
+        setUsername(userName)
 
         // Fetch reading progress after updating the reading goal
         const readingProgressResponse = await axios.get(
-          `/users/${user_id}/books/num_completed`
+          `/users/${userID}/books/num_completed`
         )
         const countData = readingProgressResponse.data[0]
         if (
@@ -30,7 +30,7 @@ function StatisticsGoal({ user_id }) {
         ) {
           const completedBooksCount = parseInt(countData.count)
           setBooksCompleted(completedBooksCount)
-          setProgress((completedBooksCount / book_goal) * 100)
+          setProgress((completedBooksCount / bookGoal) * 100)
         } else {
           console.log('Invalid completedBooks value:', countData.count)
         }
@@ -41,7 +41,7 @@ function StatisticsGoal({ user_id }) {
     }
 
     fetchData()
-  }, [user_id])
+  }, [userID])
 
   if (error) {
     return <div>{error}</div>
