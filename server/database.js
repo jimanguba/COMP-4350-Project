@@ -114,7 +114,7 @@ function insertBook (newBook) {
 async function updateBook (book) {
   try {
     const queryResult = await pool.query(
-      `UPDATE books SET title=$1, author=$2, pages=$3, genre=$4 WHERE book_id=$5`,
+      'UPDATE books SET title=$1, author=$2, pages=$3, genre=$4 WHERE book_id=$5',
       [book.title, book.author, book.pages, book.genre, book.book_id]
     )
     return queryResult.rowCount > 0
@@ -124,14 +124,14 @@ async function updateBook (book) {
   }
 }
 
-function insertReply(reviewID, userID, replyText) {
+function insertReply (reviewID, userID, replyText) {
   return pool.query(
     'INSERT INTO replies (reviewID, userID, replyText) VALUES ($1, $2, $3) RETURNING *',
     [reviewID, userID, replyText]
   )
 }
 
-function getRepliesByReviewId(reviewID) {
+function getRepliesByReviewId (reviewID) {
   return pool.query('SELECT * FROM replies WHERE reviewID = $1', [reviewID])
 }
 

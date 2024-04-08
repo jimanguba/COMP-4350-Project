@@ -101,7 +101,7 @@ const GoalForm = () => {
             onChange={(event) => {
               setGoalNumber(event.target.value)
             }}
-          ></input>
+          />
 
           <button className='button' onClick={addGoal}>
             {' '}

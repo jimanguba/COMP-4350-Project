@@ -18,12 +18,12 @@ const LoginForm = () => {
     axios
       .get('/login', {
         params: {
-          username: username,
-          password: password
+          username,
+          password
         }
       })
       .then((response) => {
-        var test1 = JSON.parse(JSON.stringify(response.data))
+        let test1 = JSON.parse(JSON.stringify(response.data))
         if (response.status === 200) {
           cookies.set('userID', test1.data)
           navigate('/home')
@@ -42,12 +42,12 @@ const LoginForm = () => {
     axios
       .get('/signup', {
         params: {
-          username: username,
-          password: password
+          username,
+          password
         }
       })
       .then((response) => {
-        var test1 = JSON.parse(JSON.stringify(response.data))
+        let test1 = JSON.parse(JSON.stringify(response.data))
         if (response.status === 200) {
           cookies.set('userID', test1.data)
           navigate('/home')

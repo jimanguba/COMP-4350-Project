@@ -54,7 +54,7 @@ const GenreRecommendations = ({ genre, currentBookId }) => {
         {relatedBooks.map((book) => (
           <div key={book.book_id} className='book-item'>
             <Link to={`/view-book/${book.book_id}`}>
-              <BookCoverCard book={book} size={'small'} />
+              <BookCoverCard book={book} size='small' />
             </Link>
           </div>
         ))}

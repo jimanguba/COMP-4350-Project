@@ -109,7 +109,6 @@ const ReviewCard = ({ review, addReply }) => {
 
   // Default tags and replies to an empty array if null
   const tags = Array.isArray(review.tags) ? review.tags : []
-  const replies = Array.isArray(review.replies) ? review.replies : []
 
   return (
     <div className='review-card'>

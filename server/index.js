@@ -217,7 +217,7 @@ app.get('/login', async (req, res) => {
         'SELECT userPassword, userID FROM users WHERE userName = $1',
         [username]
       )
-      let pw = result2.rows[0].userPassword
+      const pw = result2.rows[0].userPassword
 
       if (await bcrypt.compare(password, pw)) {
         console.log('Login Success')
@@ -584,7 +584,7 @@ app.put('/users/:bookID/readingTime', async (req, res) => {
 let server
 ;(async () => {
   server = app.listen(PORT, () => {
-    console.log('Server listening on the port ${PORT}')
+    console.log(`Server listening on the port ${PORT}`)
   })
   await db.connectToDatabase()
 })().catch((err) => console.log(err))

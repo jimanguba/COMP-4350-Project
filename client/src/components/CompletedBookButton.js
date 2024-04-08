@@ -8,7 +8,7 @@ import '../styles/ReadingStateButton.css'
 import Cookies from 'universal-cookie'
 import axios from 'axios'
 
-export default function CompletedBookButton({ bookID }) {
+export default function CompletedBookButton ({ bookID }) {
   const cookies = new Cookies(null, { path: '/' })
   const userID = cookies.get('userID')
   const [onCompletedBooks, setOnCompletedBooks] = useState(false)
