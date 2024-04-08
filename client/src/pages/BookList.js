@@ -45,21 +45,13 @@ export default function BookList ({ type }) {
       <Sidebar />
       <div className='bookList'>
         {
-          type === 'all' 
-          ?(
-            <h1>All Books</h1>
-          )
-          : type === 'completed' 
-          ?(
-            <h1>Completed Books</h1>
-          ) 
-          : type === 'to-read' 
-          ?(
-            <h1>Want To Read</h1>
-          ) 
-          : (
-            <h1>Books</h1>
-          )
+          type === 'all'
+            ? ( <h1>All Books</h1> )
+            : type === 'completed' 
+            ? ( <h1>Completed Books</h1> ) 
+            : type === 'to-read' 
+            ? ( <h1>Want To Read</h1> ) 
+            : ( <h1>Books</h1> )
         }
         <input
           type='text'
