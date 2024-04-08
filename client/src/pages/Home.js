@@ -39,7 +39,8 @@ function Home() {
               </tr>
             </thead>
             <tbody>
-              {loading ? (
+              {loading ? 
+              (
                 <tr>
                   <td colSpan='5' className='text-center'>
                     Loading...
