@@ -49,7 +49,7 @@ export default function BookList ({ type }) {
             ? (<h1>All Books</h1>)
             : type === 'completed'
               ? (<h1>Completed Books</h1>)
-                : type === 'to-read'
+              : type === 'to-read'
                 ? (<h1>Want To Read</h1>)
                 : (<h1>Books</h1>)
         }
@@ -63,8 +63,7 @@ export default function BookList ({ type }) {
           {books &&
             books
               .filter((book) => {
-                if (book.title)
-                {
+                if (book.title) {
                   return book.title.toLowerCase().includes(query.toLowerCase())
                 }
               })

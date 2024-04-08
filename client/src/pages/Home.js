@@ -40,15 +40,14 @@ function Home () {
             </thead>
             <tbody>
               {
-                loading
-                  ?
-                    (
-                      <tr>
-                        <td colSpan='5' className='text-center'>
-                          Loading...
-                        </td>
-                      </tr>
-                    )
+                loading ?
+                  (
+                    <tr>
+                      <td colSpan='5' className='text-center'>
+                        Loading...
+                      </td>
+                    </tr>
+                  )
                   : (
                       data.map((item, index) => (
                         <tr key={index}>
