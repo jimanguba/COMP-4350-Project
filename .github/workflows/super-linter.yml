@@ -25,3 +25,5 @@ jobs:
           IGNORE_ALL_PATHS: true
           JAVASCRIPT_ES_DEFAULT_ENABLED: true
           JAVASCRIPT_ES_USE_CACHE: false
+          CSS_ES_DEFAULT_ENABLED: false
+          CSS_ES_USE_CACHE: false
