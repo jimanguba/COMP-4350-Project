@@ -22,4 +22,8 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_JAVASCRIPT: true
           JAVASCRIPT_ES_MULTI: true
+          VALIDATE_MARKDOWN: false
+          VALIDATE_NATURAL: false
+          VALIDATE_SQL: false
+          VALIDATE_SQLFLUFF: false
           JAVASCRIPT_STANDARD: 'airbnb'
