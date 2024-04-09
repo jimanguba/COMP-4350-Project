@@ -47,16 +47,17 @@ export default function ViewBook () {
           <div className='viewBook'>
             <BookCoverCard book={book} size='large' />
             <div className='readingStateContainer'>
-            <ToReadButton bookID={bookID} />
-            <CompletedBookButton bookID={bookID} />
-          </div>
+              <ToReadButton bookID={bookID} />
+              <CompletedBookButton bookID={bookID} />
+            </div>
             <BookDetailsCard book={book} setBook={setBook} />
             {book && book.genre && (
-            <GenreRecommendations genre={book.genre} currentBookId={bookID} />
-          )}
+              <GenreRecommendations genre={book.genre} currentBookId={bookID} />
+            )}
             <ReviewsList reviews={reviews} bookId={bookID} />
-      </div>
-      )}
+          </div>
+        )
+      }
     </div>
   )
 }
