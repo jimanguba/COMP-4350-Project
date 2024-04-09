@@ -20,8 +20,6 @@ jobs:
         uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
-          # Specify JavaScript file extensions here
           VALIDATE_JAVASCRIPT: true
           JAVASCRIPT_ES_MULTI: true
           JAVASCRIPT_STANDARD: 'airbnb'
