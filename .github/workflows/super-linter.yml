@@ -1,66 +1,27 @@
 name: Super Linter
 
 on:
-  pull_request:
-    branches:
-      - main
-      - master
   push:
     branches:
       - main
-      - master
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  super-linter:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run Super-Linter
+      - name: Setup Super-Linter
         uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: false
-          VALIDATE_JAVASCRIPT: true
-          VALIDATE_TYPESCRIPT: false
-          VALIDATE_CSS: false
-          VALIDATE_HTML: false
-          VALIDATE_PYTHON: false
-          VALIDATE_RUBY: false
-          VALIDATE_GO: false
-          VALIDATE_JAVA: false
-          VALIDATE_SHELL: false
-          VALIDATE_PHP: false
-          VALIDATE_CLOUDFORMATION: false
-          VALIDATE_YAML: false
-          VALIDATE_JSON: false
-          VALIDATE_XML: false
-          VALIDATE_MARKDOWN: false
-          VALIDATE_KOTLIN: false
-          VALIDATE_GROOVY: false
-          VALIDATE_PROTOBUF: false
-          VALIDATE_TERRAFORM: false
-          VALIDATE_ANGULAR: false
-          VALIDATE_KUBERNETES: false
-          VALIDATE_ARM: false
-          VALIDATE_CLOJURE: false
-          VALIDATE_DOCKER: false
-          VALIDATE_EMBER: false
-          VALIDATE_RUST: false
-          VALIDATE_R: false
-          VALIDATE_CHEF: false
-          VALIDATE_SALTSTACK: false
-          VALIDATE_PERL: false
-          VALIDATE_CMAKE: false
-          VALIDATE_MIXAL: false
-          VALIDATE_LATEX: false
-          VALIDATE_BASH: false
-          VALIDATE_ACTIONSCRIPT: false
-          VALIDATE_LUA: false
-          VALIDATE_POWER_SHELL: false
-          VALIDATE_TEX: false
-          VALIDATE_OPENAPI: false
-          VALIDATE_SCALA: false
-          VALIDATE_SOLIDITY: false
-          VALIDATE_JUPYTER_NOTEBOOK: false
-          VALIDATE_HCL: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IGNORE_ALL_PATHS: true
+          JAVASCRIPT_ES_DEFAULT_ENABLED: true
+          JAVASCRIPT_ES_USE_CACHE: false
