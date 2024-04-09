@@ -1,4 +1,3 @@
----
 name: Super Linter
 
 on:
@@ -20,12 +19,9 @@ jobs:
       - name: Setup Super-Linter
         uses: github/super-linter@v4
         env:
+          VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_ALL_CODEBASE: false
+          IGNORE_PATH: "**/*.css"
           JAVASCRIPT_ES_DEFAULT_ENABLED: true
           JAVASCRIPT_ES_USE_CACHE: false
-          IGNORE_PATH: "**/*.(css|html|json|md|yaml|yml)"
-
-
-...
