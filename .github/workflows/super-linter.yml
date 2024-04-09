@@ -26,4 +26,4 @@ jobs:
           VALIDATE_NATURAL: false
           VALIDATE_SQL: false
           VALIDATE_SQLFLUFF: false
-          JAVASCRIPT_STANDARD: 'airbnb'
+
