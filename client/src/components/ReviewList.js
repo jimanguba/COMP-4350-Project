@@ -3,7 +3,19 @@ import ReviewCard from './ReviewCard'
 import ReviewForm from './ReviewForm'
 import ReviewDateFilter from './ReviewDateFilter'
 import ReviewFilter from './ReviewFilter'
+import { subDays, isWithinInterval } from 'date-fns'
 import '../styles/ReviewList.css'
+
+const wasReviewCreatedInTimeFrame = (reviewDate, daysAgo) => {
+  const start = subDays(new Date(), daysAgo)
+  const end = new Date()
+
+  // Set the hours for the start and end to encompass the entire day
+  start.setHours(0, 0, 0, 0)
+  end.setHours(23, 59, 59, 999)
+
+  return isWithinInterval(reviewDate, { start, end })
+}
 
 const ReviewsList = ({ reviews: initialReviews, bookId }) => {
   const [reviews, setReviews] = useState(
@@ -32,7 +44,6 @@ const ReviewsList = ({ reviews: initialReviews, bookId }) => {
 
   // Function to check if the review was created exactly days ago
   // Function to check if the review was created exactly days ago
-
   const applyDateFilter = (review, dateFilter) => {
     const reviewDate = new Date(review.review_date)
 

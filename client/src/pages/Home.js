@@ -43,11 +43,11 @@ function Home () {
                 loading
                   ? (
                     <tr>
-                    <td colSpan='5' className='text-center'>
-                      Loading...
-                    </td>
+                      <td colSpan='5' className='text-center'>
+                        Loading...
+                      </td>
                     </tr>
-                  )
+                    )
                   : (
                       data.map((item, index) => (
                         <tr key={index}>
