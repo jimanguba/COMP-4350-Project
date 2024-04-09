@@ -41,21 +41,21 @@ export default function ViewBook () {
   return (
     <div style={{ display: 'flex' }}>
       <Sidebar />
-      {loading 
-        ? (<p className='text-center'>Loading...</p>) 
+      {loading
+        ? (<p className='text-center'>Loading...</p>)
         : (
           <div className='viewBook'>
-          <BookCoverCard book={book} size='large' />
-          <div className='readingStateContainer'>
+            <BookCoverCard book={book} size='large' />
+            <div className='readingStateContainer'>
             <ToReadButton bookID={bookID} />
             <CompletedBookButton bookID={bookID} />
           </div>
-          <BookDetailsCard book={book} setBook={setBook} />
-          {book && book.genre && (
+            <BookDetailsCard book={book} setBook={setBook} />
+            {book && book.genre && (
             <GenreRecommendations genre={book.genre} currentBookId={bookID} />
           )}
-          <ReviewsList reviews={reviews} bookId={bookID} />
-        </div>
+            <ReviewsList reviews={reviews} bookId={bookID} />
+      </div>
       )}
     </div>
   )

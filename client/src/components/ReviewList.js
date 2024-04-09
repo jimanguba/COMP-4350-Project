@@ -5,7 +5,6 @@ import ReviewDateFilter from './ReviewDateFilter'
 import ReviewFilter from './ReviewFilter'
 import '../styles/ReviewList.css'
 
-
 const ReviewsList = ({ reviews: initialReviews, bookId }) => {
   const [reviews, setReviews] = useState(
     Array.isArray(initialReviews) ? initialReviews : []
@@ -33,7 +32,21 @@ const ReviewsList = ({ reviews: initialReviews, bookId }) => {
 
   // Function to check if the review was created exactly days ago
   // Function to check if the review was created exactly days ago
-  //Removed
+
+  const applyDateFilter = (review, dateFilter) => {
+    const reviewDate = new Date(review.review_date)
+
+    switch (dateFilter) {
+      case '1':
+        return wasReviewCreatedInTimeFrame(reviewDate, 1)
+      case '7':
+        return wasReviewCreatedInTimeFrame(reviewDate, 7)
+      case '30':
+        return wasReviewCreatedInTimeFrame(reviewDate, 30)
+      default:
+        return true // If no date filter is set, show all reviews
+    }
+  }
 
   const filteredReviews = reviews
     .filter((review) => !filter || review.rating === filter) // Apply rating filter if set

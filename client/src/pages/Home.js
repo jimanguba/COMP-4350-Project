@@ -40,9 +40,9 @@ function Home () {
             </thead>
             <tbody>
               {
-                loading 
-                ? (
-                    <tr>
+                loading
+                  ? (
+                      <tr>
                       <td colSpan='5' className='text-center'>
                         Loading...
                       </td>

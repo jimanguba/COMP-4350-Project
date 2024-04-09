@@ -16,10 +16,7 @@ const sidebar = () => {
     <Sidebar className='app'>
       <Menu>
         <MenuItem
-          icon={
-            <MenuOutlinedIcon
-            />
-          }
+          icon={<MenuOutlinedIcon />}
         >
           <Link to='/'>
             <h2>BOOKSHELF</h2>

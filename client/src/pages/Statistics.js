@@ -112,8 +112,8 @@ function Statistics ({ userID }) {
             <h3 className='book-title'>{getBookDate()}</h3>
             <ul>
               <li>{bookDetails}</li>
-              {bookImage 
-              ? (
+              {bookImage
+                ? (
                   <li>
                     <img
                       src={bookImage}
@@ -121,8 +121,8 @@ function Statistics ({ userID }) {
                       className='book-cover'
                     />
                   </li>
-                ) 
-              : null}
+                  )
+                : null}
             </ul>
           </div>
         </div>
