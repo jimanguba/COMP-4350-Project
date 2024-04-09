@@ -7,8 +7,10 @@ const bodyParser = require('body-parser')
 const bookUtil = require('./book')
 const db = require('./database')
 
-require('dotenv').config(path.join(__dirname , '.env'))
-require('dotenv').config(path.join(__dirname , '.env.local'))
+const path = require('path')
+
+require('dotenv').config(path.join(__dirname ,'.env'))
+require('dotenv').config(path.join(__dirname ,'.env.local'))
 
 app.use(cors())
 app.use(express.json())
