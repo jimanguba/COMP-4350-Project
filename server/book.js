@@ -1,9 +1,9 @@
 class Book {
   constructor (name, writer, pageCount, type) {
-    (this.title = name),
-    (this.author = writer),
-    (this.pages = pageCount),
-    (this.genre = type)
+    this.title = name
+    this.author = writer
+    this.pages = pageCount
+    this.genre = type
   }
 
   static example = new Book(

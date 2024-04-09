@@ -44,31 +44,7 @@ const ReviewsList = ({ reviews: initialReviews, bookId }) => {
 
   // Function to check if the review was created exactly days ago
   // Function to check if the review was created exactly days ago
-  const isReviewFromExactDaysAgo = (reviewDate, daysAgo) => {
-    const startOfDay = new Date()
-    startOfDay.setHours(0, 0, 0, 0)
-    startOfDay.setDate(startOfDay.getDate() - daysAgo)
-
-    const endOfDay = new Date()
-    endOfDay.setHours(23, 59, 59, 999)
-    endOfDay.setDate(endOfDay.getDate() - daysAgo)
-
-    return reviewDate >= startOfDay && reviewDate <= endOfDay
-  }
-  const applyDateFilter = (review, dateFilter) => {
-    const reviewDate = new Date(review.review_date)
-
-    switch (dateFilter) {
-      case '1':
-        return wasReviewCreatedInTimeFrame(reviewDate, 1)
-      case '7':
-        return wasReviewCreatedInTimeFrame(reviewDate, 7)
-      case '30':
-        return wasReviewCreatedInTimeFrame(reviewDate, 30)
-      default:
-        return true // If no date filter is set, show all reviews
-    }
-  }
+  // Removed extra code
 
   const filteredReviews = reviews
     .filter((review) => !filter || review.rating === filter) // Apply rating filter if set

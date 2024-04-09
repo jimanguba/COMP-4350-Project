@@ -4,10 +4,9 @@
  * @param {function} updateBookDetails - Callback to update the Book
  */
 
-import React from 'react'
 import axios from 'axios'
 import '../styles/BookDetailsCard.css'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 export default function BookDetailsCard ({ book, setBook }) {
   // Are we editing currently? If not, disable inputs and style them properly

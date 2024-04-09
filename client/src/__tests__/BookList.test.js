@@ -97,7 +97,7 @@ describe('BookList', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getAllByText('Completed Books')).length >= 2
+      expect(screen.getAllByText('Completed Books').length >= 2)
     })
   })
 

@@ -41,11 +41,10 @@ export default function ViewBook () {
   return (
     <div style={{ display: 'flex' }}>
       <Sidebar />
-      {loading ? 
-        (
-          <p className='text-center'>Loading...</p>
-        ) : (
-        <div className='viewBook'>
+      {loading 
+        ? (<p className='text-center'>Loading...</p>) 
+        : (
+          <div className='viewBook'>
           <BookCoverCard book={book} size='large' />
           <div className='readingStateContainer'>
             <ToReadButton bookID={bookID} />

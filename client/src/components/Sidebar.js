@@ -18,9 +18,6 @@ const sidebar = () => {
         <MenuItem
           icon={
             <MenuOutlinedIcon
-              onClick={() => {
-                collapseSidebar()
-              }}
             />
           }
         >

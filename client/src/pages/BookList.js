@@ -66,6 +66,7 @@ export default function BookList ({ type }) {
                 if (book.title) {
                   return book.title.toLowerCase().includes(query.toLowerCase())
                 }
+                return false
               })
               .map((book) => (
                 <Link key={book.bookID} to={`/view-book/${book.bookID}`}>
@@ -78,4 +79,4 @@ export default function BookList ({ type }) {
       </div>
     </div>
   )
-}
+} 
