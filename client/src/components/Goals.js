@@ -7,7 +7,6 @@ import '../styles/Goals.css'
 
 const GoalForm = () => {
   const cookies = new Cookies(null, { path: '/' })
-  const setLoading = useState(true)
   const [data, setData] = useState([])
   const [goalText, setGoalText] = useState('')
   const [goalStauts, setGoalStatus] = useState('')
@@ -15,7 +14,6 @@ const GoalForm = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true)
       try {
         const { data: response } = await axios.get('/getGoals', {
           params: { userId: cookies.get('userID') }
@@ -24,7 +22,6 @@ const GoalForm = () => {
       } catch (error) {
         console.error(error.message)
       }
-      setLoading(false)
     }
 
     fetchData()

@@ -9,8 +9,11 @@ const db = require('./database')
 
 const path = require('path')
 
-require('dotenv').config(path.join(__dirname ,'.env'))
-require('dotenv').config(path.join(__dirname ,'.env.local'))
+const envPath = path.join(__dirname, '.env')
+require('dotenv').config({ path: envPath })
+
+const envPathLocal = path.join(__dirname, '.env.local')
+require('dotenv').config({ path: envPathLocal })
 
 app.use(cors())
 app.use(express.json())
@@ -220,11 +223,11 @@ app.get('/login', async (req, res) => {
         'SELECT userPassword, userID FROM users WHERE userName = $1',
         [username]
       )
-      const pw = result2.rows[0].userPassword
+      const pw = result2.rows[0].userpassword
 
       if (await bcrypt.compare(password, pw)) {
         console.log('Login Success')
-        res.status(200).json({ data: result2.rows[0].userID })
+        res.status(200).json({ data: result2.rows[0].userid })
       } else {
         return res
           .status(400)
