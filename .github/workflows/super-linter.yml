@@ -14,22 +14,20 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Set up Git repository
         uses: actions/checkout@v2
+        with:
+          # Only fetch JavaScript files
+          path: ./
+          ref: main
+          # Create a sparse checkout to ignore all files except JavaScript files
+          sparse-checkout: |
+            !**/*.js
+            /*.js
 
-      - name: Setup Super-Linter
-        uses: github/super-linter@v4
-        env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_ALL_CODEBASE: false
-          IGNORE_PATH: |
-            **/*.css
-            **/*.html
-            **/*.json
-            **/*.md
-            **/*.yaml
-            **/*.yml
-          JAVASCRIPT_ES_DEFAULT_ENABLED: true
-          JAVASCRIPT_ES_USE_CACHE: false
+      - name: Setup ESLint
+        uses: andstor/eslint-action@v4
+        with:
+          args: .
+          extensions: js
 ...
