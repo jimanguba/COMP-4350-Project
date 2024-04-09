@@ -56,8 +56,7 @@ export default function ViewBook () {
             )}
             <ReviewsList reviews={reviews} bookId={bookID} />
           </div>
-        )
-      }
+          )}
     </div>
   )
 }

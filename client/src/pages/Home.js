@@ -42,10 +42,10 @@ function Home () {
               {
                 loading
                   ? (
-                      <tr>
-                      <td colSpan='5' className='text-center'>
-                        Loading...
-                      </td>
+                    <tr>
+                    <td colSpan='5' className='text-center'>
+                      Loading...
+                    </td>
                     </tr>
                   )
                   : (
