@@ -25,9 +25,15 @@ jobs:
             !**/*.js
             /*.js
 
-      - name: Setup ESLint
-        uses: andstor/eslint-action@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          args: .
-          extensions: js
+          node-version: '14'
+
+      - name: Install ESLint
+        run: npm install eslint
+
+      - name: Lint JavaScript files
+        run: npx eslint . --ext .js
+
 ...
