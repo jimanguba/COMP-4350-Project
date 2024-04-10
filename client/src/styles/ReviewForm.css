@@ -1,27 +1,29 @@
 * {
   box-sizing: border-box;
 }
-.ReviewForm{
+.ReviewForm {
   box-sizing: border-box;
   max-width: 1200px; /* Remove any max-width restrictions */
-  margin: 20px auto; /* Center the form within its parent */box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  margin: 20px auto; /* Center the form within its parent */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 
   padding-top: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
-  width: 80%; 
+  width: 80%;
   background: white;
   border: 1px solid #e1e1e1;
   border-radius: 10px; /* Consistent border-radius */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent box-shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Consistent box-shadow */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 /* Ensure buttons inside the form are not stretched */
-.ReviewForm .submit-btn, .submit-btn {
+.ReviewForm .submit-btn,
+.submit-btn {
   width: auto; /* Let the button size according to its content */
   padding: 10px 20px;
   background-color: #007bff;
@@ -31,83 +33,81 @@
   cursor: pointer;
   margin-top: 10px; /* Spacing above the button */
 }
-  
-  .rating {
-    margin-bottom: 10px;
-  }
-  
-  .star {
-    color: #ffd700; /* Gold color for stars */
-    cursor: pointer;
-  }
-  
-  .tags select {
-    width: 100%;
-    padding: 5px 10px;
-    margin-bottom: 10px;
-  }
-  .genre-button {
-    padding: 7px;
-    margin: 0 3px 3px 0;
-    border: 1px solid #ddd;
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  .genre-button:hover {
-    border-color: #ccc;
-  }
-  .genre-button.selected {
-    background-color: #007bff; /* or any color you prefer */
-    color: white;
-    border-color: #0056b3;
-  }
-  .review-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #e1e1e1;
-    border-radius: 4px;
-  }
-  
-  .review-input:focus {
-    outline: none;
-    border-color: #007bff;
-  }
 
-  .submit-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .review-card {
-    background: #fff;
-    border: 1px solid #e1e1e1;
-    margin-bottom: 10px;
-    padding: 15px;
-  }
+.rating {
+  margin-bottom: 10px;
+}
 
-  
-  .reviewer-name {
-    font-weight: bold;
-  }
-  
-  .review-rating {
-    display: flex;
-    align-items: left;
-  }
-  
-  .verified-purchase-icon {
-    color: #28a745; /* Green color for verified icon */
-    margin-left: 5px;
-  }
-  
-  .review-content {
-    font-size: 0.9rem;
-  }
-  
-  .review-date {
-    font-size: 0.8rem;
-    color: #666;
-  }
-  
+.star {
+  color: #ffd700; /* Gold color for stars */
+  cursor: pointer;
+}
+
+.tags select {
+  width: 100%;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+.genre-button {
+  padding: 7px;
+  margin: 0 3px 3px 0;
+  border: 1px solid #ddd;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.genre-button:hover {
+  border-color: #ccc;
+}
+.genre-button.selected {
+  background-color: #007bff; /* or any color you prefer */
+  color: white;
+  border-color: #0056b3;
+}
+.review-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e1e1e1;
+  border-radius: 4px;
+}
+
+.review-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.review-card {
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+.reviewer-name {
+  font-weight: bold;
+}
+
+.review-rating {
+  display: flex;
+  align-items: left;
+}
+
+.verified-purchase-icon {
+  color: #28a745; /* Green color for verified icon */
+  margin-left: 5px;
+}
+
+.review-content {
+  font-size: 0.9rem;
+}
+
+.review-date {
+  font-size: 0.8rem;
+  color: #666;
+}
