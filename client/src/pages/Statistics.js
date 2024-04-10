@@ -8,6 +8,7 @@ import '../styles/StatisticsCalendar.css'
 import Sidebar from '../components/Sidebar'
 import { API_URL } from '../proxy'
 
+
 function Statistics ({ userid }) {
   const [calendarData, setCalendarData] = useState([])
   const [selectedDate, setSelectedDate] = useState(null)
