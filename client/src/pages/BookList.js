@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import '../styles/BookList.css'
 import Sidebar from '../components/Sidebar'
 import Cookies from 'universal-cookie'
+import { API_URL } from '../proxy'
 
 export default function BookList ({ type }) {
   const cookies = new Cookies(null, { path: '/' })
@@ -23,13 +24,13 @@ export default function BookList ({ type }) {
     const fetchData = async () => {
       try {
         if (type === 'all') {
-          const { data } = await axios.get('/books')
+          const { data } = await axios.get(`${API_URL}/books`)
           setBooks(data)
         } else if (type === 'completed') {
-          const { data } = await axios.get(`/users/${userid}/completedBooks`)
+          const { data } = await axios.get(`${API_URL}/users/${userid}/completedBooks`)
           setBooks(data)
         } else if (type === 'to-read') {
-          const { data } = await axios.get(`/users/${userid}/toRead`)
+          const { data } = await axios.get(`${API_URL}/users/${userid}/toRead`)
           setBooks(data)
         }
       } catch (error) {

@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar'
 import Cookies from 'universal-cookie'
 
 import '../styles/Goals.css'
+import { API_URL } from '../proxy'
 
 const GoalForm = () => {
   const cookies = new Cookies(null, { path: '/' })
@@ -15,7 +16,7 @@ const GoalForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: response } = await axios.get('/getGoals', {
+        const { data: response } = await axios.get(`${API_URL}/getGoals`, {
           params: { userid: cookies.get('userID') }
         })
         setData(response)
@@ -30,7 +31,7 @@ const GoalForm = () => {
   const addGoal = (event) => {
     event.preventDefault()
     axios
-      .get('/goalCreate', {
+      .get(`${API_URL}/goalCreate`, {
         params: {
           goalText,
           goalStauts,

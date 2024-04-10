@@ -9,6 +9,7 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import BookList from '../pages/BookList'
 import { MemoryRouter } from 'react-router-dom'
+import { API_URL } from '../proxy'
 
 describe('BookList', () => {
   let mock
@@ -38,7 +39,7 @@ describe('BookList', () => {
         genre: 'Non-fiction'
       }
     ]
-    mock.onGet('/books').reply(200, mockedBooks)
+    mock.onGet(`${API_URL}/books`).reply(200, mockedBooks)
 
     render(
       <MemoryRouter>
@@ -69,7 +70,7 @@ describe('BookList', () => {
         genre: 'Non-fiction'
       }
     ]
-    mock.onGet('/books').reply(200, mockedBooks)
+    mock.onGet(`${API_URL}/books`).reply(200, mockedBooks)
 
     render(
       <MemoryRouter>

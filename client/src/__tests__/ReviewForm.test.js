@@ -8,6 +8,7 @@ import '@testing-library/jest-dom/extend-expect'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import ReviewForm from '../components/ReviewForm' // Update the path as necessary
+import { API_URL } from '../proxy'
 
 // Mocking the universal-cookie module
 jest.mock('universal-cookie')
@@ -33,7 +34,7 @@ describe('ReviewForm', () => {
   })
 
   it('submits a review with valid data', async () => {
-    mockAxios.onPost('/reviews/new').reply(200, {
+    mockAxios.onPost(`${API_URL}/reviews/new`).reply(200, {
       message: 'Review added successfully'
     })
 

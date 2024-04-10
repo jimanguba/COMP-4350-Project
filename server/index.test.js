@@ -67,7 +67,7 @@ test('Correct user and password log in. Status 200 should be returned', (done) =
   pool.query.mockResolvedValueOnce({
     rows: [
       {
-        user_password:
+        userpassword:
           '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu'
       }
     ],
@@ -112,7 +112,7 @@ test('Status 400 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({
     rows: [
       {
-        user_password:
+        userpassword:
           '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu'
       }
     ],
@@ -169,7 +169,7 @@ test('Status 400 should be returned', (done) => {
   pool.query.mockResolvedValueOnce({
     rows: [
       {
-        user_password:
+        userpassword:
           '$2a$10$b.DX3Oqmcdb69ItAhL8J/uFg3RtJEP3hc1Io8KLdZREiwMOw4Tmeu'
       }
     ],

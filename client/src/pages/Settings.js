@@ -4,6 +4,7 @@ import axios from 'axios'
 import TextField from '@mui/material/TextField'
 import Cookies from 'universal-cookie'
 import Sidebar from '../components/Sidebar'
+import { API_URL } from '../proxy'
 
 const SettingsForm = () => {
   const [password, setPassword] = useState('')
@@ -12,7 +13,7 @@ const SettingsForm = () => {
   const resetGoals = (event) => {
     event.preventDefault()
     axios
-      .get('/resetGoals', {
+      .get(`${API_URL}/resetGoals`, {
         params: {
           userid: cookies.get('userID')
         }
@@ -26,7 +27,7 @@ const SettingsForm = () => {
   const changePassword = (event) => {
     event.preventDefault()
     axios
-      .get('/changePassword', {
+      .get(`${API_URL}/changePassword`, {
         params: {
           userid: cookies.get('userID'),
           password

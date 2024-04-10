@@ -44,7 +44,7 @@ test('getBook runs the correct SELECT statement with the correct parameter', () 
   const result = sut.getBook(1)
 
   expect(pool.query).toBeCalledTimes(1)
-  expect(pool.query).toBeCalledWith('SELECT * FROM books WHERE book_id = $1', [
+  expect(pool.query).toBeCalledWith('SELECT * FROM books WHERE bookID = $1', [
     1
   ])
   expect(result === exampleBook)
@@ -55,7 +55,7 @@ test('getBook recieves invalid book back and returns undefined', () => {
   const result = sut.getBook(1)
 
   expect(pool.query).toBeCalledTimes(1)
-  expect(pool.query).toBeCalledWith('SELECT * FROM books WHERE book_id = $1', [
+  expect(pool.query).toBeCalledWith('SELECT * FROM books WHERE bookID = $1', [
     1
   ])
   expect(!result)

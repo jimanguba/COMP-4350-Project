@@ -6,6 +6,7 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import '../styles/StatisticsCalendar.css'
 import Sidebar from '../components/Sidebar'
+import { API_URL } from '../proxy'
 
 function Statistics ({ userid }) {
   const [calendarData, setCalendarData] = useState([])
@@ -81,7 +82,7 @@ function Statistics ({ userid }) {
   useEffect(() => {
     // Fetch calendar data
     axios
-      .get(`/users/${userid}/calendar-data`)
+      .get(`${API_URL}/users/${userid}/calendar-data`)
       .then((response) => {
         setCalendarData(response.data)
       })

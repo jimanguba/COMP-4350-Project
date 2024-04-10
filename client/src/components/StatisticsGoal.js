@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import ProgressBar from '../components/ProgressBar'
+import { API_URL } from '../proxy'
 
 function StatisticsGoal ({ userid }) {
   const [progress, setProgress] = useState(0)
@@ -13,14 +14,14 @@ function StatisticsGoal ({ userid }) {
     const fetchData = async () => {
       try {
         // Fetch user data including reading goal
-        const userDataResponse = await axios.get(`/users/${userid}`)
+        const userDataResponse = await axios.get(`${API_URL}/users/${userid}`)
         const { bookgoal, username } = userDataResponse.data
         setReadingGoal(bookgoal)
         setUsername(username)
 
         // Fetch reading progress after updating the reading goal
         const readingProgressResponse = await axios.get(
-          `/users/${userid}/books/num_completed`
+          `${API_URL}/users/${userid}/books/num_completed`
         )
         const countData = readingProgressResponse.data[0]
         if (

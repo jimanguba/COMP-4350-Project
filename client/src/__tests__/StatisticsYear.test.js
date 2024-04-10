@@ -2,6 +2,7 @@ import React from 'react'
 import { render, waitFor } from '@testing-library/react'
 import axios from 'axios'
 import StatisticsYear from '../components/StatisticsYear'
+import { API_URL } from '../proxy'
 
 jest.mock('axios')
 
@@ -21,7 +22,7 @@ describe('StatisticsYear component', () => {
     axios.get.mockResolvedValueOnce(mockAverageTime)
     axios.get.mockResolvedValueOnce(mockAverageRating)
 
-    const { getByText, getByAltText } = render(<StatisticsYear user_id={1} />)
+    const { getByText, getByAltText } = render(<StatisticsYear userid={1} />)
 
     await waitFor(() => {
       expect(
@@ -32,8 +33,8 @@ describe('StatisticsYear component', () => {
     })
 
     // Check if API requests were made with the correct URLs
-    expect(axios.get).toHaveBeenCalledWith('/books/1/average_time')
-    expect(axios.get).toHaveBeenCalledWith('/users/1/average_rating')
+    expect(axios.get).toHaveBeenCalledWith(`${API_URL}/books/1/average_time`)
+    expect(axios.get).toHaveBeenCalledWith(`${API_URL}/users/1/average_rating`)
 
     // Check if API requests were made only once
     expect(axios.get).toHaveBeenCalledTimes(2)
@@ -43,7 +44,7 @@ describe('StatisticsYear component', () => {
     axios.get.mockRejectedValueOnce(new Error('Failed to fetch average time'))
     axios.get.mockRejectedValueOnce(new Error('Failed to fetch average rating'))
 
-    render(<StatisticsYear user_id={1} />)
+    render(<StatisticsYear userid={1} />)
 
     await waitFor(() => {
       expect(console.error).toHaveBeenCalledWith(
@@ -56,8 +57,8 @@ describe('StatisticsYear component', () => {
       )
     })
 
-    expect(axios.get).toHaveBeenCalledWith('/books/1/average_time')
-    expect(axios.get).toHaveBeenCalledWith('/users/1/average_rating')
+    expect(axios.get).toHaveBeenCalledWith(`${API_URL}/books/1/average_time`)
+    expect(axios.get).toHaveBeenCalledWith(`${API_URL}/users/1/average_rating`)
 
     expect(axios.get).toHaveBeenCalledTimes(2)
   })

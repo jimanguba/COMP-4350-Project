@@ -7,13 +7,13 @@ jest.mock('axios')
 
 describe('StatisticsGoal component', () => {
   it('renders correctly with user data and reading progress', async () => {
-    const mockUserData = { data: { book_goal: 10, user_name: 'Test User' } }
+    const mockUserData = { data: { bookgoal: 10, username: 'Test User' } }
     const mockReadingProgress = { data: [{ count: 5 }] }
 
     axios.get.mockResolvedValueOnce(mockUserData)
     axios.get.mockResolvedValueOnce(mockReadingProgress)
 
-    render(<StatisticsGoal user_id={1} />)
+    render(<StatisticsGoal userid={1} />)
 
     await waitFor(() => {
       expect(document.body).toHaveTextContent("Test User's Reading Statistics")

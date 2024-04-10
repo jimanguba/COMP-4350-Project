@@ -5,6 +5,7 @@ import { faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons'
 import '../styles/ReviewForm.css' // Make sure you have the correct path to your CSS file
 import Cookies from 'universal-cookie'
 import axios from 'axios'
+import { API_URL } from '../proxy'
 
 // Define the genres or tags for the dropdown
 const genres = [
@@ -56,7 +57,7 @@ const ReviewForm = ({ addReview, bookid }) => {
       tags: selectedTags
     }
     try {
-      const response = await axios.post('/reviews/new', newReview)
+      const response = await axios.post(`${API_URL}/reviews/new`, newReview)
 
       // Assuming your addReview prop updates the parent state
       addReview(response.data)

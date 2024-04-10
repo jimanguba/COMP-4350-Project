@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react'
 import '../styles/ReadingStateButton.css'
 import Cookies from 'universal-cookie'
 import axios from 'axios'
+import { API_URL } from '../proxy'
 
 export default function ToReadButton ({ bookid }) {
   const cookies = new Cookies(null, { path: '/' })
@@ -15,14 +16,14 @@ export default function ToReadButton ({ bookid }) {
 
   useEffect(() => {
     axios
-      .get(`/users/${userID}/toRead/${bookid}`)
+      .get(`${API_URL}/users/${userID}/toRead/${bookid}`)
       .then((response) => setOnToRead(response.data.toRead))
       .catch((error) => console.error('Error fetching to-read:', error))
   }, [])
 
   const toggleReadingState = () => {
     axios
-      .put(`/users/${userID}/toRead/${bookid}`, { toRead: !onToRead })
+      .put(`${API_URL}/users/${userID}/toRead/${bookid}`, { toRead: !onToRead })
       .then(() => setOnToRead(!onToRead))
       .catch((error) => console.error('Error updating to-read status:', error))
   }

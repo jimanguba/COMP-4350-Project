@@ -1,6 +1,7 @@
 import '../components/BookTable'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import { API_URL } from '../proxy'
 
 function App () {
   const [data, setData] = useState([])
@@ -8,7 +9,7 @@ function App () {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: response } = await axios.get('/books')
+        const { data: response } = await axios.get(`${API_URL}/books`)
         setData(response)
       } catch (error) {
         console.error(error.message)

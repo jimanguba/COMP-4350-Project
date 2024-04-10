@@ -8,25 +8,26 @@ import '@testing-library/jest-dom/extend-expect'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import ReviewCard from '../components/ReviewCard' // Adjust the import path according to your project structure
+import { API_URL } from '../proxy'
 
 describe('ReviewCard', () => {
   const reviewMock = {
-    review_id: 'review123', // Add review_id to match your component logic
-    user_id: 'user123',
-    review_title: 'Great Product',
+    reviewid: 'review123', // Add review_id to match your component logic
+    userid: 'user123',
+    reviewTitle: 'Great Product',
     rating: 5,
     verifiedPurchase: true,
     comment: 'This product is amazing!',
     tags: ['Durable', 'Stylish'],
-    review_date: '2023-01-01'
+    reviewDate: '2023-01-01'
   }
 
   it('renders correctly with a given review', async () => {
     const mockAxios = new MockAdapter(axios)
     // Mocking the user name fetching
-    mockAxios.onGet(`/user/${reviewMock.user_id}`).reply(200, 'John Doe')
+    mockAxios.onGet(`${API_URL}/user/${reviewMock.userid}`).reply(200, 'John Doe')
     // Mocking the replies fetching
-    mockAxios.onGet(`/reviews/${reviewMock.review_id}/replies`).reply(200, [
+    mockAxios.onGet(`${API_URL}/reviews/${reviewMock.reviewid}/replies`).reply(200, [
       {
         reply_text: 'Thanks for your feedback!',
         user_id: 'user456',
@@ -44,7 +45,7 @@ describe('ReviewCard', () => {
 
   it('fetches and displays the username correctly', async () => {
     const mockAxios = new MockAdapter(axios)
-    mockAxios.onGet(`/user/${reviewMock.user_id}`).reply(200, 'John Doe')
+    mockAxios.onGet(`${API_URL}/user/${reviewMock.userid}`).reply(200, 'John Doe')
 
     render(<ReviewCard review={reviewMock} addReply={() => {}} />)
 

@@ -7,6 +7,7 @@
 import axios from 'axios'
 import '../styles/BookDetailsCard.css'
 import React, { useState } from 'react'
+import { API_URL } from '../proxy'
 
 export default function BookDetailsCard ({ book, setBook }) {
   // Are we editing currently? If not, disable inputs and style them properly
@@ -17,14 +18,14 @@ export default function BookDetailsCard ({ book, setBook }) {
     author: book.author,
     genre: book.genre,
     pages: book.pages,
-    book_id: book.bookid
+    bookid: book.bookid
   }
 
   const editButtonCallback = async () => {
     console.log('editing:', editing)
     if (editing) {
       try {
-        await axios.put(`/book/${newBook.bookid}`, newBook)
+        await axios.put(`${API_URL}/book/${newBook.bookid}`, newBook)
         setBook(newBook)
       } catch (error) {
         console.error('Error updating book details:', error)

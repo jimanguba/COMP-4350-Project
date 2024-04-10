@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons'
 import { faStarHalfAlt as faStarHalf, faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons'
 import BookImg from '../images/book.png'
+import { API_URL } from '../proxy'
 
 function StatisticsYear ({ userid }) {
   const [averageReadingTime, setAverageReadingTime] = useState(null)
@@ -36,7 +37,7 @@ function StatisticsYear ({ userid }) {
   useEffect(() => {
     // Fetch average reading time
     axios
-      .get(`/books/${userid}/average_time`)
+      .get(`${API_URL}/books/${userid}/average_time`)
       .then((response) => {
         setAverageReadingTime(response.data.average_time)
       })
@@ -45,7 +46,7 @@ function StatisticsYear ({ userid }) {
       })
 
     axios
-      .get(`/users/${userid}/average_rating`)
+      .get(`${API_URL}/users/${userid}/average_rating`)
       .then((response) => {
         setAverageRating(response.data.average_rating)
       })

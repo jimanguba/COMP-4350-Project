@@ -3,6 +3,7 @@ import axios from 'axios'
 import BookCoverCard from './BookCoverCard'
 import { Link } from 'react-router-dom'
 import '../styles/GenreRecommendations.css'
+import { API_URL } from '../proxy'
 
 const GenreRecommendations = ({ genre, currentBookId }) => {
   const [relatedBooks, setRelatedBooks] = useState(null)
@@ -19,7 +20,7 @@ const GenreRecommendations = ({ genre, currentBookId }) => {
       setIsLoading(true)
       try {
         // Assuming the server will exclude the current book based on the `bookid` query parameter
-        const response = await axios.get(`/books/genre/${genre}`, {
+        const response = await axios.get(`${API_URL}/books/genre/${genre}`, {
           params: { bookid: currentBookId }
         })
 
