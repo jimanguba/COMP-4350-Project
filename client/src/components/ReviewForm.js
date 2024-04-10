@@ -27,7 +27,7 @@ const ReviewForm = ({ addReview, bookid }) => {
 
   useEffect(() => {
     const cookies = new Cookies()
-    const userIdFromCookie = cookies.get('userid') // Read the userid cookie
+    const userIdFromCookie = cookies.get('userID') // Read the userid cookie
     if (userIdFromCookie) {
       setUserId(userIdFromCookie) // Set the user ID state if the cookie exists
     }
@@ -47,13 +47,13 @@ const ReviewForm = ({ addReview, bookid }) => {
     const dateString = currentDate.toISOString().slice(0, 10)
 
     const newReview = {
-      review_title: reviewTitle,
-      book_id: bookid,
-      user_id: userid,
+      reviewTitle: reviewTitle,
+      bookid: bookid,
+      userid: userid,
       rating,
-      comment: reviewtext,
-      review_date: datestring,
-      tags: selectedtags
+      comment: reviewText,
+      reviewDate: dateString,
+      tags: selectedTags
     }
     try {
       const response = await axios.post('/reviews/new', newReview)

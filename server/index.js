@@ -35,11 +35,7 @@ app.get('/signup', async (req, res) => {
 
   try {
     const result1 = await pool.query(
-<<<<<<< HEAD
-      'SELECT count(*) FROM users WHERE username = $1 GROUP BY userid',
-=======
       'SELECT count(*) FROM users WHERE userName = $1 GROUP BY userid',
->>>>>>> f629d74cf5514198f6c6ed5d3fd277a687a72e8d
       [username]
     )
     if (result1.rowCount !== 0) {
@@ -58,11 +54,7 @@ app.get('/signup', async (req, res) => {
         )
 
         const result4 = await pool.query(
-<<<<<<< HEAD
-          'SELECT userid FROM users WHERE username = $1',
-=======
           'SELECT userid FROM users WHERE userName = $1',
->>>>>>> f629d74cf5514198f6c6ed5d3fd277a687a72e8d
           [username]
         )
 
@@ -290,7 +282,6 @@ app.put('/book/:bookid', async (req, res) => {
 app.post('/reviews/new', async (req, res) => {
   const { bookid, userid, rating, comment, reviewTitle, reviewDate, tags } =
     req.body
-
   if (
     !bookid ||
     !userid ||
@@ -663,7 +654,7 @@ app.get('/changePassword', async (req, res) => {
   const partsArray = str.split('&')
   const userIdStr = partsArray[0].split('=')
   const passwordStr = partsArray[1].split('=')
-  const userid = userIdStr[1]
+  const userId = userIdStr[1]
   const password = passwordStr[1]
 
   const salt = await bcrypt.genSalt(10)

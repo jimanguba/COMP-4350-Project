@@ -16,7 +16,7 @@ const GoalForm = () => {
     const fetchData = async () => {
       try {
         const { data: response } = await axios.get('/getGoals', {
-          params: { userid: cookies.get('userid') }
+          params: { userid: cookies.get('userID') }
         })
         setData(response)
       } catch (error) {
@@ -35,7 +35,7 @@ const GoalForm = () => {
           goalText,
           goalStauts,
           goalNumber,
-          userid: cookies.get('userid')
+          userid: cookies.get('userID')
         }
       })
       .catch(function (error) {

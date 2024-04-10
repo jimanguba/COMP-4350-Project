@@ -15,7 +15,7 @@ import Cookies from 'universal-cookie'
 
 export default function BookList ({ type }) {
   const cookies = new Cookies(null, { path: '/' })
-  const userid = cookies.get('userid')
+  const userid = cookies.get('userID')
   const [query, setQuery] = useState('')
   const [books, setBooks] = useState()
 
@@ -26,10 +26,10 @@ export default function BookList ({ type }) {
           const { data } = await axios.get('/books')
           setBooks(data)
         } else if (type === 'completed') {
-          const { data } = await axios.get(`/users/${userID}/completedBooks`)
+          const { data } = await axios.get(`/users/${userid}/completedBooks`)
           setBooks(data)
         } else if (type === 'to-read') {
-          const { data } = await axios.get(`/users/${userID}/toRead`)
+          const { data } = await axios.get(`/users/${userid}/toRead`)
           setBooks(data)
         }
       } catch (error) {

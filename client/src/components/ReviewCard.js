@@ -52,7 +52,7 @@ const ReviewCard = ({ review, addReply }) => {
     if (reviewReplies.length > 0) {
       // Get unique userids from the replies
       const uniqueUserIds = [
-        ...new Set(reviewReplies.map((reply) => reply.userid))
+        ...new Set(reviewReplies.map((reply) => reply.user_id))
       ]
       fetchReplyUserNames(uniqueUserIds)
     }
@@ -68,7 +68,7 @@ const ReviewCard = ({ review, addReply }) => {
   useEffect(() => {
     if (reviewReplies.length > 0) {
       const uniqueUserIds = [
-        ...new Set(reviewReplies.map((reply) => reply.userid))
+        ...new Set(reviewReplies.map((reply) => reply.user_id))
       ]
       fetchReplyUserNames(uniqueUserIds)
     }
@@ -86,12 +86,12 @@ const ReviewCard = ({ review, addReply }) => {
   const submitReply = async (replyText) => {
     try {
       const cookies = new Cookies()
-      const userIdFromCookie = cookies.get('userid') // Read the userid cookie
+      const userIdFromCookie = cookies.get('userID') // Read the userid cookie
       const response = await axios.post(
         `/reviews/${review.reviewid}/replies`,
         {
           userid: userIdFromCookie, // This should be the ID of the user making the reply
-          reply_text: replyText
+          replyText: replyText
         }
       )
 
@@ -141,7 +141,7 @@ const ReviewCard = ({ review, addReply }) => {
           <div key={index} className='review-reply'>
             <div className='review-reply-header'>
               <span className='reply-user-name'>
-                {replyUserNames[reply.userid] || 'Anonymous'}
+                {replyUserNames[reply.user_id] || 'Anonymous'}
               </span>
               <span className='reply-date'>
                 {new Date(reply.reply_date).toLocaleDateString()}

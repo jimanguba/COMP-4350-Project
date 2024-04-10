@@ -125,7 +125,7 @@ async function updateBook (book) {
 
 function insertReply (reviewID, userID, replyText) {
   return pool.query(
-    'INSERT INTO replies (reviewID, userID, replyText) VALUES ($1, $2, $3) RETURNING *',
+    'INSERT INTO replies (review_id, user_id, reply_text) VALUES ($1, $2, $3) RETURNING *',
     [reviewID, userID, replyText]
   )
 }

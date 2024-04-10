@@ -17,7 +17,7 @@ const wasReviewCreatedInTimeFrame = (reviewDate, daysAgo) => {
   return isWithinInterval(reviewDate, { start, end })
 }
 
-const ReviewsList = ({ reviews: initialReviews, bookId }) => {
+const ReviewsList = ({ reviews: initialReviews, bookid }) => {
   const [reviews, setReviews] = useState(
     Array.isArray(initialReviews) ? initialReviews : []
   )
@@ -65,7 +65,7 @@ const ReviewsList = ({ reviews: initialReviews, bookId }) => {
 
   return (
     <div className='reviews-container'>
-      <ReviewForm addReview={addReview} bookId={bookId} />
+      <ReviewForm addReview={addReview} bookid={bookid} />
       <div
         style={{
           display: 'flex',
