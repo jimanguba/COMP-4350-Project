@@ -25,7 +25,7 @@ const LoginForm = () => {
       .then((response) => {
         const test1 = JSON.parse(JSON.stringify(response.data))
         if (response.status === 200) {
-          cookies.set('userid', test1.data)
+          cookies.set('userID', test1.data)
           navigate('/home')
         }
       })
@@ -49,7 +49,7 @@ const LoginForm = () => {
       .then((response) => {
         const test1 = JSON.parse(JSON.stringify(response.data))
         if (response.status === 200) {
-          cookies.set('userid', test1.data)
+          cookies.set('userID', test1.data)
           navigate('/home')
         }
       })
