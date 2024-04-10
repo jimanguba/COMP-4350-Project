@@ -69,7 +69,7 @@ export default function BookList ({ type }) {
                 return false
               })
               .map((book) => (
-                <Link key={book.bookID} to={`/view-book/${book.bookID}`}>
+                <Link key={book.bookid} to={`/view-book/${book.bookid}`}>
                   <li>
                     <BookCoverCard book={book} size='small' />
                   </li>

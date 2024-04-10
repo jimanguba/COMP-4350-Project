@@ -17,7 +17,7 @@ export default function BookDetailsCard ({ book, setBook }) {
     author: book.author,
     genre: book.genre,
     pages: book.pages,
-    book_id: book.book_id
+    book_id: book.bookid
   }
 
   const editButtonCallback = async () => {

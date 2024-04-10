@@ -15,12 +15,12 @@ const ReviewCard = ({ review, addReply }) => {
     const names = {}
     try {
       const responses = await Promise.all(
-        uniqueUserIds.map((userId) => axios.get(`/users/${userId}`))
+        uniqueUserIds.map((userid) => axios.get(`/users/${userid}`))
       )
       responses.forEach((response) => {
         const user = response.data
-        console.log('User detail:', user) // This should show the user object including the user_name field
-        names[user.user_id] = user.user_name // This should match the field from your user object
+        console.log('User detail:', user) // This should show the user object including the username field
+        names[user.userid] = user.username // This should match the field from your user object
       })
     } catch (error) {
       console.error('Error fetching reply user names:', error)
@@ -33,9 +33,10 @@ const ReviewCard = ({ review, addReply }) => {
     // Function to fetch the user name from the API
     const fetchUserName = async () => {
       try {
-        const response = await axios.get(`/user/${review.user_id}`)
+        console.log('Review User ID:', review.userid)
+        const response = await axios.get(`/user/${review.userid}`)
         setUserName(response.data)
-        console.log(response.data)
+        console.log('Response data', response.data)
       } catch (error) {
         console.error('Error fetching user name:', error)
         setUserName('Anonymous')
@@ -43,7 +44,7 @@ const ReviewCard = ({ review, addReply }) => {
     }
     const fetchReplies = async () => {
       try {
-        const response = await axios.get(`/reviews/${review.review_id}/replies`)
+        const response = await axios.get(`/reviews/${review.reviewid}/replies`)
         setReviewReplies(response.data)
       } catch (error) {
         console.error('Error fetching replies:', error)
@@ -51,25 +52,25 @@ const ReviewCard = ({ review, addReply }) => {
     }
 
     if (reviewReplies.length > 0) {
-      // Get unique user_ids from the replies
+      // Get unique userids from the replies
       const uniqueUserIds = [
-        ...new Set(reviewReplies.map((reply) => reply.user_id))
+        ...new Set(reviewReplies.map((reply) => reply.userid))
       ]
       fetchReplyUserNames(uniqueUserIds)
     }
 
-    // Call the function if user_id is available
-    if (review.user_id) {
+    // Call the function if userid is available
+    if (review.userid) {
       fetchUserName()
     }
     fetchReplies()
-  }, [review.user_id, review.review_id])
+  }, [review.userid, review.reviewid])
 
   // useEffect for fetching reply user names, triggered when reviewReplies changes
   useEffect(() => {
     if (reviewReplies.length > 0) {
       const uniqueUserIds = [
-        ...new Set(reviewReplies.map((reply) => reply.user_id))
+        ...new Set(reviewReplies.map((reply) => reply.userid))
       ]
       fetchReplyUserNames(uniqueUserIds)
     }
@@ -89,9 +90,9 @@ const ReviewCard = ({ review, addReply }) => {
       const cookies = new Cookies()
       const userIdFromCookie = cookies.get('userID') // Read the userID cookie
       const response = await axios.post(
-        `/reviews/${review.review_id}/replies`,
+        `/reviews/${review.reviewid}/replies`,
         {
-          user_id: userIdFromCookie, // This should be the ID of the user making the reply
+          userid: userIdFromCookie, // This should be the ID of the user making the reply
           reply_text: replyText
         }
       )
@@ -113,7 +114,7 @@ const ReviewCard = ({ review, addReply }) => {
   return (
     <div className='review-card'>
       <div className='review-header'>
-        <div className='Title-card'>{review.review_title}</div>
+        <div className='Title-card'>{review.reviewtitle}</div>
         <span className='reviewer-name'>{userName || review.reviewer}</span>
         <div className='review-rating'>
           {stars}
@@ -124,7 +125,7 @@ const ReviewCard = ({ review, addReply }) => {
             />
           )}
         </div>
-        <span className='review-date'>{review.review_date || review.date}</span>
+        <span className='review-date'>{review.reviewdate || review.date}</span>
       </div>
       <div className='review-tags'>
         {tags.map((tag, index) => (
