@@ -15,7 +15,7 @@ import Cookies from 'universal-cookie'
 
 export default function BookList ({ type }) {
   const cookies = new Cookies(null, { path: '/' })
-  const userID = cookies.get('userID')
+  const userid = cookies.get('userid')
   const [query, setQuery] = useState('')
   const [books, setBooks] = useState()
 
@@ -26,10 +26,10 @@ export default function BookList ({ type }) {
           const { data } = await axios.get('/books')
           setBooks(data)
         } else if (type === 'completed') {
-          const { data } = await axios.get(`/users/${userID}/completed_books`)
+          const { data } = await axios.get(`/users/${userid}/completed_books`)
           setBooks(data)
         } else if (type === 'to-read') {
-          const { data } = await axios.get(`/users/${userID}/to_read`)
+          const { data } = await axios.get(`/users/${userid}/to_read`)
           setBooks(data)
         }
       } catch (error) {
@@ -69,7 +69,7 @@ export default function BookList ({ type }) {
                 return false
               })
               .map((book) => (
-                <Link key={book.bookID} to={`/view-book/${book.bookID}`}>
+                <Link key={book.bookid} to={`/view-book/${book.bookid}`}>
                   <li>
                     <BookCoverCard book={book} size='small' />
                   </li>

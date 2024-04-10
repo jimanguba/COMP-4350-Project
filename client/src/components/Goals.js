@@ -16,7 +16,7 @@ const GoalForm = () => {
     const fetchData = async () => {
       try {
         const { data: response } = await axios.get('/getGoals', {
-          params: { userId: cookies.get('userID') }
+          params: { userid: cookies.get('userid') }
         })
         setData(response)
       } catch (error) {
@@ -35,7 +35,7 @@ const GoalForm = () => {
           goalText,
           goalStauts,
           goalNumber,
-          userId: cookies.get('userID')
+          userid: cookies.get('userid')
         }
       })
       .catch(function (error) {
@@ -115,10 +115,10 @@ const GoalForm = () => {
           </thead>
           <tbody>
             {data.map((item) => (
-              <tr key={item.goal_id}>
-                <td>{item.goal_id_to_user}</td>
-                <td>{item.goal_text}</td>
-                <td>{item.goal_status}</td>
+              <tr key={item.goalid}>
+                <td>{item.goalidtouser}</td>
+                <td>{item.goaltext}</td>
+                <td>{item.goalstatus}</td>
               </tr>
             ))}
           </tbody>

@@ -38,8 +38,8 @@ function App () {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr key={item.book_id}>
-              <td>{item.book_id}</td>
+            <tr key={item.bookid}>
+              <td>{item.bookid}</td>
               <td>{item.title}</td>
               <td>{item.author}</td>
               <td>{item.pages}</td>

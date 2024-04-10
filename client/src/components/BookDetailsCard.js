@@ -17,14 +17,14 @@ export default function BookDetailsCard ({ book, setBook }) {
     author: book.author,
     genre: book.genre,
     pages: book.pages,
-    book_id: book.book_id
+    bookid: book.bookid
   }
 
   const editButtonCallback = async () => {
     console.log('editing:', editing)
     if (editing) {
       try {
-        await axios.put(`/book/${newBook.book_id}`, newBook)
+        await axios.put(`/book/${newBook.bookid}`, newBook)
         setBook(newBook)
       } catch (error) {
         console.error('Error updating book details:', error)

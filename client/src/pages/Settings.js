@@ -14,7 +14,7 @@ const SettingsForm = () => {
     axios
       .get('/resetGoals', {
         params: {
-          userId: cookies.get('userID')
+          userid: cookies.get('userid')
         }
       })
       .catch(function (error) {
@@ -28,7 +28,7 @@ const SettingsForm = () => {
     axios
       .get('/changePassword', {
         params: {
-          userId: cookies.get('userID'),
+          userid: cookies.get('userid'),
           password
         }
       })

@@ -18,9 +18,9 @@ const GenreRecommendations = ({ genre, currentBookId }) => {
     const fetchRelatedBooks = async () => {
       setIsLoading(true)
       try {
-        // Assuming the server will exclude the current book based on the `book_id` query parameter
+        // Assuming the server will exclude the current book based on the `bookid` query parameter
         const response = await axios.get(`/books/genre/${genre}`, {
-          params: { book_id: currentBookId }
+          params: { bookid: currentBookId }
         })
 
         setRelatedBooks(response.data)
@@ -52,8 +52,8 @@ const GenreRecommendations = ({ genre, currentBookId }) => {
       </button>
       <div className='genre-recommendations-container' ref={scrollContainerRef}>
         {relatedBooks.map((book) => (
-          <div key={book.book_id} className='book-item'>
-            <Link to={`/view-book/${book.book_id}`}>
+          <div key={book.bookid} className='book-item'>
+            <Link to={`/view-book/${book.bookid}`}>
               <BookCoverCard book={book} size='small' />
             </Link>
           </div>

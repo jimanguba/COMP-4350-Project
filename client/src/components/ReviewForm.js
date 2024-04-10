@@ -18,16 +18,16 @@ const genres = [
   'Biography'
 ]
 
-const ReviewForm = ({ addReview, bookId }) => {
+const ReviewForm = ({ addReview, bookid }) => {
   const [reviewTitle, setReviewTitle] = useState('')
   const [rating, setRating] = useState(0)
   const [reviewText, setReviewText] = useState('')
   const [selectedTags, setSelectedTags] = useState([])
-  const [userId, setUserId] = useState('')
+  const [userid, setUserId] = useState('')
 
   useEffect(() => {
     const cookies = new Cookies()
-    const userIdFromCookie = cookies.get('userID') // Read the userID cookie
+    const userIdFromCookie = cookies.get('userid') // Read the userid cookie
     if (userIdFromCookie) {
       setUserId(userIdFromCookie) // Set the user ID state if the cookie exists
     }
@@ -48,12 +48,12 @@ const ReviewForm = ({ addReview, bookId }) => {
 
     const newReview = {
       review_title: reviewTitle,
-      book_id: bookId,
-      user_id: userId,
+      book_id: bookid,
+      user_id: userid,
       rating,
-      comment: reviewText,
-      review_date: dateString,
-      tags: selectedTags
+      comment: reviewtext,
+      review_date: datestring,
+      tags: selectedtags
     }
     try {
       const response = await axios.post('/reviews/new', newReview)

@@ -24,14 +24,14 @@ describe('BookList', () => {
   it('renders a list of books', async () => {
     const mockedBooks = [
       {
-        book_id: 1,
+        bookid: 1,
         title: 'Book 1',
         author: 'Author 1',
         pages: 200,
         genre: 'Fiction'
       },
       {
-        book_id: 2,
+        bookid: 2,
         title: 'Book 2',
         author: 'Author 2',
         pages: 250,
@@ -55,14 +55,14 @@ describe('BookList', () => {
   it('filters books based on search query', async () => {
     const mockedBooks = [
       {
-        book_id: 1,
+        bookid: 1,
         title: 'Book 1',
         author: 'Author 1',
         pages: 200,
         genre: 'Fiction'
       },
       {
-        book_id: 2,
+        bookid: 2,
         title: 'Book 2',
         author: 'Author 2',
         pages: 250,
