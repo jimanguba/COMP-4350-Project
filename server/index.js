@@ -474,13 +474,13 @@ app.get('/users/:userid/ToRead/:bookid', async (req, res) => {
   }
 })
 
-app.put('/users/:userid/ToRead/:bookid', async (req, res) => {
+app.put('/users/:userid/toRead/:bookid', async (req, res) => {
   const { bookid, userid } = req.params
-  const { ToRead } = req.body
+  const { toRead } = req.body
   console.log(
     `updating status of book (bookid ${bookid}) in user (userid ${userid}) to-read list`
   )
-  if (ToRead) {
+  if (toRead) {
     try {
       const result = await pool.query(
         'INSERT INTO wantToRead (bookid, userid) VALUES ($2, $1)',

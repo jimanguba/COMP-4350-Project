@@ -23,7 +23,6 @@ export default function ViewBook () {
         const response = await axios.get(`/book/${bookid}`)
         setBook(response.data.book)
         console.log('Fetched book details:', response.data.book)
-        console.log('Fetched review details:', response.data.reviews)
         const sortedReviews = Array.isArray(response.data.reviews)
           ? response.data.reviews.sort((a, b) => b.rating - a.rating)
           : []
