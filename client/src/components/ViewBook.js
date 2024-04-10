@@ -14,13 +14,13 @@ export default function ViewBook () {
   const [loading, setLoading] = useState(true)
   const [book, setBook] = useState(null)
   const [reviews, setReviews] = useState([])
-  const { bookID } = useParams()
+  const { bookid } = useParams()
 
   useEffect(() => {
     const fetchBookDetails = async () => {
       setLoading(true)
       try {
-        const response = await axios.get(`/book/${bookID}`)
+        const response = await axios.get(`/book/${bookid}`)
         setBook(response.data.book)
         console.log('Fetched book details:', response.data.book)
         const sortedReviews = Array.isArray(response.data.reviews)
@@ -29,14 +29,14 @@ export default function ViewBook () {
         console.log('Sorted Reviews:', sortedReviews)
         setReviews(sortedReviews)
       } catch (error) {
-        console.error(`Error fetching book with identifier ${bookID}:`, error)
+        console.error(`Error fetching book with identifier ${bookid}:`, error)
         setBook(null) // Setting to null to indicate an error occurred
       }
       setLoading(false)
     }
 
     fetchBookDetails()
-  }, [bookID])
+  }, [bookid])
 
   return (
     <div style={{ display: 'flex' }}>
@@ -47,14 +47,14 @@ export default function ViewBook () {
           <div className='viewBook'>
             <BookCoverCard book={book} size='large' />
             <div className='readingStateContainer'>
-              <ToReadButton bookID={bookID} />
-              <CompletedBookButton bookID={bookID} />
+              <ToReadButton bookid={bookid} />
+              <CompletedBookButton bookid={bookid} />
             </div>
             <BookDetailsCard book={book} setBook={setBook} />
             {book && book.genre && (
-              <GenreRecommendations genre={book.genre} currentBookId={bookID} />
+              <GenreRecommendations genre={book.genre} currentBookId={bookid} />
             )}
-            <ReviewsList reviews={reviews} bookId={bookID} />
+            <ReviewsList reviews={reviews} bookid={bookid} />
           </div>
           )}
     </div>

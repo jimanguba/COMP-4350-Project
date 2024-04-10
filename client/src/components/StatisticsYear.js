@@ -5,7 +5,7 @@ import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons'
 import { faStarHalfAlt as faStarHalf, faStar as faStarFilled } from '@fortawesome/free-solid-svg-icons'
 import BookImg from '../images/book.png'
 
-function StatisticsYear ({ userID }) {
+function StatisticsYear ({ userid }) {
   const [averageReadingTime, setAverageReadingTime] = useState(null)
   const [averageRating, setAverageRating] = useState(null)
 
@@ -36,7 +36,7 @@ function StatisticsYear ({ userID }) {
   useEffect(() => {
     // Fetch average reading time
     axios
-      .get(`/books/${userID}/average_time`)
+      .get(`/books/${userid}/average_time`)
       .then((response) => {
         setAverageReadingTime(response.data.average_time)
       })
@@ -45,14 +45,14 @@ function StatisticsYear ({ userID }) {
       })
 
     axios
-      .get(`/users/${userID}/average_rating`)
+      .get(`/users/${userid}/average_rating`)
       .then((response) => {
         setAverageRating(response.data.average_rating)
       })
       .catch((error) => {
         console.error('Error fetching average rating:', error)
       })
-  }, [userID])
+  }, [userid])
 
   return (
     <div>

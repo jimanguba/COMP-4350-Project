@@ -35,7 +35,6 @@ const ReviewCard = ({ review, addReply }) => {
       try {
         const response = await axios.get(`/user/${review.userid}`)
         setUserName(response.data)
-        console.log(response.data)
       } catch (error) {
         console.error('Error fetching user name:', error)
         setUserName('Anonymous')
@@ -51,7 +50,7 @@ const ReviewCard = ({ review, addReply }) => {
     }
 
     if (reviewReplies.length > 0) {
-      // Get unique user_ids from the replies
+      // Get unique userids from the replies
       const uniqueUserIds = [
         ...new Set(reviewReplies.map((reply) => reply.userid))
       ]
@@ -113,7 +112,7 @@ const ReviewCard = ({ review, addReply }) => {
   return (
     <div className='review-card'>
       <div className='review-header'>
-        <div className='Title-card'>{review.review_title}</div>
+        <div className='Title-card'>{review.reviewtitle}</div>
         <span className='reviewer-name'>{userName || review.reviewer}</span>
         <div className='review-rating'>
           {stars}
@@ -124,7 +123,7 @@ const ReviewCard = ({ review, addReply }) => {
             />
           )}
         </div>
-        <span className='review-date'>{review.review_date || review.date}</span>
+        <span className='review-date'>{review.reviewdate || review.date}</span>
       </div>
       <div className='review-tags'>
         {tags.map((tag, index) => (

@@ -26,10 +26,10 @@ export default function BookList ({ type }) {
           const { data } = await axios.get('/books')
           setBooks(data)
         } else if (type === 'completed') {
-          const { data } = await axios.get(`/users/${userid}/completed_books`)
+          const { data } = await axios.get(`/users/${userID}/completedBooks`)
           setBooks(data)
         } else if (type === 'to-read') {
-          const { data } = await axios.get(`/users/${userid}/to_read`)
+          const { data } = await axios.get(`/users/${userID}/toRead`)
           setBooks(data)
         }
       } catch (error) {

@@ -12,10 +12,10 @@ export default function CompletedBookButton ({ bookid }) {
   const cookies = new Cookies(null, { path: '/' })
   const userID = cookies.get('userid')
   const [onCompletedBooks, setOnCompletedBooks] = useState(false)
-
+  console.log(bookid);
   useEffect(() => {
     axios
-      .get(`/users/${userID}/completed_books/${bookid}`)
+      .get(`/users/${userID}/completedBooks/${bookid}`)
       .then((response) => {
         setOnCompletedBooks(response.data.completed)
       })
@@ -24,8 +24,8 @@ export default function CompletedBookButton ({ bookid }) {
 
   const toggleReadingState = () => {
     axios
-      .put(`/users/${userID}/completed_books/${bookid}`, {
-        completed_books: !onCompletedBooks
+      .put(`/users/${userID}/completedBooks/${bookid}`, {
+        completedBooks: !onCompletedBooks
       })
       .then(() => setOnCompletedBooks(!onCompletedBooks))
       .catch((error) =>

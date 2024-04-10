@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import ProgressBar from '../components/ProgressBar'
 
-function StatisticsGoal ({ userID }) {
+function StatisticsGoal ({ userid }) {
   const [progress, setProgress] = useState(0)
   const [count, setBooksCompleted] = useState(0)
   const [readingGoal, setReadingGoal] = useState(0)
@@ -13,14 +13,14 @@ function StatisticsGoal ({ userID }) {
     const fetchData = async () => {
       try {
         // Fetch user data including reading goal
-        const userDataResponse = await axios.get(`/users/${userID}`)
-        const { bookGoal, userName } = userDataResponse.data
-        setReadingGoal(bookGoal)
-        setUsername(userName)
+        const userDataResponse = await axios.get(`/users/${userid}`)
+        const { bookgoal, username } = userDataResponse.data
+        setReadingGoal(bookgoal)
+        setUsername(username)
 
         // Fetch reading progress after updating the reading goal
         const readingProgressResponse = await axios.get(
-          `/users/${userID}/books/num_completed`
+          `/users/${userid}/books/num_completed`
         )
         const countData = readingProgressResponse.data[0]
         if (
@@ -29,8 +29,9 @@ function StatisticsGoal ({ userID }) {
           !isNaN(countData.count)
         ) {
           const completedBooksCount = parseInt(countData.count)
+          console.log(bookgoal)
           setBooksCompleted(completedBooksCount)
-          setProgress((completedBooksCount / bookGoal) * 100)
+          setProgress((completedBooksCount / bookgoal) * 100)
         } else {
           console.log('Invalid completedBooks value:', countData.count)
         }
@@ -41,7 +42,7 @@ function StatisticsGoal ({ userID }) {
     }
 
     fetchData()
-  }, [userID])
+  }, [userid])
 
   if (error) {
     return <div>{error}</div>

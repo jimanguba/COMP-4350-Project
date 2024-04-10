@@ -131,7 +131,7 @@ function insertReply (reviewID, userID, replyText) {
 }
 
 function getRepliesByReviewId (reviewID) {
-  return pool.query('SELECT * FROM replies WHERE reviewID = $1', [reviewID])
+  return pool.query('SELECT * FROM replies WHERE review_id = $1', [reviewID])
 }
 
 module.exports = {

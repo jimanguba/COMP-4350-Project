@@ -35,7 +35,11 @@ app.get('/signup', async (req, res) => {
 
   try {
     const result1 = await pool.query(
+<<<<<<< HEAD
       'SELECT count(*) FROM users WHERE username = $1 GROUP BY userid',
+=======
+      'SELECT count(*) FROM users WHERE userName = $1 GROUP BY userid',
+>>>>>>> f629d74cf5514198f6c6ed5d3fd277a687a72e8d
       [username]
     )
     if (result1.rowCount !== 0) {
@@ -54,7 +58,11 @@ app.get('/signup', async (req, res) => {
         )
 
         const result4 = await pool.query(
+<<<<<<< HEAD
           'SELECT userid FROM users WHERE username = $1',
+=======
+          'SELECT userid FROM users WHERE userName = $1',
+>>>>>>> f629d74cf5514198f6c6ed5d3fd277a687a72e8d
           [username]
         )
 
@@ -215,12 +223,12 @@ app.get('/login', async (req, res) => {
 
   try {
     const result1 = await pool.query(
-      'SELECT userid FROM users WHERE username = $1',
+      'SELECT userid FROM users WHERE userName = $1',
       [username]
     )
     if (result1.rowCount !== 0) {
       const result2 = await pool.query(
-        'SELECT userPassword, userid FROM users WHERE username = $1',
+        'SELECT userPassword, userid FROM users WHERE userName = $1',
         [username]
       )
       const pw = result2.rows[0].userpassword
@@ -320,7 +328,7 @@ app.post('/reviews/new', async (req, res) => {
 app.get('/user/:userid', async (req, res) => {
   const { userid } = req.params
   try {
-    const query = 'SELECT username FROM users WHERE userid = $1;'
+    const query = 'SELECT userName FROM users WHERE userid = $1;'
     const result = await pool.query(query, [userid])
     if (result.rows.length > 0) {
       res.status(200).json(result.rows[0].username)
@@ -412,15 +420,15 @@ app.get('/users/:userid/calendar-data', async (req, res) => {
   try {
     const { userid } = req.params
     const result = await pool.query(
-      'SELECT cb.date_end, b.title, b.author FROM completedBooks cb INNER JOIN books b ON cb.bookid = b.bookid WHERE cb.userid = $1',
+      'SELECT cb.dateend, b.title, b.author FROM completedBooks cb INNER JOIN books b ON cb.bookid = b.bookid WHERE cb.userid = $1',
       [userid]
     )
 
     const calendarData = result.rows
       .map((row) => {
-        if (!isNaN(row.date_end)) {
+        if (!isNaN(row.dateend)) {
           return {
-            day: row.date_end.toISOString().split('T')[0],
+            day: row.dateend.toISOString().split('T')[0],
             value: 1,
             book: row.title,
             author: row.author
@@ -439,7 +447,7 @@ app.get('/users/:userid/calendar-data', async (req, res) => {
   }
 })
 
-app.get('/users/:userid/to_read', async (req, res) => {
+app.get('/users/:userid/ToRead', async (req, res) => {
   const { userid } = req.params
   console.log(`getting user (userid ${userid}) to-read list`)
   try {
@@ -474,13 +482,13 @@ app.get('/users/:userid/ToRead/:bookid', async (req, res) => {
   }
 })
 
-app.put('/users/:userid/ToRead/:bookid', async (req, res) => {
+app.put('/users/:userid/toRead/:bookid', async (req, res) => {
   const { bookid, userid } = req.params
-  const { ToRead } = req.body
+  const { toRead } = req.body
   console.log(
     `updating status of book (bookid ${bookid}) in user (userid ${userid}) to-read list`
   )
-  if (ToRead) {
+  if (toRead) {
     try {
       const result = await pool.query(
         'INSERT INTO wantToRead (bookid, userid) VALUES ($2, $1)',
@@ -503,7 +511,7 @@ app.put('/users/:userid/ToRead/:bookid', async (req, res) => {
   }
 })
 
-app.get('/users/:userid/completed_books', async (req, res) => {
+app.get('/users/:userid/completedBooks', async (req, res) => {
   const { userid } = req.params
   console.log(`getting user (userid ${userid}) completed-books list`)
   try {
@@ -664,7 +672,7 @@ app.get('/changePassword', async (req, res) => {
     if (password.length >= 5) {
       await pool.query(
         'UPDATE users SET userPassword = $1 WHERE userid = $2',
-        [await bcrypt.hash(password, salt), userid]
+        [await bcrypt.hash(password, salt), userId]
       )
       console.log('Password Change Success')
       return res.status(200)

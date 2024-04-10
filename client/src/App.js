@@ -17,8 +17,8 @@ function App () {
       <div>
         <Routes>
           <Route exact path='/' element={<Login />} />
-          <Route path='/statistics' element={<Statistics user_id={1} />} />
-          <Route path='/view-book/:book_id' element={<ViewBook />} />
+          <Route path='/statistics' element={<Statistics userid={1} />} />
+          <Route path='/view-book/:bookid' element={<ViewBook />} />
           <Route path='/reviews/new' element={<ReviewsForm />} />
           <Route path='/book-list' element={<BookList type='all' />} />
           <Route
